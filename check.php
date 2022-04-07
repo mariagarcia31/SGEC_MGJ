@@ -21,7 +21,6 @@ if(isset($_POST["enviar"])){
 
     if($contrasena==$row['contra']){
         $_SESSION['id']=$row['id'];
-        $_SESSION['correo']=$row['correo'];
         $_SESSION['nombre']=$row['nombre'];
         
         header("location:index.php");
