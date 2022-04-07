@@ -1,0 +1,202 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("fondo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Jost', sans-serif;
+}
+
+.logo {
+    width: 40%;
+    margin-top: 20px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 40px 8px 10px 8px;
+    color: #0d0d0d;
+    border-bottom: 2px solid #5fbae9;
+}
+
+
+/* STRUCTURE */
+
+.padre {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+}
+
+.contenedor {
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 350px;
+    position: relative;
+    padding: 0px;
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.562);
+    text-align: center;
+}
+
+input[type=submit] {
+    background-color: #1B4C8C;
+    border: none;
+    color: white;
+    padding: 15px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 13px;
+    box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+    border-radius: 5px 5px 5px 5px;
+    margin: 25px 20px 40px 20px;
+}
+
+input[type=submit]:hover {
+    background-color: #113059;
+    cursor: pointer;
+}
+
+.input {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid #f6f6f6;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.input:focus {
+    background-color: #fff;
+    border-bottom: 2px solid #5fbae9;
+}
+
+.input::placeholder {
+    color: #5f5f5f
+}
+
+.contenedor_tablasSeleccionar {
+    width: fit-content;
+    display: inline-block;
+    text-align: center;
+    justify-content: center;
+    padding: 250px;
+}
+
+.tablasSeleccionar {
+    background-color: #fff;
+    border-radius: 10px 10px 10px 10px;
+    border: 2px solid #5d4e65;
+    min-width: 250px;
+    min-height: 100px;
+    position: relative;
+    text-align: center;
+    transition: all .2s ease-in-out;
+    margin: 10px;
+    display: inline-block;
+    justify-content: center;
+}
+
+.tablasSeleccionar:hover {
+    background-color: #5fbae9;
+    border-top: 2px solid #113059;
+    border-bottom: 2px solid #113059;
+    box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 1);
+    transform: scale(1.025);
+    z-index: 2;
+    font-size: 20px;
+    color: white;
+}
+
+#nombreTablaClientes {
+    font-size: 30px;
+}
+
+table {
+    width: 800px;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 100px;
+}
+
+th,
+td {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #fff;
+}
+
+th {
+    text-align: left;
+    width: auto;
+    background-color: #1B4C8C;
+}
+
+td {
+    width: fit-content;
+    color: black;
+}
+
+thead th {
+    background-color: #55608f;
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+tbody td {
+    position: relative;
+}
+
+tbody td:hover:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -9999px;
+    bottom: -9999px;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: -1;
+}
+
+.cerrar {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid #f6f6f6;
+    border-radius: 5px 5px 5px 5px;
+}
