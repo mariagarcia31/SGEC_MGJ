@@ -1,5 +1,6 @@
 # SGEC_MGJ
-Sistema de Gestión de espacios comunes para el IES Ciudad Escolar. Trabajo realizado por María García, Gerardo Pimentel y Jossue Buenaño
+Sistema de Gestión de espacios comunes para el IES Ciudad Escolar. Trabajo realizado por María García, Gerardo Pimentel y Jossue Buenaño.
+Para poder ejecutar nuestro trabajo lo primero será importar la bbdd en phpmyadmin, una vez importada la bbdd tendrás que guardar en la carpeta htdocs la carpeta sgec_mgj y después tendrás que abrir en tu navegador la ruta "http://localhost/sgec_mgj/login.php"
 
 # Justificación
 La realización de este proyecto viene dada por la necesidad de los profesores del centro IES Ciudad Escolar de llevar a cabo una organización para las reservas de los espacios comunes del centro y así poder realizar estas reservas de una forma sencilla y ordenada. Con la introducción de esta aplicación el centro obtendrá un gestor de reservas así como una interfaz sencilla para que los profesores puedan realizar las reservas. 
