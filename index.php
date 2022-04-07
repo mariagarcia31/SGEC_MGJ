@@ -21,12 +21,17 @@ if(!isset($_SESSION['nombre'])){
 .bg-gray{
     background-color: lightgray !important;
 }
-div.card.bg-gray{
-    width: 18rem;
-    margin-left: 5%;
-    margin-top: 10% !important;
-    margin-bottom: 5%;
+@media screen and (max-width:690px){
+ .navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion{
+     z-index:3
+ }
+    .card.bg-gray{
+        margin-top:20% !important;
+
+    }
+
 }
+
 </style>
 </head>
 
@@ -53,7 +58,7 @@ if($result->num_rows > 0){
 
         <?php if ($row['habilitado']==0){ ?>
 
-            <div class="card bg-gray" style="width: 18rem; margin-left:5%; margin-top:25%;margin-bottom:5%">
+            <div class="card bg-gray" style="width: 18rem; margin-left:5%; margin-top:1%;margin-bottom:5%">
             <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
                 <div class="card-header">
                 <h2 class="card-title" style="text-align:center"><?php echo $row['id']; ?></h2>
