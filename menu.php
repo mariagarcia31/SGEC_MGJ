@@ -72,7 +72,7 @@
 
             <li class="nav-item active">
                 <a class="nav-link" href="crudReservas.php">
-                    <i class="far fa-eye"></i>
+                    <i class="far fa-folder-open"></i>
                     <span>Gestionar Reservas</span></a>
             </li>
 
@@ -81,8 +81,22 @@
 
             <li class="nav-item active">
                 <a class="nav-link" href="crudAulas.php">
-                    <i class="far fa-eye"></i>
+                    <i class="far fa-folder-open"></i>
                     <span>Gestionar Aulas</span></a>
+            </li>
+            <hr class="sidebar-divider">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="crudAulas.php">
+                    <i class="far fa-folder-open"></i>
+                    <span>Gestionar Usuarios</span></a>
+            </li>
+            <hr class="sidebar-divider">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="crudAulas.php">
+                    <i class="fas fa-hands-helping"></i>
+                    <span>Ayuda</span></a>
             </li>
   
 
@@ -101,7 +115,7 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <button onclick="redimensionar()" id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -206,3 +220,11 @@
 </body>
 
 </html>
+<script>
+
+
+
+$("#sidebarToggleTop").click(function(){
+    $(".card").css({"margin-top": "0%", "width":"16rem", "margin-bottom":"5%","margin-right":"-35%"});
+});
+</script>

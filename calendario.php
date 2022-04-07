@@ -393,7 +393,6 @@ if(isset($_GET['date'])){
 }
 
 if(isset($_POST['submit'])){
-
     $usuario = $_SESSION['id'];
     $grupo = $_POST['grupo'];
     $motivo = $_POST['motivo'];
