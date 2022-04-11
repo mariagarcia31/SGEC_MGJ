@@ -14,7 +14,17 @@ body {
     min-height: 100vh;
     font-family: 'Jost', sans-serif;
 }
-
+.btn[value="modificar"]{
+    margin-right: 10px;
+    margin-bottom: 4px;
+}
+.opciones{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+}
 .logo {
     width: 40%;
     margin-top: 20px;
