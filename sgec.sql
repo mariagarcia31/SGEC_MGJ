@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-04-2022 a las 09:26:13
+-- Tiempo de generación: 12-04-2022 a las 01:43:27
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -12,7 +12,7 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
--- Base de datos: `sgec1`
+-- Base de datos: `sgec`
 --
 
 -- --------------------------------------------------------
@@ -35,7 +35,27 @@ CREATE TABLE `aulas` (
 
 INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`) VALUES
 ('Aula 100', 'Pabellón 3', 'Proyector, ordenadores', 20, 1),
-('Aula Polivalente', 'Pabellón 2', 'Ordenadores, tv, proyector', 100, 0);
+('Aula 700', 'Pabellon 4', 'Tv, ordenadores', 30, 0),
+('Aula Polivalente', 'Pabellón 2', 'Ordenadores, tv, proyector', 100, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grupos`
+--
+
+CREATE TABLE `grupos` (
+  `id` int(6) UNSIGNED NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `departamento` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `grupos`
+--
+
+INSERT INTO `grupos` (`id`, `nombre`, `departamento`) VALUES
+(1, 'DAW2', 'Informática');
 
 -- --------------------------------------------------------
 
@@ -59,10 +79,34 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(12, 'Aula 100', 1, '2022-04-06', 'daw2', 'examem', '08:30AM - 09:30AM', '2022-04-06 14:01:46'),
-(13, 'Aula 100', 1, '2022-04-06', 'daw2', 'examem', '10:30AM - 11:30AM', '2022-04-06 14:48:01'),
-(14, 'Aula 100', 1, '2022-04-07', 'daw2', 'examem', '11:30AM - 12:30PM', '2022-04-07 06:41:06'),
-(17, 'Aula 100', 2, '2022-04-07', 'DAW2', 'Charla', '08:30AM - 09:30AM', '2022-04-07 07:14:07');
+(20, 'Aula 100', 1, '2022-04-12', 'DAW2', 'Charla', '08:30AM - 09:30AM', '2022-04-11 23:02:44'),
+(21, 'Aula 100', 1, '2022-04-12', 'DAW2', 'Charla', '09:30AM - 10:30AM', '2022-04-11 23:15:08'),
+(22, 'Aula 100', 1, '2022-04-19', 'DAW2', 'Charla', '09:30AM - 10:30AM', '2022-04-11 23:40:29');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(6) UNSIGNED NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `crud_roles` tinyint(1) NOT NULL,
+  `crud_usuarios` tinyint(1) NOT NULL,
+  `crud_aulas` tinyint(1) NOT NULL,
+  `crud_reservas` tinyint(1) NOT NULL,
+  `crud_grupos` tinyint(1) NOT NULL,
+  `actualizar_bbdd` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `nombre`, `crud_roles`, `crud_usuarios`, `crud_aulas`, `crud_reservas`, `crud_grupos`, `actualizar_bbdd`) VALUES
+(1, 'adminstrador', 1, 1, 1, 1, 1, 1),
+(2, 'profesor', 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -75,16 +119,17 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(150) NOT NULL,
   `correo` varchar(150) NOT NULL,
   `contra` varchar(150) NOT NULL,
-  `confirmacion` tinyint(1) NOT NULL
+  `confirmacion` tinyint(1) NOT NULL,
+  `rol` int(6) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contra`, `confirmacion`) VALUES
-(1, 'jossue', 'jossue@hotmail.com', '1234', 1),
-(2, 'maria', 'maria@hotmail.com', '1234', 1);
+INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contra`, `confirmacion`, `rol`) VALUES
+(1, 'maria', 'maria@hotmail.com', '1234', 1, 1),
+(2, 'jossue', 'jossue@hotmail.com', '1234', 1, 2);
 
 --
 -- Índices para tablas volcadas
@@ -97,6 +142,13 @@ ALTER TABLE `aulas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `grupos`
+--
+ALTER TABLE `grupos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
+
+--
 -- Indices de la tabla `reservas`
 --
 ALTER TABLE `reservas`
@@ -105,21 +157,40 @@ ALTER TABLE `reservas`
   ADD KEY `id_reserva_usuario` (`idUsuario`);
 
 --
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `correo` (`correo`);
+  ADD UNIQUE KEY `correo` (`correo`),
+  ADD KEY `fk_id_rol` (`rol`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
+-- AUTO_INCREMENT de la tabla `grupos`
+--
+ALTER TABLE `grupos`
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -131,4 +202,10 @@ ALTER TABLE `reservas`
 ALTER TABLE `reservas`
   ADD CONSTRAINT `id_reserva_aula` FOREIGN KEY (`idAula`) REFERENCES `aulas` (`id`),
   ADD CONSTRAINT `id_reserva_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `fk_id_rol` FOREIGN KEY (`rol`) REFERENCES `roles` (`id`);
 COMMIT;

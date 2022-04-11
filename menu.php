@@ -66,7 +66,7 @@
                     <i class="far fa-eye"></i>
                     <span>Mis Reservas</span></a>
             </li>
-
+    <?php if($_SESSION['crudReservas']==1){?>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -75,7 +75,10 @@
                     <i class="far fa-folder-open"></i>
                     <span>Gestionar Reservas</span></a>
             </li>
+            <?php } else{} ?>
 
+    <?php if($_SESSION['crudAulas']==1){?>
+            
                         <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -84,6 +87,10 @@
                     <i class="far fa-folder-open"></i>
                     <span>Gestionar Aulas</span></a>
             </li>
+    <?php } else{} ?>
+
+    <?php if($_SESSION['crudUsuarios']==1){?>
+           
             <hr class="sidebar-divider">
 
             <li class="nav-item active">
@@ -91,6 +98,7 @@
                     <i class="far fa-folder-open"></i>
                     <span>Gestionar Usuarios</span></a>
             </li>
+    <?php } else{} ?>    
             <hr class="sidebar-divider">
 
             <li class="nav-item active">
@@ -138,7 +146,7 @@
                                 aria-labelledby="userDropdown">
                                 
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar sesión
                                 </a>

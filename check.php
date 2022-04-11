@@ -18,8 +18,15 @@ if(isset($_POST["enviar"])){
     $result = $db->query("SELECT * FROM usuarios WHERE correo='$nombre'"); 
     $row = $result->fetch_assoc();
     if($result->num_rows > 0){ 
-
     if($contrasena==$row['contra']){
+
+        $id =$row['id'];
+        $result2 = $db->query("SELECT * FROM roles WHERE id='$id'"); 
+        $row2 = $result2->fetch_assoc();
+
+        $_SESSION['crudReservas']=$row2['crud_reservas'];
+        $_SESSION['crudUsuarios']=$row2['crud_usuarios'];
+        $_SESSION['crudAulas']=$row2['crud_aulas'];
         $_SESSION['id']=$row['id'];
         $_SESSION['nombre']=$row['nombre'];
         

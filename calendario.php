@@ -203,6 +203,8 @@ function esFinde($date) {
 }
 
 function build_calendar($month, $year) {
+
+
         $mysqli = new mysqli('localhost', 'root', '', 'sgec');
         $stmt = $mysqli->prepare("select * from reservas where MONTH(fecha) = ? AND YEAR(fecha)=?");
         $stmt->bind_param('ss', $month, $year);
@@ -346,8 +348,9 @@ function build_calendar($month, $year) {
    </div> 
   </div> 
  </div> 
- <?php if(isset($_GET['date'])){
-
+ <?php 
+ 
+ if(isset($_GET['date'])){
 
 
 
@@ -381,7 +384,7 @@ function timeslots($duration, $cleanup, $start, $end){
 }
 
 $mysqli = new mysqli('localhost', 'root', '', 'sgec');
-if(isset($_GET['date'])){
+
     $idAula=$_GET['id'];
     $date = $_GET['date'];
     $stmt = $mysqli->prepare("select * from reservas where fecha = ? AND idAula = ? ");
@@ -390,7 +393,7 @@ if(isset($_GET['date'])){
     if($stmt->execute()){
         $result = $stmt->get_result();
     }
-}
+
 
 if(isset($_POST['submit'])){
     $usuario = $_SESSION['id'];
@@ -416,7 +419,7 @@ if(isset($_POST['submit'])){
 }
 
 $mysqli = new mysqli('localhost', 'root', '', 'sgec');
-if(isset($_GET['date'])){
+
     $date = $_GET['date'];
     $stmt = $mysqli->prepare("select * from reservas where idAula = ? AND fecha = ?");
     $stmt->bind_param('ss', $idAula,$date);
@@ -430,7 +433,7 @@ if(isset($_GET['date'])){
             $stmt->close();
         }
     }
-}
+
 
 ?>
 
