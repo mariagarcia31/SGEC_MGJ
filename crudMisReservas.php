@@ -1,18 +1,16 @@
 <?php session_start();
 if(!isset($_SESSION['nombre'])){
     header("Location:login.php");
-}?>
+}
+
+include "menu1.php";?>
 <?php
 
 if(!$_GET){
-	header('Location: crudMisReservas.php?pag=1');
+	header('Location: crudReservas.php?pag=1');
 }
 
-if ( $_GET['pag']==1){
-	?>
-	<html><head><style>.anterior{display:none}</style></head></html>
-	<?php
-}
+
 if(isset($_POST["cancelar"])){ 
 	header("Location:crudMisReservas.php");
 }
@@ -66,106 +64,9 @@ if(isset($_POST["cancelar"])){
 
 </head>
 
-<body id="page-top">
+<body>
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">sgec</div>
-            </a>
-
-                        <!-- Divider -->
-                        <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.php">
-                    <i class="far fa-calendar-alt"></i>
-                    <span>Reservar</span></a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item active">
-                <a class="nav-link" href="crudMisReservas.php">
-                    <i class="far fa-eye"></i>
-                    <span>Mis Reservas</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item active">
-                <a class="nav-link" href="crudReservas.php">
-                    <i class="far fa-eye"></i>
-                    <span>Gestionar Reservas</span></a>
-            </li>
-
-                        <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item active">
-                <a class="nav-link" href="crudAulas.php">
-                    <i class="far fa-eye"></i>
-                    <span>Gestionar Aulas</span></a>
-            </li>
-
-           
-
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nombre'];?></span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Cerrar sesión
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
+    <div class="contenedor">
                 <!-- End of Topbar -->
 				<?php 
 $servername="localhost";
@@ -344,10 +245,6 @@ if(isset($_POST['borrar'])){
 	
 
 
-
-
-
-
 	//PAGINACIÓN PARTE 1
 	//Creamos la consulta para saber cuantos contactos tenemos en total, despues dividimos los contactos que tenemos entre los que queremos que se muestren
 	//por pantalla, en este caso 6, y redondeamos y ya tenemos el número de páginas que se van a mostrar
@@ -368,22 +265,16 @@ if(isset($_POST['borrar'])){
 
 			
 		
-		//crudMisReservas 2 parte
+		//crudReservas 2 parte
 		//Creamos la consulta para obtener los contactos de 6 en 6
-        $usuario = $_SESSION['id'];
 			$iniciar=($_GET['pag']-1)*$contactos_x_pagina;
-			$sql_contactos='SELECT * FROM reservas  WHERE idUsuario = '.$usuario.' LIMIT :inicar,:ncontactos';
+			$sql_contactos='SELECT * FROM reservas LIMIT :inicar,:ncontactos';
 			$sentencia_contactos=$conn->prepare($sql_contactos);
 			$sentencia_contactos->bindParam(':inicar',$iniciar,  PDO::PARAM_INT);
 			$sentencia_contactos->bindParam(':ncontactos',$contactos_x_pagina,  PDO::PARAM_INT);
 			$sentencia_contactos->execute();
 			$resultado_contactos=$sentencia_contactos->fetchAll();
 			
-			//obtenemos todos los nombres de las columnas de nuestra tabla, este código es independiente de la bbdd
-			$nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='reservas';";
-			$consulta_nombres=$conn->prepare($nombres);
-			$consulta_nombres->execute();
-			$resultado_nombres=$consulta_nombres->fetchAll();
 						echo "
 			
 			<form method='post' class='crud ' >
@@ -457,20 +348,7 @@ if(isset($_POST['borrar'])){
 
 
 
-                </div>
-                <!-- /.container-fluid -->
 
-            </div>
-            <!-- End of Main Content -->
-
-           
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -512,7 +390,7 @@ if(isset($_POST['borrar'])){
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-
+</div>
 </body>
 
 </html>

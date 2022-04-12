@@ -35,12 +35,16 @@ if(!isset($_SESSION['nombre'])){
 </style>
 </head>
 
-<div style="    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: center;flex-wrap: wrap; padding-left:16%;padding-right:16%;margin-top:7%" class="card-wrapper">
+<div style="        display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-left: 16%;
+    padding-right: 16%;
+    margin-top: 12%;" >
 <?php 
-include "menu.php";
+include "menu1.php";
 //CONEXIÓN 
 $dbHost     = "localhost";  
 $dbUsername = "root";  

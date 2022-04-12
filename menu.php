@@ -19,6 +19,37 @@
     right: 0px;
     bottom: 0px;
     }
+    .container-fluid{
+    display:none
+}
+#wrapper{
+    top: 0px;
+position: absolute;
+left: 0px;
+right: 0px;
+bottom: 0px;
+}
+.menu{
+                top: 0px;
+    position: absolute;
+    left:0px;
+    bottom:0px
+            }
+            .navbar{
+                top: 0px !important;
+                position: absolute !important;
+                right: 0px !important;
+                left: 0px !important;
+            }
+            .contenedor{
+                margin-top:150px !important;
+                margin-left:264px !important
+            }
+            .menu>ul{
+                bottom: 0px;
+    position: absolute;
+    top:0px
+            }
 </style>
     <title>sgec</title>
 
@@ -125,11 +156,7 @@
                     <!-- Sidebar Toggle (Topbar) -->
                     <button onclick="redimensionar()" id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
-                    </button>
-
-
-
-                    <!-- Topbar Navbar -->
+                    </button>    <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <div class="topbar-divider d-none d-sm-block"></div>
 
