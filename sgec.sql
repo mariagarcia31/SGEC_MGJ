@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-04-2022 a las 01:43:27
+-- Tiempo de generación: 14-04-2022 a las 01:14:49
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -14,6 +14,47 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sgec`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cambiarContra` (IN `_correo` VARCHAR(150), IN `_contra` VARCHAR(250))   BEGIN
+	declare _id int;
+	select id into _id from usuarios where correo = _correo;
+    
+	update usuarios
+		set contra=_contra, confirmacion=1
+		where id=_id;
+END$$
+
+--
+-- Funciones
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `ValidarUsuario` (`_correo` VARCHAR(150), `_contra` VARCHAR(150)) RETURNS INT(11)  BEGIN
+	DECLARE aux int default null;
+
+	SELECT count(*) INTO aux FROM usuarios WHERE correo = _correo and contra=_contra;
+    
+IF aux = 0 THEN
+        return 0; -- NO EXISTE ESE USUARIO
+END IF;
+return 1; -- SÍ EXISTE ESE USUARIO
+
+ END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `verificarContra` (`_correo` VARCHAR(50)) RETURNS INT(11)  BEGIN
+	DECLARE aux int default null;
+		select confirmacion into aux from usuarios where correo = _correo;
+        
+IF aux = 0 THEN
+         return 0; -- No confirmado
+END IF;
+return 1; -- Si confirmado
+
+ END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -35,8 +76,7 @@ CREATE TABLE `aulas` (
 
 INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`) VALUES
 ('Aula 100', 'Pabellón 3', 'Proyector, ordenadores', 20, 1),
-('Aula 700', 'Pabellon 4', 'Tv, ordenadores', 30, 0),
-('Aula Polivalente', 'Pabellón 2', 'Ordenadores, tv, proyector', 100, 1);
+('Aula 700', 'Pabellon 4', 'Tv, ordenadores', 30, 0);
 
 -- --------------------------------------------------------
 
@@ -79,9 +119,9 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(20, 'Aula 100', 1, '2022-04-12', 'DAW2', 'Charla', '08:30AM - 09:30AM', '2022-04-11 23:02:44'),
-(21, 'Aula 100', 1, '2022-04-12', 'DAW2', 'Charla', '09:30AM - 10:30AM', '2022-04-11 23:15:08'),
-(22, 'Aula 100', 1, '2022-04-19', 'DAW2', 'Charla', '09:30AM - 10:30AM', '2022-04-11 23:40:29');
+(101, 'Aula 100', 1, '2022-04-13', 'DAW2', 'Charla', '08:30AM - 09:30AM', '2022-04-13 21:42:25'),
+(102, 'Aula 100', 1, '2022-04-13', 'DAW2', 'Charla', '09:30AM - 10:30AM', '2022-04-13 21:42:28'),
+(103, 'Aula 100', 1, '2022-04-13', 'DAW2', 'Charla', '10:30AM - 11:30AM', '2022-04-13 21:43:07');
 
 -- --------------------------------------------------------
 
@@ -128,7 +168,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contra`, `confirmacion`, `rol`) VALUES
-(1, 'maria', 'maria@hotmail.com', '1234', 1, 1),
+(1, 'maria', 'maria@hotmail.com', '12345', 1, 1),
 (2, 'jossue', 'jossue@hotmail.com', '1234', 1, 2);
 
 --
@@ -184,7 +224,7 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
