@@ -20,7 +20,7 @@ if(isset($_POST["enviar"])){
     if($result->num_rows > 0){ 
     if($contrasena==$row['contra']){
 
-        $id =$row['id'];
+        $id =$row['rol'];
         $result2 = $db->query("SELECT * FROM roles WHERE id='$id'"); 
         $row2 = $result2->fetch_assoc();
 

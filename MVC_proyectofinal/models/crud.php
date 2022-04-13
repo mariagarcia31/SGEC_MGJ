@@ -21,13 +21,42 @@ class Crud extends Conexion{
             if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
                
                 $sql="SELECT ValidarUsuario(:email,:contra)";
-                $consulta2=$this->conexion->prepare($sql);
-                $consulta2->bindParam(":email",$correo);
-                $consulta2->bindParam(":contra",$contrasena);
-                $consulta2->execute();
-                $verif2=$consulta2->fetch();
+                $consulta=$this->conexion->prepare($sql);
+                $consulta->bindParam(":email",$correo);
+                $consulta->bindParam(":contra",$contrasena);
+                $consulta->execute();
+                $verif2=$consulta->fetch();
+   
 
                 if($verif2[0]==1){
+
+                    $sql="SELECT id, nombre, rol FROM usuarios WHERE correo ='$correo'";
+                    $consulta=$this->conexion->prepare($sql);
+                    $consulta->execute();
+                    $verif3=$consulta->fetch();
+
+                    $idSesion =$verif3[0];
+                    $nombre =$verif3[1];
+
+                    $_SESSION['id']=$idSesion;
+                    $_SESSION['nombre']=$nombre;
+                    
+
+                    $rol =$verif3[1];
+
+                    $sql="SELECT * FROM roles WHERE id ='$rol'";
+                    $consulta=$this->conexion->prepare($sql);
+                    $consulta->execute();
+                    $verif4=$consulta->fetch();
+                
+                    $_SESSION['crudRoles']=$verif4['crud_roles'];
+                    $_SESSION['crudUsuarios']=$verif4['crud_usuarios'];
+                    $_SESSION['crudAulas']=$verif4['crud_aulas'];
+                    $_SESSION['crudReservas']=$verif4['crud_reservas'];
+                    $_SESSION['crudGrupos']=$verif4['crud_grupos'];
+                    $_SESSION['actualizarBBDD']=$verif4['actualizar_bbdd'];
+
+
                     return true;
                 }else{
                     return false;
@@ -334,8 +363,10 @@ class Crud extends Conexion{
     function borrar($selec){
       
         if(empty($selec)){
+           
             return false;
-        }else{
+        }
+        else{
           
             foreach($selec as $valores){
                 $sql="DELETE FROM reservas WHERE  id=$valores";
@@ -343,18 +374,19 @@ class Crud extends Conexion{
                 $consulta->execute();
                 
             }
+            return true;
         }
-        return true;
+        
         }  
  
     
 
 
     function crudMiReservas($opc,$iteams_pagina=null,$offset=null){
-
+        $idUsuario = $_SESSION['id'];   
         if($opc==1){
 
-            $sql="SELECT count(*) FROM reservas";
+            $sql="SELECT count(*) FROM reservas WHERE idUsuario ='$idUsuario'";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -364,8 +396,8 @@ class Crud extends Conexion{
         }
         elseif($opc==2){
 
-                        
-            $sql="SELECT * FROM reservas ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+                   
+            $sql="SELECT * FROM reservas WHERE idUsuario ='$idUsuario' ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -417,8 +449,9 @@ class Crud extends Conexion{
                     $stmt->bindParam(":date",$indic[$i]);
                     $stmt->execute();
                     
-                    return true;
+                    
                 }
+            return true;
 		}      
 
     }

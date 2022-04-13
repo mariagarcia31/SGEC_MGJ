@@ -33,6 +33,13 @@ class Control{
         include_once ("views/crudMisReservas.php");
     }
 
+    function logout(){
+        include_once ("views/logout.php");
+    }
+
+   
+
+
 
 
   
@@ -48,6 +55,9 @@ class Control{
         if($result){
 
             if($result2){
+
+
+
 
                 header("location:?c=principal"); 
             }else{
@@ -82,7 +92,7 @@ class Control{
     function reserva(){
 
 
-        $resultado=$this->crud->reservar(1,$_POST['grupo'],$_POST['motivo'],$_POST['timeslot'],$_GET['id'],$_GET['date']);
+        $resultado=$this->crud->reservar($_SESSION['id'],$_POST['grupo'],$_POST['motivo'],$_POST['timeslot'],$_GET['id'],$_GET['date']);
 
         if($resultado){
 
@@ -100,11 +110,20 @@ class Control{
     
     function borrar(){
 
-        if(isset($_POST["eliminar"])){
+        
+        if(isset($_POST["borrar"])){
             $result=$this->crud->borrar($_POST["eliminar"]);
             if($result){
+                $_SESSION["exito"]="<div class='alert alert-success'>Reserva eliminada con éxito.</div>";
+                $cuantos=count($_POST["eliminar"]);
+                if($_SESSION['cuantas']==$cuantos){
+                    header("location:?c=crudMisReservas&page=".$_GET["pag"]-1 ."");
+                }
+                else{
                 header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
+                }
             }else{
+                $_SESSION["error2"]="<div class='alert alert-danger'>No se ha seleccionado ninguna reserva para eliminar</div>";
                 header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
             }
         
@@ -115,9 +134,13 @@ class Control{
 
         }else{
             $result=$this->crud->borrarUnoaUno($_GET["id"]);
-          
+            $_SESSION["exito"]="<div class='alert alert-success'>Reserva eliminada con éxito.</div>";
+            if($_SESSION['cuantas']==1){
+                header("location:?c=crudMisReservas&page=".$_GET["pag"] - 1 ."");
+            }
+            else{
             header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
-            
+            }
             
 
         }
@@ -126,17 +149,24 @@ class Control{
 
     function modificar(){
         //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
-
+        if(isset($_POST['cancelar'])){
+            header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
+        }
+        else{
+        
         $resultado=$this->crud->actualizar($_POST["dato"]);
 
         if($resultado){
+            $_SESSION["exito"]="<div class='alert alert-success'>Reserva modificada con éxito.</div>";
+
             header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
         }else{
-            header("location:?c=home");
+            $_SESSION["error2"]="<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
+            header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
 
         }
 
-    }
+    }}
 
 
 }

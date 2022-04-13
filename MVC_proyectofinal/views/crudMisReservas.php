@@ -10,6 +10,17 @@
 
 
 $count=$this->crud->crudMiReservas(1);
+
+if($count[0]==0){
+    echo '<div class="container" style="margin-top:60px;margin-right:80px">
+    <div class="row">
+    <div class="col-md-12 border">
+    <h1 class="display-1"> No se han realizado reservas aún</h1>
+    </div>
+    </div>
+    </div>';}
+else{
+
 $iteams_pagina=3;
 
 $total_pages=ceil($count[0]/$iteams_pagina);
@@ -26,16 +37,31 @@ $offset=($page-1) * $iteams_pagina;
 
 $result=$this->crud->crudMiReservas(2,$iteams_pagina,$offset);
 
+$_SESSION['cuantas']=count($result[0]);
+
+
+
 ?>
 <div class="container" style="margin-top:60px;margin-right:80px">
 
 
 
 <div class="row">
+    
                 <div class="col-md-12 border">
 
                     <table class="table table-striped" style="text-align: center;">
-                    <?php if(isset($_SESSION["modificar"])){
+                    <?php 
+                    if(isset($_SESSION['error2'])){
+                        echo $_SESSION['error2'];
+                        unset($_SESSION['error2']);
+                    }
+                    else if(isset($_SESSION['exito'])){
+                        echo $_SESSION['exito'];
+                        unset($_SESSION['exito']);
+                    }
+                    
+                    if(isset($_SESSION["modificar"])){
                             ?>
                             <html><head><style>#todo{opacity: 0.2;}</style></head></html>
                                 <?php
@@ -44,7 +70,10 @@ $result=$this->crud->crudMiReservas(2,$iteams_pagina,$offset);
                     
                             $resu=$this->crud->modif($id);
 
-                            echo "<div id='container' ><form action='?c=modificar' method='post' ><table>";
+                            
+
+                            echo "<div id='container' ><form action='?c=modificar&pag=".$_GET['page']."' method='post' ><table>";
+                            
                             foreach($resu as $nombre_columna){
                                 for($i=0;$i<count($nombre_columna)/2;$i++){
                                    if($i==0||$i==2){
@@ -202,6 +231,8 @@ for($i=1;$i<=$total_pages;$i++){
         echo "<a style='margin-left:10px' href='?c=crudMisReservas&page=$i'>$i</a>";
         
     }
+}
+
 }
 ?>
 </div>
