@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,56 +40,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="?c=principal">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">sgec</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="?c=principal">
-                    <i class="far fa-calendar-alt"></i>
-                    <span>Reservar</span></a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item active">
-                <a class="nav-link" href="?c=crudMisReservas&page=1">
-                    <i class="far fa-eye"></i>
-                    <span>Mis Reservas</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item active">
-                <a class="nav-link" href="crudReservas.php">
-                    <i class="far fa-eye"></i>
-                    <span>Gestionar Reservas</span></a>
-            </li>
-
-                        <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item active">
-                <a class="nav-link" href="crudAulas.php">
-                    <i class="far fa-eye"></i>
-                    <span>Gestionar Aulas</span></a>
-            </li>
-  
-
-           
-
-        </ul>
+       
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -135,7 +87,144 @@
 
                 </nav>
                 <!-- End of Topbar -->
+                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="position:absolute; top:0px;left:0px;bottom:0px">
 
+<!-- Sidebar - Brand -->
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="?c=principal">
+    <div class="sidebar-brand-icon rotate-n-15">
+        <i class="fas fa-laugh-wink"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">sgec</div>
+</a>
+
+<!-- Divider -->
+<hr class="sidebar-divider my-0">
+
+<!-- Nav Item - Dashboard -->
+<li class="nav-item active">
+    <a class="nav-link" href="?c=principal">
+        <i class="far fa-calendar-alt"></i>
+        <span>Reservar</span></a>
+</li>
+<hr class='sidebar-divider'>
+
+<li class="nav-item active">
+    <a class="nav-link" href="?c=crudMisReservas&page=1">
+        <i class="far fa-calendar-alt"></i>
+        <span>Mis reservas</span></a>
+</li>
+
+<!-- Divider -->
+
+<?php if($_SESSION['crudReservas']==1){
+echo "
+<hr class='sidebar-divider'>
+
+<li class='nav-item active'>
+    <a class='nav-link' href='crudReservas.php'>
+        <i class='far fa-folder-open'></i>
+        <span>Gestionar Reservas</span></a>
+</li>";
+} else{ }; 
+
+
+
+if($_SESSION['crudAulas']==1){
+
+echo "
+   <hr class='sidebar-divider'>
+
+   <li class='nav-item active'>
+       <a class='nav-link' href='crudAulas.php'>
+           <i class='far fa-folder-open'></i>
+           <span>Gestionar Aulas</span></a>
+   </li>";
+} else{} 
+
+if($_SESSION['crudUsuarios']==1){
+echo "
+  
+   <hr class='sidebar-divider'>
+
+   <li class='nav-item active'>
+       <a class='nav-link' href='crudAulas.php'>
+           <i class='far fa-folder-open'></i>
+           <span>Gestionar Usuarios</span></a>
+   </li>";
+} else{} 
+
+
+
+if($_SESSION['crudUsuarios']==1){
+echo "
+
+<hr class='sidebar-divider'>
+
+<li class='nav-item active'>
+  <a class='nav-link' href='crudAulas.php'>
+      <i class='far fa-folder-open'></i>
+      <span>Gestionar Roles</span></a>
+</li>";
+} else{} 
+
+
+
+if($_SESSION['crudUsuarios']==1){
+echo "
+
+<hr class='sidebar-divider'>
+
+<li class='nav-item active'>
+  <a class='nav-link' href='crudAulas.php'>
+      <i class='far fa-folder-open'></i>
+      <span>Gestionar Grupos</span></a>
+</li>";
+} else{} 
+
+
+if($_SESSION['crudUsuarios']==1){
+echo "
+
+<hr class='sidebar-divider'>
+
+<li class='nav-item active'>
+  <a class='nav-link' href='crudAulas.php'>
+      <i class='far fa-folder-open'></i>
+      <span>Actualizar Base de Datos</span></a>
+</li>";
+} else{} 
+
+
+echo "   
+<hr class='sidebar-divider'>
+
+<li class='nav-item active'>
+<a class='nav-link' href='crudAulas.php'>
+<i class='fas fa-hands-helping'></i>
+<span>Ayuda</span></a>
+</li>
+
+
+
+
+</ul>
+</div>
+
+
+";
+
+
+?>
+
+    
+
+
+
+
+
+
+
+</ul>
              <?php //function cerrar(){?>
                    <!-- Begin Page Content -->
                                 <div class="container-fluid">
