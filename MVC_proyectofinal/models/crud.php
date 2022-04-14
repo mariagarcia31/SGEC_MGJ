@@ -424,7 +424,7 @@ class Crud extends Conexion{
 
     function actualizar($indic){
 
-        $comprobar="SELECT * FROM reservas WHERE fecha='".$indic[3]."' AND  idAula='".$indic[1]."' AND  hora='".$indic[6]."';";
+        $comprobar="SELECT * FROM reservas WHERE id!='".$indic[0]."' AND fecha='".$indic[3]."' AND  idAula='".$indic[1]."' AND  hora='".$indic[6]."';";
 		$consulta_comprobar=$this->conexion->prepare($comprobar);
 		$consulta_comprobar->execute();
 		$resultado_comprobar=$consulta_comprobar->fetchAll();
