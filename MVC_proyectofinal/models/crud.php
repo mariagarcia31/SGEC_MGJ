@@ -42,7 +42,7 @@ class Crud extends Conexion{
                     $_SESSION['nombre']=$nombre;
                     
 
-                    $rol =$verif3[1];
+                    $rol =$verif3[2];
 
                     $sql="SELECT * FROM roles WHERE id ='$rol'";
                     $consulta=$this->conexion->prepare($sql);
@@ -349,7 +349,7 @@ class Crud extends Conexion{
       
     }
 
-
+/*************************************  MODELO DE MIS RESERVAS   ********************************/
     
     function borrarUnoaUno($selec){
             
@@ -424,152 +424,200 @@ class Crud extends Conexion{
 
     function actualizar($indic){
 
-        $comprobar="SELECT * FROM reservas WHERE id!='".$indic[0]."' AND fecha='".$indic[3]."' AND  idAula='".$indic[1]."' AND  hora='".$indic[6]."';";
+        $comprobar="SELECT * FROM reservas WHERE id='".$indic[0]."';";
 		$consulta_comprobar=$this->conexion->prepare($comprobar);
 		$consulta_comprobar->execute();
-		$resultado_comprobar=$consulta_comprobar->fetchAll();
-		if(count($resultado_comprobar)>0){
-            return false;
+		$resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
+
+        $resultado = array_diff($resultado_comprobar, $indic);
+
+        if(empty($resultado)){
+            return 3;
 		}
-        else{
-            $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='reservas';";
-			$consulta_nombres=$this->conexion->prepare($nombres);
-			$consulta_nombres->execute();
-			$resultado_nombres=$consulta_nombres->fetchAll();
-				foreach($resultado_nombres as $nombre_columna){	
-					for($i=0;$i<count($nombre_columna)/2;$i++){
-						$nombress[]=$nombre_columna;
-					}
-				}
-	
-                for($i=0;$i<count($nombress);$i++){
-                    
-                    $sql="UPDATE reservas SET  ".$nombress[$i][0]."=:date  WHERE id=".$indic[0].";";
-                    $stmt=$this->conexion->prepare($sql);
-                    $stmt->bindParam(":date",$indic[$i]);
-                    $stmt->execute();
-                    
-                    
-                }
-            return true;
-		}      
-
-    }
-
-
-    /*------------------------------------------------------------------------- */
-
-    function obtenerTablas(){
         
-        $sql='SHOW TABLES FROM protectora_animales';
+
+            $comprobar="SELECT * FROM reservas WHERE fecha='".$indic[3]."' AND  idAula='".$indic[1]."' AND  hora='".$indic[6]."';";
+            $consulta_comprobar=$this->conexion->prepare($comprobar);
+            $consulta_comprobar->execute();
+            $resultado_comprobar=$consulta_comprobar->fetchAll();
+            if(count($resultado_comprobar)>0){
+                return false;
+            }
+            else{
+                $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='reservas';";
+                $consulta_nombres=$this->conexion->prepare($nombres);
+                $consulta_nombres->execute();
+                $resultado_nombres=$consulta_nombres->fetchAll();
+                    foreach($resultado_nombres as $nombre_columna){	
+                        for($i=0;$i<count($nombre_columna)/2;$i++){
+                            $nombress[]=$nombre_columna;
+                        }
+                    }
+        
+                    for($i=0;$i<count($nombress);$i++){
+                        
+                        $sql="UPDATE reservas SET  ".$nombress[$i][0]."=:date  WHERE id=".$indic[0].";";
+                        $stmt=$this->conexion->prepare($sql);
+                        $stmt->bindParam(":date",$indic[$i]);
+                        $stmt->execute();
+                        
+                        
+                    }
+                return true;
+            }      
+        
+    }
+    /*************************************  FIN MODELO DE MIS RESERVAS   ********************************/
+
+
+
+
+    /*************************************  MODELO DE AULAS   ********************************/
+    function borrarUnoaUnoAulas($selec){
+            
+        $sql="DELETE FROM aulas WHERE  id='$selec'";
         $consulta=$this->conexion->prepare($sql);
         $consulta->execute();
-        $consult=$consulta->fetchAll(PDO::FETCH_COLUMN);
-        return $consult; 
+        return true;
+            
     }
+
+    function borrarAulas($selec){
+      
+        if(empty($selec)){
+           
+            return false;
+        }
+        else{
+          
+            foreach($selec as $valores){
+                $sql="DELETE FROM aulas WHERE  id='$valores'";
+                $consulta=$this->conexion->prepare($sql);
+                $consulta->execute();
+                
+            }
+            return true;
+        }
+        
+        }  
+ 
     
-    function obtieneCampos($tabla){
-        try{
-            $sql='SELECT * FROM '.$tabla;
+
+
+    function crudAulas($opc,$iteams_pagina=null,$offset=null){
+         
+        if($opc==1){
+
+            $sql="SELECT count(*) FROM aulas";
+
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $count=$consulta->fetch(PDO::FETCH_NUM);
+            
+            return $count;
+        }
+        elseif($opc==2){
+
+                   
+            $sql="SELECT * FROM aulas ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
             $consult=$consulta->fetchAll(PDO::FETCH_ASSOC);
             $keys=array_keys($consult[0]);
-            return $keys;
-
-        }catch(PDOException){
-            return [];
+            return array($consult,$keys);
         }
-      
-        
-    }
-
-
-  
-
-    function obtieneDeId($tabla,$id){
-        try{
-            $sql='SELECT * FROM '.$tabla.' WHERE  id='.$id;
-            $ver=$this->conexion->prepare($sql);
-            $ver->execute();
-            $_ver=$ver->fetchAll(PDO::FETCH_ASSOC);
-            return $_ver;  
-
-        }catch(PDOException $e){
-            echo "<tr><td style='text-align:center'><h1>Fallo</h1></td></tr>";
-            return [];
-        }
-      
        
-      
-    
-    }
-/*
-    function borrar($tabla,$id){
+        
 
-        if($this->obtieneDeId($tabla,$id)==null){
-
-            echo "No existe ese Id";
-
-        }else{
-            $sql='DELETE FROM '.$tabla.' WHERE  id='.$id;
-            $borrar=$this->conexion->prepare($sql);
-            $borrar->execute();
-           
-        }
     }
 
-*/
+    function modifAulas($id){
 
+         
+        $nombres="SELECT * FROM aulas WHERE id=:cod;";
+        $consulta_nombres=$this->conexion->prepare($nombres);
+        $consulta_nombres->bindParam(':cod',$id);
+        $consulta_nombres->execute();
+        $resultado_nombres=$consulta_nombres->fetchAll();
 
+        return $resultado_nombres;
+    }
 
+    function actualizarAulas($indic){
 
+        $comprobar="SELECT * FROM aulas WHERE id='".$indic[0]."';";
+		$consulta_comprobar=$this->conexion->prepare($comprobar);
+		$consulta_comprobar->execute();
+		$resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
 
+        $resultado = array_diff($resultado_comprobar, $indic);
 
+        if(empty($resultado)){
+            return false;
+		}
+        
 
-
-
-
-
-
-    function crear($tabla){
-
-        try{
-            $sql="INSERT INTO ".$tabla."(";
-            foreach($this->obtieneCampos($tabla) as $indice){
+            
+                $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='aulas';";
+                $consulta_nombres=$this->conexion->prepare($nombres);
+                $consulta_nombres->execute();
+                $resultado_nombres=$consulta_nombres->fetchAll();
+                    foreach($resultado_nombres as $nombre_columna){	
+                        for($i=0;$i<count($nombre_columna)/2;$i++){
+                            $nombress[]=$nombre_columna;
+                        }
+                    }
+        
+                    for($i=0;$i<count($nombress);$i++){
+                        
+                        $sql="UPDATE aulas SET  ".$nombress[$i][0]."=:data  WHERE id='".$indic[0]."';";
+                        $stmt=$this->conexion->prepare($sql);
+                        $stmt->bindParam(":data",$indic[$i]);
+                        $stmt->execute();
+                        
+                        
+                    }
+                return true;
+            }      
+        
     
-                $sql.=$indice.",";
-            }
-            $sql=trim($sql,",");
-            $sql.=") VALUES( ";
-            foreach($this->obtieneCampos($tabla) as $indice){
+
+    function crearAulas($indic){
+
+            $comprobar="SELECT * FROM aulas WHERE id='".$indic[0]."';";
+            $consulta_comprobar=$this->conexion->prepare($comprobar);
+            $consulta_comprobar->execute();
+            $resultado_comprobar=$consulta_comprobar->fetchAll();
+            if(count($resultado_comprobar)>0){
+                return false;
+			}
+            
+			else{
+                $id = $indic[0];
+				$ubicacion = $indic[1];
+				$informacion =$indic[2];
+				$aforo = $indic[3];
+				$habilitado = $indic[4];
+				
+                $comprobar="INSERT INTO  aulas VALUES ('$id','$ubicacion','$informacion',$aforo,$habilitado);";
+                $consulta_comprobar=$this->conexion->prepare($comprobar);
+                $consulta_comprobar->execute();
                 
-                $sql.="'$_POST[$indice]'".",";
-            }
-    
-            $sql=trim($sql,",");
-            $sql.=")";
-            
-            $añadir=$this->conexion->prepare($sql);
-    
-            $añadir->execute();
+                return true;
 
-        }catch(PDOException){
-          
-           return null;
-            
-           
-        }
-      
-    
-    }
- 
+				
+			
+		}
 
- 
+
+			
+	}
+
+    
+
+     /*************************************  FIN MODELO DE AULAS   ********************************/
 }
-
-
 
 
 ?>

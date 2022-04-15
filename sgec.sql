@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-04-2022 a las 01:14:49
+-- Tiempo de generación: 15-04-2022 a las 20:50:52
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -75,8 +75,8 @@ CREATE TABLE `aulas` (
 --
 
 INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`) VALUES
-('Aula 100', 'Pabellón 3', 'Proyector, ordenadores', 20, 1),
-('Aula 700', 'Pabellon 4', 'Tv, ordenadores', 30, 0);
+('Aula 700', 'Pabellon 3', 'Tv, ordenadores', 20, 1),
+('Aula 815', 'Pabellon 5', 'TV', 15, 0);
 
 -- --------------------------------------------------------
 
@@ -113,15 +113,6 @@ CREATE TABLE `reservas` (
   `hora` varchar(255) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `reservas`
---
-
-INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(101, 'Aula 100', 1, '2022-04-13', 'DAW2', 'Charla', '08:30AM - 09:30AM', '2022-04-13 21:42:25'),
-(102, 'Aula 100', 1, '2022-04-13', 'DAW2', 'Charla', '09:30AM - 10:30AM', '2022-04-13 21:42:28'),
-(103, 'Aula 100', 1, '2022-04-13', 'DAW2', 'Charla', '10:30AM - 11:30AM', '2022-04-13 21:43:07');
 
 -- --------------------------------------------------------
 
@@ -224,7 +215,7 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`

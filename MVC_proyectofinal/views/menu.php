@@ -121,7 +121,7 @@ echo "
 <hr class='sidebar-divider'>
 
 <li class='nav-item active'>
-    <a class='nav-link' href='crudReservas.php'>
+    <a class='nav-link' href='?c=crudReservas&page=1'>
         <i class='far fa-folder-open'></i>
         <span>Gestionar Reservas</span></a>
 </li>";
@@ -135,7 +135,7 @@ echo "
    <hr class='sidebar-divider'>
 
    <li class='nav-item active'>
-       <a class='nav-link' href='crudAulas.php'>
+       <a class='nav-link' href='?c=crudAulas&page=1'>
            <i class='far fa-folder-open'></i>
            <span>Gestionar Aulas</span></a>
    </li>";
@@ -147,7 +147,7 @@ echo "
    <hr class='sidebar-divider'>
 
    <li class='nav-item active'>
-       <a class='nav-link' href='crudAulas.php'>
+       <a class='nav-link' href='?c=crudUsuarios&page=1'>
            <i class='far fa-folder-open'></i>
            <span>Gestionar Usuarios</span></a>
    </li>";
@@ -155,13 +155,13 @@ echo "
 
 
 
-if($_SESSION['crudUsuarios']==1){
+if($_SESSION['crudRoles']==1){
 echo "
 
 <hr class='sidebar-divider'>
 
 <li class='nav-item active'>
-  <a class='nav-link' href='crudAulas.php'>
+  <a class='nav-link' href='?c=crudRoles&page=1'>
       <i class='far fa-folder-open'></i>
       <span>Gestionar Roles</span></a>
 </li>";
@@ -169,26 +169,26 @@ echo "
 
 
 
-if($_SESSION['crudUsuarios']==1){
+if($_SESSION['crudGrupos']==1){
 echo "
 
 <hr class='sidebar-divider'>
 
 <li class='nav-item active'>
-  <a class='nav-link' href='crudAulas.php'>
+  <a class='nav-link' href='?c=crudGrupos&page=1'>
       <i class='far fa-folder-open'></i>
       <span>Gestionar Grupos</span></a>
 </li>";
 } else{} 
 
 
-if($_SESSION['crudUsuarios']==1){
+if($_SESSION['actualizarBBDD']==1){
 echo "
 
 <hr class='sidebar-divider'>
 
 <li class='nav-item active'>
-  <a class='nav-link' href='crudAulas.php'>
+  <a class='nav-link' href='?c=crudBBDD&page=1'>
       <i class='far fa-folder-open'></i>
       <span>Actualizar Base de Datos</span></a>
 </li>";
@@ -257,7 +257,7 @@ echo "
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">¿Seguro que desea cerrar sesión?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">X</span>
                     </button>
                 </div>
                 <div class="modal-body">Selecciona "cerrar sesión" abajo si estás seguro de cerrar la sesión.</div>

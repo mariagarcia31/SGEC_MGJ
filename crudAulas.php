@@ -140,36 +140,37 @@ try{
 //aqui se termina la agregación
 if(isset($_POST['agregar-ult'])){
 
-    $mysqli = new mysqli('localhost', 'root', '', 'sgec');
-    $id = $_POST['dato'][0];
-    $stmt = $mysqli->prepare("select * from aulas where id = ? ");
-    $stmt->bind_param('s',$id);
-    if($stmt->execute()){
-        $result = $stmt->get_result();
-        if($result->num_rows>0){
-            echo "<div class='alert alert-danger'>Ya existe una aula con este nombre</div>";
-        }
-        else{
-            $ubicacion = $_POST['dato'][1];
-            $informacion = $_POST['dato'][2];
-            $aforo = $_POST['dato'][3];
-            $habilitado = $_POST['dato'][4];
-            
+		$mysqli = new mysqli('localhost', 'root', '', 'sgec');
+		$id = $_POST['dato'][0];
+		$stmt = $mysqli->prepare("select * from aulas where id = ? ");
+		$stmt->bind_param('s',$id);
+		if($stmt->execute()){
+			$result = $stmt->get_result();
+			if($result->num_rows>0){
+				echo "<div class='alert alert-danger'>Ya existe una aula con este nombre</div>";
+			}
+			else{
+				$ubicacion = $_POST['dato'][1];
+				$informacion = $_POST['dato'][2];
+				$aforo = $_POST['dato'][3];
+				$habilitado = $_POST['dato'][4];
+				
 
-            $stmt = $mysqli->prepare("INSERT INTO aulas  VALUES (?,?,?,?,?)");
-            $stmt->bind_param('sssss', $id, $ubicacion, $informacion, $aforo, $habilitado );
-            $stmt->execute();
-            echo "<div class='alert alert-success'>Aula creada con exito</div>";
-            
-            $stmt->close();
-            $mysqli->close();
-            
-        
-    }
+				$stmt = $mysqli->prepare("INSERT INTO aulas  VALUES (?,?,?,?,?)");
+				$stmt->bind_param('sssss', $id, $ubicacion, $informacion, $aforo, $habilitado );
+				$stmt->execute();
+				echo "<div class='alert alert-success'>Aula creada con exito</div>";
+				
+				$stmt->close();
+				$mysqli->close();
+				
+			
+		}
 
 
-		
-}}
+			
+	}
+}
 
 
 

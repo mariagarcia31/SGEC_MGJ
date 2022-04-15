@@ -3,6 +3,13 @@
 <head>
   
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".alert").delay( 2200 ).fadeOut(1100);
+  });
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body>
 
@@ -63,7 +70,7 @@ $_SESSION['cuantas']=count($result[0]);
                     
                     if(isset($_SESSION["modificar"])){
                             ?>
-                            <html><head><style>#todo{opacity: 0.2;}</style></head></html>
+                            
                                 <?php
 
                             $id=$_SESSION["modificar"];
@@ -73,7 +80,10 @@ $_SESSION['cuantas']=count($result[0]);
                             
 
                             echo "<div id='container' ><form action='?c=modificar&pag=".$_GET['page']."' method='post' ><table>";
-                            
+                            if(isset($_SESSION['vacio'])){
+                                echo $_SESSION['vacio'];
+                                unset($_SESSION['vacio']);
+                            }
                             foreach($resu as $nombre_columna){
                                 for($i=0;$i<count($nombre_columna)/2;$i++){
                                    if($i==0||$i==2){
@@ -146,7 +156,7 @@ $_SESSION['cuantas']=count($result[0]);
                             echo "<input type='submit'  name='cancelar' value='Cancelar'></input></div></tr>";
                     
                             echo "</table></form></div>";
-                            unset($_SESSION["modificar"]);
+                            
                         };
                         
                         
@@ -154,7 +164,15 @@ $_SESSION['cuantas']=count($result[0]);
                     ?>
        
 <?php
-       // echo "<table class='tabla' cellpadding=5px' >";
+       echo '<div class="container" style="margin-top:60px;margin-right:80px">
+
+
+
+       <div class="row">
+           
+                       <div class="col-md-12 border">
+       
+                           <table class="table table-striped bg-white" style="text-align: center;">';
 
         echo "<tr >";
 
@@ -184,10 +202,10 @@ $_SESSION['cuantas']=count($result[0]);
 
             <td><input type="checkbox" name="eliminar[]" value="<?php echo $dato["id"]?>">
             
-            <a href="?c=borrar&id=<?php echo $dato["id"] ?>&pag=<?php echo $_GET["page"]?>">Borrar</a>
+            <a class="btn btn-danger"  href="?c=borrar&id=<?php echo $dato["id"] ?>&pag=<?php echo $_GET["page"]?>"><i class="bi bi-trash"></i></a>
         
             </td>
-            <td><button  name="modificar" value="<?php echo $dato["id"] ?>">Modificar</button></td>
+            <td><button  title="Modificar" class="btn btn-primary" name="modificar" value="<?php echo $dato["id"] ?>"> <i class="bi bi-pencil-square"></i></button></td>
 
 
             <?php
@@ -204,7 +222,7 @@ $_SESSION['cuantas']=count($result[0]);
         
     </div>
 
-  <input type="submit" name="borrar" value="Borrar" class="btn btn-danger" style="position:relative;left:92%">
+  <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="position:relative;left:92%">
  </form>
  
 
@@ -238,9 +256,6 @@ for($i=1;$i<=$total_pages;$i++){
 </div>
 
 </div>
-
-
-
 
 
 </body>
