@@ -20,6 +20,14 @@
     right: 0px;
     bottom: 0px;
     }
+    @media screen and (max-width:768px){
+        ul.navbar-nav{
+            z-index: 1 !important;
+        }
+        nav{
+            z-index:2
+        }
+    }
 </style>
     <title>sgec</title>
 

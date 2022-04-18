@@ -16,6 +16,14 @@
 .bg-gray{
     background-color: lightgray !important;
 }
+@media screen and (max-width:650px){
+    .card-wrapper{
+        display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;flex-wrap: wrap; padding-left:16%;padding-right:16%;margin-top:35% !important
+    }
+}
 </style>
 </head>
 
