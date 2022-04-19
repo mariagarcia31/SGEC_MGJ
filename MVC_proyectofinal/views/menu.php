@@ -23,10 +23,20 @@
     justify-content: center;
     width: 100%;
     /* margin: 15px; */
-    background: #C6CECF;
+    background-color: #212529;
     padding: 20px;
-    color: white;
+    color: rgba(255, 255, 255, 0.5);
     }
+
+    .cabecera, .cabecera-todo{
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .logoEnlace{
+        margin-right: 5rem;
+    }
+
+
     li.nav-item{
         float: right;
     right: 0px;
@@ -40,10 +50,10 @@
     top: 30px;
     left: 20px;
         margin:15px !important;
-        color:#375458 !important
+        color: rgba(255, 255, 255, 0.7) !important
     }
     .menu:hover{
-        color:#1A3C40 !important
+        color: rgba(255, 255, 255, 0.5) !important
     }
    /* The side navigation menu */
 .sidenav {
@@ -53,7 +63,7 @@
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
-  background-color: #C6CECF; /* Black*/
+  background-color: #212529; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -76,14 +86,14 @@
 padding: 20px 8px 20px 32px;
   text-decoration: none !important;
   font-size: 18px;
-  color: #375458;
+  color: rgba(255, 255, 255, 0.7);
   display: block;
   transition: 0.3s;
 }
 
 /* When you mouse over the navigation links, change their color */
 .btn-menu:hover {
-  color:#1A3C40;
+    color: rgba(255, 255, 255, 0.5);
   font-size: 20px;
 
 }
@@ -105,7 +115,7 @@ hr{
   padding: 20px;
 }
 .footer{
-    background:#C6CECF;
+    background-color: #212529; /* Black*/
     position:fixed;
     bottom:0px;
     left:0px;
@@ -213,12 +223,14 @@ if($_SESSION['actualizarBBDD']==1){
 <span onclick="openNav()" class="menu">
 <span class="glyphicon glyphicon-align-justify"></span>
 </span>
-<div class="cabecera-todo"><h1 class="cabecera">Sistema de Gestión de Espacios Comunes</h1><a href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img class="logo" src="libs/img/logo_ciudadescolar.jpg"></a>
+<div class="cabecera-todo">
+    <a class="logoEnlace" href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img class="logo" src="libs/img/logo_ciudadescolar.jpg"></a>
+    <h1 class="cabecera">Sistema de Gestión de Espacios Comunes</h1>
 </div>
 <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span style="color:#1A3C40" class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nombre'];?></span>
+            <span style="color: rgba(255, 255, 255, 0.7);" class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nombre'];?></span>
             <img class="img-profile rounded-circle" style="width:50px"
                 src="libs/img/undraw_profile.svg">
         </a>

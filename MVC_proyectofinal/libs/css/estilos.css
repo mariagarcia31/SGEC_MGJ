@@ -31,11 +31,7 @@
     border-color: #536D70!important;
 }
 
-.btn-primary {
-    color: white!important;
-    background-color: #708588!important;
-    border-color: #708588!important;
-}
+
 .btn-primary:hover{
     color: white !important;
     background-color: #536D70!important;
@@ -78,10 +74,10 @@ li.page-item.active a.page-link{
 }
 
 .btn.btn-success{
-    background-color: #536D70;
+    background-color: #107717;
     color:#E2E7E7
 }
 .btn.btn-success:hover{
-    background-color: #1A3C40;
+    background-color: #0e5812;
     color:#E2E7E7
 }

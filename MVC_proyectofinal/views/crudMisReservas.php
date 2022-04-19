@@ -85,19 +85,32 @@ $_SESSION['cuantas']=count($result[0]);
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            align-content: center;'><form action='?c=modificar&pag=".$_GET['page']."' method='post' ><table>";
+                            align-content: center;'><form action='?c=modificar&pag=".$_GET['page']."' method='post' ><table class='table table-striped bg-white' style='margin-top:2%'>";
                             if(isset($_SESSION['vacio'])){
                                 echo $_SESSION['vacio'];
                                 unset($_SESSION['vacio']);
                             }
+
+                            echo '<tr>';
+                            echo '<th> ID</th>';
+                            echo '<th> Aula</th>';
+                            echo '<th> Usuario</th>';
+                            echo '<th> Fecha</th>';
+                            echo '<th> Grupo</th>';
+                            echo '<th> Motivo</th>';
+                            echo '<th> Hora</th>';
+                            echo '<th> Fecha creación</th>';
+                            echo '</tr>';
+                            echo '<tr>';
                             foreach($resu as $nombre_columna){
                                 for($i=0;$i<count($nombre_columna)/2;$i++){
-                                   if($i==0||$i==2){
-                                    echo "<tr ><input type='text' readonly name='dato[]' value='".$nombre_columna[$i]."'></input></tr>";
+                                   if($i==0||$i==2||$i==7){
+                                    echo "<td ><input type='text' readonly name='dato[]' value='".$nombre_columna[$i]."'></input></td>";
                     
                                    }
                                     elseif($i==6){                    
                                         echo "
+                                        <td>
                                         <select name='dato[]'>  ";
                                         if($nombre_columna[6]=='08:30AM - 09:30AM'){
                                             echo "<option selected value='08:30AM - 09:30AM'>08:30AM - 09:30AM</option>";
@@ -150,18 +163,19 @@ $_SESSION['cuantas']=count($result[0]);
                                             echo "<option selected value='13:30PM - 14:30PM'>13:30PM - 14:30PM</option>";
                                         }
                                         echo" </select>
-                                        </tr>";
+                                        </td>";
                     
                                     }else{
-                                        echo "<tr ><input type='text' name='dato[]' value='".$nombre_columna[$i]."'></input></tr>";
+                                        echo "<td ><input type='text' name='dato[]' value='".$nombre_columna[$i]."'></input></td>";
                     
                                     }
                                 }
                             }
-                            echo "<tr><div><input type='submit'  name='modificar-ult' value='Actualizar'></input>";
-                            echo "<input type='submit'  name='cancelar' value='Cancelar'></input></div></tr>";
+                            echo "</table>";
+                            echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
+                            echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
                     
-                            echo "</table></form></div>";
+                            echo "</form></div>";
                             
                         };
                         
@@ -177,7 +191,7 @@ $_SESSION['cuantas']=count($result[0]);
        <div class="row">
            
                        <div class="col-md-12">
-                       <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="float:right">
+                      
 
                            <table class="table table-striped bg-white" style="text-align: center;">';
 
@@ -192,6 +206,10 @@ $_SESSION['cuantas']=count($result[0]);
         
         
         echo "</tr>";
+        ?>
+<form action="?c=borrar&pag=<?php echo $_GET["page"]?>" method="post"> 
+<input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="float:right; margin-bottom:1%">
+        <?php
         
         foreach($result[0] as $indice=>$dato){
         
@@ -205,7 +223,7 @@ $_SESSION['cuantas']=count($result[0]);
             }
       
             ?>
-            <form action="?c=borrar&pag=<?php echo $_GET["page"]?>" method="post"> 
+            
 
             <td><input type="checkbox" name="eliminar[]" value="<?php echo $dato["id"]?>">
             

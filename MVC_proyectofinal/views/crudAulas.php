@@ -147,7 +147,7 @@ $_SESSION['cuantas']=count($result[0]);
                                 echo '</tr>';
 
                                 echo "</table>";
-                        echo "<input class='btn btn-primary'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
+                        echo "<input class='btn btn-success'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
                         echo "<input  class='btn btn-danger'type='submit'  name='cancelar' value='Cancelar'></input>";
                 
                         echo "</form></div>";
@@ -221,7 +221,7 @@ $_SESSION['cuantas']=count($result[0]);
        <div class="row">
            
                        <div class="col-md-12 ">';
-        echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style='float:right;' >";
+        echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  ";
        
        echo                    '<table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
 
@@ -236,7 +236,13 @@ $_SESSION['cuantas']=count($result[0]);
         
         
         echo "</tr>";
+        ?>
         
+        <form action="?c=borrarAulas&pag=<?php echo $_GET["page"]?>" method="post"> 
+            <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style='float:right;' >
+
+        
+        <?php
         foreach($result[0] as $indice=>$dato){
         
             foreach($dato as $x=>$y){
@@ -244,12 +250,9 @@ $_SESSION['cuantas']=count($result[0]);
             
                 echo "<td>".$y."</td>";
                 
-                //$vivienda=new Vivienda($y);
-                //$i=new Vivienda($dato["id"],$dato["tipo"],$dato["zona"],$dato["direccion"],$dato["ndormitorios"],$dato["tamano"],$dato["precio"]);           
             }
       
             ?>
-            <form action="?c=borrarAulas&pag=<?php echo $_GET["page"]?>" method="post"> 
 
             <td><input type="checkbox" name="eliminar[]" value="<?php echo $dato["id"]?>">
             
@@ -272,7 +275,7 @@ $_SESSION['cuantas']=count($result[0]);
         
     
 
-  
+        
  </form>
 
 

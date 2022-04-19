@@ -37,10 +37,6 @@ class Control{
         include_once ("views/crudAulas.php");
     }
 
-    function crudRoles(){
-        include_once ("views/crudRoles.php");
-    }
-
     function logout(){
         include_once ("views/logout.php");
     }
@@ -290,116 +286,7 @@ function crearAulas(){
 
 /******************************   FINAL CONTROLADOR AULAS         ********************************/
 
-
-
-
-/******************************   CONTROLADOR ROLES               ********************************/
-function borrarRoles(){
-
-        
-    if(isset($_POST["borrar"])){
-        $result=$this->crud->borrarRoles($_POST["eliminar"]);
-        if($result){
-            $_SESSION["exito"]="<div class='alert alert-success'>Rol eliminado con éxito.</div>";
-            $cuantos=count($_POST["eliminar"]);
-            if($_SESSION['cuantas']==$cuantos){
-                header("location:?c=crudRoles&page=".$_GET["pag"]-1 ."");
-            }
-            else{
-            header("location:?c=crudRoles&page=".$_GET["pag"]."");
-            }
-        }else{
-            $_SESSION["error2"]="<div class='alert alert-danger'>No se ha seleccionado ningún Rol para eliminar</div>";
-            header("location:?c=crudRoles&page=".$_GET["pag"]."");
-        }
-    
-    }
-    elseif(isset($_POST["modificar"])){
-        $_SESSION["modificar"]=$_POST["modificar"];
-        header("location:?c=crudRoles&page=".$_GET["pag"]."");
-
-    }else{
-        $result=$this->crud->borrarUnoaUnoRoles($_GET["id"]);
-        $_SESSION["exito"]="<div class='alert alert-success'>Rol eliminado con éxito.</div>";
-        if($_SESSION['cuantas']==1){
-            header("location:?c=crudRoles&page=".$_GET["pag"] - 1 ."");
-        }
-        else{
-        header("location:?c=crudRoles&page=".$_GET["pag"]."");
-        }
-        
-
-    }
-  
 }
-
-function modificarRoles(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y Role</div>";
-    if(isset($_POST['cancelar'])){
-        unset($_SESSION["modificar"]);
-        header("location:?c=crudRoles&page=".$_GET["pag"]."");
-    }
-    else{
-    
-    $resultado=$this->crud->actualizarRoles($_POST["dato"]);
-
-    if($resultado){
-        $_SESSION["exito"]="<div class='alert alert-success'>Rol modificado con éxito.</div>";
-        unset($_SESSION["modificar"]);
-        header("location:?c=crudRoles&page=".$_GET["pag"]."");
-    }
-    else{
-        
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> No se ha cambiado ningún campo</div>";
-        
-        header("location:?c=crudRoles&page=".$_GET["pag"]."");
-    }
-    
-
-}
-}
-
-
-function crearRoles(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
-    if(isset($_POST['cancelar'])){
-        header("location:?c=crudRoles&page=".$_GET["pag"]."");
-    }
-    else if($_POST['dato'][0]==null || $_POST['dato'][1]==null || $_POST['dato'][2]==null || $_POST['dato'][3]==null || $_POST['dato'][4]==null ){
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Debe rellenar todos los campos</div>";
-        header("location:?c=crudRoles&page=".$_GET["pag"]."&crear=1");
-    }
-    else{
-    
-    $resultado=$this->crud->crearRoles($_POST["dato"]);
-
-
-    if($resultado){
-        $_SESSION["exito"]="<div class='alert alert-success'>Rol creado con éxito.</div>";
-        unset($_SESSION["modificar"]);
-        header("location:?c=crudRoles&page=".$_GET["pag"]."");
-    }
-    else{
-        
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Ya existe un rol con ese nombre</div>";
-        
-        header("location:?c=crudRoles&page=".$_GET["pag"]."&crear=1");
-    }
-    
-
-}
-}
-
-/******************************   FINAL CONTROLADOR ROLES         ********************************/
-
-
-
-}
-
-
-
-
-
 
 
 
