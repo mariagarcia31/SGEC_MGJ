@@ -343,7 +343,6 @@ function modificarRoles(){
     
     $resultado=$this->crud->actualizarRoles($_POST["dato"]);
 
-
     if($resultado){
         $_SESSION["exito"]="<div class='alert alert-success'>Rol modificado con éxito.</div>";
         unset($_SESSION["modificar"]);

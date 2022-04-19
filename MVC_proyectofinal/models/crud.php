@@ -802,17 +802,18 @@ class Crud extends Conexion{
 
     
 
-    function modifRoles($id){
+        function modifRoles($id){
 
          
-        $nombres="SELECT * FROM roles WHERE id=:cod;";
-        $consulta_nombres=$this->conexion->prepare($nombres);
-        $consulta_nombres->bindParam(':cod',$id);
-        $consulta_nombres->execute();
-        $resultado_nombres=$consulta_nombres->fetchAll();
-
-        return $resultado_nombres;
-    }
+            $nombres="SELECT * FROM roles WHERE id=:cod;";
+            $consulta_nombres=$this->conexion->prepare($nombres);
+            $consulta_nombres->bindParam(':cod',$id);
+            $consulta_nombres->execute();
+            $resultado_nombres=$consulta_nombres->fetchAll();
+    
+            return $resultado_nombres;
+        }
+    
 
     function actualizarRoles($indic){
         $comprobar="SELECT * FROM roles WHERE id='".$indic[0]."';";
@@ -822,12 +823,12 @@ class Crud extends Conexion{
 
         $resultado = array_diff($resultado_comprobar, $indic);
 
+       /*SI DEJO ESTO LA ACTUALIZACIÓN NO VA
         if(empty($resultado)){
             return false;
 		}
-        
-
-            
+        */
+           
                 $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='roles';";
                 $consulta_nombres=$this->conexion->prepare($nombres);
                 $consulta_nombres->execute();
@@ -848,6 +849,7 @@ class Crud extends Conexion{
                         
                     }
                 return true;
+            
             }      
         
 
