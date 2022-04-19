@@ -36,7 +36,11 @@ if($count[0]==0){
             unset($_SESSION['vacio']);
         }
 
-        echo "<div style='width:80%'><form action='?c=crearAulas&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
+        echo "<div style='    width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;'><form action='?c=crearAulas&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
         
                 echo '<tr>';
                 echo '<th> Nombre</th>';
@@ -121,7 +125,11 @@ $_SESSION['cuantas']=count($result[0]);
                             unset($_SESSION['vacio']);
                         }
 
-                        echo "<div style='width:80%'><form action='?c=crearAulas&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
+                        echo "<div  style='    width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        align-content: center;'><form action='?c=crearAulas&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
                         
                                 echo '<tr>';
                                 echo '<th> Nombre</th>';
