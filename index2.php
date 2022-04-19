@@ -16,7 +16,7 @@ if(!isset($_SESSION['nombre'])){
     justify-content: center;
     }
     .card-header{
-    background-color:#537efd !important
+    background-color:#2FA4FF !important
 }
 .bg-gray{
     background-color: lightgray !important;

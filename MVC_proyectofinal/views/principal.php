@@ -11,7 +11,7 @@
     justify-content: center;
     }
     .card-header{
-    background-color:#537efd !important
+    background-color: #2FA4FF !important
 }
 .bg-gray{
     background-color: lightgray !important;
@@ -34,7 +34,7 @@
 
                 <div class="card bg-gray" style="width: 18rem; margin-left:5%; margin-top:1%;margin-bottom:5%">
                 <div class="card text-white bg-info mb-3" style="max-width: 18rem; border:none">
-                    <div class="card-header">
+                    <div class="card-header" style="background: #2FA4FF">
                     <h2 class="card-title" style="text-align:center"><?php echo $row['id']; ?></h2>
                     </div>
                 </div>
