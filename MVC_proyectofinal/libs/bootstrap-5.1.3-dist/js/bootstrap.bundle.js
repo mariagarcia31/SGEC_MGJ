@@ -4550,7 +4550,7 @@
   const OPEN_SELECTOR$1 = '.modal.show';
   const SELECTOR_DIALOG = '.modal-dialog';
   const SELECTOR_MODAL_BODY = '.modal-body';
-  const SELECTOR_DATA_TOGGLE$2 = '[data-bs-toggle="modal"]';
+  const SELECTOR_DATA_TOGGLE$2 = '[data-bs-toggle=""]';
   /**
    * ------------------------------------------------------------------------
    * Class Definition

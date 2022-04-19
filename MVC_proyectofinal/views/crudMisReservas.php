@@ -248,7 +248,7 @@ for($i=1;$i<=$total_pages;$i++){
     if($i==$page){
         echo "<li class='page-item active'><a class='page-link'>".$i."</a></li>";
     }else{
-        echo "<li class='page-item'><a class='page-link' href='?c=crudAulas&page=$i'>$i</a></li>";
+        echo "<li class='page-item'><a class='page-link' href='?c=crudMisReservas&page=$i'>$i</a></li>";
         
     }
 }
