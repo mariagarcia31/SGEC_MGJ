@@ -21,10 +21,9 @@
     background-color: #2FA4FF!important;}
 .btn-info {
     color: white !important;
-    background-color: #708588!important;
-    border-color: #708588!important;
+    background-color: #2FA4FF!important;
+    border-color: #2FA4FF!important;
 }
-
 
 .btn-info:hover{
     color: white !important;
