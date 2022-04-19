@@ -238,7 +238,7 @@ $_SESSION['cuantas']=count($result[0]);
        <div class="row">
            
                        <div class="col-md-12 ">';
-        echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style='float:right;' >";
+        echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  ";
        
        echo                    '<table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
 
@@ -253,6 +253,10 @@ $_SESSION['cuantas']=count($result[0]);
         
         
         echo "</tr>";
+        ?>
+<form action="?c=borrarRoles&pag=<?php echo $_GET["page"]?>" method="post"> 
+<input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style='float:right;' >
+<?php
         
         foreach($result[0] as $indice=>$dato){
         
@@ -266,7 +270,7 @@ $_SESSION['cuantas']=count($result[0]);
             }
       
             ?>
-            <form action="?c=borrarRoles&pag=<?php echo $_GET["page"]?>" method="post"> 
+            
 
             <td><input type="checkbox" name="eliminar[]" value="<?php echo $dato["id"]?>">
             
