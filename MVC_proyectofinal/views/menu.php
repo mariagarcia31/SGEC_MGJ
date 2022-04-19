@@ -213,14 +213,14 @@ if($_SESSION['actualizarBBDD']==1){
 <span onclick="openNav()" class="menu">
 <span class="glyphicon glyphicon-align-justify"></span>
 </span>
-<div class="cabecera-todo"><h1 class="cabecera">Sistema de Gestión de Espacios Comunes</h1><img class="logo" src="libs/img/logo_ciudadescolar.jpg">
+<div class="cabecera-todo"><h1 class="cabecera">Sistema de Gestión de Espacios Comunes</h1><a href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img class="logo" src="libs/img/logo_ciudadescolar.jpg"></a>
 </div>
 <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span style="color:#1A3C40" class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nombre'];?></span>
-            <img class="img-profile rounded-circle"
-                src="img/undraw_profile.svg">
+            <img class="img-profile rounded-circle" style="width:50px"
+                src="libs/img/undraw_profile.svg">
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
