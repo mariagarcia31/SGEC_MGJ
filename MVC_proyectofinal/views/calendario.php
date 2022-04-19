@@ -1,30 +1,135 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/css/estilos.css">
+
     <title>Calendario</title>
+    <style>
+        .row{
+            margin:0px !important
+        }
+        .tramos{
+            margin-bottom:100px
+        }
+        body{
+            overflow-x: hidden !important;
+        }
+        .btn-group-xs>.btn, .btn-xs {
+            padding: 1px 5px;
+            font-size: 16px !important;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+        a:hover{
+            text-decoration:none !important
+        }
+
+
+        .close {
+            font-size: 4rem !important;
+            margin-top: 50px;
+            margin-left: 50px;
+            float: left !important;
+            background: none;
+            border: none;
+        }
+        .mx-auto{
+            text-align:center
+        }
+        @media screen and (max-width:1200px){
+            table{
+                width:40%
+            }
+            body{
+            overflow-x: hidden;
+        }
+            
+        }
+        @media screen and (max-width:890px){
+            td{
+                padding:0px;
+                font-size:12px
+            }
+            body{
+            overflow-x: hidden;
+        }
+            .header{
+                font-size:12px
+            }
+            .mx-auto{
+                font-size:12px
+            }
+            td h4{
+                font-size:12px
+            }
+            td a{
+                font-size:12px
+            }
+            .btn.btn-info{
+                color: #fff;
+                background-color: #36b9cc;
+                border-color: #36b9cc;
+                font-size: 12px !important;
+                padding: 3px !important;
+            }
+            #calendario{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+                align-items: center;
+            }
+            h3{
+                font-size: 1.1rem !important;
+            }
+            .btn.btn-xs{
+                font-size: 12px;
+            }
+            
+            
+            
+        }
+
+        @media screen and (max-width:690px){
+            body{
+            overflow-x: hidden;
+        }
+            .btn.btn-info {
+
+                font-size: 9px !important;
+            }
+            .table>:not(caption)>*>* {
+                padding:0.1rem !important;
+            }
+            .btn.btn-info {
+                font-size: 7px !important;
+            }
+        }
+
+    </style>
+
 </head>
 <body>
     
 <?php include "menu.php"?>
 
-<div class="container bg-white rounded shadow p-1 mb-5 bg-white rounded">
-<div class="card-body">
-  </div>
- <div class="container"> 
+
+
  <div class="row text-center"> 
 
-
+ <a href="?c=principal" title="Cancelar"><button type="button" class="close" style="font-size:3.5em"><i class='fas fa-reply'></i></button></a>
+    
  </div> 
   <div class="row"> 
-      
-   <div class="col-md-12" style="background-color:white; margin-left:13.2%; padding-right:5%; margin-top:2%"> 
-   
-    <div id="calendario" style="width: 70%;" class='mx-auto'> 
-    <a href="?c=principal" title="Cancelar"><button type="button" class="close" style="font-size:3.5em">&times;</button></a>
+   <div class="col-md-12"> 
+    <div id="calendario" style="width: 80%;" class='mx-auto'> 
     
     <?php if(isset($_GET['id'])){ ?>
 
-           <h1 class='mx-auto' style='color:#202020; text-align:center'> Reserva para el <?php echo $_GET['id'] ?></h1>
+           <h1 class='mx-auto' style='color:#202020'> Reserva para el <?php echo $_GET['id'] ?></h1>
      <?php 
     }
       if(isset($_GET["month"])){
@@ -57,14 +162,13 @@
      
 ?>
 
-    
 
 <div class="container" style="width: 80%;">
         <div class="row">
 
 
     <div class="col-md-12">
-    <h1 class='mx-auto text-center' style='color:#202020'>Horarios del día: <?php echo date('m/d/Y', strtotime($_GET["date"])); ?></h1><hr>
+    <h1 class='mx-auto text-center' style='color:#202020'>Horarios del día: <?php echo date('m/d/Y', strtotime($_GET["date"])); ?></h1><hr style="margin:15px !important">
 
     <?php if(isset($_SESSION["msg"])){ 
         echo $_SESSION["msg"];
@@ -72,7 +176,7 @@
     </div>
 
 
-
+<div class="tramos">
 <?php $timeslots = $this->crud->timeslots($duration, $cleanup, $start, $end); 
 
     foreach($timeslots as $ts){
@@ -90,6 +194,7 @@
     <?php } ?>
     </div>
        </div>
+        </div>
 <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -107,6 +212,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Grupo</label>
+                                  
                                     <input required type="text" class="form-control" name="grupo">
                                 </div>
                                 <div class="form-group">
@@ -124,8 +230,7 @@
             </div>
 
         </div>
-    </div>
-    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>

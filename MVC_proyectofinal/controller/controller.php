@@ -32,7 +32,9 @@ class Control{
     function crudMisReservas(){
         include_once ("views/crudMisReservas.php");
     }
-
+    function crudReservas(){
+        include_once ("views/crudReservas.php");
+    }
     function crudAulas(){
         include_once ("views/crudAulas.php");
     }

@@ -439,6 +439,37 @@ class Crud extends Conexion{
 
     }
 
+
+
+
+    
+    function crudReservas($opc,$iteams_pagina=null,$offset=null){
+        if($opc==1){
+
+            $sql="SELECT count(*) FROM reservas";
+
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $count=$consulta->fetch(PDO::FETCH_NUM);
+            
+            return $count;
+        }
+        elseif($opc==2){
+
+                   
+            $sql="SELECT * FROM reservas ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $consult=$consulta->fetchAll(PDO::FETCH_ASSOC);
+            $keys=array_keys($consult[0]);
+            return array($consult,$keys);
+        }
+       
+        
+
+    }
+
     function modif($id){
 
          
