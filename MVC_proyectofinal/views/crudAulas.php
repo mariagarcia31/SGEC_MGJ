@@ -10,6 +10,8 @@ $(document).ready(function(){
   });
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
+
 </head>
 <body>
 
@@ -19,13 +21,51 @@ $(document).ready(function(){
 $count=$this->crud->crudAulas(1);
 
 if($count[0]==0){
-    echo '<div class="container" style="margin-top:60px;margin-right:80px">
+    
+    echo '<div class="container" style="margin-top:7%;margin-right:15%;margin-left:15%; padding:8%; padding-top:1%;">
     <div class="row">
-    <div class="col-md-12 border">
-    <h1 class="display-1"> No se han creado aulas aún</h1>
-    </div>
+    <div class="col-md-12 ">
+    <h1 class="display-3"> No se han creado aulas aún</h1>';
+    echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>";
+    if(isset($_GET["crear"])){
+        if(isset($_SESSION['vacio'])){
+            echo $_SESSION['vacio'];
+            unset($_SESSION['vacio']);
+        }
+
+        echo "<div style='width:80%'><form action='?c=crearAulas&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
+        
+                echo '<tr>';
+                echo '<th> Nombre</th>';
+                echo '<th> Ubicación</th>';
+                echo '<th> Información</th>';
+                echo '<th> Aforo</th>';
+                echo '<th> Habilitado</th>';
+                echo '</tr>';
+                echo '<tr>';
+                echo "<td><input type='text' name='dato[]' style='width:210px'></input></td>";
+                echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
+                echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
+                echo "<td><input type='number' name='dato[]' style='width:80px'></input></td>";
+                echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
+                echo '</tr>';
+
+                echo "</table>";
+        echo "<input class='btn btn-primary'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
+        echo "<input  class='btn btn-danger'type='submit'  name='cancelar' value='Cancelar'></input>";
+
+        echo "</form></div>";
+
+
+
+
+    }
+
+    echo '</div>
     </div>
     </div>';
+    
+    
 }
 else{
 
@@ -50,20 +90,20 @@ $_SESSION['cuantas']=count($result[0]);
 
 
 ?>
-<div class="container" style="margin-top:60px;margin-right:80px">
+<div class="container" style="margin-top:7%;margin-right:15%;margin-left:15%; padding:8%; padding-top:1%;">
 
 
 
 <div class="row">
     
-                <div class="col-md-12 border">
-                
-                    <table class="table table-striped" style="text-align: center;">
+                <div class="col-md-12 ">
+                <h1 style="color:black; text-align:center; margin-bottom:0%; background-color:white" >AULAS</h1>
+                    
                     
                     <?php
                     /*AGREGAR AQUI EL FORMULARIO PARA CREAR */
                     
-                   echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>";
+                  
                     if(isset($_SESSION['error2'])){
                         echo $_SESSION['error2'];
                         unset($_SESSION['error2']);
@@ -79,24 +119,28 @@ $_SESSION['cuantas']=count($result[0]);
                             unset($_SESSION['vacio']);
                         }
 
-                        echo "<div id='container' ><form action='?c=crearAulas&pag=".$_GET['page']."' method='post' ><table>";
+                        echo "<div style='width:80%'><form action='?c=crearAulas&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
                         
-                       
-                                echo "<tr>Nombre: <input type='text' name='dato[]'></input></tr>";
-                                echo "<tr>Ubicación: <input type='text' name='dato[]'></input></tr>";
-                                echo "<tr>Información: <input type='text' name='dato[]'></input></tr>";
-                                echo "<tr>Aforo: <input type='number' name='dato[]'></input></tr>";
-                                echo "<tr>Habilitado: <input type='number' name='dato[]'></input></tr>";
+                                echo '<tr>';
+                                echo '<th> Nombre</th>';
+                                echo '<th> Ubicación</th>';
+                                echo '<th> Información</th>';
+                                echo '<th> Aforo</th>';
+                                echo '<th> Habilitado</th>';
+                                echo '</tr>';
+                                echo '<tr>';
+                                echo "<td><input type='text' name='dato[]' style='width:210px'></input></td>";
+                                echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
+                                echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
+                                echo "<td><input type='number' name='dato[]' style='width:80px'></input></td>";
+                                echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
+                                echo '</tr>';
+
+                                echo "</table>";
+                        echo "<input class='btn btn-primary'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
+                        echo "<input  class='btn btn-danger'type='submit'  name='cancelar' value='Cancelar'></input>";
                 
-
-                 
-                        echo "<tr><div><input type='submit'  name='agregar-ult' value='Agregar'></input>";
-                        echo "<input type='submit'  name='cancelar' value='Cancelar'></input></div></tr>";
-                
-                        echo "</table></form></div>";
-
-
-
+                        echo "</form></div>";
 
                     }
 
@@ -111,27 +155,42 @@ $_SESSION['cuantas']=count($result[0]);
 
                             
 
-                            echo "<div id='container' ><form action='?c=modificarAulas&pag=".$_GET['page']."' method='post' ><table>";
+                            echo "<div id='container' ><form action='?c=modificarAulas&pag=".$_GET['page']."' method='post' ><table class='table table-striped bg-white ' style='margin-top:2%'>";
                             if(isset($_SESSION['vacio'])){
                                 echo $_SESSION['vacio'];
                                 unset($_SESSION['vacio']);
                             }
+                            echo '<tr>';
+                            echo '<th> ID</th>';
+                            echo '<th> Ubicación</th>';
+                            echo '<th> Información</th>';
+                            echo '<th> Aforo</th>';
+                            echo '<th> Habilitado</th>';
+                            echo '</tr>';
+                            echo '<tr>';
+                            
                             foreach($resu as $nombre_columna){
                                 for($i=0;$i<count($nombre_columna)/2;$i++){
-                                   if($i==0){
-                                    echo "<tr ><input type='text' readonly name='dato[]' value='".$nombre_columna[$i]."'></input></tr>";
+                                   if($i===0){
+                                    echo "<th><input type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' style='width:150px'></input></th>";
                     
                                    }
-                                   else{
-                                        echo "<tr ><input type='text' name='dato[]' value='".$nombre_columna[$i]."'></input></tr>";
+                                   elseif($i===1 || $i===2){
+                                        echo "<th ><input type='text' name='dato[]' value='".$nombre_columna[$i]."' style='width:220px'></input></th>";
                     
+                                    }
+                                    else{
+                                      
+                                        echo "<th ><input type='text' name='dato[]' value='".$nombre_columna[$i]."' style='width:75px'></input></th>";
+
                                     }
                                 }
                             }
-                            echo "<tr><div><input type='submit'  name='modificar-ult' value='Actualizar'></input>";
-                            echo "<input type='submit'  name='cancelar' value='Cancelar'></input></div></tr>";
+                            echo '</tr></table>';
+                            echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input>  ";
+                            echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
                     
-                            echo "</table></form></div>";
+                            echo "</form></div>";
                             
                         };
                         
@@ -140,15 +199,17 @@ $_SESSION['cuantas']=count($result[0]);
                     ?>
        
 <?php
+
        echo '<div class="container" style="margin-top:60px;margin-right:80px">
 
 
 
        <div class="row">
            
-                       <div class="col-md-12 border">
+                       <div class="col-md-12 ">';
+        echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>";
        
-                           <table class="table table-striped bg-white" style="text-align: center;">';
+       echo                    '<table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
 
         echo "<tr >";
 
@@ -193,20 +254,19 @@ $_SESSION['cuantas']=count($result[0]);
   
   ?>
            </table>
-            
+           <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="position:relative; left:86%;" >
         </div>
         
     </div>
     
-  <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="position:relative;left:92%">
+
   
  </form>
-
-   
 
 
 
  <?php
+ 
  //--------------------------------------------------------------------
 
 echo "<br>";
@@ -214,28 +274,23 @@ echo "<br>";
 //listado
 
 ?>
-<div class="container" style="margin-top:60px;margin-right:80px">
+<nav aria-label="..." >
+  <ul class="pagination pagination-mg justify-content-center">
 
-
-
-<div class="row">
-                <div class="col-md-12 border">
 <?php
 for($i=1;$i<=$total_pages;$i++){
     if($i==$page){
-        echo "<a style='margin-left:10px'>".$i."</a>";
+        echo "<li class='page-item active'><a class='page-link'>".$i."</a></li>";
     }else{
-        echo "<a style='margin-left:10px' href='?c=crudAulas&page=$i'>$i</a>";
+        echo "<li class='page-item'><a class='page-link' href='?c=crudAulas&page=$i'>$i</a></li>";
         
     }
 }
 
 }
 ?>
-</div>
-
-</div>
-
+  </ul>
+</nav>
 
 </body>
 </html>

@@ -19,30 +19,57 @@ class Crud extends Conexion{
         try{
 
             if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-               
-                $sql="SELECT ValidarUsuario(:email,:contra)";
+                
+                
+
+                $sql="SELECT * FROM usuarios WHERE correo ='$correo'";
                 $consulta=$this->conexion->prepare($sql);
-                $consulta->bindParam(":email",$correo);
-                $consulta->bindParam(":contra",$contrasena);
                 $consulta->execute();
-                $verif2=$consulta->fetch();
-   
+                $verif3=$consulta->fetch();
 
-                if($verif2[0]==1){
+                
+                $sql="SELECT count(*) FROM usuarios WHERE correo ='$correo' and contra='$contrasena'";
+                $consulta=$this->conexion->prepare($sql);
+                $consulta->execute();
+                $verif4=$consulta->fetch();
+                
 
-                    $sql="SELECT id, nombre, rol FROM usuarios WHERE correo ='$correo'";
-                    $consulta=$this->conexion->prepare($sql);
-                    $consulta->execute();
-                    $verif3=$consulta->fetch();
-
-                    $idSesion =$verif3[0];
-                    $nombre =$verif3[1];
+                if($verif4[0]>0){
+                    $idSesion =$verif3["id"];
+                    $nombre =$verif3["nombre"];
 
                     $_SESSION['id']=$idSesion;
                     $_SESSION['nombre']=$nombre;
                     
 
-                    $rol =$verif3[2];
+                    $rol =$verif3["rol"];
+
+                    $sql="SELECT * FROM roles WHERE id ='$rol'";
+                    $consulta=$this->conexion->prepare($sql);
+                    $consulta->execute();
+                    $verif4=$consulta->fetch();
+                
+                    $_SESSION['crudRoles']=$verif4['crud_roles'];
+                    $_SESSION['crudUsuarios']=$verif4['crud_usuarios'];
+                    $_SESSION['crudAulas']=$verif4['crud_aulas'];
+                    $_SESSION['crudReservas']=$verif4['crud_reservas'];
+                    $_SESSION['crudGrupos']=$verif4['crud_grupos'];
+                    $_SESSION['actualizarBBDD']=$verif4['actualizar_bbdd'];
+
+
+                    return true;
+                    
+                }
+                else if($verif3>0 && (password_verify($contrasena,$verif3["contra"]))){
+
+                    $idSesion =$verif3["id"];
+                    $nombre =$verif3["nombre"];
+
+                    $_SESSION['id']=$idSesion;
+                    $_SESSION['nombre']=$nombre;
+                    
+
+                    $rol =$verif3["rol"];
 
                     $sql="SELECT * FROM roles WHERE id ='$rol'";
                     $consulta=$this->conexion->prepare($sql);
@@ -98,9 +125,11 @@ class Crud extends Conexion{
 
             if($contraN == $contraN2){
 
-                $sql="CALL cambiarContra('$correo','$contraN')";
+                $contra=password_hash("$contraN", PASSWORD_DEFAULT);
+                $sql="CALL cambiarContra('$correo','$contra')";
                 $con=$this->conexion->prepare($sql);
                 $con->execute();
+                
                 return true;
                 
             }else{

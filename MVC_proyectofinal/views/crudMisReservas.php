@@ -10,6 +10,8 @@ $(document).ready(function(){
   });
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
+
 </head>
 <body>
 
@@ -49,14 +51,14 @@ $_SESSION['cuantas']=count($result[0]);
 
 
 ?>
-<div class="container" style="margin-top:60px;margin-right:80px">
+<div class="container" style="margin-top:7%;margin-right:15%;margin-left:15%; padding:8%; padding-top:1%;">
 
 
 
 <div class="row">
     
-                <div class="col-md-12 border">
-
+                <div class="col-md-12 border" style="border:none">
+<h1 style="color:black; text-align:center; margin-bottom:-5%; background-color:white" >MIS  RESERVAS</h1>
                     <table class="table table-striped" style="text-align: center;">
                     <?php 
                     if(isset($_SESSION['error2'])){
@@ -217,12 +219,12 @@ $_SESSION['cuantas']=count($result[0]);
   
   ?>
            </table>
-            
+           <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger">
         </div>
         
     </div>
 
-  <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="position:relative;left:92%">
+
  </form>
  
 
@@ -235,7 +237,7 @@ echo "<br>";
 //listado
 
 ?>
-<div class="container" style="margin-top:60px;margin-right:80px">
+<div class="container" style="margin-top:60px;margin-right:80px; text-align:center">
 
 
 

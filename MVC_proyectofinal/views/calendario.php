@@ -2,98 +2,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Calendario</title>
-    <style>
-        table{
-            background-color: white;
-        }
-        .close{
-            margin-top:50px
-        }
-        .mx-auto{
-            text-align:center
-        }
-        @media screen and (max-width:1200px){
-            table{
-                width:40%
-            }
-            
-        }
-        @media screen and (max-width:1120px){
-            td{
-                padding:0px;
-                font-size:12px
-            }
-            .header{
-                font-size:12px
-            }
-            .mx-auto{
-                font-size:12px
-            }
-            td h4{
-                font-size:12px
-            }
-            td a{
-                font-size:12px
-            }
-            .btn.btn-info{
-                color: #fff;
-                background-color: #36b9cc;
-                border-color: #36b9cc;
-                font-size: 12px !important;
-                padding: 3px !important;
-            }
-            #calendario{
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-content: center;
-                justify-content: center;
-                align-items: center;
-            }
-            h3{
-                font-size: 1.1rem !important;
-            }
-            .btn.btn-xs{
-                font-size: 12px;
-            }
-            .close{
-                font-size: 2rem !important;
-                margin-top: 50px;
-                margin-left:150px
-            }
-            .container{
-                padding-left: 6.5rem !important; 
-            }
-            
-        }
-
-        @media screen and (max-width:830px){
-            .container{
-                margin-left: 71px !important;
-            }
-        }
-    </style>
 </head>
 <body>
     
 <?php include "menu.php"?>
 
-<div class="container bg-white rounded shadow p-1 mb-5 bg-white rounded" style="padding-left:100px">
+<div class="container bg-white rounded shadow p-1 mb-5 bg-white rounded">
 <div class="card-body">
   </div>
  <div class="container"> 
  <div class="row text-center"> 
 
- <a href="?c=principal" title="Cancelar"><button type="button" class="close" style="font-size:3.5em">&times;</button></a>
-    
+
  </div> 
   <div class="row"> 
-   <div class="col-md-12"> 
-    <div id="calendario" style="width: 80%;" class='mx-auto'> 
+      
+   <div class="col-md-12" style="background-color:white; margin-left:13.2%; padding-right:5%; margin-top:2%"> 
+   
+    <div id="calendario" style="width: 70%;" class='mx-auto'> 
+    <a href="?c=principal" title="Cancelar"><button type="button" class="close" style="font-size:3.5em">&times;</button></a>
     
     <?php if(isset($_GET['id'])){ ?>
 
-           <h1 class='mx-auto' style='color:#202020'> Reserva para el <?php echo $_GET['id'] ?></h1>
+           <h1 class='mx-auto' style='color:#202020; text-align:center'> Reserva para el <?php echo $_GET['id'] ?></h1>
      <?php 
     }
       if(isset($_GET["month"])){
