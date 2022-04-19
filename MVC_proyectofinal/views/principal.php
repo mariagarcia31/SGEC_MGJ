@@ -16,14 +16,7 @@
 .bg-gray{
     background-color: lightgray !important;
 }
-@media screen and (max-width:650px){
-    .card-wrapper{
-        display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: center;flex-wrap: wrap; padding-left:16%;padding-right:16%;margin-top:35% !important
-    }
-}
+
 </style>
 </head>
 
@@ -35,12 +28,12 @@
     <div style="display: flex;
     flex-direction: row;
     align-items: stretch;
-    justify-content: center;flex-wrap: wrap; padding-left:16%;padding-right:16%;margin-top:7%" class="card-wrapper">
+    justify-content: center;flex-wrap: wrap; padding-left:16%;padding-right:16%;margin-top:7%;margin-bottom:150px" class="card-wrapper">
     <?php  foreach($this->crud->obtieneTodos("aulas") as $row){  ?>
         <?php if ($row['habilitado']==0){ ?>
 
                 <div class="card bg-gray" style="width: 18rem; margin-left:5%; margin-top:1%;margin-bottom:5%">
-                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                <div class="card text-white bg-info mb-3" style="max-width: 18rem; border:none">
                     <div class="card-header">
                     <h2 class="card-title" style="text-align:center"><?php echo $row['id']; ?></h2>
                     </div>
@@ -62,7 +55,7 @@
                 <?php } else{ ?>
 
                 <div class="card" style="width: 18rem; margin-left:5%; margin-top:1%;margin-bottom:5%">
-                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                <div class="card text-white bg-info mb-3" style="max-width: 18rem; border:none">
                     <div class="card-header">
                     <h2 class="card-title" style="text-align:center"><?php echo $row['id']; ?></h2>
                     </div>

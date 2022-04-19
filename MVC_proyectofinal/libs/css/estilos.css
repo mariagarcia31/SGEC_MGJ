@@ -66,3 +66,24 @@ a.paginacion:hover{
 .bg-info{
     background-color:none !important
 }
+
+th{
+    text-align: center !important;
+}
+.contenedor-paginador{
+    display: flex;
+    justify-content: center;
+}
+li.page-item.active a.page-link{
+    background-color: #1A3C40 !important;
+    color:#708588 !important
+}
+
+.btn.btn-success{
+    background-color: #536D70;
+    color:#E2E7E7
+}
+.btn.btn-success:hover{
+    background-color: #1A3C40;
+    color:#E2E7E7
+}

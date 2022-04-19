@@ -115,6 +115,14 @@ hr{
     z-index:4;
     color:white
 }
+@media screen and (max-width: 890px) {
+  .nav{
+      padding:50px
+  }
+  .cabecera-todo{
+      display:none
+  }
+} 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}

@@ -51,14 +51,14 @@ $_SESSION['cuantas']=count($result[0]);
 
 
 ?>
-<div class="container" style="margin-top:7%;margin-right:15%;margin-left:15%; padding:8%; padding-top:1%;">
+<div class="container" style="margin-top:5%">
 
 
 
 <div class="row">
     
                 <div class="col-md-12 " style="border:none">
-<h1 style="color:#1A3C40; text-align:center; margin-bottom:-5%; background-color:white" >MIS  RESERVAS</h1>
+<h1 style="color:#1A3C40; text-align:center; margin-bottom:5%; background-color:white" >MIS  RESERVAS</h1>
                     <table class="table table-striped" style="text-align: center;">
                     <?php 
                     if(isset($_SESSION['error2'])){
@@ -166,14 +166,15 @@ $_SESSION['cuantas']=count($result[0]);
                     ?>
        
 <?php
-       echo '<div class="container" style="margin-top:60px;margin-right:80px">
+       echo '
 
 
 
        <div class="row">
            
                        <div class="col-md-12">
-       
+                       <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="float:right">
+
                            <table class="table table-striped bg-white" style="text-align: center;">';
 
         echo "<tr >";
@@ -219,7 +220,6 @@ $_SESSION['cuantas']=count($result[0]);
   
   ?>
            </table>
-           <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger">
         </div>
         
     </div>
@@ -237,28 +237,26 @@ echo "<br>";
 //listado
 
 ?>
-<div class="container" style="margin-top:60px;margin-right:80px; text-align:center">
 
 
 
-<div class="row">
-                <div class="col-md-12 ">
+<nav aria-label="..." class="contenedor-paginador" >
+  <ul class="pagination pagination-mg justify-content-center">
+
 <?php
 for($i=1;$i<=$total_pages;$i++){
     if($i==$page){
-        echo "<a style='margin-left:10px'>".$i."</a>";
+        echo "<li class='page-item active'><a class='page-link'>".$i."</a></li>";
     }else{
-        echo "<a style='margin-left:10px' href='?c=crudMisReservas&page=$i'>$i</a>";
+        echo "<li class='page-item'><a class='page-link' href='?c=crudAulas&page=$i'>$i</a></li>";
         
     }
 }
 
 }
 ?>
-</div>
-
-</div>
-
+  </ul>
+</nav>
 
 </body>
 </html>

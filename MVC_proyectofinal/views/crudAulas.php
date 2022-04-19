@@ -22,11 +22,14 @@ $count=$this->crud->crudAulas(1);
 
 if($count[0]==0){
     
-    echo '<div class="container" style="margin-top:7%;margin-right:15%;margin-left:15%; padding:8%; padding-top:1%;">
-    <div class="row">
+    echo '
+    <div class="row >
     <div class="col-md-12 ">
     <h1 class="display-3"> No se han creado aulas aún</h1>';
-    echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>";
+ 
+    echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>
+  
+    ";
     if(isset($_GET["crear"])){
         if(isset($_SESSION['vacio'])){
             echo $_SESSION['vacio'];
@@ -90,11 +93,10 @@ $_SESSION['cuantas']=count($result[0]);
 
 
 ?>
-<div class="container" style="margin-top:7%;margin-right:15%;margin-left:15%; padding:8%; padding-top:1%;">
 
 
 
-<div class="row">
+<div class="row" style="margin-top:5%">
     
                 <div class="col-md-12 ">
                 <h1 style="color:black; text-align:center; margin-bottom:0%; background-color:white" >AULAS</h1>
@@ -200,14 +202,14 @@ $_SESSION['cuantas']=count($result[0]);
        
 <?php
 
-       echo '<div class="container" style="margin-top:60px;margin-right:80px">
+       echo '<div class="container" style="margin-top:60px;">
 
 
 
        <div class="row">
            
                        <div class="col-md-12 ">';
-        echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>";
+        echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style='float:right;' >";
        
        echo                    '<table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
 
@@ -254,10 +256,8 @@ $_SESSION['cuantas']=count($result[0]);
   
   ?>
            </table>
-           <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="position:relative; left:86%;" >
         </div>
         
-    </div>
     
 
   
@@ -274,7 +274,7 @@ echo "<br>";
 //listado
 
 ?>
-<nav aria-label="..." >
+<nav aria-label="..." class="contenedor-paginador" >
   <ul class="pagination pagination-mg justify-content-center">
 
 <?php
