@@ -23,8 +23,8 @@ $count=$this->crud->crudMiReservas(1);
 if($count[0]==0){
     echo '<div class="container" style="margin-top:60px;margin-right:80px">
     <div class="row">
-    <div class="col-md-12 border">
-    <h1 class="display-1"> No se han realizado reservas aún</h1>
+    <div class="col-md-12 ">
+    <h1 class="display-1" style="color:#1A3C40"> No se han realizado reservas aún</h1>
     </div>
     </div>
     </div>';}
@@ -57,8 +57,8 @@ $_SESSION['cuantas']=count($result[0]);
 
 <div class="row">
     
-                <div class="col-md-12 border" style="border:none">
-<h1 style="color:black; text-align:center; margin-bottom:-5%; background-color:white" >MIS  RESERVAS</h1>
+                <div class="col-md-12 " style="border:none">
+<h1 style="color:#1A3C40; text-align:center; margin-bottom:-5%; background-color:white" >MIS  RESERVAS</h1>
                     <table class="table table-striped" style="text-align: center;">
                     <?php 
                     if(isset($_SESSION['error2'])){
@@ -172,7 +172,7 @@ $_SESSION['cuantas']=count($result[0]);
 
        <div class="row">
            
-                       <div class="col-md-12 border">
+                       <div class="col-md-12">
        
                            <table class="table table-striped bg-white" style="text-align: center;">';
 
@@ -242,7 +242,7 @@ echo "<br>";
 
 
 <div class="row">
-                <div class="col-md-12 border">
+                <div class="col-md-12 ">
 <?php
 for($i=1;$i<=$total_pages;$i++){
     if($i==$page){
