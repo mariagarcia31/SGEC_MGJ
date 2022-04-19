@@ -45,6 +45,18 @@
             body{
             overflow-x: hidden;
         }
+        .col-md-2.boton{
+                width:40%;
+                text-align:center
+            }
+            .tramos{
+                display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+            }
             
         }
         @media screen and (max-width:890px){
@@ -89,7 +101,7 @@
                 font-size: 12px;
             }
             
-            
+
             
         }
 
@@ -181,7 +193,7 @@
 
     foreach($timeslots as $ts){
 ?>
-    <div class="col-md-2">
+    <div class="col-md-2 boton">
         
         <div class="form-group">
         <?php if(in_array($ts, $booking)){ ?>
