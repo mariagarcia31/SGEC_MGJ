@@ -81,7 +81,11 @@ $_SESSION['cuantas']=count($result[0]);
 
                             
 
-                            echo "<div id='container' ><form action='?c=modificar&pag=".$_GET['page']."' method='post' ><table>";
+                            echo "<div id='container' style='    width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            align-content: center;'><form action='?c=modificar&pag=".$_GET['page']."' method='post' ><table>";
                             if(isset($_SESSION['vacio'])){
                                 echo $_SESSION['vacio'];
                                 unset($_SESSION['vacio']);
