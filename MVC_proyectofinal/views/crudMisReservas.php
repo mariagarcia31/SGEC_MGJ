@@ -8,9 +8,15 @@
 $(document).ready(function(){
     $(".alert").delay( 2200 ).fadeOut(1100);
   });
+
+
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-<link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<!--JS below-->
 
 </head>
 <body>
@@ -48,7 +54,164 @@ $result=$this->crud->crudMiReservas(2,$iteams_pagina,$offset);
 
 $_SESSION['cuantas']=count($result[0]);
 
+if(isset($_SESSION["modificar"])){
+    ?>
+    
+<script>
 
+$(document).ready(function(){
+$("#myModal").modal();
+});
+</script>
+    
+        <?php
+
+    $id=$_SESSION["modificar"];
+
+    $resu=$this->crud->modif($id);
+
+    echo 
+'<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLongTitle">Modificar reserva</h3>
+        </div>
+        <div class="modal-body">';
+
+    echo "<form action='?c=modificar&pag=".$_GET['page']."' method='post'>";
+    if(isset($_SESSION['vacio'])){
+        echo $_SESSION['vacio'];
+        unset($_SESSION['vacio']);
+    }
+
+    
+    foreach($resu as $nombre_columna){
+        for($i=0;$i<count($nombre_columna)/2;$i++){
+           if($i==0){
+           echo '<div class="form-group">
+            <label for="">ID</label>';
+            echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+            echo '</div>';
+           }
+
+           if($i==2){
+            echo '<div class="form-group">
+             <label for="">Usuario</label>';
+             echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+             echo '</div>';
+            }
+
+            if($i==7){
+                echo '<div class="form-group">
+                 <label for="">Fecha de creación</label>';
+                 echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                 echo '</div>';
+                }
+           elseif($i==1){
+                echo '<div class="form-group">
+                <label for="">Aula</label>';
+
+                $aulasDisponibles=$this->crud->aulasDisponibles();
+
+                echo '<select name="dato[]" class="form-control" required>';
+
+                foreach($aulasDisponibles as $idAulas){
+                    foreach($idAulas as $idAula){
+
+                        if($idAula==$nombre_columna[$i]){
+
+                            echo '<option value="'.$idAula.'" selected>'.$idAula.'</option>';
+                        }
+                        else{
+                            echo '<option value="'.$idAula.'">'.$idAula.'</option>';
+                        }
+                        
+                        
+                        
+                    }
+                }
+                echo '</select></div>';
+           }
+           elseif($i==3){
+            echo '<div class="form-group">
+            <label for="">Fecha de reserva </label>';
+
+                echo "<input id='date1' type='date' name='dato[]' value='".$nombre_columna[$i]."' class='form-control' required></input>";
+                echo '</div>';
+            }
+
+           elseif($i==4){
+            echo '<div class="form-group">
+            <label for="">Grupo </label>';
+
+                $gruposDisponibles=$this->crud->gruposDisponibles();
+
+                echo '<select name="dato[]" class="form-control" required>';
+
+                foreach($gruposDisponibles as $nombresGrupos){
+                    foreach($nombresGrupos as $nombreGrupo){
+
+                        if($nombreGrupo==$nombre_columna[$i]){
+
+                            echo '<option value="'.$nombreGrupo.'" selected>'.$nombreGrupo.'</option>';
+                        }
+                        else{
+                            echo '<option value="'.$nombreGrupo.'">'.$nombreGrupo.'</option>';
+                        }
+                        
+                    }
+                }
+                echo '</select></div>';
+            }
+
+            elseif($i==6){   
+                echo '<div class="form-group">
+            <label for="">Hora </label>';
+
+                $horarios=array('08:30AM - 09:30AM', '09:30AM - 10:30AM', '10:30AM - 11:30AM', '11:30AM - 12:30AM', '12:30AM - 13:30PM', '13:30PM - 14:30PM');              
+                
+                echo "<select name='dato[]' class='form-control' required>  ";
+
+                foreach($horarios as $hora){
+
+                    if($hora==$nombre_columna[$i]){
+
+                        echo '<option value="'.$hora.'" selected>'.$hora.'</option>';
+                    }
+
+                    else{
+                        echo '<option value="'.$hora.'">'.$hora.'</option>';
+                    }
+                    
+                }
+               
+                echo" </select>
+                </div>";
+
+            }
+            else{
+                echo '<div class="form-group">
+            <label for="">Motivo </label>';
+
+                echo "<input type='text' name='dato[]' value='".$nombre_columna[$i]."' class='form-control' required></input></div>";
+
+            }
+        }
+    }
+    
+    echo '<div class="modal-footer">';
+    echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
+    echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
+    echo '</div>';
+    echo "</form>";
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    
+    
+};
 
 ?>
 <div class="container" style="margin-top:5%">
@@ -69,115 +232,6 @@ $_SESSION['cuantas']=count($result[0]);
                         echo $_SESSION['exito'];
                         unset($_SESSION['exito']);
                     }
-                    
-                    if(isset($_SESSION["modificar"])){
-                            ?>
-                            
-                                <?php
-
-                            $id=$_SESSION["modificar"];
-                    
-                            $resu=$this->crud->modif($id);
-
-                            
-
-                            echo "<div id='container' style='    width: 100%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            align-content: center;'><form action='?c=modificar&pag=".$_GET['page']."' method='post' ><table class='table table-striped bg-white' style='margin-top:2%'>";
-                            if(isset($_SESSION['vacio'])){
-                                echo $_SESSION['vacio'];
-                                unset($_SESSION['vacio']);
-                            }
-
-                            echo '<tr>';
-                            echo '<th> ID</th>';
-                            echo '<th> Aula</th>';
-                            echo '<th> Usuario</th>';
-                            echo '<th> Fecha</th>';
-                            echo '<th> Grupo</th>';
-                            echo '<th> Motivo</th>';
-                            echo '<th> Hora</th>';
-                            echo '<th> Fecha creación</th>';
-                            echo '</tr>';
-                            echo '<tr>';
-                            foreach($resu as $nombre_columna){
-                                for($i=0;$i<count($nombre_columna)/2;$i++){
-                                   if($i==0||$i==2||$i==7){
-                                    echo "<td ><input type='text' readonly name='dato[]' value='".$nombre_columna[$i]."'></input></td>";
-                    
-                                   }
-                                    elseif($i==6){                    
-                                        echo "
-                                        <td>
-                                        <select name='dato[]'>  ";
-                                        if($nombre_columna[6]=='08:30AM - 09:30AM'){
-                                            echo "<option selected value='08:30AM - 09:30AM'>08:30AM - 09:30AM</option>";
-                                            echo "<option value='09:30AM - 10:30AM'>09:30AM - 10:30AM</option>";
-                                            echo "<option value='10:30AM - 11:30AM'>10:30AM - 11:30AM</option>";
-                                            echo "<option value='11:30AM - 12:30PM'>11:30AM - 12:30PM</option>";
-                                            echo "<option value='12:30PM - 13:30PM'>12:30PM - 13:30PM</option>";
-                                            echo "<option value='13:30PM - 14:30PM'>13:30PM - 14:30PM</option>";
-                    
-                    
-                                        }
-                                        elseif($nombre_columna[6]=='09:30AM - 10:30AM'){
-                                            echo "<option value='08:30AM - 09:30AM'>08:30AM - 09:30AM</option>";
-                                            echo "<option selected value='09:30AM - 10:30AM'>09:30AM - 10:30AM</option>";
-                                            echo "<option value='10:30AM - 11:30AM'>10:30AM - 11:30AM</option>";
-                                            echo "<option value='11:30AM - 12:30PM'>11:30AM - 12:30PM</option>";
-                                            echo "<option value='12:30PM - 13:30PM'>12:30PM - 13:30PM</option>";
-                                            echo "<option value='13:30PM - 14:30PM'>13:30PM - 14:30PM</option>";
-                                        }
-                                        elseif($nombre_columna[6]=='10:30AM - 11:30AM'){
-                                            echo "<option value='08:30AM - 09:30AM'>08:30AM - 09:30AM</option>";
-                                            echo "<option value='09:30AM - 10:30AM'>09:30AM - 10:30AM</option>";
-                                            echo "<option selected value='10:30AM - 11:30AM'>10:30AM - 11:30AM</option>";
-                                            echo "<option value='11:30AM - 12:30PM'>11:30AM - 12:30PM</option>";
-                                            echo "<option value='12:30PM - 13:30PM'>12:30PM - 13:30PM</option>";
-                                            echo "<option value='13:30PM - 14:30PM'>13:30PM - 14:30PM</option>";
-                                        }
-                                        elseif($nombre_columna[6]=='11:30AM - 12:30PM'){
-                                            echo "<option value='08:30AM - 09:30AM'>08:30AM - 09:30AM</option>";
-                                            echo "<option value='09:30AM - 10:30AM'>09:30AM - 10:30AM</option>";
-                                            echo "<option value='10:30AM - 11:30AM'>10:30AM - 11:30AM</option>";
-                                            echo "<option selected value='11:30AM - 12:30PM'>11:30AM - 12:30PM</option>";
-                                            echo "<option value='12:30PM - 13:30PM'>12:30PM - 13:30PM</option>";
-                                            echo "<option value='13:30PM - 14:30PM'>13:30PM - 14:30PM</option>";
-                                        }
-                                        elseif($nombre_columna[6]=='12:30PM - 13:30PM'){
-                                            echo "<option value='08:30AM - 09:30AM'>08:30AM - 09:30AM</option>";
-                                            echo "<option value='09:30AM - 10:30AM'>09:30AM - 10:30AM</option>";
-                                            echo "<option value='10:30AM - 11:30AM'>10:30AM - 11:30AM</option>";
-                                            echo "<option value='11:30AM - 12:30PM'>11:30AM - 12:30PM</option>";
-                                            echo "<option selected value='12:30PM - 13:30PM'>12:30PM - 13:30PM</option>";
-                                            echo "<option value='13:30PM - 14:30PM'>13:30PM - 14:30PM</option>";
-                                        }
-                                        elseif($nombre_columna[6]=='13:30PM - 14:30PM'){
-                                            echo "<option value='08:30AM - 09:30AM'>08:30AM - 09:30AM</option>";
-                                            echo "<option value='09:30AM - 10:30AM'>09:30AM - 10:30AM</option>";
-                                            echo "<option value='10:30AM - 11:30AM'>10:30AM - 11:30AM</option>";
-                                            echo "<option value='11:30AM - 12:30PM'>11:30AM - 12:30PM</option>";
-                                            echo "<option value='12:30PM - 13:30PM'>12:30PM - 13:30PM</option>";
-                                            echo "<option selected value='13:30PM - 14:30PM'>13:30PM - 14:30PM</option>";
-                                        }
-                                        echo" </select>
-                                        </td>";
-                    
-                                    }else{
-                                        echo "<td ><input type='text' name='dato[]' value='".$nombre_columna[$i]."'></input></td>";
-                    
-                                    }
-                                }
-                            }
-                            echo "</table>";
-                            echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
-                            echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
-                    
-                            echo "</form></div>";
-                            
-                        };
                         
                         
                         
@@ -279,6 +333,39 @@ for($i=1;$i<=$total_pages;$i++){
 ?>
   </ul>
 </nav>
+<script>
 
+
+
+const picker = document.getElementById('date1');
+picker.addEventListener('input', function(e){
+  var day = new Date(this.value).getUTCDay();
+  const dateform = document.getElementById("date1").value;
+    const date1 = new Date();
+    const date2 = new Date(dateform);
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+
+  if([6,0].includes(day)){
+    e.preventDefault();
+    this.value = '';
+    alert('Fines de semana no disponibles, seleccione un día de semana.');
+  }
+  else if(diffDays>14){
+    e.preventDefault();
+    this.value = '';
+    alert('Seleccione un día dentro de los 14 días siguientes a la fecha de hoy.');
+
+  }
+
+  else if(date2.getDate() < date1.getDate()){
+    e.preventDefault();
+    this.value = '';
+    alert('No puede seleccionar un día anterior al actual. Seleccione un día dentro de los 14 días siguientes a la fecha de hoy.');
+
+  }
+});
+
+</script>
 </body>
 </html>

@@ -25,11 +25,12 @@
     /* margin: 15px; */
     background-color: #212529;
     padding: 20px;
+   
     color: rgba(255, 255, 255, 0.5);
     }
 
     .cabecera, .cabecera-todo{
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(255, 255, 255, 0.8);
     }
 
     .logoEnlace{
@@ -225,13 +226,13 @@ if($_SESSION['actualizarBBDD']==1){
 </span>
 <div class="cabecera-todo">
     <a class="logoEnlace" href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img class="logo" src="libs/img/logo_ciudadescolar.jpg"></a>
-    <h1 class="cabecera">Sistema de Gestión de Espacios Comunes</h1>
+    <h3 class="cabecera">Sistema de Gestión de Espacios Comunes</h3>
 </div>
 <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span style="color: rgba(255, 255, 255, 0.7);" class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nombre'];?></span>
-            <img class="img-profile rounded-circle" style="width:50px"
+            <h5 style="color: rgba(255, 255, 255, 0.7); display:inline-block" ><?php echo $_SESSION['nombre'];?></h5>
+            <img class="img-profile rounded-circle" style="width:40px"
                 src="libs/img/undraw_profile.svg">
         </a>
         <!-- Dropdown - User Information -->
@@ -239,16 +240,35 @@ if($_SESSION['actualizarBBDD']==1){
             aria-labelledby="userDropdown">
             
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="?c=logout" data-toggle="" data-target="#logoutModal">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Cerrar sesión
+            <a class="dropdown-item"  data-toggle="modal" data-target="#logoutModal" style="cursor:pointer">
+            
+                Cerrar sesión   
+                <i class="bi bi-box-arrow-right"></i>
             </a>
         </div>
     </li>
 </div>
    <div class="footer">
-       <p>Copyright 2022 |Sistema de Gestión de Espacios Comunes | Gerardo, María y Jossue</p>
-</div>         
+       <p>© Copyright 2022 |Sistema de Gestión de Espacios Comunes | IES Ciudad Escolar</p>
+</div>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">¿Seguro que desea cerrar sesión?</h3>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione "cerrar sesión" abajo si está seguro de cerrar la sesión.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="?c=logout" >Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>         
 </body>
 
 </html>

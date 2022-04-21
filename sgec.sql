@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-04-2022 a las 12:34:45
+-- Tiempo de generación: 15-04-2022 a las 20:50:52
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -75,9 +75,8 @@ CREATE TABLE `aulas` (
 --
 
 INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`) VALUES
-('Aula 500', 'Pabellon 5', 'tv', 20, 1),
-('Aula 700', 'Pabellon 3', 'Tv, ordenadores', 15, 0),
-('Aula 705', '1', '1', 1, 1);
+('Aula 700', 'Pabellon 3', 'Tv, ordenadores', 20, 1),
+('Aula 815', 'Pabellon 5', 'TV', 15, 0);
 
 -- --------------------------------------------------------
 
@@ -107,20 +106,13 @@ INSERT INTO `grupos` (`id`, `nombre`, `departamento`) VALUES
 CREATE TABLE `reservas` (
   `id` int(11) NOT NULL,
   `idAula` varchar(220) NOT NULL,
-  `idUsuario` int(11) NOT NULL,
+  `idUsuario` int(11) UNSIGNED NOT NULL,
   `fecha` date NOT NULL,
   `grupo` varchar(255) NOT NULL,
   `motivo` varchar(255) NOT NULL,
   `hora` varchar(255) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `reservas`
---
-
-INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(133, 'Aula 705', 1, '2022-04-19', 'DAW2', 'Charla', '08:30AM - 09:30AM', '2022-04-19 08:53:45');
 
 -- --------------------------------------------------------
 
@@ -154,7 +146,7 @@ INSERT INTO `roles` (`id`, `nombre`, `crud_roles`, `crud_usuarios`, `crud_aulas`
 --
 
 CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `nombre` varchar(150) NOT NULL,
   `correo` varchar(150) NOT NULL,
   `contra` varchar(150) NOT NULL,
@@ -167,7 +159,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contra`, `confirmacion`, `rol`) VALUES
-(1, 'maria', 'maria@hotmail.com', '$2y$10$1FCqvh2zbxEHS.wBbh4vKObaF4Nab5ki28ULCe3mc1/ZFU86CpnLq', 1, 1),
+(1, 'maria', 'maria@hotmail.com', '12345', 1, 1),
 (2, 'jossue', 'jossue@hotmail.com', '1234', 1, 2);
 
 --
@@ -223,13 +215,19 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -239,12 +237,12 @@ ALTER TABLE `roles`
 -- Filtros para la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  ADD CONSTRAINT `id_reserva_aula` FOREIGN KEY (`idAula`) REFERENCES `aulas` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `id_reserva_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `id_reserva_aula` FOREIGN KEY (`idAula`) REFERENCES `aulas` (`id`),
+  ADD CONSTRAINT `id_reserva_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
 
 --
 -- Filtros para la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_id_rol` FOREIGN KEY (`rol`) REFERENCES `roles` (`id`);
+  ADD CONSTRAINT `fk_id_rol` FOREIGN KEY (`rol`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 COMMIT;

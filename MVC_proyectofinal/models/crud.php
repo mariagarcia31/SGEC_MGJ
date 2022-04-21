@@ -209,13 +209,24 @@ class Crud extends Conexion{
         //nombre del mes
         $monthName = $dateComponents['month'];
     
+        $mesesES=array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+
+        $mesesEN=array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+
+        for($i=0;$i<count($mesesEN);$i++){
+
+            if ($monthName==$mesesEN[$i]){
+
+                $monthName = $mesesES[$i];
+            }
+        }
         //numero de la semana del primer día del mes
         $dayOfWeek = $dateComponents['wday'];
     
         //cremaos el calendario
          
-        $datetoday = date('Y-m-d');
-        $calendar = "<table class='table table-bordered'>";
+
+        $calendar = "<table class=' table table-bordered '>";
         $calendar .= "<center><h3>$monthName $year</h3>";
         
         $calendar.= " <a href='?c=calendario&id=".$idAula."' class='btn btn-xs btn-primary' data-month='".date('m')."' data-year='".date('Y')."'>Mes actual</a> ";
@@ -580,14 +591,21 @@ class Crud extends Conexion{
         if(empty($resultado)){
             return 3;
 		}
-        
 
+      
             $comprobar="SELECT * FROM reservas WHERE fecha='".$indic[3]."' AND  idAula='".$indic[1]."' AND  hora='".$indic[6]."';";
             $consulta_comprobar=$this->conexion->prepare($comprobar);
             $consulta_comprobar->execute();
-            $resultado_comprobar=$consulta_comprobar->fetchAll();
+            $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
             if(count($resultado_comprobar)>0){
-                return false;
+
+                if($resultado_comprobar[0]['idUsuario']===$_SESSION['id']){
+                    return true;
+                }
+
+                else{
+                    return false;
+                }
             }
             else{
                 $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='reservas';";
@@ -612,6 +630,28 @@ class Crud extends Conexion{
                 return true;
             }      
         
+    }
+
+    function aulasDisponibles(){
+
+        $comprobar="SELECT id FROM `aulas` WHERE habilitado = 1 GROUP BY id";
+        $consulta_comprobar=$this->conexion->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+       
+        return $resultado_comprobar;
+
+    }
+
+    function gruposDisponibles(){
+
+        $comprobar="SELECT nombre FROM `grupos` GROUP BY nombre";
+        $consulta_comprobar=$this->conexion->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+       
+        return $resultado_comprobar;
+
     }
     /*************************************  FIN MODELO DE MIS RESERVAS   ********************************/
 
