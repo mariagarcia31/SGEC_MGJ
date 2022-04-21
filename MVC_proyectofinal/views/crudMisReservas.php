@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   
@@ -11,10 +10,6 @@ $(document).ready(function(){
 
 
 </script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.8.0/sweetalert2.min.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.8.0/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -243,14 +238,10 @@ $("#myModal").modal();
        
 <?php
        echo '
-
-
-
        <div class="row">
            
                        <div class="col-md-12">
                       
-
                            <table class="table table-striped bg-white" style="text-align: center;">';
 
         echo "<tr >";
@@ -361,13 +352,13 @@ picker.addEventListener('input', function(e){
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'Entendido'
 
-        });
-  }
+        });  
+    }
   else if(diffDays>14){
     e.preventDefault();
     this.value = '';
     swal({
-        title: "No puede seleccionar un día anterior al actual. ",
+        title: "Seleccione un día dentro de los 14 días siguientes a la fecha de hoy.",
           text: "",
           type: "warning",
           showCancelButton: false,
@@ -375,7 +366,6 @@ picker.addEventListener('input', function(e){
           confirmButtonText: 'Entendido'
 
         });
-
   }
 
   else if(date2.getDate() < date1.getDate()){
@@ -390,8 +380,6 @@ picker.addEventListener('input', function(e){
           confirmButtonText: 'Entendido'
 
         });
-
-        
 
   }
 });
