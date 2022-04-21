@@ -1,9 +1,12 @@
+<?php include "menu.php"?>
 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <title>Principal</title>
+    <link rel="stylesheet" href="libs/css/estilos.css">
+
 <style>
     .card {
 
@@ -28,7 +31,6 @@
 </head>
 
 <?php 
-include "menu.php";
  $contador=0; 
  $aulas=$this->crud->obtieneTodos("aulas");
  $cuantasAulas=count($aulas);
@@ -40,6 +42,13 @@ include "menu.php";
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <body>
+    
+
+
+
+  
+  
+  
 
 <section class="pt-5 pb-5 mt-5 ml-5">
     
@@ -73,11 +82,12 @@ include "menu.php";
         <?php }?>
         
      
-            
+        
             <div class="col-md-4 mb-4 mt-1 p-5">
                 <div class="card mt-2 " >
                     <div class="card text-white bg-info mb-3">
                         <div class="card-header" style="background: #2FA4FF">
+
                             <h1 class="card-title" style="text-align:center;margin-top:2%"><?php echo $row['id']; ?></h1>
                         </div>
                     </div>

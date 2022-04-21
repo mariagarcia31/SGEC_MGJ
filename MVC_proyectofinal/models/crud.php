@@ -830,6 +830,9 @@ class Crud extends Conexion{
 
      
 
+
+     
+
     /*************************************  MODELO DE ROLES   ********************************/
     function borrarUnoaUnoRoles($selec){
             
@@ -953,6 +956,275 @@ class Crud extends Conexion{
     
 
      /*************************************  FIN MODELO DE ROLES   ********************************/
+
+
+
+
+
+
+    /*************************************  MODELO DE USUARIOS   ********************************/
+    function borrarUnoaUnoUsuarios($selec){
+            
+        $sql="DELETE FROM usuarios WHERE  id='$selec'";
+        $consulta=$this->conexion->prepare($sql);
+        $consulta->execute();
+        return true;
+            
+    }
+
+    function borrarUsuarios($selec){
+      
+        if(empty($selec)){
+           
+            return false;
+        }
+        else{
+          
+            foreach($selec as $valores){
+                $sql="DELETE FROM usuarios WHERE  id='$valores'";
+                $consulta=$this->conexion->prepare($sql);
+                $consulta->execute();
+                
+            }
+            return true;
+        }
+        
+        }  
+ 
+    
+
+
+    
+
+        function modifUsuarios($id){
+
+         
+            $nombres="SELECT * FROM usuarios WHERE id=:cod;";
+            $consulta_nombres=$this->conexion->prepare($nombres);
+            $consulta_nombres->bindParam(':cod',$id);
+            $consulta_nombres->execute();
+            $resultado_nombres=$consulta_nombres->fetchAll();
+    
+            return $resultado_nombres;
+        }
+    
+
+    function actualizarUsuarios($indic){
+        $comprobar="SELECT * FROM usuarios WHERE id='".$indic[0]."';";
+		$consulta_comprobar=$this->conexion->prepare($comprobar);
+		$consulta_comprobar->execute();
+		$resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
+
+        $resultado = array_diff($resultado_comprobar, $indic);
+
+       /*SI DEJO ESTO LA ACTUALIZACIÓN NO VA
+        if(empty($resultado)){
+            return false;
+		}
+        */
+           
+                $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='usuarios';";
+                $consulta_nombres=$this->conexion->prepare($nombres);
+                $consulta_nombres->execute();
+                $resultado_nombres=$consulta_nombres->fetchAll();
+                    foreach($resultado_nombres as $nombre_columna){	
+                        for($i=0;$i<count($nombre_columna)/2;$i++){
+                            $nombress[]=$nombre_columna;
+                        }
+                    }
+        
+                    for($i=0;$i<count($nombress);$i++){
+                        
+                        $sql="UPDATE usuarios SET  ".$nombress[$i][0]."=:data  WHERE id='".$indic[0]."';";
+                        $stmt=$this->conexion->prepare($sql);
+                        $stmt->bindParam(":data",$indic[$i]);
+                        $stmt->execute();
+                        
+                        
+                    }
+                return true;
+            
+            }      
+        
+
+    function crearUsuarios($indic){
+
+            $comprobar="SELECT * FROM usuarios WHERE id='".$indic[0]."';";
+            $consulta_comprobar=$this->conexion->prepare($comprobar);
+            $consulta_comprobar->execute();
+            $resultado_comprobar=$consulta_comprobar->fetchAll();
+            if(count($resultado_comprobar)>0){
+                return false;
+			}
+            
+			else{
+                $id = $indic[0];
+				$nombre = $indic[1];
+				$correo =$indic[2];
+				$contra = $indic[3];
+				$confirmacion = $indic[4];
+                $rol = $indic[5];
+				
+
+				
+                $comprobar="INSERT INTO  usuarios VALUES ($id,'$nombre','$correo','$contra',$confirmacion, $rol);";
+                $consulta_comprobar=$this->conexion->prepare($comprobar);
+                $consulta_comprobar->execute();
+                
+                return true;
+
+				
+			
+		}
+
+
+			
+	}
+
+    
+
+     /*************************************  FIN MODELO DE USUARIOS   ********************************/
+
+
+
+
+
+/*************************************  MODELO DE GRUPOS   ********************************/
+function borrarUnoaUnoGrupos($selec){
+            
+    $sql="DELETE FROM grupos WHERE  id='$selec'";
+    $consulta=$this->conexion->prepare($sql);
+    $consulta->execute();
+    return true;
+        
+}
+
+function borrarGrupos($selec){
+  
+    if(empty($selec)){
+       
+        return false;
+    }
+    else{
+      
+        foreach($selec as $valores){
+            $sql="DELETE FROM grupos WHERE  id='$valores'";
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            
+        }
+        return true;
+    }
+    
+    }  
+
+
+
+
+
+
+    function modifGrupos($id){
+
+     
+        $nombres="SELECT * FROM grupos WHERE id=:cod;";
+        $consulta_nombres=$this->conexion->prepare($nombres);
+        $consulta_nombres->bindParam(':cod',$id);
+        $consulta_nombres->execute();
+        $resultado_nombres=$consulta_nombres->fetchAll();
+
+        return $resultado_nombres;
+    }
+
+
+function actualizarGrupos($indic){
+    $comprobar="SELECT * FROM grupos WHERE id='".$indic[0]."';";
+    $consulta_comprobar=$this->conexion->prepare($comprobar);
+    $consulta_comprobar->execute();
+    $resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
+
+    $resultado = array_diff($resultado_comprobar, $indic);
+
+   /*SI DEJO ESTO LA ACTUALIZACIÓN NO VA
+    if(empty($resultado)){
+        return false;
+    }
+    */
+       
+            $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='grupos';";
+            $consulta_nombres=$this->conexion->prepare($nombres);
+            $consulta_nombres->execute();
+            $resultado_nombres=$consulta_nombres->fetchAll();
+                foreach($resultado_nombres as $nombre_columna){	
+                    for($i=0;$i<count($nombre_columna)/2;$i++){
+                        $nombress[]=$nombre_columna;
+                    }
+                }
+    
+                for($i=0;$i<count($nombress);$i++){
+                    
+                    $sql="UPDATE grupos SET  ".$nombress[$i][0]."=:data  WHERE id='".$indic[0]."';";
+                    $stmt=$this->conexion->prepare($sql);
+                    $stmt->bindParam(":data",$indic[$i]);
+                    $stmt->execute();
+                    
+                    
+                }
+            return true;
+        
+        }      
+    
+
+function crearGrupos($indic){
+
+        $comprobar="SELECT * FROM grupos WHERE id='".$indic[0]."';";
+        $consulta_comprobar=$this->conexion->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll();
+        if(count($resultado_comprobar)>0){
+            return false;
+        }
+        
+        else{
+            $id = $indic[0];
+            $nombre = $indic[1];
+            $departamento =$indic[2];
+           
+            
+
+            
+            $comprobar="INSERT INTO  grupos VALUES ($id,'$nombre','$departamento');";
+            $consulta_comprobar=$this->conexion->prepare($comprobar);
+            $consulta_comprobar->execute();
+            
+            return true;
+
+            
+        
+    }
+
+
+        
+}
+
+
+
+ /*************************************  FIN MODELO DE GRUPOS   ********************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

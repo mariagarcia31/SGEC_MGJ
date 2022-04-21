@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   
@@ -245,14 +244,10 @@ $("#myModal").modal();
        
 <?php
        echo '
-
-
-
        <div class="row">
            
                        <div class="col-md-12">
                       
-
                            <table class="table table-striped bg-white" style="text-align: center;">';
 
         echo "<tr >";
@@ -355,19 +350,42 @@ picker.addEventListener('input', function(e){
   if([6,0].includes(day)){
     e.preventDefault();
     this.value = '';
-    alert('Fines de semana no disponibles, seleccione un día de semana.');
-  }
+    swal({
+        title: "Fines de semana no disponibles, seleccione un día de semana.",
+          text: "",
+          type: "warning",
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Entendido'
+
+        });  
+    }
   else if(diffDays>14){
     e.preventDefault();
     this.value = '';
-    alert('Seleccione un día dentro de los 14 días siguientes a la fecha de hoy.');
+    swal({
+        title: "Seleccione un día dentro de los 14 días siguientes a la fecha de hoy.",
+          text: "",
+          type: "warning",
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Entendido'
 
+        });
   }
 
   else if(date2.getDate() < date1.getDate()){
     e.preventDefault();
     this.value = '';
-    alert('No puede seleccionar un día anterior al actual. Seleccione un día dentro de los 14 días siguientes a la fecha de hoy.');
+    swal({
+        title: "No puede seleccionar un día anterior al actual. ",
+          text: "Seleccione un día dentro de los 14 días siguientes a la fecha de hoy.",
+          type: "warning",
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Entendido'
+
+        });
 
   }
 });
