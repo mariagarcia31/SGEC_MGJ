@@ -106,7 +106,7 @@ if(isset($_SESSION["modificar"])){
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h3 class="modal-title" id="exampleModalLongTitle">Modificar reserva</h3>
+              <h3 class="modal-title" id="exampleModalLongTitle">Modificar aula</h3>
             </div>
             <div class="modal-body">';
     echo "<form action='?c=modificarAulas&pag=".$_GET['page']."' method='post' >";

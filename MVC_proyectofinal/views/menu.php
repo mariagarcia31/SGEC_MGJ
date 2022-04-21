@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="libs/css/estilos.css">
 
 <style>
-            body{
+
+
+body{
             overflow-x: hidden;
         }
     .nav{
@@ -25,12 +27,11 @@
     /* margin: 15px; */
     background-color: #212529;
     padding: 20px;
-   
     color: rgba(255, 255, 255, 0.5);
     }
 
     .cabecera, .cabecera-todo{
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.7);
     }
 
     .logoEnlace{
@@ -105,7 +106,7 @@ hr{
 .sidenav .closebtn {
   position: absolute;
   top: 0;
-  right: 25px;
+  right: 20px;
   font-size: 36px;
   margin-left: 50px;
 }
@@ -158,6 +159,75 @@ hr{
 a:visited{
     text-decoration:none
 }
+
+hr{
+    margin:0px !important;
+    color:white
+}
+body {
+  font-family: "Lato", sans-serif;
+}
+
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #212529;
+  overflow-x: hidden;
+  padding-top: 20px;
+  padding-top:115px;
+}
+
+/* Style the sidenav links and the dropdown button */
+ .dropdown-btn {
+  padding: 15px 8px 15px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: whitesmoke;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: white;
+}
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: #2FA4FF;
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #545454;
+  padding-left: 8px;
+  color:white !important
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -166,56 +236,72 @@ a:visited{
 </head>
 <body>
 
-<div id="mySidenav" class="sidenav">
+<div id="mySidenav" class="sidenav" style="z-index:8">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a class="btn-menu" href="?c=principal&page=1"><i class="bi bi-calendar-plus"></i>  Reservar</a>
+  <a class="btn-menu btn-menu-reservar" href="?c=principal&page=1"><i class="bi bi-calendar-plus"></i>  Reservar</a>
   <hr class='sidebar-divider'>
 
   <a class="btn-menu" href="?c=crudMisReservas&page=1"><i class="bi bi-calendar-week"></i>  Mis reservas</a>
   <hr class='sidebar-divider'>
+<?php
+  if($_SESSION['crudReservas']==1 || $_SESSION['crudAulas']==1 || $_SESSION['crudUsuarios']==1 || $_SESSION['crudRoles']==1 || $_SESSION['crudGrupos']==1){
+    echo '  <a class="dropdown-btn btn-menu" style="color:rgba(255, 255, 255, 0.7)"><i class="bi bi-clipboard-check"></i>  Gestionar 
+    <i class="bi bi-caret-down-fill" style="    float: right;
+    padding-right: 15px;"></i>
+  </a>
+  <div class="dropdown-container">';
 
-  <?php     
-  
+
   if($_SESSION['crudReservas']==1){
-      echo '  <a class="btn-menu" href="?c=crudReservas&page=1"><i class="bi bi-calendar3"></i>  Gestionar Reservas</a>  <hr class="sidebar-divider">
-      ';
-  }else{echo"";}
-
-  if($_SESSION['crudAulas']==1){
-    echo '  <a class="btn-menu" href="?c=crudAulas&page=1"><i class="bi bi-house"></i>  Gestionar Aulas</a>  <hr class="sidebar-divider">
-
+    echo '  
+    <a class="btn-menu" href="?c=crudReservas&page=1"><i class="bi bi-calendar3"></i>   Reservas</a>  <hr class="sidebar-divider">
     ';
+}else{echo"";}
+
+if($_SESSION['crudAulas']==1){
+  echo '  
+  <a class="btn-menu" href="?c=crudAulas&page=1"><i class="bi bi-house"></i>   Aulas</a>  <hr class="sidebar-divider">
+
+  ';
 }else{echo"";}
 
 
 if($_SESSION['crudUsuarios']==1){
-    echo '  <a class="btn-menu" href="?c=crudUsuarios&page=1"><i class="bi bi-person"></i>  Gestionar Usuarios</a>  <hr class="sidebar-divider">
-    ';
+  echo '  
+  <a class="btn-menu" href="?c=crudUsuarios&page=1"><i class="bi bi-person"></i>   Usuarios</a>  <hr class="sidebar-divider">
+  ';
 }else{echo"";}
 
 
 if($_SESSION['crudRoles']==1){
-    echo '  <a class="btn-menu" href="?c=crudRoles&page=1"><i class="bi bi-person-lines-fill"></i>  Gestionar Roles</a>  <hr class="sidebar-divider">
+  echo '  
+  <a class="btn-menu" href="?c=crudRoles&page=1"><i class="bi bi-person-lines-fill"></i>   Roles</a>  <hr class="sidebar-divider">
 
-    ';
+  ';
 }else{echo"";}
 
 if($_SESSION['crudGrupos']==1){
-    echo '  <a class="btn-menu" href="?c=crudGrupos&page=1"><i class="bi bi-people"></i> Gestionar Grupos</a>  <hr class="sidebar-divider">
+  echo '  
+  <a class="btn-menu" href="?c=crudGrupos&page=1"><i class="bi bi-people"></i>  Grupos</a>  
 
 
-    ';
+  ';
 }else{echo"";}
+echo " </div>  <hr class='sidebar-divider'>";
 
 if($_SESSION['actualizarBBDD']==1){
-    echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar Base de Datos</a>  <hr class="sidebar-divider">
-    ';
+echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar Base de Datos</a>  <hr class="sidebar-divider">
+';
 }else{echo"";}
+  }
 
+  
+
+echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle"></i>  Ayuda</a>
+</div>
+';
 ?>
 
-
-  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle"></i>  Ayuda</a>
 
 </div>
 
@@ -285,5 +371,21 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft = "0";
   document.body.style.backgroundColor = "white";
+}
+
+
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
 }
 </script>
