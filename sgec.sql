@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-04-2022 a las 20:50:52
+-- Tiempo de generación: 21-04-2022 a las 07:49:25
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -75,8 +75,12 @@ CREATE TABLE `aulas` (
 --
 
 INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`) VALUES
-('Aula 700', 'Pabellon 3', 'Tv, ordenadores', 20, 1),
-('Aula 815', 'Pabellon 5', 'TV', 15, 0);
+('Auditorio Sur', 'Pabellon 3, Planta baja, Puerta 4ª', 'Proyector, mesas, sillas, micrófono', 120, 1),
+('Aula 100', 'Pabellón 4, Planta 1ª, Puerta 7ª', 'Mesas, sillas, ordenadores', 35, 0),
+('Aula 515', 'Pabellón 5, Planta 1ª, Puerta 1ª', 'Mesas, Sillas', 30, 0),
+('Aula 700', 'Pabellón 9, Planta 2ª, Puerta 2ª', 'Tv, Ordenadores', 20, 1),
+('Aula 815', 'Pabellón 10, Planta 2ª, Puerta 1ª', 'Tv, Ordenadores, Sillas, Mesas', 30, 1),
+('Aula Polivalente', 'Pabellón 10, Planta 1ª, Puerta 1ª', 'Mesas, Sillas, Pizarras', 70, 1);
 
 -- --------------------------------------------------------
 
@@ -95,7 +99,10 @@ CREATE TABLE `grupos` (
 --
 
 INSERT INTO `grupos` (`id`, `nombre`, `departamento`) VALUES
-(1, 'DAW2', 'Informática');
+(1, 'DAW 2', 'Informática'),
+(2, 'DAM 2', 'Informática'),
+(3, 'DAW 1', 'Informática'),
+(4, 'DAM 1', 'Informática');
 
 -- --------------------------------------------------------
 
@@ -113,6 +120,13 @@ CREATE TABLE `reservas` (
   `hora` varchar(255) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
+(134, 'Auditorio Sur', 1, '2022-04-21', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-04-21 05:00:02');
 
 -- --------------------------------------------------------
 
@@ -209,25 +223,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
