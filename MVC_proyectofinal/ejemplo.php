@@ -15,7 +15,16 @@ class Precio{
         }
     }
       /*************************************  MODELO DE AULAS   ********************************/
+      function gruposDisponibles(){
 
+        $comprobar="SELECT * FROM reservas ;";
+            $consulta_comprobar=$this->conexion()->prepare($comprobar);
+            $consulta_comprobar->execute();
+            $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+       
+        return $resultado_comprobar;
+
+    }
       
      /*************************************  FIN MODELO DE AULAS  ********************************/
    
@@ -26,8 +35,11 @@ class Precio{
 
 
 $precio=new Precio();
-$datos= array("Aula 200", "Pabellon 10", "TV, ordenadores", 15, 1);
-print_r($datos);
+$datos= $precio->gruposDisponibles();
+
+
+print_r($datos[0]['idUsuario']);
+
 
 
 exit();

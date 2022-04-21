@@ -5,29 +5,46 @@
     <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/cssc/login&check.css">
     <title>Login</title>
-   
+    <style>
+
+        .footer{
+            background-color: #212529; /* Black*/
+            position:fixed;
+            bottom:0px;
+            left:0px;
+            right:0px;
+            padding:7px;
+            text-align:center;
+            z-index:4;
+            color:white
+        }
+    </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light" style="background: #537efd;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background: #212529;justify-content: left;">
         <div>
-            <a href="" class="navbar-brand">
-                <img src="libs/img/logo_ciudadescolar.jpg" height="68" width="150" style="border-radius:1px" alt="CoolBrand">
+            <a href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank" class="navbar-brand" style="display:inline-block;">
+                <img src="libs/img/logo_ciudadescolar.jpg" height="55" width="135" style="border-radius:1px; margin-left:5%;display:inline-block;" alt="CoolBrand">
             </a>
-            <h2 style="color:white; display:inline-block; ">Sistema de Gestión de Espacios Comunes</h2>
+            <h3 style="color:rgba(255, 255, 255, 0.9); display:inline-block;  ">Sistema de Gestión de Espacios Comunes</h3>
         </div>
     </nav>
 
-    <div class="login-page">
-        <div style="position: relative;text-align:center;">
-            <h1>Iniciar Sesión</h1>
-        </div>
+    <div class="login-page border" style="padding:0%; margin-top:4%">
+        
         <div class="form">
+        
+            <h2>Iniciar Sesión</h2>
+            <hr>
+        
             <form class="login-form" action="?c=verificar" method="post">
                 <input type="email"  name="correo" placeholder="Correo" required>
                <input type="password" name="contrasena" placeholder="Contraseña" required>
-                <button>Entrar</button>
+               <br>
+               <br>
+                <button >Entrar</button>
             </form>
             <?php if(isset($_SESSION["error"])){ ?>     
                  <div class='alert alert-danger'><?php echo $_SESSION["error"];?></div>                     
@@ -39,7 +56,9 @@
 
 
 
-
+    <div class="footer">
+       <p>© Copyright 2022 |Sistema de Gestión de Espacios Comunes | IES Ciudad Escolar</p>
+</div>
 </body>
 
 </html>
