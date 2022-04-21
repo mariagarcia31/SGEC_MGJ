@@ -2,7 +2,8 @@
 if(!isset($_SESSION['nombre'])){
     header("Location:login.php");
 }
-include "menu1.php";?>
+include "menu1.php";
+include "/libs/js/scripts.js"?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -312,7 +313,12 @@ if(isset($_POST['submit'])){
             $stmt = $mysqli->prepare("INSERT INTO reservas (idAula, idUsuario, fecha, grupo, motivo,hora) VALUES (?,?,?,?,?,?)");
             $stmt->bind_param('ssssss', $idAula, $usuario, $date, $grupo, $motivo, $timeslot );
             $stmt->execute();
-            $msg = "<div class='alert alert-success'>Reserva realizada</div>";
+            $msg = " <script>    Swal.fire({
+                icon: 'success',
+                title: 'Reserva realizada con éxito',
+                showConfirmButton: false,
+                timer: 1500
+              });</script>";
             $bookings[] = $timeslot;
             $stmt->close();
             $mysqli->close();

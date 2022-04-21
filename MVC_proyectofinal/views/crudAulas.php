@@ -14,6 +14,10 @@ $(document).ready(function(){
 
 </head>
 <body>
+
+  
+  
+
 <?php include "menu.php";
 if(isset($_GET["crear"])){
     ?>
@@ -249,9 +253,9 @@ $_SESSION['cuantas']=count($result[0]);
        echo '<div class="container" style="margin-top:60px;">
 
 
-
        <div class="row">
-           
+
+
                        <div class="col-md-12 ">';
         echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  ";
        

@@ -11,6 +11,10 @@ $(document).ready(function(){
 
 
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.8.0/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.8.0/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -349,19 +353,45 @@ picker.addEventListener('input', function(e){
   if([6,0].includes(day)){
     e.preventDefault();
     this.value = '';
-    alert('Fines de semana no disponibles, seleccione un día de semana.');
+    swal({
+        title: "Fines de semana no disponibles, seleccione un día de semana.",
+          text: "",
+          type: "warning",
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Entendido'
+
+        });
   }
   else if(diffDays>14){
     e.preventDefault();
     this.value = '';
-    alert('Seleccione un día dentro de los 14 días siguientes a la fecha de hoy.');
+    swal({
+        title: "No puede seleccionar un día anterior al actual. ",
+          text: "",
+          type: "warning",
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Entendido'
+
+        });
 
   }
 
   else if(date2.getDate() < date1.getDate()){
     e.preventDefault();
     this.value = '';
-    alert('No puede seleccionar un día anterior al actual. Seleccione un día dentro de los 14 días siguientes a la fecha de hoy.');
+    swal({
+        title: "No puede seleccionar un día anterior al actual. ",
+          text: "Seleccione un día dentro de los 14 días siguientes a la fecha de hoy.",
+          type: "warning",
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Entendido'
+
+        });
+
+        
 
   }
 });

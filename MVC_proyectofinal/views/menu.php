@@ -49,7 +49,7 @@
         position: absolute;
     top: 30px;
     left: 20px;
-        margin:15px !important;
+        margin:0px 15px !important;
         color: rgba(255, 255, 255, 0.7) !important
     }
     .menu:hover{
@@ -133,6 +133,9 @@ hr{
       display:none
   }
 } 
+.cabecera{
+  font-size: 1.75rem !important; 
+}
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}

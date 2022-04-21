@@ -4,7 +4,8 @@ if(!isset($_SESSION['nombre'])){
 
 }
 
-include "menu1.php"?>
+include "menu1.php";
+include "libs/js/scripts.js";?>
 <?php
 
 if(!$_GET){
@@ -159,7 +160,12 @@ if(isset($_POST['agregar-ult'])){
 				$stmt = $mysqli->prepare("INSERT INTO aulas  VALUES (?,?,?,?,?)");
 				$stmt->bind_param('sssss', $id, $ubicacion, $informacion, $aforo, $habilitado );
 				$stmt->execute();
-				echo "<div class='alert alert-success'>Aula creada con exito</div>";
+				echo " <script>    Swal.fire({
+					icon: 'success',
+					title: 'Aula creada con éxito',
+					showConfirmButton: false,
+					timer: 1500
+				  });</script>";
 				
 				$stmt->close();
 				$mysqli->close();
@@ -254,7 +260,15 @@ if(isset($_POST['borrar'])){
 						}
 
                         
-                        echo "<div class='alert alert-success'>Aula modificada con exito</div>";
+                        echo "
+        
+
+						<script>    Swal.fire({
+							icon: 'success',
+							title: 'Aula modificada con éxito',
+							showConfirmButton: false,
+							timer: 1500
+						  });</script>"; 
                         
 
 
