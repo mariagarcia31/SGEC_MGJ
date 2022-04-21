@@ -14,9 +14,7 @@
     <link rel="stylesheet" href="libs/css/estilos.css">
 
 <style>
-
-
-body{
+            body{
             overflow-x: hidden;
         }
     .nav{
@@ -106,7 +104,7 @@ hr{
 .sidenav .closebtn {
   position: absolute;
   top: 0;
-  right: 20px;
+  right: 25px;
   font-size: 36px;
   margin-left: 50px;
 }
@@ -159,75 +157,6 @@ hr{
 a:visited{
     text-decoration:none
 }
-
-hr{
-    margin:0px !important;
-    color:white
-}
-body {
-  font-family: "Lato", sans-serif;
-}
-
-/* Fixed sidenav, full height */
-.sidenav {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #212529;
-  overflow-x: hidden;
-  padding-top: 20px;
-  padding-top:115px;
-}
-
-/* Style the sidenav links and the dropdown button */
- .dropdown-btn {
-  padding: 15px 8px 15px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  color: whitesmoke;
-  display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  outline: none;
-}
-
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-  color: white;
-}
-
-/* Main content */
-.main {
-  margin-left: 200px; /* Same as the width of the sidenav */
-  font-size: 20px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
-
-/* Add an active class to the active dropdown button */
-.active {
-  background-color: #2FA4FF;
-  color: white;
-}
-
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
-  display: none;
-  background-color: #545454;
-  padding-left: 8px;
-  color:white !important
-}
-
-/* Optional: Style the caret down icon */
-.fa-caret-down {
-  float: right;
-  padding-right: 8px;
-}
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -236,72 +165,56 @@ body {
 </head>
 <body>
 
-<div id="mySidenav" class="sidenav" style="z-index:8">
+<div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a class="btn-menu btn-menu-reservar" href="?c=principal&page=1"><i class="bi bi-calendar-plus"></i>  Reservar</a>
+  <a class="btn-menu" href="?c=principal&page=1"><i class="bi bi-calendar-plus"></i>  Reservar</a>
   <hr class='sidebar-divider'>
 
   <a class="btn-menu" href="?c=crudMisReservas&page=1"><i class="bi bi-calendar-week"></i>  Mis reservas</a>
   <hr class='sidebar-divider'>
-<?php
-  if($_SESSION['crudReservas']==1 || $_SESSION['crudAulas']==1 || $_SESSION['crudUsuarios']==1 || $_SESSION['crudRoles']==1 || $_SESSION['crudGrupos']==1){
-    echo '  <a class="dropdown-btn btn-menu" style="color:rgba(255, 255, 255, 0.7)"><i class="bi bi-clipboard-check"></i>  Gestionar 
-    <i class="bi bi-caret-down-fill" style="    float: right;
-    padding-right: 15px;"></i>
-  </a>
-  <div class="dropdown-container">';
 
-
+  <?php     
+  
   if($_SESSION['crudReservas']==1){
-    echo '  
-    <a class="btn-menu" href="?c=crudReservas&page=1"><i class="bi bi-calendar3"></i>   Reservas</a>  <hr class="sidebar-divider">
+      echo '  <a class="btn-menu" href="?c=crudReservas&page=1"><i class="bi bi-calendar3"></i>  Gestionar Reservas</a>  <hr class="sidebar-divider">
+      ';
+  }else{echo"";}
+
+  if($_SESSION['crudAulas']==1){
+    echo '  <a class="btn-menu" href="?c=crudAulas&page=1"><i class="bi bi-house"></i>  Gestionar Aulas</a>  <hr class="sidebar-divider">
+
     ';
-}else{echo"";}
-
-if($_SESSION['crudAulas']==1){
-  echo '  
-  <a class="btn-menu" href="?c=crudAulas&page=1"><i class="bi bi-house"></i>   Aulas</a>  <hr class="sidebar-divider">
-
-  ';
 }else{echo"";}
 
 
 if($_SESSION['crudUsuarios']==1){
-  echo '  
-  <a class="btn-menu" href="?c=crudUsuarios&page=1"><i class="bi bi-person"></i>   Usuarios</a>  <hr class="sidebar-divider">
-  ';
+    echo '  <a class="btn-menu" href="?c=crudUsuarios&page=1"><i class="bi bi-person"></i>  Gestionar Usuarios</a>  <hr class="sidebar-divider">
+    ';
 }else{echo"";}
 
 
 if($_SESSION['crudRoles']==1){
-  echo '  
-  <a class="btn-menu" href="?c=crudRoles&page=1"><i class="bi bi-person-lines-fill"></i>   Roles</a>  <hr class="sidebar-divider">
+    echo '  <a class="btn-menu" href="?c=crudRoles&page=1"><i class="bi bi-person-lines-fill"></i>  Gestionar Roles</a>  <hr class="sidebar-divider">
 
-  ';
+    ';
 }else{echo"";}
 
 if($_SESSION['crudGrupos']==1){
-  echo '  
-  <a class="btn-menu" href="?c=crudGrupos&page=1"><i class="bi bi-people"></i>  Grupos</a>  
+    echo '  <a class="btn-menu" href="?c=crudGrupos&page=1"><i class="bi bi-people"></i> Gestionar Grupos</a>  <hr class="sidebar-divider">
 
 
-  ';
+    ';
 }else{echo"";}
-echo " </div>  <hr class='sidebar-divider'>";
 
 if($_SESSION['actualizarBBDD']==1){
-echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar Base de Datos</a>  <hr class="sidebar-divider">
-';
+    echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar Base de Datos</a>  <hr class="sidebar-divider">
+    ';
 }else{echo"";}
-  }
 
-  
-
-echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle"></i>  Ayuda</a>
-</div>
-';
 ?>
 
+
+  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle"></i>  Ayuda</a>
 
 </div>
 
@@ -312,13 +225,13 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
 </span>
 <div class="cabecera-todo">
     <a class="logoEnlace" href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img class="logo" src="libs/img/logo_ciudadescolar.jpg"></a>
-    <h3 class="cabecera">Sistema de Gestión de Espacios Comunes</h3>
+    <h1 class="cabecera">Sistema de Gestión de Espacios Comunes</h1>
 </div>
 <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <h5 style="color: rgba(255, 255, 255, 0.7); display:inline-block" ><?php echo $_SESSION['nombre'];?></h5>
-            <img class="img-profile rounded-circle" style="width:40px"
+            <span style="color: rgba(255, 255, 255, 0.7);" class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nombre'];?></span>
+            <img class="img-profile rounded-circle" style="width:50px"
                 src="libs/img/undraw_profile.svg">
         </a>
         <!-- Dropdown - User Information -->
@@ -326,35 +239,16 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
             aria-labelledby="userDropdown">
             
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item"  data-toggle="modal" data-target="#logoutModal" style="cursor:pointer">
-            
-                Cerrar sesión   
-                <i class="bi bi-box-arrow-right"></i>
+            <a class="dropdown-item" href="?c=logout" data-toggle="" data-target="#logoutModal">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                Cerrar sesión
             </a>
         </div>
     </li>
 </div>
    <div class="footer">
-       <p>© Copyright 2022 |Sistema de Gestión de Espacios Comunes | IES Ciudad Escolar</p>
-</div>
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">¿Seguro que desea cerrar sesión?</h3>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Seleccione "cerrar sesión" abajo si está seguro de cerrar la sesión.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="?c=logout" >Cerrar sesión</a>
-                </div>
-            </div>
-        </div>
-    </div>         
+       <p>Copyright 2022 |Sistema de Gestión de Espacios Comunes | Gerardo, María y Jossue</p>
+</div>         
 </body>
 
 </html>
@@ -371,21 +265,5 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft = "0";
   document.body.style.backgroundColor = "white";
-}
-
-
-var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
-
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-  this.classList.toggle("active");
-  var dropdownContent = this.nextElementSibling;
-  if (dropdownContent.style.display === "block") {
-  dropdownContent.style.display = "none";
-  } else {
-  dropdownContent.style.display = "block";
-  }
-  });
 }
 </script>
