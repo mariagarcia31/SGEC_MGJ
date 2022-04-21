@@ -42,7 +42,9 @@ include "menu.php";
 <body>
 
 <section class="pt-5 pb-5 mt-5 ml-5">
+    
     <div class="container">
+        
         <div class="row">
            
             <div class="col-12" >
@@ -60,28 +62,20 @@ include "menu.php";
          ?>
         <div class="carousel-item active">
         <div class="row">
-        <div class="col-1" style="display: flex;align-items: center;justify-content: center;">
-                <a class="btn btn-primary " style="border-radius:10px;"  href="#carouselExampleIndicators2" role="button" data-slide="prev" style="width:100%;">
-                <i class="bi bi-arrow-left-circle" style="font-size:30px"></i>
-                </a>
-        </div>
+        
 
         <?php }
 
         else if ($contador==4||$contador==7||$contador==10||$contador==13||$contador==16||$contador==19||$contador==22||$contador==25||$contador==28||$contador==31){ ?>
         <div class="carousel-item">
-        <div class="row">
-        <div class="col-1" style="display: flex;align-items: center;justify-content: center;">
-                <a class="btn btn-primary " style="border-radius:10px;"  href="#carouselExampleIndicators2" role="button" data-slide="prev" style="width:100%;">
-                <i class="bi bi-arrow-left-circle" style="font-size:30px"></i>
-                </a>
-        </div>
+        <div class="row ">
+       
         <?php }?>
         
      
             
-            <div class="col-md-3 mb-3">
-                <div class="card mt-2" >
+            <div class="col-md-4 mb-4 mt-1 p-5">
+                <div class="card mt-2 " >
                     <div class="card text-white bg-info mb-3">
                         <div class="card-header" style="background: #2FA4FF">
                             <h1 class="card-title" style="text-align:center;margin-top:2%"><?php echo $row['id']; ?></h1>
@@ -89,17 +83,17 @@ include "menu.php";
                     </div>
                     <img class="img-fluid"  src="aula.jpg">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item ">• Aforo: <?php echo $row['aforo']; ?></li>
-                        <li class="list-group-item ">• Herramientas: <?php echo $row['informacion']; ?></li>
-                        <li class="list-group-item ">• Ubicación: <?php echo $row['ubicacion']; ?></li>
+                        <li class="list-group-item " style="font-size:1.3rem" >• Aforo: <?php echo $row['aforo']; ?></li>
+                        <li class="list-group-item " style="font-size:1.3rem">• Herramientas: <?php echo $row['informacion']; ?></li>
+                        <li class="list-group-item " style="font-size:1.3rem">• Ubicación: <?php echo $row['ubicacion']; ?></li>
                     </ul>
                     
                     <div class="card-body">
                             <div class="d-flex justify-content-center">
                                 <?php if($row['habilitado']==0) {?>
-                                <button type="submit" class="btn btn-secondary" disabled>No disponible</button>
+                                <button type="submit" class="btn btn-secondary" style="font-size:1.4rem" disabled>No disponible</button>
                                 <?php } else{?>
-                                    <a href="?c=calendario&id=<?php echo $row['id']?>"><button type="submit" class="btn btn-info">Reservar</button></a>
+                                    <a href="?c=calendario&id=<?php echo $row['id']?>"><button type="submit" class="btn btn-info" style="font-size:1.4rem" >Reservar</button></a>
                                 <?php } ?>
                                 
                             </div>
@@ -110,23 +104,31 @@ include "menu.php";
         
         <?php if ($contador==$cuantasAulas||$contador==3||$contador==6||$contador==9||$contador==12||$contador==15||$contador==18||$contador==21||$contador==24||$contador==27||$contador==30||$contador==33||$contador==36||$contador==39){?>
         
-        <div class="col-1" style="display: flex;align-items: center;justify-content: center;">
-                <a class="btn btn-primary" style="border-radius:10px;" href="#carouselExampleIndicators2" role="button" data-slide="next" style="width:100%;">
-                <i class="bi bi-arrow-right-circle" style="font-size:30px"></i>
-                </a>
+        
         </div>
         </div>
-        </div>
-
+        
         <?php }?>
 
                 
 
         <?php } ?> 
 
-            
+       
 
         </div>
+        <div class="row ">
+        <div class="col-9 mx-auto" style="display: flex;align-items: center;justify-content: center; margin-top:-2%">
+                <a style="border-radius:100%;"  href="#carouselExampleIndicators2" role="button" data-slide="prev" style="width:100%;">
+                <i class="bi bi-chevron-left " style="font-size:30px; color:#212529;"></i>
+                </a>
+
+                <a  style="border-radius:20%; margin-left:5%" href="#carouselExampleIndicators2" role="button" data-slide="next" style="width:100%;">
+                <i class="bi bi-chevron-right" style="font-size:30px; color:#212529;"></i>
+                </a>
+        </div>
+        </div>
+        
         </div>
         </div>
         </div>

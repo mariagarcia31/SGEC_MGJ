@@ -600,6 +600,28 @@ class Crud extends Conexion{
             if(count($resultado_comprobar)>0){
 
                 if($resultado_comprobar[0]['idUsuario']===$_SESSION['id']){
+                    $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='reservas';";
+                $consulta_nombres=$this->conexion->prepare($nombres);
+                $consulta_nombres->execute();
+                $resultado_nombres=$consulta_nombres->fetchAll();
+                    foreach($resultado_nombres as $nombre_columna){	
+                        for($i=0;$i<count($nombre_columna)/2;$i++){
+                            $nombress[]=$nombre_columna;
+                        }
+                    }
+        
+                    for($i=0;$i<count($nombress);$i++){
+                        
+                        $sql="UPDATE reservas SET  ".$nombress[$i][0]."=:date  WHERE id=".$indic[0].";";
+                        $stmt=$this->conexion->prepare($sql);
+                        $stmt->bindParam(":date",$indic[$i]);
+                        $stmt->execute();
+                        
+                        
+                    }
+                    
+
+
                     return true;
                 }
 

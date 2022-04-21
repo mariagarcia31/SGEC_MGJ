@@ -94,109 +94,115 @@ $("#myModal").modal();
             echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
             echo '</div>';
            }
+           elseif($i==1){
+            echo '<div class="form-group">
+            <label for="">Aula</label>';
 
-           if($i==2){
+            $aulasDisponibles=$this->crud->aulasDisponibles();
+
+            echo '<select name="dato[]" class="form-control" required>';
+
+            foreach($aulasDisponibles as $idAulas){
+                foreach($idAulas as $idAula){
+
+                    if($idAula==$nombre_columna[$i]){
+
+                        echo '<option value="'.$idAula.'" selected>'.$idAula.'</option>';
+                    }
+                    else{
+                        echo '<option value="'.$idAula.'">'.$idAula.'</option>';
+                    }
+                    
+                    
+                    
+                }
+            }
+            echo '</select></div>';
+       }
+
+           elseif($i==2){
             echo '<div class="form-group">
              <label for="">Usuario</label>';
              echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
              echo '</div>';
             }
 
-            if($i==7){
+            elseif($i==3){
+                echo '<div class="form-group">
+                <label for="">Fecha de reserva </label>';
+    
+                    echo "<input id='date1' type='date' name='dato[]' value='".$nombre_columna[$i]."' class='form-control' required></input>";
+                    echo '</div>';
+                }
+    
+               elseif($i==4){
+                echo '<div class="form-group">
+                <label for="">Grupo </label>';
+    
+                    $gruposDisponibles=$this->crud->gruposDisponibles();
+    
+                    echo '<select name="dato[]" class="form-control" required>';
+    
+                    foreach($gruposDisponibles as $nombresGrupos){
+                        foreach($nombresGrupos as $nombreGrupo){
+    
+                            if($nombreGrupo==$nombre_columna[$i]){
+    
+                                echo '<option value="'.$nombreGrupo.'" selected>'.$nombreGrupo.'</option>';
+                            }
+                            else{
+                                echo '<option value="'.$nombreGrupo.'">'.$nombreGrupo.'</option>';
+                            }
+                            
+                        }
+                    }
+                    echo '</select></div>';
+                }
+
+                else if($i==5){
+                    echo '<div class="form-group">
+                <label for="">Motivo </label>';
+    
+                    echo "<input type='text' name='dato[]' value='".$nombre_columna[$i]."' class='form-control' required></input></div>";
+    
+                }
+                elseif($i==6){   
+                    echo '<div class="form-group">
+                <label for="">Hora </label>';
+    
+                    $horarios=array('08:30AM - 09:30AM', '09:30AM - 10:30AM', '10:30AM - 11:30AM', '11:30AM - 12:30AM', '12:30AM - 13:30PM', '13:30PM - 14:30PM');              
+                    
+                    echo "<select name='dato[]' class='form-control' required>  ";
+    
+                    foreach($horarios as $hora){
+    
+                        if($hora==$nombre_columna[$i]){
+    
+                            echo '<option value="'.$hora.'" selected>'.$hora.'</option>';
+                        }
+    
+                        else{
+                            echo '<option value="'.$hora.'">'.$hora.'</option>';
+                        }
+                        
+                    }
+                   
+                    echo" </select>
+                    </div>";
+    
+                }
+
+            elseif($i==7){
                 echo '<div class="form-group">
                  <label for="">Fecha de creación</label>';
                  echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                  echo '</div>';
                 }
-           elseif($i==1){
-                echo '<div class="form-group">
-                <label for="">Aula</label>';
+           
+           
 
-                $aulasDisponibles=$this->crud->aulasDisponibles();
-
-                echo '<select name="dato[]" class="form-control" required>';
-
-                foreach($aulasDisponibles as $idAulas){
-                    foreach($idAulas as $idAula){
-
-                        if($idAula==$nombre_columna[$i]){
-
-                            echo '<option value="'.$idAula.'" selected>'.$idAula.'</option>';
-                        }
-                        else{
-                            echo '<option value="'.$idAula.'">'.$idAula.'</option>';
-                        }
-                        
-                        
-                        
-                    }
-                }
-                echo '</select></div>';
-           }
-           elseif($i==3){
-            echo '<div class="form-group">
-            <label for="">Fecha de reserva </label>';
-
-                echo "<input id='date1' type='date' name='dato[]' value='".$nombre_columna[$i]."' class='form-control' required></input>";
-                echo '</div>';
-            }
-
-           elseif($i==4){
-            echo '<div class="form-group">
-            <label for="">Grupo </label>';
-
-                $gruposDisponibles=$this->crud->gruposDisponibles();
-
-                echo '<select name="dato[]" class="form-control" required>';
-
-                foreach($gruposDisponibles as $nombresGrupos){
-                    foreach($nombresGrupos as $nombreGrupo){
-
-                        if($nombreGrupo==$nombre_columna[$i]){
-
-                            echo '<option value="'.$nombreGrupo.'" selected>'.$nombreGrupo.'</option>';
-                        }
-                        else{
-                            echo '<option value="'.$nombreGrupo.'">'.$nombreGrupo.'</option>';
-                        }
-                        
-                    }
-                }
-                echo '</select></div>';
-            }
-
-            elseif($i==6){   
-                echo '<div class="form-group">
-            <label for="">Hora </label>';
-
-                $horarios=array('08:30AM - 09:30AM', '09:30AM - 10:30AM', '10:30AM - 11:30AM', '11:30AM - 12:30AM', '12:30AM - 13:30PM', '13:30PM - 14:30PM');              
-                
-                echo "<select name='dato[]' class='form-control' required>  ";
-
-                foreach($horarios as $hora){
-
-                    if($hora==$nombre_columna[$i]){
-
-                        echo '<option value="'.$hora.'" selected>'.$hora.'</option>';
-                    }
-
-                    else{
-                        echo '<option value="'.$hora.'">'.$hora.'</option>';
-                    }
-                    
-                }
-               
-                echo" </select>
-                </div>";
-
-            }
-            else{
-                echo '<div class="form-group">
-            <label for="">Motivo </label>';
-
-                echo "<input type='text' name='dato[]' value='".$nombre_columna[$i]."' class='form-control' required></input></div>";
-
-            }
+           
+            
         }
     }
     
