@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2022 a las 07:49:25
+-- Tiempo de generación: 23-04-2022 a las 00:24:38
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -75,10 +75,8 @@ CREATE TABLE `aulas` (
 --
 
 INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`) VALUES
-('Auditorio Sur', 'Pabellon 3, Planta baja, Puerta 4ª', 'Proyector, mesas, sillas, micrófono', 120, 1),
-('Aula 100', 'Pabellón 4, Planta 1ª, Puerta 7ª', 'Mesas, sillas, ordenadores', 35, 0),
 ('Aula 515', 'Pabellón 5, Planta 1ª, Puerta 1ª', 'Mesas, Sillas', 30, 0),
-('Aula 700', 'Pabellón 9, Planta 2ª, Puerta 2ª', 'Tv, Ordenadores', 20, 1),
+('Aula 700', 'Pabellon 3', 'Tv', 70, 1),
 ('Aula 815', 'Pabellón 10, Planta 2ª, Puerta 1ª', 'Tv, Ordenadores, Sillas, Mesas', 30, 1),
 ('Aula Polivalente', 'Pabellón 10, Planta 1ª, Puerta 1ª', 'Mesas, Sillas, Pizarras', 70, 1);
 
@@ -126,7 +124,7 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(134, 'Auditorio Sur', 1, '2022-04-21', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-04-21 05:00:02');
+(136, 'Aula 815', 1, '2022-04-27', 'DAW 2', 'Charla', '08:30AM - 09:30AM', '2022-04-22 21:53:57');
 
 -- --------------------------------------------------------
 
@@ -173,7 +171,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contra`, `confirmacion`, `rol`) VALUES
-(1, 'maria', 'maria@hotmail.com', '12345', 1, 1),
+(1, 'Maria', 'maria@hotmail.com', '12345', 1, 1),
 (2, 'jossue', 'jossue@hotmail.com', '1234', 1, 2);
 
 --
@@ -229,7 +227,7 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
