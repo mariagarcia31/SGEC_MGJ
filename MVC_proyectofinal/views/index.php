@@ -57,7 +57,7 @@
 
 
     <div class="footer">
-       <p>© Copyright 2022 |Sistema de Gestión de Espacios Comunes | IES Ciudad Escolar</p>
+       <p>© Copyright 2022 | Sistema de Gestión de Espacios Comunes | IES Ciudad Escolar</p>
 </div>
 </body>
 
