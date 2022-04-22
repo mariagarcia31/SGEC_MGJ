@@ -52,6 +52,9 @@ class Control{
         include_once ("views/crudGrupos.php");
     }
 
+    function crudReservas(){
+        include_once ("views/crudReservas.php");
+    }
 
     function logout(){
         include_once ("views/logout.php");
@@ -86,7 +89,15 @@ class Control{
             }             
         }else{
             
-            $_SESSION["error"]="Correo o contraseña incorrecta";
+            $_SESSION["error"]="
+        
+
+        <script>     Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Correo o contraseña incorrecta.',
+            footer: ''
+          })</script>";  
             header("location: ?c=home");  
           
         }
@@ -102,7 +113,15 @@ class Control{
             header("location:?c=principal"); 
             
         }else{
-            $_SESSION["error2"]="Las contraseñas tienen que ser iguales";
+            $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Las contraseñas deben ser iguales',
+                footer: ''
+              })</script>";
             header("location:?c=c_contra&correo=".$_GET['_correo']."");     
         }
 
@@ -159,7 +178,15 @@ class Control{
                 header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
                 }
             }else{
-                $_SESSION["error2"]="<div class='alert alert-danger'>No se ha seleccionado ninguna reserva para eliminar</div>";
+                $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No se ha seleccionado ninguna reserva para eliminar.',
+                footer: ''
+              })</script>";
                 header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
             }
         
@@ -229,6 +256,126 @@ class Control{
 }
 /******************************   FINAL CONTROLADOR MIS RESERVAS  ********************************/
 
+
+
+
+
+
+
+
+/******************************   CONTROLADOR RESERVAS  ********************************/
+function borrarReservas(){
+
+        
+    if(isset($_POST["borrar"])){
+        $result=$this->crud->borrarReservas($_POST["eliminar"]);
+        if($result){
+            $_SESSION["exito"]="
+    
+
+            <script>    Swal.fire({
+                icon: 'success',
+                title: 'Reserva eliminada con éxito',
+                showConfirmButton: false,
+                timer: 1500
+              });</script>";                $cuantos=count($_POST["eliminar"]);
+            if($_SESSION['cuantas']==$cuantos){
+                header("location:?c=crudReservas&page=".$_GET["pag"]-1 ."");
+            }
+            else{
+            header("location:?c=crudReservas&page=".$_GET["pag"]."");
+            }
+        }else{
+            $_SESSION["error2"]="<div class='alert alert-danger'>No se ha seleccionado ninguna reserva para eliminar</div>";
+            header("location:?c=crudReservas&page=".$_GET["pag"]."");
+        }
+    
+    }
+    elseif(isset($_POST["modificar"])){
+        $_SESSION["modificar"]=$_POST["modificar"];
+        header("location:?c=crudReservas&page=".$_GET["pag"]."");
+
+    }else{
+        $result=$this->crud->borrarUnoaUnoReservas($_GET["id"]);
+        $_SESSION["exito"]="
+    
+
+        <script>    Swal.fire({
+            icon: 'success',
+            title: 'Reserva eliminada con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>";
+        if($_SESSION['cuantas']==1){
+            header("location:?c=crudReservas&page=".$_GET["pag"] - 1 ."");
+        }
+        else{
+        header("location:?c=crudReservas&page=".$_GET["pag"]."");
+        }
+        
+
+    }
+  
+}
+
+function modificarReservas(){
+    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
+    if(isset($_POST['cancelar'])){
+        unset($_SESSION["modificar"]);
+        header("location:?c=crudReservas&page=".$_GET["pag"]."");
+    }
+    else{
+    
+    $resultado=$this->crud->actualizarReservas($_POST["dato"]);
+
+    if($resultado===3){
+        
+        $_SESSION["error2"]="
+        
+
+        <script>     swal({
+            title: 'No se ha cambiado ningún campo. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";       
+        header("location:?c=crudReservas&page=".$_GET["pag"]."");
+    }
+    else if($resultado){
+        $_SESSION["exito"]="
+    
+
+        <script>    Swal.fire({
+            icon: 'success',
+            title: 'Reserva modificada con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>";
+        unset($_SESSION["modificar"]);
+        header("location:?c=crudReservas&page=".$_GET["pag"]."");
+    }else{
+        $_SESSION["error2"]="
+        
+
+        <script>     swal({
+            title: 'Ya existe una reserva con ese día, fecha y aula. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";        
+            header("location:?c=crudReservas&page=".$_GET["pag"]."");
+
+    }
+
+}
+}
+/******************************   FINAL CONTROLADOR RESERVAS  ********************************/
 
 
 
