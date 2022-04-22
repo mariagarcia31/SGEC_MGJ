@@ -195,7 +195,7 @@ class Crud extends Conexion{
         }
            
         // creamos el array con los días de la semana
-        $daysOfWeek = array('Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo');
+        $daysOfWeek = array('Lunes','Martes','Miércoles','Jueves','Viernes','Sabado','Domingo');
     
         // saber cual es el primer día del mes
         $firstDayOfMonth = mktime(0,0,0,$month,1,$year);
@@ -225,20 +225,20 @@ class Crud extends Conexion{
     
         //cremaos el calendario
          
-       
-        $calendar = "<table class=' table rounded table-condensed '>";
-       
+
+        $calendar = "<table class=' table table-bordered '>";
+        $calendar .= "<center><h3>$monthName $year</h3>";
         
-        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month-1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month-1, 1, $year))."&id=".$idAula."'><i class='bi bi-chevron-left ' style='font-size:23px; color:#212529; margin-right:5%'></i></a>";
-        $calendar .= "<h2 style='color:#1089ff;display:inline-block'>$monthName $year</h2>";
-        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."'><i class='bi bi-chevron-right ' style='font-size:23px; color:#212529; margin-left:5%'></i></a><br>";
+        $calendar.= " <a href='?c=calendario&id=".$idAula."' class='btn btn-xs btn-primary' data-month='".date('m')."' data-year='".date('Y')."'>Mes actual</a> ";
+        
+        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."' class='btn btn-xs btn-primary'>Siguiente mes ➜</a></center><br>";
         
 
         $calendar .= "<tr>";
     
         // Creamos las cabeceras
         foreach($daysOfWeek as $day) {
-            $calendar .= "<td  style='background-color:#1089ff; border:none; color:#feffff'>$day</td>";
+            $calendar .= "<th  class='header'>$day</th>";
         } 
         
         // creamos el resto del calendario
@@ -249,7 +249,7 @@ class Crud extends Conexion{
     
         if($dayOfWeek > 0) { 
             for($k=0;$k<$dayOfWeek;$k++){
-                $calendar .= "<td  class='empty' style='border:none;'></td>"; 
+                $calendar .= "<td  class='empty'></td>"; 
             }
         }
         
@@ -269,28 +269,26 @@ class Crud extends Conexion{
              $date2 = date('Y-m-d', strtotime("+14 day"));
              $finde= $this->esFinde($date);
              if($date<date('Y-m-d')||$date>$date2||$finde==1){
-                 $calendar.="<td style='border:none;color:lightgrey'><h4>$currentDay</h4> ";
+                 $calendar.="<td><h4>$currentDay</h4> ";
              }
              else{
-                 $calendar.="<td class='$today' style='border:none; width:fit-content' onmouseover='overStyle(this)' onmouseout='outStyle(this)'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."'' class='btn btn-info btn-xs'>Horarios</a>";
+                 $calendar.="<td class='$today'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."'' class='btn btn-info btn-xs'>Horarios</a>";
              }
              $calendar .="</td>";
              $currentDay++;
              $dayOfWeek++;
          }
          
-         
          //pintamos los ultimos dias del mes si el mes no acaba en domingo
          if ($dayOfWeek != 7) { 
             $remainingDays = 7 - $dayOfWeek;
             for($l=0;$l<$remainingDays;$l++){
-                $calendar .= "<td class='empty' style='border:none;'></td>"; 
+                $calendar .= "<td class='empty'></td>"; 
             }
          }
          
         $calendar .= "</tr>";
         $calendar .= "</table>";
-       
         return $calendar;
     }
 
@@ -391,39 +389,7 @@ class Crud extends Conexion{
       
     }
 
-/*************************************  MODELO DE MIS RESERVAS   ********************************/
-    
-    function borrarUnoaUno($selec){
-            
-        $sql="DELETE FROM reservas WHERE  id=$selec";
-        $consulta=$this->conexion->prepare($sql);
-        $consulta->execute();
-        return true;
-            
-    }
-
-    function borrar($selec){
-      
-        if(empty($selec)){
-           
-            return false;
-        }
-        else{
-          
-            foreach($selec as $valores){
-                $sql="DELETE FROM reservas WHERE  id=$valores";
-                $consulta=$this->conexion->prepare($sql);
-                $consulta->execute();
-                
-            }
-            return true;
-        }
-        
-        }  
- 
-    
-
-
+    /**********************CRUDS**************************** */
     function crudMiReservas($opc,$iteams_pagina=null,$offset=null){
         $idUsuario = $_SESSION['id'];   
         if($opc==1){
@@ -567,6 +533,42 @@ class Crud extends Conexion{
 
     }
 
+    /***************************FIN CRUDS************************ */
+
+/*************************************  MODELO DE MIS RESERVAS   ********************************/
+    
+    function borrarUnoaUno($selec){
+            
+        $sql="DELETE FROM reservas WHERE  id=$selec";
+        $consulta=$this->conexion->prepare($sql);
+        $consulta->execute();
+        return true;
+            
+    }
+
+    function borrar($selec){
+      
+        if(empty($selec)){
+           
+            return false;
+        }
+        else{
+          
+            foreach($selec as $valores){
+                $sql="DELETE FROM reservas WHERE  id=$valores";
+                $consulta=$this->conexion->prepare($sql);
+                $consulta->execute();
+                
+            }
+            return true;
+        }
+        
+        }  
+ 
+    
+
+
+   
 
 
     function modif($id){
@@ -678,6 +680,161 @@ class Crud extends Conexion{
 
     }
     /*************************************  FIN MODELO DE MIS RESERVAS   ********************************/
+
+
+
+
+
+
+
+
+
+
+    /*************************************  MODELO DE RESERVAS   ********************************/
+    
+    function borrarUnoaUnoReservas($selec){
+            
+        $sql="DELETE FROM reservas WHERE  id=$selec";
+        $consulta=$this->conexion->prepare($sql);
+        $consulta->execute();
+        return true;
+            
+    }
+
+    function borrarReservas($selec){
+      
+        if(empty($selec)){
+           
+            return false;
+        }
+        else{
+          
+            foreach($selec as $valores){
+                $sql="DELETE FROM reservas WHERE  id=$valores";
+                $consulta=$this->conexion->prepare($sql);
+                $consulta->execute();
+                
+            }
+            return true;
+        }
+        
+        }  
+ 
+    
+
+
+   
+
+
+    function modifReservas($id){
+
+         
+        $nombres="SELECT * FROM reservas WHERE id=:cod;";
+        $consulta_nombres=$this->conexion->prepare($nombres);
+        $consulta_nombres->bindParam(':cod',$id);
+        $consulta_nombres->execute();
+        $resultado_nombres=$consulta_nombres->fetchAll();
+
+        return $resultado_nombres;
+    }
+
+    function actualizarReservas($indic){
+
+        $comprobar="SELECT * FROM reservas WHERE id='".$indic[0]."';";
+		$consulta_comprobar=$this->conexion->prepare($comprobar);
+		$consulta_comprobar->execute();
+		$resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
+
+        $resultado = array_diff($resultado_comprobar, $indic);
+
+        if(empty($resultado)){
+            return 3;
+		}
+
+      
+            $comprobar="SELECT * FROM reservas WHERE fecha='".$indic[3]."' AND  idAula='".$indic[1]."' AND  hora='".$indic[6]."';";
+            $consulta_comprobar=$this->conexion->prepare($comprobar);
+            $consulta_comprobar->execute();
+            $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+            if(count($resultado_comprobar)>0){
+
+                if($resultado_comprobar[0]['idUsuario']===$_SESSION['id']){
+                    $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='reservas';";
+                $consulta_nombres=$this->conexion->prepare($nombres);
+                $consulta_nombres->execute();
+                $resultado_nombres=$consulta_nombres->fetchAll();
+                    foreach($resultado_nombres as $nombre_columna){	
+                        for($i=0;$i<count($nombre_columna)/2;$i++){
+                            $nombress[]=$nombre_columna;
+                        }
+                    }
+        
+                    for($i=0;$i<count($nombress);$i++){
+                        
+                        $sql="UPDATE reservas SET  ".$nombress[$i][0]."=:date  WHERE id=".$indic[0].";";
+                        $stmt=$this->conexion->prepare($sql);
+                        $stmt->bindParam(":date",$indic[$i]);
+                        $stmt->execute();
+                        
+                        
+                    }
+                    
+
+
+                    return true;
+                }
+
+                else{
+                    return false;
+                }
+            }
+            else{
+                $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='reservas';";
+                $consulta_nombres=$this->conexion->prepare($nombres);
+                $consulta_nombres->execute();
+                $resultado_nombres=$consulta_nombres->fetchAll();
+                    foreach($resultado_nombres as $nombre_columna){	
+                        for($i=0;$i<count($nombre_columna)/2;$i++){
+                            $nombress[]=$nombre_columna;
+                        }
+                    }
+        
+                    for($i=0;$i<count($nombress);$i++){
+                        
+                        $sql="UPDATE reservas SET  ".$nombress[$i][0]."=:date  WHERE id=".$indic[0].";";
+                        $stmt=$this->conexion->prepare($sql);
+                        $stmt->bindParam(":date",$indic[$i]);
+                        $stmt->execute();
+                        
+                        
+                    }
+                return true;
+            }      
+        
+    }
+
+    function aulasDisponiblesReservas(){
+
+        $comprobar="SELECT id FROM `aulas` WHERE habilitado = 1 GROUP BY id";
+        $consulta_comprobar=$this->conexion->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+       
+        return $resultado_comprobar;
+
+    }
+
+    function gruposDisponiblesReservas(){
+
+        $comprobar="SELECT nombre FROM `grupos` GROUP BY nombre";
+        $consulta_comprobar=$this->conexion->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+       
+        return $resultado_comprobar;
+
+    }
+    /*************************************  FIN MODELO DE RESERVAS   ********************************/
 
 
 
