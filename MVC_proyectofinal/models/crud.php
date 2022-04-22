@@ -195,7 +195,7 @@ class Crud extends Conexion{
         }
            
         // creamos el array con los días de la semana
-        $daysOfWeek = array('Lunes','Martes','Miércoles','Jueves','Viernes','Sabado','Domingo');
+        $daysOfWeek = array('Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo');
     
         // saber cual es el primer día del mes
         $firstDayOfMonth = mktime(0,0,0,$month,1,$year);
@@ -225,20 +225,20 @@ class Crud extends Conexion{
     
         //cremaos el calendario
          
-
-        $calendar = "<table class=' table table-bordered '>";
-        $calendar .= "<center><h3>$monthName $year</h3>";
+       
+        $calendar = "<table class=' table rounded table-condensed '>";
+       
         
-        $calendar.= " <a href='?c=calendario&id=".$idAula."' class='btn btn-xs btn-primary' data-month='".date('m')."' data-year='".date('Y')."'>Mes actual</a> ";
-        
-        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."' class='btn btn-xs btn-primary'>Siguiente mes ➜</a></center><br>";
+        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month-1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month-1, 1, $year))."&id=".$idAula."'><i class='bi bi-chevron-left ' style='font-size:23px; color:#212529; margin-right:5%'></i></a>";
+        $calendar .= "<h2 style='color:#1089ff;display:inline-block'>$monthName $year</h2>";
+        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."'><i class='bi bi-chevron-right ' style='font-size:23px; color:#212529; margin-left:5%'></i></a><br>";
         
 
         $calendar .= "<tr>";
     
         // Creamos las cabeceras
         foreach($daysOfWeek as $day) {
-            $calendar .= "<th  class='header'>$day</th>";
+            $calendar .= "<td  style='background-color:#1089ff; border:none; color:#feffff'>$day</td>";
         } 
         
         // creamos el resto del calendario
@@ -249,7 +249,7 @@ class Crud extends Conexion{
     
         if($dayOfWeek > 0) { 
             for($k=0;$k<$dayOfWeek;$k++){
-                $calendar .= "<td  class='empty'></td>"; 
+                $calendar .= "<td  class='empty' style='border:none;'></td>"; 
             }
         }
         
@@ -269,26 +269,28 @@ class Crud extends Conexion{
              $date2 = date('Y-m-d', strtotime("+14 day"));
              $finde= $this->esFinde($date);
              if($date<date('Y-m-d')||$date>$date2||$finde==1){
-                 $calendar.="<td><h4>$currentDay</h4> ";
+                 $calendar.="<td style='border:none;color:lightgrey'><h4>$currentDay</h4> ";
              }
              else{
-                 $calendar.="<td class='$today'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."'' class='btn btn-info btn-xs'>Horarios</a>";
+                 $calendar.="<td class='$today' style='border:none; width:fit-content' onmouseover='overStyle(this)' onmouseout='outStyle(this)'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."'' class='btn btn-info btn-xs'>Horarios</a>";
              }
              $calendar .="</td>";
              $currentDay++;
              $dayOfWeek++;
          }
          
+         
          //pintamos los ultimos dias del mes si el mes no acaba en domingo
          if ($dayOfWeek != 7) { 
             $remainingDays = 7 - $dayOfWeek;
             for($l=0;$l<$remainingDays;$l++){
-                $calendar .= "<td class='empty'></td>"; 
+                $calendar .= "<td class='empty' style='border:none;'></td>"; 
             }
          }
          
         $calendar .= "</tr>";
         $calendar .= "</table>";
+       
         return $calendar;
     }
 

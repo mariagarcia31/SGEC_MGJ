@@ -275,7 +275,7 @@ if($_SESSION['crudGrupos']==1){
 echo " </div>  <hr class='sidebar-divider'>";
 
 if($_SESSION['actualizarBBDD']==1){
-echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar Base de Datos</a>  <hr class="sidebar-divider">
+echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar</a>  <hr class="sidebar-divider">
 ';
 }else{echo"";}
   }
@@ -321,7 +321,7 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
     </li>
 </div>
    <div class="footer">
-       <p>© Copyright 2022 |Sistema de Gestión de Espacios Comunes | IES Ciudad Escolar</p>
+       <p>© Copyright 2022 | Sistema de Gestión de Espacios Comunes | IES Ciudad Escolar</p>
 </div>
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">

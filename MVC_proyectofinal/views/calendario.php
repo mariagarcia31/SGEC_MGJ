@@ -122,6 +122,19 @@
         }
 
     </style>
+<script>
+ /** Change the style **/
+ function overStyle(object){
+    object.style.backgroundColor = "#E8E8E8";
+    // Change some other properties ...
+ }
+
+ /** Restores the style **/
+ function outStyle(object){
+    object.style.backgroundColor = "white";
+    // Restore the rest ...
+ }
+</script>
 
 </head>
 <body>
@@ -138,11 +151,11 @@
    <div class="col-md-12 "> 
    <a href="?c=principal" title="Cancelar"><button type="button" class="close" style="font-size:3.5em"><i class="bi bi-arrow-return-left"><p style="font-size:small">Ver aulas</p></i></button></a>
     
-    <div id="calendario" style="width: 50%;margin-bottom:5%" class=' mx-auto'> 
+    <div id="calendario" style="width: 65%;padding:5" class=' mx-auto rounded'> 
     
     <?php if(isset($_GET['id'])){ ?>
 
-           <h1 class='mx-auto' style='color:#202020'> Reserva para el <?php echo $_GET['id'] ?></h1>
+           <h1 class='mx-auto' style='color:#202020; background-color:white;'> Reserva para el <?php echo $_GET['id'] ?></h1>
      <?php 
     }
       if(isset($_GET["month"])){
@@ -161,6 +174,7 @@
    </div> 
   </div> 
  </div> 
+
  <?php if(isset($_GET['date'])){
 
     //PARTE DE RESERVA EN LOS TRAMOS HORARIOS
@@ -174,22 +188,29 @@
 
      
 ?>
+<script type="text/javascript">
+   $(document).ready(function(){
+     var divLoc = $('#fixed').offset();
+     $('html, body').animate({scrollTop: divLoc.top}, "medium");
+ });
+ </script>
 
-
-<div class="container" style="width: 80%;">
+<div class="container" style="width: 67%;">
         <div class="row">
 
-
+        <hr style='color:lightgray'>
     <div class="col-md-12">
+    
     <h1 class='mx-auto text-center' style='color:#202020'>Horarios del día: <?php echo date('m/d/Y', strtotime($_GET["date"])); ?></h1><hr style="margin:15px !important">
-
+    
+    
     <?php if(isset($_SESSION["msg"])){ 
         echo $_SESSION["msg"];
         unset($_SESSION["msg"]);} ?>
     </div>
 
 
-<div class="tramos">
+<div class="tramos" id="fixed">
 <?php $timeslots = $this->crud->timeslots($duration, $cleanup, $start, $end); 
 
     foreach($timeslots as $ts){
@@ -200,11 +221,13 @@
         <?php if(in_array($ts, $booking)){ ?>
         <button class="btn btn-danger"><?php echo $ts; ?></button>
         <?php }else{ ?>
-        <button class="btn btn-info book" data-timeslot="<?php echo $ts; ?>"><?php echo $ts; ?></button>
+        <button class="btn btn-success book" data-timeslot="<?php echo $ts; ?>"><?php echo $ts; ?></button>
         <?php }  ?>
         </div>
     </div>
     <?php } ?>
+    
+    <h5 class='mx-auto text-center' style='margin-top:7%'><i class="bi bi-circle-fill" style='color:green'> Disponible</i><i class="bi bi-circle-fill" style='color:#df4759; margin-left:4%'> No disponible</i></h5>
     </div>
        </div>
         </div>
@@ -297,6 +320,7 @@ $(".book").click(function(){
     <!-- Page level custom scripts -->
     <script src="libs/js/demo/chart-area-demo.js"></script>
     <script src="libs/js/demo/chart-pie-demo.js"></script>
+    
 
 </body>
 
