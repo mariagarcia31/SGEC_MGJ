@@ -213,6 +213,7 @@ body {
   float: right;
   padding-right: 8px;
 }
+
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -297,11 +298,11 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
 <span class="glyphicon glyphicon-align-justify"></span>
 </span>
 <div class="cabecera-todo">
-    <a class="logoEnlace" href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img class="logo" src="libs/img/logo_ciudadescolar.jpg"></a>
+    <a class="logoEnlace" href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img class="logo" style="width:135px" src="libs/img/logo_ciudadescolar.png"></a>
     <h3 class="cabecera">Sistema de Gestión de Espacios Comunes</h3>
 </div>
 <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+        <a class="nav-link dropdown-toggle" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <h5 style="color: rgba(255, 255, 255, 0.7); display:inline-block" ><?php echo $_SESSION['nombre'];?></h5>
             <img class="img-profile rounded-circle" style="width:40px"
