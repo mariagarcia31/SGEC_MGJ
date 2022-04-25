@@ -45,7 +45,7 @@ if (isset($_POST['search'])) {
 
    echo '
 
-<div>
+<div style="margin-left:30px">
 
    ';
 
@@ -61,7 +61,7 @@ if (isset($_POST['search'])) {
 
         By passing fetched result as parameter. -->
 
-   <a href="?c=calendario&id=<?php echo $Result['id']; ?>" >
+   <a href="?c=calendario&id=<?php echo $Result['id']; ?>" style="font-size:18px">
 
    <!-- Assigning searched result in "Search box" in "search.php" file. -->
    <div>

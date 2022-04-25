@@ -613,7 +613,7 @@ function crearRoles(){
     if(isset($_POST['cancelar'])){
         header("location:?c=crudRoles&page=".$_GET["pag"]."");
     }
-    else if($_POST['dato'][0]==null || $_POST['dato'][1]==null || $_POST['dato'][2]==null || $_POST['dato'][3]==null || $_POST['dato'][4]==null ){
+    else if($_POST['dato'][0]==null || $_POST['dato'][1]==null || $_POST['dato'][2]==null || $_POST['dato'][3]==null || $_POST['dato'][4]==null ||$_POST['dato'][5]==null||$_POST['dato'][6]==null||$_POST['dato'][7]==null ){
         $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Debe rellenar todos los campos</div>";
         header("location:?c=crudRoles&page=".$_GET["pag"]."&crear=1");
     }

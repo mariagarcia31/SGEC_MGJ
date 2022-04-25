@@ -100,6 +100,12 @@ $_SESSION['cuantas']=count($result[0]);
 
 ?>
 
+<script>
+
+$(document).ready(function(){
+$("#myModal").modal();
+});
+</script>
 
 
 <div class="row" style="margin-top:5%">
@@ -127,37 +133,46 @@ $_SESSION['cuantas']=count($result[0]);
                             unset($_SESSION['vacio']);
                         }
 
-                        echo "<div style='    width: 100%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        align-content: center;'><form action='?c=crearGrupos&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
-                        
-                        echo '<tr>';
-                echo '<th> id</th>';
-                echo '<th> nombre</th>';
-                echo '<th> departamento</th>';
-                ;
+                        echo  
+        '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title" id="exampleModalLongTitle">Crear grupo</h3>
+                </div>
+                <div class="modal-body">';
+        
+                echo "<form action='?c=crearGrupos&pag=".$_GET['page']."' method='post'>";
                
-
-                echo '</tr>';
-                echo '<tr>';
-                echo "<td><input type='number' name='dato[]' style='width:210px'></input></td>";
-                echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
-                echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
-               
-               
-
-                echo '</tr>';
-
-                                echo "</table>";
-                        echo "<input class='btn btn-primary'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
-                        echo "<input  class='btn btn-danger'type='submit'  name='cancelar' value='Cancelar'></input>";
+                                        
+                                
+                echo '<div class="form-group">
+                    <label for="">ID</label>';
+                    echo "<input class='form-control' type='number'  name='dato[]' value='' required></input>";
+                    echo '</div>';
                 
-                        echo "</form></div>";
-
+                    echo '<div class="form-group">
+                    <label for="">Nombre</label>';
+                    echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
+                    echo '</div>';
+                                    
+                                                
+                                          
+                    echo '<div class="form-group">
+                    <label for="">Departamento</label>';
+                    echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
+                    echo '</div>';
+                  
+                    echo '<div class="modal-footer">';
+                    echo "<input class='btn btn-primary' type='submit'  name='agregar-ult' value='Crear'></input> ";
+                    echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
+                    echo '</div>';
+                    echo "</form>";
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
                     }
-
 
 
                     
@@ -167,44 +182,69 @@ $_SESSION['cuantas']=count($result[0]);
                     
                             $resu=$this->crud->modifGrupos($id);
 
-                            
-
-                            echo "<div id='container' style='    width: 100%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            align-content: center;' ><form action='?c=modificarGrupos&pag=".$_GET['page']."' method='post' ><table class='table table-striped bg-white ' style='margin-top:2%'>";
+                            echo  
+                        '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h3 class="modal-title" id="exampleModalLongTitle">Modificar grupo</h3>
+                                </div>
+                                <div class="modal-body">';
+                        
+                            echo "<form action='?c=modificarGrupos&pag=".$_GET['page']."' method='post'>";
                             if(isset($_SESSION['vacio'])){
                                 echo $_SESSION['vacio'];
                                 unset($_SESSION['vacio']);
                             }
-                            echo '<tr>';
-                            echo '<th> id</th>';
-                            echo '<th> nombre</th>';
-                            echo '<th> departamento</th>';
-                            
-                            echo '</tr>';
-                            echo '<tr>';
-                            
+                                                    
                             foreach($resu as $nombre_columna){
-                                for($i=0;$i<count($nombre_columna)/2;$i++){
-                                   if($i===1||$i===2){
-                                    echo "<th><input type='text'  name='dato[]' value='".$nombre_columna[$i]."' style='width:150px'></input></th>";
-                    
-                                   }
-                                  
-                                    else{
-                                      
-                                        echo "<th ><input type='number' name='dato[]' value='".$nombre_columna[$i]."' style='width:75px'></input></th>";
-
-                                    }
+                            for($i=0;$i<count($nombre_columna)/2;$i++){
+                                if($i==0){
+                                echo '<div class="form-group">
+                                    <label for="">ID</label>';
+                                    echo "<input class='form-control' type='number' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                    echo '</div>';
                                 }
+                                elseif($i==1){
+                                    echo '<div class="form-group">
+                                    <label for="">Nombre</label>';
+                                    echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                    echo '</div>';
+
+                                    
                             }
-                            echo '</tr></table>';
-                            echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input>  ";
+
+                                elseif($i==2){
+                                    echo '<div class="form-group">
+                                    <label for="">Departamento</label>';
+                                    echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                    echo '</div>';
+                                    }
+
+                                
+
+                                
+                                
+                                
+
+                                
+                                    
+                            }
+                            }
+                            
+                            echo '<div class="modal-footer">';
+                            echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
                             echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
-                    
-                            echo "</form></div>";
+                            echo '</div>';
+                            echo "</form>";
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                                                    
+                     
+                                                
+                                                
                             
                         };
                         

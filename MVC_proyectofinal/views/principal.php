@@ -130,7 +130,7 @@
 
         </div>
         <div class="row ">
-        <div class="col-9 mx-auto" style="display: flex;align-items: center;justify-content: center; margin-top:-2%">
+        <div class="col-9 mx-auto" style="display: flex;align-items: center;justify-content: center; margin-top:-2%; margin-bottom:100px">
                 <a style="border-radius:100%;"  href="#carouselExampleIndicators2" role="button" data-slide="prev" style="width:100%;">
                 <i class="bi bi-chevron-left " style="font-size:30px; color:#212529;"></i>
                 </a>
