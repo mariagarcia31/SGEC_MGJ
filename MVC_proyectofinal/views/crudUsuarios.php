@@ -46,7 +46,7 @@ if($count[0]==0){
                 echo '<th> id</th>';
                 echo '<th> nombre</th>';
                 echo '<th> correo</th>';
-                echo '<th> contra</th>';
+               // echo '<th> contra</th>';
                 echo '<th> confirmacion</th>';
                 echo '<th> rol</th>';
                
@@ -56,7 +56,7 @@ if($count[0]==0){
                 echo "<td><input type='number' name='dato[]' style='width:210px'></input></td>";
                 echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
                 echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
-                echo "<td><input type='text' name='dato[]' style='width:80px'></input></td>";
+              //  echo "<td><input type='text' name='dato[]' style='width:80px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                
@@ -169,14 +169,20 @@ $("#myModal").modal();
                                         echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                         echo '</div>';
                                       
-                                            echo '<div class="form-group">
+                                           echo '<div class="form-group">
                                             <label for="">Contraseña</label>';
                                             echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                             echo '</div>';
                                          
                                             echo '<div class="form-group">
                                         <label for="">Confirmación</label>';
-                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
+                                        echo "<select name='dato[]' class='form-control' required>";
+
+                                        echo "  <option value='0' selected>No</option>
+                                        <option value='1' >Si</option>";
+                                       
+                                 
+                                    echo "</select>";
                                         echo '</div>';
                                            
                                                 echo '<div class="form-group">
@@ -264,12 +270,18 @@ $("#myModal").modal();
                                         echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                                         echo '</div>';
                                         }
-                            
+                    
                                        elseif($i==4){
                                         echo '<div class="form-group">
-                                    <label for="">Confirmación</label>';
-                                    echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
-                                    echo '</div>';
+                                        <label for="">Confirmación</label><select name="dato[]" class="form-control" required>';
+                                        if($nombre_columna[$i]==0){
+                                            echo "  <option value='0' selected>No</option>
+                                            <option value='1' >Si</option>";
+                                        }else{
+                                            echo "  <option value='0' >No</option>
+                                            <option value='1' selected>Si</option>";
+                                        }
+                                        echo "</select></div>";
                                         }
                         
                                         else if($i==5){
@@ -337,9 +349,11 @@ $("#myModal").modal();
         foreach($result[0] as $indice=>$dato){
         
             foreach($dato as $x=>$y){
-        
+                
+                    echo "<td>".$y."</td>";
+
+                
             
-                echo "<td>".$y."</td>";
                 
                 //$vivienda=new Vivienda($y);
                 //$i=new Vivienda($dato["id"],$dato["tipo"],$dato["zona"],$dato["direccion"],$dato["ndormitorios"],$dato["tamano"],$dato["precio"]);           

@@ -283,6 +283,8 @@ echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arro
   
 
 echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle"></i>  Ayuda</a>
+<hr class="sidebar-divider">
+<a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-gear"></i>  Configuración</a>
 </div>
 ';
 ?>
