@@ -168,19 +168,19 @@ $("#myModal").modal();
                                                    
                                                            echo '<div class="form-group">
                                                             <label for="">ID</label>';
-                                                            echo "<input class='form-control' type='number'  name='dato[]' value='' required></input>";
+                                                            echo "<input class='form-control' type='number'  name='dato[]' value='' ></input>";
                                                             echo '</div>';
                                                           
                                                             echo '<div class="form-group">
                                                             <label for="">Nombre</label>';
-                                                            echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
+                                                            echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                                             echo '</div>';
                                                 
                                                             
                                                       
                                                             echo '<div class="form-group">
                                                             <label for="">Crud roles</label>';
-                                                            echo "<select name='dato[]' class='form-control' required>
+                                                            echo "<select name='dato[]' class='form-control' >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";
@@ -188,7 +188,7 @@ $("#myModal").modal();
                                                           
                                                                 echo '<div class="form-group">
                                                                 <label for="">Crud usuarios</label>';
-                                                                echo "<select name='dato[]' class='form-control' required>
+                                                                echo "<select name='dato[]' class='form-control' >
                                                                 <option value='0' selected>No</option>
                                                                 <option value='1' selected>Si</option>
                                                                 </select>";                                                                
@@ -196,7 +196,7 @@ $("#myModal").modal();
                                                              
                                                                 echo '<div class="form-group">
                                                             <label for="">Crud aulas</label>';
-                                                            echo "<select name='dato[]' class='form-control' required>
+                                                            echo "<select name='dato[]' class='form-control' >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";                                                            
@@ -204,7 +204,7 @@ $("#myModal").modal();
                                                                
                                                             echo '<div class="form-group">
                                                             <label for="">Crud reservas</label>';
-                                                            echo "<select name='dato[]' class='form-control' required>
+                                                            echo "<select name='dato[]' class='form-control' >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";                                                            
@@ -212,7 +212,7 @@ $("#myModal").modal();
                                                             
                                                             echo '<div class="form-group">
                                                             <label for="">Crud grupos</label>';
-                                                            echo "<select name='dato[]' class='form-control' required>
+                                                            echo "<select name='dato[]' class='form-control' >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";                                                            
@@ -221,7 +221,7 @@ $("#myModal").modal();
                                                            
                                                             echo '<div class="form-group">
                                                             <label for="">Actualizar BBDD</label>';
-                                                            echo "<select name='dato[]' class='form-control' required>
+                                                            echo "<select name='dato[]' class='form-control' >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";                                                           

@@ -154,34 +154,34 @@ $("#myModal").modal();
                                
                                        echo '<div class="form-group">
                                         <label for="">ID</label>';
-                                        echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                         echo '</div>';
                                       
                                         echo '<div class="form-group">
                                         <label for="">Nombre</label>';
-                                        echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                         echo '</div>';
                             
                                         
                                   
                                         echo '<div class="form-group">
                                         <label for="">Correo</label>';
-                                        echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                         echo '</div>';
                                       
                                             echo '<div class="form-group">
                                             <label for="">Contraseña</label>';
-                                            echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
+                                            echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                             echo '</div>';
                                          
                                             echo '<div class="form-group">
                                         <label for="">Confirmación</label>';
-                                        echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                         echo '</div>';
                                            
                                                 echo '<div class="form-group">
                                                 <label for="">Rol</label>';
-                                                echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
+                                                echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                                 echo '</div>';
                                             
                                             

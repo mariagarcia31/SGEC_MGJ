@@ -478,7 +478,13 @@ function crearAulas(){
         header("location:?c=crudAulas&page=".$_GET["pag"]."");
     }
     else if($_POST['dato'][0]==null || $_POST['dato'][1]==null || $_POST['dato'][2]==null || $_POST['dato'][3]==null || $_POST['dato'][4]==null ){
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Debe rellenar todos los campos</div>";
+        $_SESSION["vacio"]="  <script>    Swal.fire({
+            icon: 'warning',
+            title: 'Debe rellenar todos los campos',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>
+    ";
         header("location:?c=crudAulas&page=".$_GET["pag"]."&crear=1");
     }
     else{
@@ -614,7 +620,13 @@ function crearRoles(){
         header("location:?c=crudRoles&page=".$_GET["pag"]."");
     }
     else if($_POST['dato'][0]==null || $_POST['dato'][1]==null || $_POST['dato'][2]==null || $_POST['dato'][3]==null || $_POST['dato'][4]==null ||$_POST['dato'][5]==null||$_POST['dato'][6]==null||$_POST['dato'][7]==null ){
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Debe rellenar todos los campos</div>";
+        $_SESSION["vacio"]="  <script>    Swal.fire({
+            icon: 'warning',
+            title: 'Debe rellenar todos los campos',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>
+    ";
         header("location:?c=crudRoles&page=".$_GET["pag"]."&crear=1");
     }
     else{
@@ -751,7 +763,13 @@ function crearUsuarios(){
         header("location:?c=crudUsuarios&page=".$_GET["pag"]."");
     }
     else if($_POST['dato'][0]==null || $_POST['dato'][1]==null || $_POST['dato'][2]==null || $_POST['dato'][3]==null || $_POST['dato'][4]==null || $_POST['dato'][5]==null ){
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Debe rellenar todos los campos</div>";
+        $_SESSION["vacio"]="  <script>    Swal.fire({
+            icon: 'warning',
+            title: 'Debe rellenar todos los campos',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>
+    ";
         header("location:?c=crudUsuarios&page=".$_GET["pag"]."&crear=1");
     }
     else{
@@ -886,10 +904,18 @@ function modificarGrupos(){
 function crearGrupos(){
     //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
     if(isset($_POST['cancelar'])){
+        unset($_SESSION["modificar"]);
+
         header("location:?c=crudGrupos&page=".$_GET["pag"]."");
     }
     else if($_POST['dato'][0]==null || $_POST['dato'][1]==null || $_POST['dato'][2]==null){
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Debe rellenar todos los campos</div>";
+        $_SESSION["vacio"]="  <script>    Swal.fire({
+            icon: 'warning',
+            title: 'Debe rellenar todos los campos',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>
+    ";
         header("location:?c=crudGrupos&page=".$_GET["pag"]."&crear=1");
     }
     else{
