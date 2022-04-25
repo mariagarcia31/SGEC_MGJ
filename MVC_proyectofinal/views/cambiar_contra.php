@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="libs/cssc/login&check.css">
 
     <title>Cambio de Contraseña</title>
-  
+    <?php include "menu.php";
+    
+    echo "<style>.menu{display:none}</style>";
+    ?>
 </head>
 
 <body>

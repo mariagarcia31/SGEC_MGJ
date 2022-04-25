@@ -1220,12 +1220,11 @@ class Crud extends Conexion{
                 $id = $indic[0];
 				$nombre = $indic[1];
 				$correo =$indic[2];
-				$contra = $indic[3];
 				$confirmacion = $indic[4];
                 $rol = $indic[5];
 				
 
-				
+				$contra = $indic[3];
                 $comprobar="INSERT INTO  usuarios VALUES ($id,'$nombre','$correo','$contra',$confirmacion, $rol);";
                 $consulta_comprobar=$this->conexion->prepare($comprobar);
                 $consulta_comprobar->execute();
