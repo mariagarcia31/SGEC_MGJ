@@ -230,7 +230,7 @@ class Crud extends Conexion{
         
         
         $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month-1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month-1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-left' style='font-size:30px; color:#212529;'></i></a>";   
-        $calendar .= "<h3 style='display:inline-block;margin-left:2%; margin-right:2%;font-size:30px; color:#EC5800'>$monthName $year</h3>";
+        $calendar .= "<h3 style='display:inline-block;margin-left:2%; margin-right:2%;font-size:30px; color:#cb4f24'>$monthName $year</h3>";
         $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-right' style='font-size:30px;color:#212529;'></i></a><br>";
         
 
@@ -238,7 +238,7 @@ class Crud extends Conexion{
     
         // Creamos las cabeceras
         foreach($daysOfWeek as $day) {
-            $calendar .= "<th  class='header' style='border:none; background-color:#EC5800; color:white'>$day</th>";
+            $calendar .= "<th  class='header' style='border:none; background-color:#cb4f24; color:white'>$day</th>";
         } 
         
         // creamos el resto del calendario
@@ -272,7 +272,7 @@ class Crud extends Conexion{
                  $calendar.="<td><h4 style='color:#D8D8D8'>$currentDay</h4> ";
              }
              else{
-                 $calendar.="<td class='$today' onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."'' class='btn btn-xs' style='background-color:#EC5800;color:white' >Horarios</a>";
+                 $calendar.="<td class='$today' onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."'' class='btn btn-xs' style='background-color:#cb4f24;color:white' >Horarios</a>";
              }
              $calendar .="</td>";
              $currentDay++;

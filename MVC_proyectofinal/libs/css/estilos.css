@@ -18,11 +18,11 @@
     text-align: center;
 }
 .card-header{
-    background-color: #2FA4FF!important;}
+    background-color: #cb4f24!important;}
 .btn-info {
     color: white !important;
-    background-color: #2FA4FF!important;
-    border-color: #2FA4FF!important;
+    background-color: #cb4f24!important;
+    border-color: #cb4f24!important;
 }
 
 .btn-info:hover{
@@ -57,9 +57,7 @@ table.datos{
 a.paginacion:hover{
     cursor:pointer
 }
-.bg-info{
-    background-color:none !important
-}
+
 
 th{
     text-align: center !important;
