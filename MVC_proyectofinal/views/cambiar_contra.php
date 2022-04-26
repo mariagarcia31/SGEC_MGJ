@@ -26,7 +26,7 @@
                 <button>Confirmar</button>
             </form>
             <?php if(isset($_SESSION["error2"])){ ?>     
-                 <div class='alert alert-danger'><?php echo $_SESSION["error2"];?></div>                     
+                 <div class='alert  '><?php echo $_SESSION["error2"];?></div>                     
             <?php   unset($_SESSION["error2"]);
     
         }?>

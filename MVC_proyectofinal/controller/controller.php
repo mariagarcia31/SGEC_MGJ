@@ -148,7 +148,7 @@ class Control{
             
         }else{
 
-            $_SESSION["msg"]="<div class='alert alert-danger'>Ya reservado</div>";
+            $_SESSION["msg"]="<div class='alert  '>Ya reservado</div>";
             header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id'].""); 
         }
        
@@ -219,7 +219,7 @@ class Control{
     }
 
     function modificar(){
-        //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
+        //echo "<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
         if(isset($_POST['cancelar'])){
             unset($_SESSION["modificar"]);
             header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
@@ -230,7 +230,7 @@ class Control{
 
         if($resultado===3){
             
-            $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> No se ha cambiado ningún campo</div>";
+            $_SESSION["vacio"]="<div class='alert  ' id='alerta'> No se ha cambiado ningún campo</div>";
             
             header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
         }
@@ -247,7 +247,7 @@ class Control{
             unset($_SESSION["modificar"]);
             header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
         }else{
-            $_SESSION["error2"]="<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
+            $_SESSION["error2"]="<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
             header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
 
         }
@@ -286,7 +286,7 @@ function borrarReservas(){
             header("location:?c=crudReservas&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert alert-danger'>No se ha seleccionado ninguna reserva para eliminar</div>";
+            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ninguna reserva para eliminar</div>";
             header("location:?c=crudReservas&page=".$_GET["pag"]."");
         }
     
@@ -319,7 +319,7 @@ function borrarReservas(){
 }
 
 function modificarReservas(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
     if(isset($_POST['cancelar'])){
         unset($_SESSION["modificar"]);
         header("location:?c=crudReservas&page=".$_GET["pag"]."");
@@ -404,7 +404,7 @@ function borrarAulas(){
             header("location:?c=crudAulas&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert alert-danger'>No se ha seleccionado ningún aula para eliminar</div>";
+            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningún aula para eliminar</div>";
             header("location:?c=crudAulas&page=".$_GET["pag"]."");
         }
     
@@ -437,7 +437,7 @@ function borrarAulas(){
 }
 
 function modificarAulas(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
     if(isset($_POST['cancelar'])){
         unset($_SESSION["modificar"]);
         header("location:?c=crudAulas&page=".$_GET["pag"]."");
@@ -462,7 +462,7 @@ function modificarAulas(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> No se ha cambiado ningún campo</div>";
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> No se ha cambiado ningún campo</div>";
         
         header("location:?c=crudAulas&page=".$_GET["pag"]."");
     }
@@ -473,7 +473,7 @@ function modificarAulas(){
 
 
 function crearAulas(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
     if(isset($_POST['cancelar'])){
         header("location:?c=crudAulas&page=".$_GET["pag"]."");
     }
@@ -507,7 +507,7 @@ function crearAulas(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Ya existe un aula con ese nombre</div>";
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe un aula con ese nombre</div>";
         
         header("location:?c=crudAulas&page=".$_GET["pag"]."&crear=1");
     }
@@ -545,7 +545,7 @@ function borrarRoles(){
             header("location:?c=crudRoles&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert alert-danger'>No se ha seleccionado ningún Rol para eliminar</div>";
+            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningún Rol para eliminar</div>";
             header("location:?c=crudRoles&page=".$_GET["pag"]."");
         }
     
@@ -578,7 +578,7 @@ function borrarRoles(){
 }
 
 function modificarRoles(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y Role</div>";
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y Role</div>";
     if(isset($_POST['cancelar'])){
         unset($_SESSION["modificar"]);
         header("location:?c=crudRoles&page=".$_GET["pag"]."");
@@ -604,7 +604,7 @@ function modificarRoles(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> No se ha cambiado ningún campo</div>";
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> No se ha cambiado ningún campo</div>";
         
         header("location:?c=crudRoles&page=".$_GET["pag"]."");
     }
@@ -615,7 +615,7 @@ function modificarRoles(){
 
 
 function crearRoles(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
     if(isset($_POST['cancelar'])){
         header("location:?c=crudRoles&page=".$_GET["pag"]."");
     }
@@ -649,7 +649,7 @@ function crearRoles(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Ya existe un rol con ese nombre</div>";
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe un rol con ese nombre</div>";
         
         header("location:?c=crudRoles&page=".$_GET["pag"]."&crear=1");
     }
@@ -688,7 +688,7 @@ function borrarUsuarios(){
             header("location:?c=crudUsuarios&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert alert-danger'>No se ha seleccionado ningún usuario para eliminar</div>";
+            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningún usuario para eliminar</div>";
             header("location:?c=crudUsuarios&page=".$_GET["pag"]."");
         }
     
@@ -721,7 +721,7 @@ function borrarUsuarios(){
 }
 
 function modificarUsuarios(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y Usuarioe</div>";
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y Usuarioe</div>";
     if(isset($_POST['cancelar'])){
         unset($_SESSION["modificar"]);
         header("location:?c=crudUsuarios&page=".$_GET["pag"]."");
@@ -747,7 +747,7 @@ function modificarUsuarios(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> No se ha cambiado ningún campo</div>";
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> No se ha cambiado ningún campo</div>";
         
         header("location:?c=crudUsuarios&page=".$_GET["pag"]."");
     }
@@ -758,7 +758,7 @@ function modificarUsuarios(){
 
 
 function crearUsuarios(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
     if(isset($_POST['cancelar'])){
         header("location:?c=crudUsuarios&page=".$_GET["pag"]."");
     }
@@ -792,7 +792,7 @@ function crearUsuarios(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Ya existe un usuario con ese nombre</div>";
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe un usuario con ese nombre</div>";
         
         header("location:?c=crudUsuarios&page=".$_GET["pag"]."&crear=1");
     }
@@ -832,7 +832,7 @@ function borrarGrupos(){
             header("location:?c=crudGrupos&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert alert-danger'>No se ha seleccionado ningún grupo para eliminar</div>";
+            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningún grupo para eliminar</div>";
             header("location:?c=crudGrupos&page=".$_GET["pag"]."");
         }
     
@@ -865,7 +865,7 @@ function borrarGrupos(){
 }
 
 function modificarGrupos(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y Usuarioe</div>";
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y Usuarioe</div>";
     if(isset($_POST['cancelar'])){
         unset($_SESSION["modificar"]);
         header("location:?c=crudGrupos&page=".$_GET["pag"]."");
@@ -891,7 +891,7 @@ function modificarGrupos(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> No se ha cambiado ningún campo</div>";
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> No se ha cambiado ningún campo</div>";
         
         header("location:?c=crudGrupos&page=".$_GET["pag"]."");
     }
@@ -902,7 +902,7 @@ function modificarGrupos(){
 
 
 function crearGrupos(){
-    //echo "<div class='alert alert-danger'>Ya existe una reserva con este día, hora y aula</div>";
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
     if(isset($_POST['cancelar'])){
         unset($_SESSION["modificar"]);
 
@@ -938,7 +938,7 @@ function crearGrupos(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert alert-danger' id='alerta'> Ya existe un grupo con ese nombre</div>";
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe un grupo con ese nombre</div>";
         
         header("location:?c=crudGrupos&page=".$_GET["pag"]."&crear=1");
     }
