@@ -227,18 +227,18 @@ class Crud extends Conexion{
          
 
         $calendar = "<table class=' table table-bordered '>";
-        $calendar .= "<center><h3>$monthName $year</h3>";
         
-        $calendar.= " <a href='?c=calendario&id=".$idAula."' class='btn btn-xs btn-primary' data-month='".date('m')."' data-year='".date('Y')."'>Mes actual</a> ";
         
-        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."' class='btn btn-xs btn-primary'>Siguiente mes ➜</a></center><br>";
+        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month-1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month-1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-left' style='font-size:30px; color:#212529;'></i></a>";   
+        $calendar .= "<h3 style='display:inline-block;margin-left:2%; margin-right:2%;font-size:30px; color:#EC5800'>$monthName $year</h3>";
+        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-right' style='font-size:30px;color:#212529;'></i></a><br>";
         
 
         $calendar .= "<tr>";
     
         // Creamos las cabeceras
         foreach($daysOfWeek as $day) {
-            $calendar .= "<th  class='header'>$day</th>";
+            $calendar .= "<th  class='header' style='border:none; background-color:#EC5800; color:white'>$day</th>";
         } 
         
         // creamos el resto del calendario
@@ -269,10 +269,10 @@ class Crud extends Conexion{
              $date2 = date('Y-m-d', strtotime("+14 day"));
              $finde= $this->esFinde($date);
              if($date<date('Y-m-d')||$date>$date2||$finde==1){
-                 $calendar.="<td><h4>$currentDay</h4> ";
+                 $calendar.="<td><h4 style='color:#D8D8D8'>$currentDay</h4> ";
              }
              else{
-                 $calendar.="<td class='$today'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."'' class='btn btn-info btn-xs'>Horarios</a>";
+                 $calendar.="<td class='$today' onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."'' class='btn btn-xs' style='background-color:#EC5800;color:white' >Horarios</a>";
              }
              $calendar .="</td>";
              $currentDay++;
