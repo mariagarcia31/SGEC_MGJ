@@ -301,7 +301,7 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
 </span>
 <div class="cabecera-todo">
     <a class="logoEnlace" href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img class="logo" style="    width: 175px;
-    height: 85px;" src="libs/img/logo_ciudadescolar.png"></a>
+    height: 60px;" src="libs/img/logo_ciudadescolar.png"></a>
     <h3 class="cabecera">Sistema de Gestión de Espacios Comunes</h3>
 </div>
 <li class="nav-item dropdown no-arrow">

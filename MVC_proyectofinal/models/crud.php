@@ -279,7 +279,8 @@ class Crud extends Conexion{
              }
 
              else{
-                 $calendar.="<td class='$today' onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."'' class='btn btn-xs' style='background-color:#cb4f24;color:white' >Horarios</a>";
+                 
+                 $calendar.="<td class='$today' onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."&month=$month&year=$year' class='btn btn-xs' style='background-color:#cb4f24;color:white' >Horarios</a>";
              }
              $calendar .="</td>";
              $currentDay++;
@@ -386,7 +387,7 @@ class Crud extends Conexion{
                  }
 
                 else{
-                    $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4></h4> <a href='?c=calendarioSemanal&date=".$fecha."&id=".$idAula."&hora=".$hora."' class='btn btn-success btn-xs' >Reservar</a></td>";
+                    $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4></h4> <a href='?c=calendarioSemanal&date=".$fecha."&id=".$idAula."&hora=".$hora."&week=".$week."&year=".$year."' class='btn btn-success btn-xs' >Reservar</a></td>";
 
                 }
 
