@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-04-2022 a las 00:24:38
+-- Tiempo de generación: 30-04-2022 a las 00:19:15
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -75,10 +75,32 @@ CREATE TABLE `aulas` (
 --
 
 INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`) VALUES
+('Aula 100', 'Pabellon 3, Planta baja, Puerta 4ª', 'tv, ordenadores', 30, 1),
 ('Aula 515', 'Pabellón 5, Planta 1ª, Puerta 1ª', 'Mesas, Sillas', 30, 0),
 ('Aula 700', 'Pabellon 3', 'Tv', 70, 1),
 ('Aula 815', 'Pabellón 10, Planta 2ª, Puerta 1ª', 'Tv, Ordenadores, Sillas, Mesas', 30, 1),
 ('Aula Polivalente', 'Pabellón 10, Planta 1ª, Puerta 1ª', 'Mesas, Sillas, Pizarras', 70, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `festivos`
+--
+
+CREATE TABLE `festivos` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `Nombre` varchar(100) DEFAULT NULL,
+  `fechaInicio` date NOT NULL,
+  `fechaFinal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `festivos`
+--
+
+INSERT INTO `festivos` (`id`, `Nombre`, `fechaInicio`, `fechaFinal`) VALUES
+(1, 'Semana Santa', '2022-04-04', '2022-04-18'),
+(2, 'Día del Trabajador', '2022-05-02', '2022-05-02');
 
 -- --------------------------------------------------------
 
@@ -124,7 +146,29 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(136, 'Aula 815', 1, '2022-04-27', 'DAW 2', 'Charla', '08:30AM - 09:30AM', '2022-04-22 21:53:57');
+(142, 'Aula 100', 1, '2022-04-26', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-26 20:25:00'),
+(143, 'Aula 100', 1, '2022-04-26', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-26 20:27:28'),
+(144, 'Aula 100', 1, '2022-04-29', 'DAW 1', 'Examen', '09:30AM - 10:30AM', '2022-04-26 20:30:48'),
+(145, 'Aula 100', 1, '2022-04-29', 'DAM 1', 'Charla', '13:30PM - 14:30PM', '2022-04-29 16:04:01'),
+(146, 'Aula 100', 1, '2022-05-04', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-29 16:48:05'),
+(147, 'Aula 100', 1, '2022-05-06', 'DAM 1', 'Charla', '11:30AM - 12:30AM', '2022-04-29 16:55:14'),
+(148, 'Aula 100', 1, '2022-05-05', 'DAM 1', 'Charla', '11:30AM - 12:30AM', '2022-04-29 18:19:59'),
+(149, 'Aula Polivalente', 1, '2022-05-03', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-29 21:26:44'),
+(150, 'Aula Polivalente', 1, '2022-05-03', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 21:27:25'),
+(151, 'Aula Polivalente', 1, '2022-05-03', 'DAM 2', 'Charla', '10:30AM - 11:30AM', '2022-04-29 21:29:57'),
+(152, 'Aula Polivalente', 1, '2022-05-09', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-29 21:30:38'),
+(153, 'Aula Polivalente', 1, '2022-05-13', 'DAW 2', 'Charla', '13:30PM - 14:30PM', '2022-04-29 21:36:20'),
+(154, 'Aula 100', 1, '2022-05-13', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 21:51:16'),
+(155, 'Aula 100', 1, '2022-05-13', 'DAW 1', 'Charla', '10:30AM - 11:30AM', '2022-04-29 22:08:06'),
+(156, 'Aula 100', 1, '2022-05-13', 'DAW 1', 'Charla', '11:30AM - 12:30AM', '2022-04-29 22:10:51'),
+(157, 'Aula 100', 1, '2022-05-13', 'DAM 2', 'Charla', '08:30AM - 09:30AM', '2022-04-29 22:11:07'),
+(158, 'Aula 100', 1, '2022-05-13', 'DAM 1', 'Charla', '12:30AM - 13:30PM', '2022-04-29 22:14:38'),
+(159, 'Aula 100', 1, '2022-05-13', 'DAM 1', 'Charla', '13:30PM - 14:30PM', '2022-04-29 22:14:44'),
+(160, 'Aula Polivalente', 1, '2022-05-06', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 22:16:07'),
+(161, 'Aula Polivalente', 1, '2022-05-04', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-29 22:17:01'),
+(162, 'Aula Polivalente', 1, '2022-05-04', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 22:18:22'),
+(163, 'Aula Polivalente', 1, '2022-05-06', 'DAM 1', 'Charla', '13:30PM - 14:30PM', '2022-04-29 22:18:29'),
+(164, 'Aula 700', 1, '2022-05-11', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 22:18:41');
 
 -- --------------------------------------------------------
 
@@ -171,8 +215,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contra`, `confirmacion`, `rol`) VALUES
-(1, 'Maria', 'maria@hotmail.com', '12345', 1, 1),
-(2, 'jossue', 'jossue@hotmail.com', '1234', 1, 2);
+(1, 'Maria', 'maria@gmail.com', '12345', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -182,6 +225,12 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contra`, `confirmacion`, `rol
 -- Indices de la tabla `aulas`
 --
 ALTER TABLE `aulas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `festivos`
+--
+ALTER TABLE `festivos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -218,6 +267,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `festivos`
+--
+ALTER TABLE `festivos`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
@@ -227,7 +282,7 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -249,12 +304,12 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  ADD CONSTRAINT `id_reserva_aula` FOREIGN KEY (`idAula`) REFERENCES `aulas` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  ADD CONSTRAINT `id_reserva_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,;
+  ADD CONSTRAINT `id_reserva_aula` FOREIGN KEY (`idAula`) REFERENCES `aulas` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `id_reserva_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_id_rol` FOREIGN KEY (`rol`) REFERENCES `roles` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,;
+  ADD CONSTRAINT `fk_id_rol` FOREIGN KEY (`rol`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 COMMIT;

@@ -33,6 +33,10 @@ class Control{
         include_once ("views/calendario.php");
     }
 
+    function calendarioSemanal(){
+        include_once ("views/calendarioSemanal.php");
+    }
+
     function crudMisReservas(){
         include_once ("views/crudMisReservas.php");
     }
@@ -144,6 +148,7 @@ class Control{
                 showConfirmButton: false,
                 timer: 1500
               });</script>";
+              
             header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id'].""); 
             
         }else{
@@ -154,6 +159,35 @@ class Control{
        
 
     }
+
+    function reservaSemanal(){
+
+
+        $resultado=$this->crud->reservar($_SESSION['id'],$_POST['grupo'],$_POST['motivo'],$_POST['timeslot'],$_GET['id'],$_GET['date']);
+
+        if($resultado){
+
+            $_SESSION["msg"]=" 
+        
+
+            <script>    Swal.fire({
+                icon: 'success',
+                title: 'Reserva realizada con éxito',
+                showConfirmButton: false,
+                timer: 1500
+              });</script>";
+              
+            header("location:?c=calendarioSemanal&id=".$_GET['id'].""); 
+            
+        }else{
+
+            $_SESSION["msg"]="<div class='alert  '>Ya reservado</div>";
+            header("location:?c=calendarioSemanal&id=".$_GET['id'].""); 
+        }
+       
+
+    }
+    
     
     /******************************   CONTROLADOR MIS RESERVAS  ********************************/
     function borrar(){

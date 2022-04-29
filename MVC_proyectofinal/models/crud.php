@@ -233,6 +233,8 @@ class Crud extends Conexion{
         $calendar .= "<h3 style='display:inline-block;margin-left:2%; margin-right:2%;font-size:30px; color:#cb4f24'>$monthName $year</h3>";
         $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-right' style='font-size:30px;color:#212529;'></i></a><br>";
         
+        $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week' style='font-size:15px;color:white;'> Vista semanal</i></button></a><br><br>";
+
 
         $calendar .= "<tr>";
     
@@ -268,9 +270,14 @@ class Crud extends Conexion{
              $today = $date==date('Y-m-d')? "today" : "";
              $date2 = date('Y-m-d', strtotime("+14 day"));
              $finde= $this->esFinde($date);
-             if($date<date('Y-m-d')||$date>$date2||$finde==1){
+             $festivo= $this->esFestivo($date);
+             if($festivo){
+                $calendar.="<td><h4 style='color:#B8B8B8'>Festivo<br>$festivo</h4></td> ";
+            }
+             else if($date<date('Y-m-d')||$date>$date2||$finde==1){
                  $calendar.="<td><h4 style='color:#D8D8D8'>$currentDay</h4> ";
              }
+
              else{
                  $calendar.="<td class='$today' onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."'' class='btn btn-xs' style='background-color:#cb4f24;color:white' >Horarios</a>";
              }
@@ -289,6 +296,117 @@ class Crud extends Conexion{
          
         $calendar .= "</tr>";
         $calendar .= "</table>";
+        return $calendar;
+    }
+
+    function build_calendar_semanal(){
+
+        $dt = new DateTime;
+        if (isset($_GET['year']) && isset($_GET['week'])) {
+            $dt->setISODate($_GET['year'], $_GET['week']);
+        } else {
+            $dt->setISODate($dt->format('o'), $dt->format('W'));
+        }
+        $year = $dt->format('o');
+        $week = $dt->format('W');
+        $horarios=array('08:30AM - 09:30AM', '09:30AM - 10:30AM', '10:30AM - 11:30AM', '11:30AM - 12:30AM', '12:30AM - 13:30PM', '13:30PM - 14:30PM');              
+        $daysOfWeek = array('Lunes','Martes','Miércoles','Jueves','Viernes','Sabado','Domingo');
+        $dateTime=$dt;
+        $dateTime->setISODate($year,$week);
+        $primerDiaSemana=$dateTime->format('Y-m-d');
+
+        if(isset($_GET['id'])){
+            $idAula=$_GET['id'];
+        }
+           
+        
+        $calendar = "<table class=' table table-bordered'>";
+        
+        
+        
+        $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."&week=".($week-1)."&year=".$year."'><i class='bi bi-chevron-left' style='font-size:30px; color:#212529;'></i></a>";   
+        $calendar .= "<h3 style='display:inline-block;margin-left:2%; margin-right:2%;font-size:30px; color:#cb4f24'>Semana del $primerDiaSemana</h3>";
+        $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."&week=".($week+1)."&year=".$year."'><i class='bi bi-chevron-right' style='font-size:30px;color:#212529;'></i></a><br>";
+        $calendar.= "<a href='?c=calendario&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week' style='font-size:15px;color:white;'> Vista mensual</i></button></a><br><br>";
+
+
+        $calendar .= "<tr>";
+        $calendar .= "<th  class='header' style='border:none; background-color:#cb4f24; color:white'>Horarios</th>";
+        
+        $hoy = date('Y-m-d');
+        
+        $maximoDiasSiguientes = date('Y-m-d', strtotime("+14 day"));
+
+
+
+        // Creamos las cabeceras
+        foreach($daysOfWeek as $day) {
+            $fecha = $dt->format('Y-m-d');
+            $calendar .= "<th class='header' style='border:none; background-color:#cb4f24; color:white'>$day<br><h5>$fecha</h5></th>";
+            $dt->modify('+1 day');
+        } 
+        $dt = new DateTime;
+        if (isset($_GET['year']) && isset($_GET['week'])) {
+            $dt->setISODate($_GET['year'], $_GET['week']);
+        } else {
+            $dt->setISODate($dt->format('o'), $dt->format('W'));
+        }
+    $dt->setISODate($dt->format('o'), $dt->format('W'));
+    $week = $dt->format('W');
+ 
+        $calendar .= "</tr>";
+
+        
+        foreach($horarios as $hora) {
+
+            $calendar.="<tr><td><h4>$hora</h4></td> ";
+
+            while ($week == $dt->format('W')){
+
+                $fecha = $dt->format('Y-m-d');
+                $finde= $this->esFinde($fecha);
+                $festivo= $this->esFestivo($fecha);
+                $booking=$this->seteaDate2($_GET['id'],$fecha);
+
+                if($festivo){
+                    $calendar.="<td><h5 style='color:#B8B8B8'>Festivo<br>$festivo</h5></td> ";
+                }
+
+                else if($fecha<$hoy||$fecha>$maximoDiasSiguientes||$finde==1){
+                    $calendar.="<td><h4 style='color:#D8D8D8'></h4></td> ";
+                }
+
+
+                else if(in_array($hora, $booking[0])){
+
+                    $clave = array_search($hora, $booking[0]);
+    
+                    $calendar.="<td><h4 class='btn btn-danger btn-xs' disabled>Reservado<br>Prof. ".$booking[1][$clave]."</h4></td> ";
+                    
+                 }
+
+                else{
+                    $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4></h4> <a href='?c=calendarioSemanal&date=".$fecha."&id=".$idAula."&hora=".$hora."' class='btn btn-success btn-xs' >Reservar</a></td>";
+
+                }
+
+                $dt->modify('+1 day');
+            
+            } 
+    
+            $calendar.="</tr>";
+            
+                $dt = new DateTime;
+                if (isset($_GET['year']) && isset($_GET['week'])) {
+                    $dt->setISODate($_GET['year'], $_GET['week']);
+                } else {
+                    $dt->setISODate($dt->format('o'), $dt->format('W'));
+                }
+            $dt->setISODate($dt->format('o'), $dt->format('W'));
+            $week = $dt->format('W');
+        }
+        $calendar .= "</table>";
+        
         return $calendar;
     }
 
@@ -332,8 +450,10 @@ class Crud extends Conexion{
      
     }
     function seteaDate2($id,$fecha){
-
+        $datos = array();
         $bookings = array();
+        $nombres = array();
+       
         $sql="SELECT * from reservas where idAula = :id AND fecha = :fecha";
         $consulta=$this->conexion->prepare($sql);
         $consulta->bindParam(":id",$id);
@@ -347,10 +467,51 @@ class Crud extends Conexion{
                foreach($consult as $x){
 
                     $bookings[]= $x["hora"];
-               }            
+                    $idReservaUsuario=$x["idUsuario"];
+                    $comprobar="SELECT nombre FROM `usuarios` WHERE id = '$idReservaUsuario'";
+                    $consulta_comprobar=$this->conexion->prepare($comprobar);
+                    $consulta_comprobar->execute();
+                    $resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
+                    $nombres[]= $resultado_comprobar['nombre'];
+                   
+               }      
+               
             }
+             
         }
-        return $bookings;
+        $datos[0]=$bookings;
+        $datos[1]=$nombres;
+        return $datos;
+    }
+
+    function esFestivo($date){
+
+        $comprobar="SELECT nombre, fechaInicio, fechaFinal FROM festivos GROUP BY nombre;";
+        $consulta_comprobar=$this->conexion->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+        $fechaComparar = strtotime($date);
+
+        foreach($resultado_comprobar as $festivo){
+
+            
+            $inicioFestivo = strtotime($festivo['fechaInicio']);
+            $finalFesitvo = strtotime($festivo['fechaFinal']);
+
+            if($fechaComparar==$inicioFestivo||$fechaComparar==$finalFesitvo){
+            return $festivo['nombre'];
+            
+            }
+
+            else if($fechaComparar>$inicioFestivo and $fechaComparar<$finalFesitvo){
+
+                return $festivo['nombre'];
+            }
+
+           
+
+        }
+        
     }
    
 
