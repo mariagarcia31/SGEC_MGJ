@@ -32,7 +32,7 @@
 }
 
 .link-info {
-  color: #0dcaf0;
+  color: # ;
 }
 .link-info:hover, .link-info:focus {
   color: #3dd5f3;
@@ -476,7 +476,7 @@
 }
 
 .border-info {
-  border-color: #0dcaf0 !important;
+  border-color: #  !important;
 }
 
 .border-warning {
