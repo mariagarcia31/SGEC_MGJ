@@ -81,10 +81,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
     margin-left: 5px;
   }
   
-  .accordion.active:after {
-    content: "\2212";
-  }
-  
+
   .panel {
     padding: 0 18px;
     background-color: white;
