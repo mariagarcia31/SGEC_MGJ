@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-lg navbar-light" style="background: #212529;justify-content: left;">
         <div>
             <a href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank" class="navbar-brand" style="display:inline-block;">
-                <img src="libs/img/logo_ciudadescolar.png" height="50" width="135" style="border-radius:1px; margin-left:5%;display:inline-block;" alt="CoolBrand">
+                <img src="libs/img/logo_ciudadescolar.png" height="70" width="140" style="border-radius:1px; margin-left:5%;display:inline-block;" alt="CoolBrand">
             </a>
             <h4 style="color:rgba(255, 255, 255, 0.9); display:inline-block;"> Sistema de Gestión de Espacios Comunes</h4>
         </div>
