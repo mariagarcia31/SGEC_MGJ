@@ -632,7 +632,7 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT * FROM usuarios ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+            $sql="SELECT id, correo FROM usuarios ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -1437,51 +1437,44 @@ class Crud extends Conexion{
 	}
 
     function cargarUsuarios(){
-
-        $open = fopen('libs/usuarios.csv','r');
-        while (!feof($open)){
-            $getTextLine = fgets($open);
-            $explodeLine = explode(",",$getTextLine);
-            list($nombre,$primerApellido,$segundoApellido,$usuario,$correo,$puesto) = $explodeLine;
-            $qry = "SELECT * from usuarios where correo='".$correo."' ; ";
-            $consulta= $this->conexion->prepare($qry);
-            $consulta->execute();
-            $resultado_nombres=$consulta->fetchAll();
-            if($resultado_nombres==null){
-                $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, puesto,contra, confirmacion, rol) values('$nombre','$correo','$primerApellido','$segundoApellido','$usuario','$puesto','$usuario','0','2'); ";
-                $consulta=$this->conexion->prepare($qry);
+        
+        $filename=$_FILES["file"]["name"];
+        $info = new SplFileInfo($filename);
+        $extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);
+      
+         if($extension == 'csv'){
+            $filename = $_FILES['file']['tmp_name'];
+            $open = fopen($filename, "r");
+            while (!feof($open)){
+                $getTextLine = fgets($open);
+                $explodeLine = explode(",",$getTextLine);
+                list($nombre,$primerApellido,$segundoApellido,$usuario,$correo,$puesto) = $explodeLine;
+                $qry = "SELECT * from usuarios where correo='".$correo."' ; ";
+                $consulta= $this->conexion->prepare($qry);
                 $consulta->execute();
+                $resultado_nombres=$consulta->fetchAll();
+                if($resultado_nombres==null){
+                    $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, puesto,contra, confirmacion, rol) values('$nombre','$correo','$primerApellido','$segundoApellido','$usuario','$puesto','$usuario','0','2'); ";
+                    $consulta=$this->conexion->prepare($qry);
+                    $consulta->execute();
 
-                echo "<script>    Swal.fire({
-                    icon: 'success',
-                    title: 'Usuarios cargados con éxito',
-                    showConfirmButton: false,
-                    timer: 1500
-                  });</script>"; 
-                return true;
-                
-            }else{
-    
+                   return true;  
+
+                    
+                }else{
+                    echo "error";
+                }
             }
-    
+        
             
         }
         fclose($open);
         if($resultado_nombres==null){
-        echo "<script>    Swal.fire({
-            icon: 'success',
-            title: 'Usuarios cargados con éxito',
-            showConfirmButton: false,
-            timer: 1500
-          });</script>";
+        return true;     
+
         }
         else{
-            echo "<script>    Swal.fire({
-                icon: 'success',
-                title: 'Los usuarios no registrados se han registrado con éxito',
-                showConfirmButton: false,
-                timer: 1500
-              });</script>";
+            return true;
     
         }
     

@@ -77,7 +77,27 @@ class Control{
     }
 
     function cargarUsuarios(){
+           if(isset($_POST["enviar"])){
             $result=$this->crud->cargarUsuarios();
+           }
+           if(isset($_POST["cancelar"])){
+            header("location:?c=crudUsuarios&page=".$_GET['page']."");     
+           }
+
+           if($result){
+            $_SESSION["exito"]=" 
+        
+
+            <script>    Swal.fire({
+                icon: 'success',
+                title: 'Usuarios cargados con éxito',
+                showConfirmButton: false,
+                timer: 1500
+              });</script>";
+              
+            header("location:?c=crudUsuarios&page=".$_GET['pag'].""); 
+            
+           }
         
     }
 
@@ -218,7 +238,8 @@ class Control{
                     title: 'Reserva eliminada con éxito',
                     showConfirmButton: false,
                     timer: 1500
-                  });</script>";                $cuantos=count($_POST["eliminar"]);
+                  });</script>";                
+                  $cuantos=count($_POST["eliminar"]);
                 if($_SESSION['cuantas']==$cuantos){
                     header("location:?c=crudMisReservas&page=".$_GET["pag"]-1 ."");
                 }
