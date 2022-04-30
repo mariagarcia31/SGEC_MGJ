@@ -640,7 +640,7 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT id, correo FROM usuarios ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+            $sql="SELECT id, nombre, primerApellido, segundoApellido, usuario, correo, puesto, confirmacion, rol FROM usuarios ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -1422,15 +1422,18 @@ class Crud extends Conexion{
 			}
             
 			else{
-                $id = $indic[0];
 				$nombre = $indic[1];
 				$correo =$indic[2];
-				$confirmacion = $indic[4];
-                $rol = $indic[5];
+                $primerApellido=$indic[3];
+                $segundoApellido=$indic[4];
+                $usuario=$indic[5];
+                $puesto=$indic[6];
+                $contra=$indic[7];
+				$confirmacion = $indic[8];
+                $rol = $indic[9];
 				
 
-				$contra = $indic[3];
-                $comprobar="INSERT INTO  usuarios VALUES ($id,'$nombre','$correo','$contra',$confirmacion, $rol);";
+                $comprobar="INSERT INTO  usuarios VALUES (null,'$nombre','$correo','$primerApellido','$segundoApellido','$usuario','$puesto','$contra','$confirmacion', '$rol');";
                 $consulta_comprobar=$this->conexion->prepare($comprobar);
                 $consulta_comprobar->execute();
                 

@@ -113,10 +113,8 @@ $("#myModal").modal();
         }
                                 
                                
-                                       echo '<div class="form-group">
-                                        <label for="">ID</label>';
-                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
-                                        echo '</div>';
+                                  
+                                        echo "<input class='form-control' type='hidden'  name='dato[]' value='null' ></input>";
                                       
                                         echo '<div class="form-group">
                                         <label for="">Nombre</label>';
@@ -129,7 +127,22 @@ $("#myModal").modal();
                                         <label for="">Correo</label>';
                                         echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                         echo '</div>';
-                                      
+                                        echo '<div class="form-group">
+                                        <label for="">Primer Apellido</label>';
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
+                                        echo '</div>';
+                                        echo '<div class="form-group">
+                                        <label for="">Segundo apellido</label>';
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
+                                        echo '</div>';
+                                        echo '<div class="form-group">
+                                        <label for="">Usuario</label>';
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
+                                        echo '</div>';
+                                        echo '<div class="form-group">
+                                        <label for="">Puesto</label>';
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
+                                        echo '</div>';
                                            echo '<div class="form-group">
                                             <label for="">Contraseña</label>';
                                             echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
@@ -224,15 +237,36 @@ $("#myModal").modal();
                                     echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                                     echo '</div>';
                                     }
-                        
                                     elseif($i==3){
                                         echo '<div class="form-group">
-                                        <label for="">Contraseña</label>';
+                                        <label for="">Primer apellido</label>';
                                         echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                                         echo '</div>';
                                         }
+                                        elseif($i==4){
+                                            echo '<div class="form-group">
+                                            <label for="">segundo apellido</label>';
+                                            echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                            echo '</div>';
+                                    }elseif($i==5){
+                                      echo '<div class="form-group">
+                                        <label for="">Usuario</label>';
+                                          echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                         echo '</div>';
+                                    }
+                                    elseif($i==6){
+                                        echo '<div class="form-group">
+                                        <label for="">Puesto</label>';
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                        echo '</div>';
+                                        }
+                                    elseif($i==7){
+                                      
+                                        echo "<input class='form-control' type='hidden'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                     
+                                        }
                     
-                                       elseif($i==4){
+                                       elseif($i==8){
                                         echo '<div class="form-group">
                                         <label for="">Confirmación</label><select name="dato[]" class="form-control" required>';
                                         if($nombre_columna[$i]==0){
@@ -245,7 +279,7 @@ $("#myModal").modal();
                                         echo "</select></div>";
                                         }
                         
-                                        else if($i==5){
+                                        else if($i==9){
                                             echo '<div class="form-group">
                                             <label for="">Rol</label>';
                                             echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
