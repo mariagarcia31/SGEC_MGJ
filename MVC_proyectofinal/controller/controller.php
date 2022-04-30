@@ -76,7 +76,10 @@ class Control{
         include_once ("views/logout.php");
     }
 
-   
+    function cargarUsuarios(){
+            $result=$this->crud->cargarUsuarios();
+        
+    }
 
 
 

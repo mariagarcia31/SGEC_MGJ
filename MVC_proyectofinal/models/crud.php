@@ -1436,7 +1436,38 @@ class Crud extends Conexion{
 			
 	}
 
+    function cargarUsuarios(){
+
+        $open = fopen('libs/usuarios.csv','r');
+        while (!feof($open)){
+            $getTextLine = fgets($open);
+            $explodeLine = explode(",",$getTextLine);
+            list($nombre,$primerApellido,$segundoApellido,$usuario,$correo,$puesto) = $explodeLine;
+            $qry = "SELECT * from usuarios where correo='".$correo."' ; ";
+            $consulta= $this->conexion->prepare($qry);
+            $consulta->execute();
+            $resultado_nombres=$consulta->fetchAll();
+            if($resultado_nombres==null){
+                $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, puesto,contra, confirmacion, rol) values('$nombre','$correo','$primerApellido','$segundoApellido','$usuario','$puesto','$usuario','0','2'); ";
+                $consulta=$this->conexion->prepare($qry);
+                $consulta->execute();
+            }else{
     
+            }
+    
+            
+        }
+        fclose($open);
+        if($resultado_nombres==null){
+        echo "<div class='alerta' id='mensaje'>Contactos cargados</div>";
+        }
+        else{
+            echo "<div class='alerta' id='mensaje'>Contactos ya registrados anteriormente</div>";
+    
+        }
+    
+    
+}
 
      /*************************************  FIN MODELO DE USUARIOS   ********************************/
 

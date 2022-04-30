@@ -16,6 +16,8 @@ $(document).ready(function(){
 <body>
 
 <?php include "menu.php";
+echo  "<form class='contactos' action='?c=cargarUsuarios&pag=".$_GET['page']."' method='post'><input type='submit' name='cargar' value='Cargar Contactos'>
+<input type='submit' class='cerrar' name='cerrar' value='  '></form>";
 
 
 $count=$this->crud->crudUsuarios(1);
