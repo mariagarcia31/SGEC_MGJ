@@ -55,10 +55,11 @@ if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
             <form class="login-form" action="?c=verificar" method="post">
                 <input type="email"  name="correo" placeholder="Correo" required>
                <input type="password" name="contrasena" placeholder="Contraseña" required>
-          <div class="recordar" style="width:100%; display:flex;    align-items: center;">
-               <br><label style="width:80%; margin-bottom:20px">Recordar contraseña</label>
-               <input style="width:5%" type="checkbox" name="recordar" value="recordar">
-               <br></div>
+  
+               <div class="custom-control custom-checkbox text-start">
+               <input type="checkbox" class="custom-control-input" id="checkbox-1" name="recordar" value="recordar" style="width:5%" > 
+               <label class="custom-control-label" for="checkbox-1">Recordar contraseña</label>
+        </div>
                 <button >Entrar</button>
             </form>
             <?php if(isset($_SESSION["error"])){ ?>     
