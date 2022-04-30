@@ -45,7 +45,7 @@ if (isset($_POST['search'])) {
 
    echo '
 
-<div style="margin-left:30px">
+   <ul class="list-group">
 
    ';
 
@@ -61,14 +61,14 @@ if (isset($_POST['search'])) {
 
         By passing fetched result as parameter. -->
 
-   <a href="?c=calendario&id=<?php echo $Result['id']; ?>" style="font-size:18px">
+   <a href="?c=calendario&id=<?php echo $Result['id']; ?>" style="font-size:18px;">
 
    <!-- Assigning searched result in "Search box" in "search.php" file. -->
-   <div>
+   <li class="list-group-item"  >
        <?php echo $Result['id']; ?>
        
 
-   </div></a>
+       </li></a>
 
    <!-- Below php code is just for closing parenthesis. Don't be confused. -->
 
@@ -79,4 +79,4 @@ if (isset($_POST['search'])) {
 
 ?>
 
-</div>
+</ul> 

@@ -48,14 +48,14 @@
 
   
   
-  
+
 
 <section class="pt-5 pb-5 mt-5 ml-5">
 
     <div class="container">
         
         <div class="row">
-        <?php include "barraBusqueda/barra.php"; ?>
+       <?php include "barraBusqueda/barra.php"; ?>
            
             <div class="col-12" >
             

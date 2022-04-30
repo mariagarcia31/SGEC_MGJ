@@ -94,7 +94,7 @@
 
 <body>
     <div class="container">
-        <h2>FaQ</h2>
+        <h2>Preguntas más frecuentes</h2>
 
         <div class="tab">
         <button class="tablinks" onclick="openFaqs(event, 'reservar')" id="defaultOpen">Reservas</button>
@@ -105,8 +105,10 @@
         <div id="reservar" class="tabcontent">
             <button class="accordion">¿Cómo realizar una reserva?</button>
             <div class="panel">
-            <p>Para realizar una reserva dirigete a menu>Reservar. <br> Elíge el aula que quieres reservar y se te mostrará un calnedario mensual con los días disponibles
-                para reservar (puedes cambiar a vista semanal), elíge el día y tramo horario y rellena el formulario de reserva. Listo!</p>
+            <li>Para realizar una reserva, debes dirigirte a Menu > Reservar</li>
+            <li>Elíge el aula que quieres reservar y se te mostrará un calendario mensual con los días disponibles
+                para reservar (puedes cambiar a vista semanal)</li> 
+            <li>Elíge el día y tramo horario y rellena el formulario de reserva. ¡Listo, has realizado una reserva!</li>
             </div>
 
             <button class="accordion">¿Cómo cambiar a la vista mensual/vista semanal?</button>
