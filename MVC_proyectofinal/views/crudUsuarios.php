@@ -421,7 +421,7 @@ echo "<br>";
 //listado
 
 ?>
-<nav aria-label="..." class="contenedor-paginador" >
+<nav aria-label="..." class="contenedor-paginador" style="margin-bottom:100px" >
   <ul class="pagination pagination-mg justify-content-center">
 
 <?php
