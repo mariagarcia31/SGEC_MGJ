@@ -223,14 +223,14 @@ $("#myModal").modal();
                                 elseif($i==2){
                                     echo '<div class="form-group">
                                     <label for="">Fecha inicio</label>';
-                                    echo "<input class='form-control' type='date'  name='dato[]' value='".$nombre_columna[$i]."' ></input>";
+                                    echo "<input class='form-control' id='date1' type='date'  name='dato[]' value='".$nombre_columna[$i]."' ></input>";
                                     echo '</div>';
                                     
                                     }
                                     elseif($i==3){
                                         echo '<div class="form-group">
                                     <label for="">Fecha fin</label>';
-                                    echo "<input class='form-control' type='date'  name='dato[]' value='".$nombre_columna[$i]."' ></input>";
+                                    echo "<input class='form-control' id='date2' type='date'  name='dato[]' value='".$nombre_columna[$i]."' ></input>";
                                     echo '</div>';
                                     }
 
@@ -360,6 +360,33 @@ for($i=1;$i<=$total_pages;$i++){
 ?>
   </ul>
 </nav>
+<script>
 
+
+
+const picker = document.getElementById('date2');
+picker.addEventListener('input', function(e){
+  const fechainicio = document.getElementById("date1").value;
+  const fechafin = document.getElementById("date2").value;
+    const date1 = new Date(fechainicio);
+    const date2 = new Date(fechafin);
+
+if (date1>date2){
+    e.preventDefault();
+    this.value = '';
+    swal({
+        title: "La fecha de inicio debe ser inferior a la fecha final.",
+          text: "",
+          type: "warning",
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Entendido'
+
+        });  
+}
+  
+});
+
+</script>
 </body>
 </html>

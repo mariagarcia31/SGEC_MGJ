@@ -1668,14 +1668,19 @@ function crearFestivos($indic){
             $fechainicio =$indic[2];
            
             $fechafin =$indic[2];
-            
+            if($fechainicio<$fechafin){
+                echo "no";
+            }
+            else{
+                $comprobar="INSERT INTO  festivos VALUES ($id,'$nombre','$fechainicio','$fechafin');";
+                $consulta_comprobar=$this->conexion->prepare($comprobar);
+                $consulta_comprobar->execute();
+                
+                return true;
+            }
 
             
-            $comprobar="INSERT INTO  festivos VALUES ($id,'$nombre','$fechainicio','$fechafin');";
-            $consulta_comprobar=$this->conexion->prepare($comprobar);
-            $consulta_comprobar->execute();
-            
-            return true;
+
 
             
         
