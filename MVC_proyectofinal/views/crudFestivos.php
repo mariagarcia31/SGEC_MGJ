@@ -55,8 +55,8 @@ if($count[0]==0){
                 echo '<tr>';
                 echo "<td><input type='number' name='dato[]' style='width:210px'></input></td>";
                 echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
-                echo "<td><input type='date' name='dato[]' style='width:220px'></input></td>";
-                echo "<td><input type='date' name='dato[]' style='width:220px'></input></td>";
+                echo "<td><input type='date' id='date1' name='dato[]' style='width:220px'></input></td>";
+                echo "<td><input type='date' id='date2' name='dato[]' style='width:220px'></input></td>";
 
                
 
@@ -163,11 +163,11 @@ $("#myModal").modal();
                                           
                     echo '<div class="form-group">
                     <label for="">Fecha inicio</label>';
-                    echo "<input class='form-control' type='date'  name='dato[]' value='' ></input>";
+                    echo "<input class='form-control' id='date1' type='date'  name='dato[]' value='' ></input>";
                     echo '</div>';
                     echo '<div class="form-group">
                     <label for="">Fecha fin</label>';
-                    echo "<input class='form-control' type='date'  name='dato[]' value='' ></input>";
+                    echo "<input class='form-control' id='date2' type='date'  name='dato[]' value='' ></input>";
                     echo '</div>';
                     echo '<div class="modal-footer">';
                     echo "<input class='btn btn-primary' type='submit'  name='agregar-ult' value='Crear'></input> ";
