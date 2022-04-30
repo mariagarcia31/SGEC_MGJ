@@ -38,6 +38,10 @@ include "menu.php"?>
     
 }
 
+.active, .accordion:hover {
+    background-color: white; 
+}
+
 
     </style>
 </head>
