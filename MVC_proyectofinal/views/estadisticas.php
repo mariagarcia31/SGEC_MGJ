@@ -140,6 +140,14 @@ chart3.render();
 <body>
 
 <?php include "menu.php";?>
+<?php if(isset($_POST['fechaInicio'])){?>
+    <script type="text/javascript">
+   $(document).ready(function(){
+     var divLoc = $('#chartContainer4').offset();
+     $('html, body').animate({scrollTop: divLoc.top}, "medium");
+ });
+ </script>
+ <?php }else{}?>
 <div class="container mt-5">
 
 
@@ -197,7 +205,7 @@ chart3.render();
             </div>
         </form>
 
-        <div style="height: 250px; width: 100%;">
+        <div id="chartContainer4" style="height: 250px; width: 100%;">
         <?php 
 
         if(isset($_POST['fechaInicio'])){
