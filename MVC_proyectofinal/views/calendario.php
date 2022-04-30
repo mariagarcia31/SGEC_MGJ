@@ -59,6 +59,7 @@
             }
             
         }
+
         @media screen and (max-width:890px){
             td{
                 padding:0px;

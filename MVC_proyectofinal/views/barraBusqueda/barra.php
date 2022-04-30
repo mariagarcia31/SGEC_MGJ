@@ -4,6 +4,7 @@
 
    <script type="text/javascript">
       //Getting value from "ajax.php".
+      
 
 
  $(document).ready(function() {
@@ -75,18 +76,12 @@
 
 <!-- Search box. -->
 <div class="col-12" style="margin-left:15px">
-<i class="bi bi-search" style="    font-size: 20px;
-    padding-right: 10px;"></i><input type="text" id="search" placeholder="Buscar por nombre..."  style="    width: 30%; font-size:18px"/>
-
-   <br>
-
-   
-
-   <br />
+<i class="bi bi-search" style="font-size: 20px;padding-right: 10px;"></i>
+<input type="text" id="search" placeholder="Buscar por nombre..."  style="width: 30%; font-size:18px"/>
 
    <!-- Suggestions will be displayed in below div. -->
 
-   <div id="displaySearch"></div>
+   <div id="displaySearch" style="width: 20%;position:fixed;z-index:9999;margin-left:30px"></div>
 </div>
 
 
