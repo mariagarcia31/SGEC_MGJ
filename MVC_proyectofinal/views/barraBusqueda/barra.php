@@ -82,7 +82,7 @@
 </div>
    <!-- Suggestions will be displayed in below div. -->
 
-   <div id="displaySearch" style="width: 18%;position:fixed;z-index:9999;margin-left:30px"></div>
+   <div id="displaySearch" style="width: 18%;position:fixed;z-index:90;margin-left:30px"></div>
 </div>
 
 

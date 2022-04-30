@@ -60,7 +60,7 @@
   height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
+  z-index: 999; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #212529; /* Black*/
@@ -261,7 +261,7 @@ body {
 </head>
 <body>
 
-<div id="mySidenav" class="sidenav" style="z-index:8">
+<div id="mySidenav" class="sidenav" style="z-index:999">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a class="btn-menu btn-menu-reservar" href="?c=principal&page=1"><i class="bi bi-calendar-plus"></i>  Reservar</a>
   <hr class='sidebar-divider'>
