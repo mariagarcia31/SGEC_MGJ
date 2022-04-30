@@ -195,10 +195,10 @@ chart3.render();
             <div class="form-row mx-auto border pb-4 rounded">
                 
                 <h3 style="display:inline-block;margin-left: 3%;">Desde: </h3>
-                <input type="date" class="form-control" style="width:25%;display:inline-block;margin-left: 1%;" placeholder="Desde" name="fechaInicio" required>
+                <input type="date" id="date1" class="form-control" style="width:25%;display:inline-block;margin-left: 1%;" placeholder="Desde" name="fechaInicio" required>
                 
                 <h3 style="display:inline-block;margin-left: 3%;">Hasta: </h3>
-                <input type="date" class="form-control"style="width:25%;display:inline-block;margin-left: 1%;" placeholder="Hasta" name="fechaFinal" required>
+                <input type="date" id="date2" class="form-control"style="width:25%;display:inline-block;margin-left: 1%;" placeholder="Hasta" name="fechaFinal" required>
                 
                 <button type="submit" class="btn btn-primary" style="margin-left:3%"><i class="bi bi-search"></i> Buscar</button>
                 
@@ -226,6 +226,34 @@ chart3.render();
 
 </div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+
+
+
+const picker = document.getElementById('date2');
+picker.addEventListener('input', function(e){
+  const fechainicio = document.getElementById("date1").value;
+  const fechafin = document.getElementById("date2").value;
+    const date1 = new Date(fechainicio);
+    const date2 = new Date(fechafin);
+
+if (date1>date2){
+    e.preventDefault();
+    this.value = '';
+    swal({
+        title: "La fecha de inicio debe ser inferior a la fecha final.",
+          text: "",
+          type: "warning",
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Entendido'
+
+        });  
+}
+  
+});
+
+</script>
 
 </body>
 </html>
