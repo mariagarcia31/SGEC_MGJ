@@ -1451,6 +1451,15 @@ class Crud extends Conexion{
                 $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, puesto,contra, confirmacion, rol) values('$nombre','$correo','$primerApellido','$segundoApellido','$usuario','$puesto','$usuario','0','2'); ";
                 $consulta=$this->conexion->prepare($qry);
                 $consulta->execute();
+
+                echo "<script>    Swal.fire({
+                    icon: 'success',
+                    title: 'Usuarios cargados con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });</script>"; 
+                return true;
+                
             }else{
     
             }
@@ -1459,10 +1468,20 @@ class Crud extends Conexion{
         }
         fclose($open);
         if($resultado_nombres==null){
-        echo "<div class='alerta' id='mensaje'>Contactos cargados</div>";
+        echo "<script>    Swal.fire({
+            icon: 'success',
+            title: 'Usuarios cargados con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>";
         }
         else{
-            echo "<div class='alerta' id='mensaje'>Contactos ya registrados anteriormente</div>";
+            echo "<script>    Swal.fire({
+                icon: 'success',
+                title: 'Los usuarios no registrados se han registrado con éxito',
+                showConfirmButton: false,
+                timer: 1500
+              });</script>";
     
         }
     
