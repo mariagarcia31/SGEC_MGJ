@@ -33,33 +33,36 @@ try{
         array_push($dataPoints2, array("label"=> $row->Familia, "y"=> $row->Cantidad));
     }
 
-    if(isset($_POST['fechaInicio'])){
-
-        $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad' from reservas WHERE fecha >= '2022-04-26' AND fecha <= '2022-04-26';"); 
-        $handle->execute(); 
-        $result = $handle->fetchAll(\PDO::FETCH_OBJ);
-    
-        foreach($result as $row){
-            array_push($dataPoints2, array("label"=> $row->Familia, "y"=> $row->Cantidad));
-        }
-    }
-
-    else{
 
         
-        $handle = $link->prepare("
+    $handle = $link->prepare("
         select CONCAT(DATE_FORMAT(fecha, '%M', 'es_ES'), ' ', year(fecha)) AS 'Mes',count(id) AS 'Cantidad'
         from reservas
         group by year(fecha),month(fecha)
         order by year(fecha),month(fecha);"); 
                                     
-        $handle->execute(); 
-        $result = $handle->fetchAll(\PDO::FETCH_OBJ);
+    $handle->execute(); 
+    $result = $handle->fetchAll(\PDO::FETCH_OBJ);
     
-        foreach($result as $row){
+    foreach($result as $row){
             array_push($dataPoints3, array("y"=> $row->Cantidad, "label"=> $row->Mes));
         }
-    }
+
+
+    if(isset($_POST['fechaInicio'])){
+
+        $fechaInicio=$_POST['fechaInicio'];
+        $fechaFinal=$_POST['fechaFinal'];
+
+            $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad' from reservas WHERE fecha >= '$fechaInicio' AND fecha <= '$fechaFinal';"); 
+            $handle->execute(); 
+            $result = $handle->fetchAll(PDO::FETCH_ASSOC);
+        
+            
+        }
+    
+        else{}  
+    
 
 
 	$link = null;
@@ -85,9 +88,7 @@ window.onload = function() {
 var chart = new CanvasJS.Chart("chartContainer1", {
 	theme: "light1",
 	animationEnabled: true,
-	title: {
-		text: "Número de reservas por Aula"
-	},
+	
 	data: [{
 		type: "doughnut",
 		indexLabel: "{label} - {y}",
@@ -102,9 +103,7 @@ chart.render();
 var chart2 = new CanvasJS.Chart("chartContainer2", {
 	theme: "light1",
 	animationEnabled: true,
-	title: {
-		text: "Número de reservas por Familia Profesional"
-	},
+	
 	data: [{
 		type: "doughnut",
 		indexLabel: "{label} - {y}",
@@ -122,9 +121,7 @@ chart2.render();
 var chart3 = new CanvasJS.Chart("chartContainer3", {
 	animationEnabled: true,
 	theme: "light2",
-	title: {
-		text: "Número de reservas por mes"
-	},
+	
 	axisY: {
 		title: "Reservas (por mes)"
 	},
@@ -144,17 +141,81 @@ chart3.render();
 
 <?php include "menu.php";?>
 <div class="container mt-5">
-<div class="row rounded p-5 mx-auto" style="border:5px solid #212529; margin-bottom:10%;width:90%;">
-<div id="chartContainer1" style="height: 370px; width: 100%;"></div>
-</div>
 
-<div class="row rounded p-5 mx-auto" style="border:5px solid #212529; margin-bottom:10%; width:90%;">
-<div id="chartContainer2" style="height: 370px; width: 100%;"></div>
-</div>
 
-<div class="row rounded p-5 mx-auto" style="border:5px solid #212529; margin-bottom:10%; width:90%;">
-<div id="chartContainer3" style="height: 370px; width: 100%;"></div>
-</div>
+    <div class="row rounded  mx-auto p-3" style="border:5px solid #212529; margin-bottom:10%;width:100%;">
+
+        <div class="rounded" style="background-color:#212529;margin-bottom:3%;">
+            <h1 class="text-center" style="color:#F0F0F0" >Número de reservas por Aula</h1>
+        </div>
+
+        <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+    </div>
+
+
+
+    <div class="row rounded  mx-auto p-3" style="border:5px solid #212529; margin-bottom:10%;width:100%;">
+
+        <div class="rounded"  style="background-color:#212529;margin-bottom:3%;">
+            <h1 class="text-center" style="color:#F0F0F0" >Número de reservas por Grupo Profesional</h1>
+        </div>
+
+        <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+    </div>
+
+
+
+    <div class="row rounded  mx-auto p-3" style="border:5px solid #212529; margin-bottom:10%;width:100%;">
+
+        <div  class="rounded" style="background-color:#212529;margin-bottom:3%;">
+            <h1 class="text-center" style="color:#F0F0F0" >Número de reservas por Mes</h1>
+        </div>
+
+        <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+    </div>
+
+
+
+
+    <div class="row rounded  mx-auto p-3" style="border:5px solid #212529; margin-bottom:10%;width:100%;">
+
+        <div class="rounded" style="background-color:#212529;margin-bottom:3%;">
+            <h1 class="text-center" style="color:#F0F0F0" >Número de reservas entre dos fechas </h1>
+        </div>
+        
+        <form class="mx-auto" method="post" action="">
+            <div class="form-row mx-auto border pb-4 rounded">
+                
+                <h3 style="display:inline-block;margin-left: 3%;">Desde: </h3>
+                <input type="date" class="form-control" style="width:25%;display:inline-block;margin-left: 1%;" placeholder="Desde" name="fechaInicio" required>
+                
+                <h3 style="display:inline-block;margin-left: 3%;">Hasta: </h3>
+                <input type="date" class="form-control"style="width:25%;display:inline-block;margin-left: 1%;" placeholder="Hasta" name="fechaFinal" required>
+                
+                <button type="submit" class="btn btn-primary" style="margin-left:3%"><i class="bi bi-search"></i> Buscar</button>
+                
+            </div>
+        </form>
+
+        <div style="height: 250px; width: 100%;">
+        <?php 
+
+        if(isset($_POST['fechaInicio'])){
+            echo "<b><h1 class='text-center'style='margin-top:5%;'>";
+            print_r($result[0]['Cantidad']);
+            echo " Reservas";
+            echo "</h1></b>";
+            echo "<h3 class='text-center'> Desde el ".$_POST['fechaInicio']." hasta el ".$_POST['fechaFinal'];
+            echo "</h3>";
+
+        }
+        else{}
+        
+        ?>
+    
+        </div>
+    </div>
+
 </div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
