@@ -276,8 +276,10 @@ if($_SESSION['crudGrupos']==1){
 echo " </div>  <hr class='sidebar-divider'>";
 
 if($_SESSION['actualizarBBDD']==1){
-echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar</a>  <hr class="sidebar-divider">
-';
+echo '  <a class="btn-menu" href="?c=estadisticas"><i class="bi bi-bar-chart-line"></i> Estadísticas</a>  <hr class="sidebar-divider">';
+
+echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar</a>  <hr class="sidebar-divider">';
+
 }else{echo"";}
   }
 
@@ -301,7 +303,7 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
 </span>
 <div class="cabecera-todo">
     <a class="logoEnlace" href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img class="logo" style="    width: 175px;
-    height: 60px;" src="libs/img/logo_ciudadescolar.png"></a>
+    height: 75px;" src="libs/img/logo_ciudadescolar.png"></a>
     <h3 class="cabecera">Sistema de Gestión de Espacios Comunes</h3>
 </div>
 <li class="nav-item dropdown no-arrow">

@@ -60,6 +60,11 @@ class Control{
         include_once ("views/crudReservas.php");
     }
 
+    function estadisticas(){
+        include_once ("views/estadisticas.php");
+    }
+
+
     function logout(){
         include_once ("views/logout.php");
     }
