@@ -6,7 +6,7 @@
 
 $con = MySQLi_connect(
 
-   "127.0.0.1:33065", //Server host name.
+   "localhost", //Server host name.
 
    "root", //Database username.
 
@@ -61,10 +61,10 @@ if (isset($_POST['search'])) {
 
         By passing fetched result as parameter. -->
 
-   <a href="?c=calendario&id=<?php echo $Result['id']; ?>" style="font-size:18px;">
+   <a href="?c=calendario&id=<?php echo $Result['id']; ?>" style="font-size:18px;text-decoration:none;" class="busqueda">
 
    <!-- Assigning searched result in "Search box" in "search.php" file. -->
-   <li class="list-group-item"  >
+   <li class="list-group-item busqueda"  >
        <?php echo $Result['id']; ?>
        
 

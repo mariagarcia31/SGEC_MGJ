@@ -42,6 +42,10 @@ include "menu.php"?>
     background-color: white; 
 }
 
+.busqueda:hover {
+    background-color:#D8D8D8; 
+}
+
 
     </style>
 </head>
