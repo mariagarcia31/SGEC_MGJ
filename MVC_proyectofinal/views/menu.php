@@ -330,7 +330,6 @@ body {
   }else{echo"";}
 }
 
-  
 
 echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle"></i>  Ayuda</a>
 <hr class="sidebar-divider">

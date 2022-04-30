@@ -22,11 +22,22 @@ $(document).ready(function(){
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="libs/cssc/login&check.css">
 </head>
+<style>
+    .modal-content{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+</style>
 <body>
 
 <?php include "menu.php";
+
+
+
 
 
 $count=$this->crud->crudUsuarios(1);
@@ -276,6 +287,9 @@ $("#myModal").modal();
        <div class="row">
            
                        <div class="col-md-12 ">';
+                       echo "<form action='' method='post' >
+                            <input class='btn btn-primary' type='submit' name='cargar' value='Cargar Usuarios'>
+                            </form>";
         echo "<a href='?c=crudUsuarios&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  ";
        
        echo                    '<table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
@@ -291,6 +305,30 @@ $("#myModal").modal();
         
         
         echo "</tr>";
+        if(isset($_POST["cargar"])){
+            echo  
+            '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document" >
+                  <div class="modal-content" >
+                    <div class="modal-header">
+                      <h3 class="modal-title" id="exampleModalLongTitle">Cargar usuario</h3>
+                    </div>
+                    <div class="modal-body">';
+            echo '<div class="form"><form class="login-form" class="form" enctype="multipart/form-data" method="post" action="?c=cargarUsuarios&pag='.$_GET["page"].'">
+                    <input type="file" name="file" id="file">
+                  
+
+                    </div>';            
+
+            echo '<div class="modal-footer">  <input type="submit" class="btn btn-success" value="Cargar" name="enviar">
+            <input type="submit" class="btn btn-danger" value="Cancelar" name="cancelar"></div></form></div></div></div></div>';
+     
+                                        
+                                  
+          
+        
+        }
+
         ?>
 <form action="?c=borrarUsuarios&pag=<?php echo $_GET["page"]?>" method="post"> 
 <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style='float:right;' >
