@@ -1,3 +1,16 @@
+<?php 
+
+if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
+    header ('Location:?c=principal');
+
+}else{
+
+    $contra1="";
+    $usu1="";   
+}
+
+?>
+
 <html lang="en">
 
 <head>
@@ -42,7 +55,8 @@
             <form class="login-form" action="?c=verificar" method="post">
                 <input type="email"  name="correo" placeholder="Correo" required>
                <input type="password" name="contrasena" placeholder="Contraseña" required>
-               <br>
+          
+               <br><label style="display:block">Recordar contraseña</label><input type="checkbox" name="recordar" value="recordar">
                <br>
                 <button >Entrar</button>
             </form>

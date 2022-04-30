@@ -1,4 +1,20 @@
+<?php
 
+if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra'])){
+    if(isset($_SESSION["cambiado"])){
+        header('Location:?c=principal');
+    }else{
+
+    }
+        
+}else{
+    header('Location:?c=home');
+    die() ;
+}
+
+
+
+?>
 <html lang="en">
 
 <head>

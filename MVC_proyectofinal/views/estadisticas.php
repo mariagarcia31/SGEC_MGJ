@@ -1,4 +1,14 @@
 <?php
+
+if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSION["cambiado"]) ){
+        
+}else{
+    header('Location:?c=home');
+    die() ;
+}
+
+
+
  
 $dataPoints = array();
 $dataPoints2 = array();
@@ -7,7 +17,7 @@ $dataPoints3 = array();
 try{
      // Creating a new connection.
     // Replace your-hostname, your-db, your-username, your-password according to your database
-    $link = new \PDO(   'mysql:host=localhost;dbname=sgec;charset=utf8mb4', //'mysql:host=localhost;dbname=canvasjs_db;charset=utf8mb4',
+    $link = new \PDO(   'mysql:host=127.0.0.1:33065;dbname=sgec;charset=utf8mb4', //'mysql:host=localhost;dbname=canvasjs_db;charset=utf8mb4',
                         'root', //'root',
                         '', //'',
                         array(

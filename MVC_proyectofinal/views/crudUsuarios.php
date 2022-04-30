@@ -1,4 +1,15 @@
+<?php
 
+if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSION["cambiado"]) ){
+        
+}else{
+    header('Location:?c=home');
+    die() ;
+}
+
+
+
+?>
 <html lang="en">
 <head>
   
@@ -20,67 +31,6 @@ $(document).ready(function(){
 
 $count=$this->crud->crudUsuarios(1);
 
-if($count[0]==0){
-    
-    echo '
-    <div class="row >
-    <div class="col-md-12 ">
-    <h1 class="display-3"> No se han creado Usuarios aún</h1>';
- 
-    echo "<a href='?c=crudUsuarios&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>
-  
-    ";
-    if(isset($_GET["crear"])){
-        if(isset($_SESSION['vacio'])){
-            echo $_SESSION['vacio'];
-            unset($_SESSION['vacio']);
-        }
-
-        echo "<div style='    width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        align-content: center;'><form action='?c=crearUsuarios&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
-        
-                echo '<tr>';
-                echo '<th> id</th>';
-                echo '<th> nombre</th>';
-                echo '<th> correo</th>';
-               // echo '<th> contra</th>';
-                echo '<th> confirmacion</th>';
-                echo '<th> rol</th>';
-               
-
-                echo '</tr>';
-                echo '<tr>';
-                echo "<td><input type='number' name='dato[]' style='width:210px'></input></td>";
-                echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
-                echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
-              //  echo "<td><input type='text' name='dato[]' style='width:80px'></input></td>";
-                echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
-                echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
-               
-
-                echo '</tr>';
-
-                echo "</table>";
-        echo "<input class='btn btn-primary'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
-        echo "<input  class='btn btn-danger'type='submit'  name='cancelar' value='Cancelar'></input>";
-
-        echo "</form></div>";
-
-
-
-
-    }
-
-    echo '</div>
-    </div>
-    </div>';
-    
-    
-}
-else{
 
 $iteams_pagina=3;
 
@@ -361,12 +311,14 @@ $("#myModal").modal();
       
             ?>
             
-
+            <?php if($dato["rol"]==1){?>
+            <td>No</td>
+            <?php  }else{?>
             <td><input type="checkbox" name="eliminar[]" value="<?php echo $dato["id"]?>">
             
             <a class="btn btn-danger"  href="?c=borrarUsuarios&id=<?php echo $dato["id"] ?>&pag=<?php echo $_GET["page"]?>"><i class="bi bi-trash"></i></a>
-        
             </td>
+            <?php }?>
             <td><button  title="Modificar" class="btn btn-primary" name="modificar" value="<?php echo $dato["id"] ?>"> <i class="bi bi-pencil-square"></i></button></td>
 
 
@@ -410,7 +362,7 @@ for($i=1;$i<=$total_pages;$i++){
     }
 }
 
-}
+
 ?>
   </ul>
 </nav>

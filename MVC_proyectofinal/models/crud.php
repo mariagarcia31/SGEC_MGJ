@@ -60,6 +60,10 @@ class Crud extends Conexion{
                     $_SESSION['estadisticas']=$verif4['estadisticas'];
                     $_SESSION['crudFestivos']=$verif4['crud_festivos'];
 
+                    $_SESSION['contra']=$contrasena;
+                    $_SESSION['correo']=$nombre;
+
+              
 
                     return true;
                     
@@ -88,6 +92,10 @@ class Crud extends Conexion{
                     $_SESSION['actualizarBBDD']=$verif4['actualizar_bbdd'];
                     $_SESSION['estadisticas']=$verif4['estadisticas'];
                     $_SESSION['crudFestivos']=$verif4['crud_festivos'];
+
+                    $_SESSION['contra']=$contrasena;
+                    $_SESSION['correo']=$nombre;
+                    $_SESSION["cambiado"]="ok";
 
 
                     return true;

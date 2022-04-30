@@ -1,4 +1,16 @@
-<?php include "menu.php"?>
+<?php 
+
+if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSION["cambiado"]) ){
+        
+}else{
+    header('Location:?c=home');
+    die() ;
+}
+
+
+
+
+include "menu.php"?>
 
 <html lang="en">
 <head>

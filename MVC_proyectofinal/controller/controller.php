@@ -94,10 +94,16 @@ class Control{
 
             if($result2){
 
+                if(isset($_POST['recordar'])) {
+                    
+                    setcookie("contrasena",$contrasena,time()+600);
+                    setcookie("correo",$correo,time()+600);
+                    header("location:?c=principal"); 
+                }else{
 
-
-
-                header("location:?c=principal"); 
+                    header("location:?c=principal"); 
+                }
+ 
             }else{
                 $_SESSION['correo']=$correo;
                 header("location:?c=c_contra&correo=$correo"); 
@@ -124,7 +130,7 @@ class Control{
         $result=$this->crud->contraNueva($_GET["_correo"],$_POST["contrasena1"],$_POST["contrasena2"]);
 
         if($result){
-
+            $_SESSION["cambiado"]="ok";
             header("location:?c=principal"); 
             
         }else{

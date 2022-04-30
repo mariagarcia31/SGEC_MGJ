@@ -1,13 +1,14 @@
 <?php 
-if(isset($_SESSION['nombre'])){
 
-    session_unset();
-    session_destroy();
-    header("Location:?c=home");
-}
-else{
-    header("Location:?c=home");
-}
+
+header('Location:?c=home');
+setcookie("usuario",$_COOKIE['usuario'],time()-1);
+setcookie("contrasena",$_COOKIE['contrasena'],time()-1);
+session_destroy();
+session_unset();
+$conn=null;
+
+
 
 
 ?>
