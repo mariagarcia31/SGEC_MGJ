@@ -238,7 +238,7 @@ tbody td:hover:before {
   }
   
   .active:after {
-    content: "\2212";
+     ";
   }
   
   .panel {
