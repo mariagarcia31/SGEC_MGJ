@@ -55,7 +55,7 @@ if(isset($_GET["crear"])){
         unset($_SESSION['vacio']);
     }
 
-    echo "<form action='?c=crearAulas&pag=".$_GET['page']."' method='post' >";
+    echo "<form action='?c=crearAulas&pag=".$_GET['page']."' method='post' enctype='multipart/form-data'>";
     
     echo '<div class="form-group">
     <label for="">Nombre: </label>';
@@ -86,7 +86,9 @@ if(isset($_GET["crear"])){
             
             </select></div>";
             
-
+    echo '<div class="form-group">
+        <label for="">Imágen: </label>';
+    echo "<input type='file' name='files'/></div>";
             
     echo "<input class='btn btn-primary'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
     echo "<input  class='btn btn-danger'type='submit'  name='cancelar' value='Cancelar'></input>";
@@ -124,7 +126,7 @@ if(isset($_SESSION["modificar"])){
               <h3 class="modal-title" id="exampleModalLongTitle">Modificar aula</h3>
             </div>
             <div class="modal-body">';
-    echo "<form action='?c=modificarAulas&pag=".$_GET['page']."' method='post' >";
+    echo "<form action='?c=modificarAulas&pag=".$_GET['page']."' method='post' enctype='multipart/form-data' >";
     if(isset($_SESSION['vacio'])){
         echo $_SESSION['vacio'];
         unset($_SESSION['vacio']);
@@ -176,8 +178,15 @@ if(isset($_SESSION["modificar"])){
                 }
                 echo '</select></div>';
             }
+
+            
         }
+
     }
+
+    echo '<div class="form-group">
+        <label for="">Imágen: </label>';
+    echo "<input type='file' name='files'/></div>";
     
     echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input>  ";
     echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
@@ -294,9 +303,12 @@ $_SESSION['cuantas']=count($result[0]);
         
             foreach($dato as $x=>$y){
         
-            
+                if($x=='imagen'){
+                    echo "<td><img src='".$y."' class='img-fluid img-thumbnail' style='width:70px; height:60px;'></td>";
+                }
+                else{
                 echo "<td>".$y."</td>";
-                
+                }
             }
       
             ?>

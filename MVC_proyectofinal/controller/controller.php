@@ -519,7 +519,7 @@ function modificarAulas(){
     }
     else{
     
-    $resultado=$this->crud->actualizarAulas($_POST["dato"]);
+    $resultado=$this->crud->actualizarAulas($_POST["dato"], $_FILES['files']);
 
 
     if($resultado){
@@ -564,7 +564,7 @@ function crearAulas(){
     }
     else{
     
-    $resultado=$this->crud->crearAulas($_POST["dato"]);
+    $resultado=$this->crud->crearAulas($_POST["dato"], $_FILES['files']);
 
 
     if($resultado){

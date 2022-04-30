@@ -6,7 +6,7 @@
 
 $con = MySQLi_connect(
 
-   "127.0.0.1:33065", //Server host name.
+   "localhost", //Server host name.
 
    "root", //Database username.
 

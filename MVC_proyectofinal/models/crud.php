@@ -1116,7 +1116,7 @@ class Crud extends Conexion{
         return $resultado_nombres;
     }
 
-    function actualizarAulas($indic){
+    function actualizarAulas($indic, $imagen){
 
         $comprobar="SELECT * FROM aulas WHERE id='".$indic[0]."';";
 		$consulta_comprobar=$this->conexion->prepare($comprobar);
@@ -1140,8 +1140,8 @@ class Crud extends Conexion{
                             $nombress[]=$nombre_columna;
                         }
                     }
-        
-                    for($i=0;$i<count($nombress);$i++){
+                    
+                    for($i=0;$i<count($nombress)-1;$i++){
                         
                         $sql="UPDATE aulas SET  ".$nombress[$i][0]."=:data  WHERE id='".$indic[0]."';";
                         $stmt=$this->conexion->prepare($sql);
@@ -1150,12 +1150,64 @@ class Crud extends Conexion{
                         
                         
                     }
+
+                    $sql="SELECT imagen FROM aulas WHERE id='".$indic[0]."';";
+                        $stmt=$this->conexion->prepare($sql);
+                        $stmt->execute();
+                        $resultado_imagen=$stmt->fetch(PDO::FETCH_ASSOC);
+
+                    if(empty($resultado_imagen['imagen'])){
+                        
+                        $defecto= $resultado_comprobar['imagen'];
+
+                        $query = "UPDATE aulas SET imagen ='$defecto' WHERE id='".$indic[0]."';";
+                       
+                        $statement= $this->conexion->prepare($query);
+                        $statement->execute();
+
+                        }
+                    
+                    else{
+
+                        // Prepared statement
+                        $query = "UPDATE aulas SET imagen = (?)  WHERE id='".$indic[0]."';";
+                    
+                        $statement = $this->conexion->prepare($query);
+                    
+
+                            $filename = $imagen['name'];
+                        
+                            // Location
+                            $target_file = 'libs/img/upload/'.$filename;
+                        
+                            // file extension
+                            $file_extension = pathinfo(
+                                $target_file, PATHINFO_EXTENSION);
+                                
+                            $file_extension = strtolower($file_extension);
+                        
+                            // Valid image extension
+                            $valid_extension = array("png","jpeg","jpg");
+                        
+                            if(in_array($file_extension, $valid_extension)) {
+                    
+                                // Upload file
+                                if(move_uploaded_file($imagen['tmp_name'],$target_file)) {
+                    
+                                    // Execute query
+                                    $statement->execute(array($target_file));
+                                    
+                                }
+                            }
+
+                    }
+        
                 return true;
             }      
         
     
 
-    function crearAulas($indic){
+    function crearAulas($indic, $imagen){
 
             $comprobar="SELECT * FROM aulas WHERE id='".$indic[0]."';";
             $consulta_comprobar=$this->conexion->prepare($comprobar);
@@ -1172,9 +1224,53 @@ class Crud extends Conexion{
 				$aforo = $indic[3];
 				$habilitado = $indic[4];
 				
-                $comprobar="INSERT INTO  aulas VALUES ('$id','$ubicacion','$informacion',$aforo,$habilitado);";
+                $comprobar="INSERT INTO  aulas (id, ubicacion, informacion, aforo, habilitado) VALUES ('$id','$ubicacion','$informacion',$aforo,$habilitado);";
                 $consulta_comprobar=$this->conexion->prepare($comprobar);
                 $consulta_comprobar->execute();
+
+                if(empty($imagen['name'])){
+
+                    $query = "UPDATE aulas SET imagen = 'libs/img/upload/aulaDefecto.jpeg' WHERE id='".$indic[0]."';";
+                   
+                    $statement= $this->conexion->prepare($query);
+                    $statement->execute();
+
+                    }
+                
+                else{
+
+                    // Prepared statement
+                    $query = "UPDATE aulas SET imagen = (?)   WHERE id='".$indic[0]."';";
+                
+                    $statement = $this->conexion->prepare($query);
+                
+
+                        $filename = $imagen['name'];
+                    
+                        // Location
+                        $target_file = 'libs/img/upload/'.$filename;
+                    
+                        // file extension
+                        $file_extension = pathinfo(
+                            $target_file, PATHINFO_EXTENSION);
+                            
+                        $file_extension = strtolower($file_extension);
+                    
+                        // Valid image extension
+                        $valid_extension = array("png","jpeg","jpg");
+                    
+                        if(in_array($file_extension, $valid_extension)) {
+                
+                            // Upload file
+                            if(move_uploaded_file($imagen['tmp_name'],$target_file)) {
+                
+                                // Execute query
+                                $statement->execute(array($target_file));
+                                
+                            }
+                        }
+
+                }
                 
                 return true;
 

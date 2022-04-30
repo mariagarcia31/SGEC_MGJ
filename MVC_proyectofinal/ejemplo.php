@@ -17,12 +17,11 @@ class Precio{
       /*************************************  MODELO DE AULAS   ********************************/
       function gruposDisponibles(){
 
-        $comprobar="SELECT * FROM reservas ;";
-            $consulta_comprobar=$this->conexion()->prepare($comprobar);
-            $consulta_comprobar->execute();
-            $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
-       
-        return $resultado_comprobar;
+        $sql="SELECT imagen FROM aulas WHERE id= 'Aula 100';";
+        $stmt=$this->conexion()->prepare($sql);
+        $stmt->execute();
+        $resultado_imagen=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultado_imagen;
 
     }
       
@@ -37,9 +36,13 @@ class Precio{
 $precio=new Precio();
 $datos= $precio->gruposDisponibles();
 
+if(empty($datos['imagen'])){
 
-print_r($datos[0]['idUsuario']);
-
+print_r($datos);
+}
+else{
+    echo "no vacio";
+}
 
 
 exit();
