@@ -182,7 +182,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="?c=reservaSemanal&id=<?php echo $_GET['id']?>&date=<?php echo $_GET['date'] ?>" method="post">
+                            <form action="?c=reservaSemanal&id=<?php echo $_GET['id']?>&date=<?php echo $_GET['date'] ?>&week=<?php echo $_GET['week']?>&year=<?php echo $_GET['year']?>" method="post">
                                <div class="form-group">
                                     <label for="">Franja</label>
                                     <input readonly type="text" class="form-control" id="timeslot" name="timeslot" value="<?php echo $_GET['hora']?>">

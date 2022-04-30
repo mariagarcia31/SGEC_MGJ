@@ -154,12 +154,12 @@ class Control{
                 timer: 1500
               });</script>";
               
-            header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id'].""); 
+            header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id']."&month=".$_GET['month']."&year=".$_GET['year'].""); 
             
         }else{
 
             $_SESSION["msg"]="<div class='alert  '>Ya reservado</div>";
-            header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id'].""); 
+            header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id']."&month=".$_GET['month']."&year=".$_GET['year'].""); 
         }
        
 
@@ -182,12 +182,12 @@ class Control{
                 timer: 1500
               });</script>";
               
-            header("location:?c=calendarioSemanal&id=".$_GET['id'].""); 
+            header("location:?c=calendarioSemanal&id=".$_GET['id']."&week=".$_GET['week']."&year=".$_GET['year'].""); 
             
         }else{
 
             $_SESSION["msg"]="<div class='alert  '>Ya reservado</div>";
-            header("location:?c=calendarioSemanal&id=".$_GET['id'].""); 
+            header("location:?c=calendarioSemanal&id=".$_GET['id']."&week=".$_GET['week']."&year=".$_GET['year'].""); 
         }
        
 
