@@ -249,6 +249,9 @@ body {
     margin-left: 10px;
     font-size: 13px;
 }
+.dropdown-btn.btn-menu.active{
+  color:gray !important
+}
 
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
