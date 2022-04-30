@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-04-2022 a las 00:19:15
+-- Tiempo de generación: 30-04-2022 a las 17:55:10
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -146,12 +146,6 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(142, 'Aula 100', 1, '2022-04-26', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-26 20:25:00'),
-(143, 'Aula 100', 1, '2022-04-26', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-26 20:27:28'),
-(144, 'Aula 100', 1, '2022-04-29', 'DAW 1', 'Examen', '09:30AM - 10:30AM', '2022-04-26 20:30:48'),
-(145, 'Aula 100', 1, '2022-04-29', 'DAM 1', 'Charla', '13:30PM - 14:30PM', '2022-04-29 16:04:01'),
-(146, 'Aula 100', 1, '2022-05-04', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-29 16:48:05'),
-(147, 'Aula 100', 1, '2022-05-06', 'DAM 1', 'Charla', '11:30AM - 12:30AM', '2022-04-29 16:55:14'),
 (148, 'Aula 100', 1, '2022-05-05', 'DAM 1', 'Charla', '11:30AM - 12:30AM', '2022-04-29 18:19:59'),
 (149, 'Aula Polivalente', 1, '2022-05-03', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-29 21:26:44'),
 (150, 'Aula Polivalente', 1, '2022-05-03', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 21:27:25'),
@@ -168,7 +162,8 @@ INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`,
 (161, 'Aula Polivalente', 1, '2022-05-04', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-29 22:17:01'),
 (162, 'Aula Polivalente', 1, '2022-05-04', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 22:18:22'),
 (163, 'Aula Polivalente', 1, '2022-05-06', 'DAM 1', 'Charla', '13:30PM - 14:30PM', '2022-04-29 22:18:29'),
-(164, 'Aula 700', 1, '2022-05-11', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 22:18:41');
+(164, 'Aula 700', 1, '2022-05-11', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 22:18:41'),
+(165, 'Aula 100', 1, '2022-05-03', 'DAM 1', 'examem', '09:30AM - 10:30AM', '2022-04-29 22:27:49');
 
 -- --------------------------------------------------------
 
@@ -184,16 +179,18 @@ CREATE TABLE `roles` (
   `crud_aulas` tinyint(1) NOT NULL,
   `crud_reservas` tinyint(1) NOT NULL,
   `crud_grupos` tinyint(1) NOT NULL,
-  `actualizar_bbdd` tinyint(1) NOT NULL
+  `actualizar_bbdd` tinyint(1) NOT NULL,
+  `crud_festivos` tinyint(1) NOT NULL,
+  `estadisticas` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `roles` (`id`, `nombre`, `crud_roles`, `crud_usuarios`, `crud_aulas`, `crud_reservas`, `crud_grupos`, `actualizar_bbdd`) VALUES
-(1, 'adminstrador', 1, 1, 1, 1, 1, 1),
-(2, 'profesor', 0, 0, 0, 0, 0, 0);
+INSERT INTO `roles` (`id`, `nombre`, `crud_roles`, `crud_usuarios`, `crud_aulas`, `crud_reservas`, `crud_grupos`, `actualizar_bbdd`, `crud_festivos`, `estadisticas`) VALUES
+(1, 'adminstrador', 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 'profesor', 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -215,7 +212,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contra`, `confirmacion`, `rol`) VALUES
-(1, 'Maria', 'maria@gmail.com', '12345', 1, 1);
+(1, 'Maria', 'maria@gmail.com', '$2y$10$c2SFZOk086XjKe.XkDKPOOwXfnaFpqNaQ9Et6iAVmJHP2PNLDrWMK', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -270,7 +267,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `festivos`
 --
 ALTER TABLE `festivos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos`
@@ -282,7 +279,7 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`

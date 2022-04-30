@@ -64,7 +64,9 @@ class Control{
     function crudReservas(){
         include_once ("views/crudReservas.php");
     }
-
+    function crudFestivos(){
+        include_once ("views/crudFestivos.php");
+    }
     function estadisticas(){
         include_once ("views/estadisticas.php");
     }
@@ -991,6 +993,163 @@ function crearGrupos(){
 }
 
 /******************************   FINAL CONTROLADOR GRUPOS         ********************************/
+
+
+
+
+
+/******************************   CONTROLADOR FESTIVOS            ********************************/
+function borrarFestivos(){
+
+        
+    if(isset($_POST["borrar"])){
+        $result=$this->crud->borrarFestivos($_POST["eliminar"]);
+        if($result){
+            $_SESSION["exito"]="
+        
+
+        <script>    Swal.fire({
+            icon: 'success',
+            title: 'Festivo eliminado con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>";
+            $cuantos=count($_POST["eliminar"]);
+            if($_SESSION['cuantas']==$cuantos){
+                header("location:?c=crudFestivos&page=".$_GET["pag"]-1 ."");
+            }
+            else{
+            header("location:?c=crudFestivos&page=".$_GET["pag"]."");
+            }
+        }else{
+            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningún festivo para eliminar</div>";
+            header("location:?c=crudFestivos&page=".$_GET["pag"]."");
+        }
+    
+    }
+    elseif(isset($_POST["modificar"])){
+        $_SESSION["modificar"]=$_POST["modificar"];
+        header("location:?c=crudFestivos&page=".$_GET["pag"]."");
+
+    }else{
+        $result=$this->crud->borrarUnoaUnoFestivos($_GET["id"]);
+        $_SESSION["exito"]="
+        
+
+        <script>    Swal.fire({
+            icon: 'success',
+            title: 'Festivo eliminado con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>";
+        if($_SESSION['cuantas']==1){
+            header("location:?c=crudFestivos&page=".$_GET["pag"] - 1 ."");
+        }
+        else{
+        header("location:?c=crudFestivos&page=".$_GET["pag"]."");
+        }
+        
+
+    }
+  
+}
+
+function modificarFestivos(){
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y Usuarioe</div>";
+    if(isset($_POST['cancelar'])){
+        unset($_SESSION["modificar"]);
+
+        header("location:?c=crudFestivos&page=".$_GET["pag"]."");
+    }
+    else{
+    
+    $resultado=$this->crud->actualizarFestivos($_POST["dato"]); 
+    $_SESSION["exito"]="
+        
+
+    <script>    Swal.fire({
+        icon: 'success',
+        title: 'Festivo modificado con éxito',
+        showConfirmButton: false,
+        timer: 1500
+      });</script>";  
+
+    if($resultado){
+        $result=$this->crud->borrarUnoaUnoFestivos($_GET["id"]);
+
+        unset($_SESSION["modificar"]);
+        header("location:?c=crudFestivos&page=".$_GET["pag"]."");
+    }
+    else{
+        
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> No se ha cambiado ningún campo</div>";
+        
+        header("location:?c=crudFestivos&page=".$_GET["pag"]."");
+    }
+    
+
+}
+}
+
+
+function crearFestivos(){
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
+    if(isset($_POST['cancelar'])){
+        unset($_SESSION["modificar"]);
+
+        header("location:?c=crudFestivos&page=".$_GET["pag"]."");
+    }
+    else if($_POST['dato'][0]==null || $_POST['dato'][1]==null || $_POST['dato'][2]==null){
+        $_SESSION["vacio"]="  <script>    Swal.fire({
+            icon: 'warning',
+            title: 'Debe rellenar todos los campos',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>
+    ";
+        header("location:?c=crudFestivos&page=".$_GET["pag"]."&crear=1");
+    }
+    else{
+    
+    $resultado=$this->crud->crearFestivos($_POST["dato"]);
+
+
+    if($resultado){
+        $_SESSION["exito"]="
+        
+
+        <script>    Swal.fire({
+            icon: 'success',
+            title: 'Festivo creado con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>";  
+        unset($_SESSION["modificar"]);
+        header("location:?c=crudFestivos&page=".$_GET["pag"]."");
+    }
+    else{
+        
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe un festivo con ese nombre</div>";
+        
+        header("location:?c=crudFestivos&page=".$_GET["pag"]."&crear=1");
+    }
+    
+
+}
+}
+
+/******************************   FINAL CONTROLADOR FESTIVOS         ********************************/
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

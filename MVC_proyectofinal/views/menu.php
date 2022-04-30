@@ -278,46 +278,57 @@ body {
     echo '  
     <a class="btn-menu" href="?c=crudReservas&page=1"><i class="bi bi-calendar3"></i>   Reservas</a>  <hr class="sidebar-divider">
     ';
-}else{echo"";}
+  }else{echo"";}
 
-if($_SESSION['crudAulas']==1){
-  echo '  
-  <a class="btn-menu" href="?c=crudAulas&page=1"><i class="bi bi-house"></i>   Aulas</a>  <hr class="sidebar-divider">
+  if($_SESSION['crudAulas']==1){
+    echo '  
+    <a class="btn-menu" href="?c=crudAulas&page=1"><i class="bi bi-house"></i>   Aulas</a>  <hr class="sidebar-divider">
 
-  ';
-}else{echo"";}
-
-
-if($_SESSION['crudUsuarios']==1){
-  echo '  
-  <a class="btn-menu" href="?c=crudUsuarios&page=1"><i class="bi bi-person"></i>   Usuarios</a>  <hr class="sidebar-divider">
-  ';
-}else{echo"";}
+    ';
+  }else{echo"";}
 
 
-if($_SESSION['crudRoles']==1){
-  echo '  
-  <a class="btn-menu" href="?c=crudRoles&page=1"><i class="bi bi-person-lines-fill"></i>   Roles</a>  <hr class="sidebar-divider">
-
-  ';
-}else{echo"";}
-
-if($_SESSION['crudGrupos']==1){
-  echo '  
-  <a class="btn-menu" href="?c=crudGrupos&page=1"><i class="bi bi-people"></i>  Grupos</a>  
+  if($_SESSION['crudUsuarios']==1){
+    echo '  
+    <a class="btn-menu" href="?c=crudUsuarios&page=1"><i class="bi bi-person"></i>   Usuarios</a>  <hr class="sidebar-divider">
+    ';
+  }else{echo"";}
 
 
-  ';
-}else{echo"";}
-echo " </div>  <hr class='sidebar-divider'>";
+  if($_SESSION['crudRoles']==1){
+    echo '  
+    <a class="btn-menu" href="?c=crudRoles&page=1"><i class="bi bi-person-lines-fill"></i>   Roles</a>  <hr class="sidebar-divider">
 
-if($_SESSION['actualizarBBDD']==1){
-echo '  <a class="btn-menu" href="?c=estadisticas"><i class="bi bi-bar-chart-line"></i> Estadísticas</a>  <hr class="sidebar-divider">';
+    ';
+  }else{echo"";}
 
-echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar</a>  <hr class="sidebar-divider">';
+  if($_SESSION['crudGrupos']==1){
+    echo '  
+    <a class="btn-menu" href="?c=crudGrupos&page=1"><i class="bi bi-people"></i>  Grupos</a>  <hr class="sidebar-divider">
 
-}else{echo"";}
-  }
+
+    ';
+  }else{echo"";}
+  if($_SESSION['crudFestivos']==1){
+    echo '  
+    <a class="btn-menu" href="?c=crudFestivos&page=1"><i class="bi bi-briefcase"></i>  Festivos</a>  
+
+
+    ';
+  }else{echo"";}
+  echo " </div>  <hr class='sidebar-divider'>";
+
+  if($_SESSION['actualizarBBDD']==1){
+
+  echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar</a>  <hr class="sidebar-divider">';
+
+  }else{echo"";}
+  if($_SESSION['estadisticas']==1){
+
+    echo '  <a class="btn-menu" href="?c=estadisticas&page=1"><i class="bi bi-bar-chart-line"></i>  Estadísticas</a>  <hr class="sidebar-divider">';
+    
+  }else{echo"";}
+}
 
   
 
