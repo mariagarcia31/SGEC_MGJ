@@ -108,7 +108,7 @@ li.page-item.active a.page-link{
   }
   
   .active:after {
-    content: "\2212";
+     ";
   }
   
   .panel {
