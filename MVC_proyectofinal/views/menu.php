@@ -214,6 +214,42 @@ body {
   padding-right: 8px;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.btn-cerrar-sesion{
+    color: black;
+    font-size: 14px !important;
+    padding: 0px;
+    margin-bottom: 0px !important;
+}
+.btn-cerrar-sesion:hover{
+    cursor:pointer !important
+}
+.swal2-confirm.btn.btn-success{
+    margin-left: 10px;
+    font-size: 13px;
+}
+.swal2-cancel.btn.btn-danger{
+    margin-left: 10px;
+    font-size: 13px;
+}
+
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -287,7 +323,7 @@ echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arro
 
 echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle"></i>  Ayuda</a>
 <hr class="sidebar-divider">
-<a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-gear"></i>  Configuración</a>
+<a class="btn-menu" href="?c=configuracion&page=1"><i class="bi bi-gear"></i>  Configuración</a>
 </div>
 ';
 ?>
@@ -313,40 +349,21 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
             <img class="img-profile rounded-circle" style="width:40px"
                 src="libs/img/undraw_profile.svg">
         </a>
-        <!-- Dropdown - User Information -->
-        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-            aria-labelledby="userDropdown">
-            
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item"  data-toggle="modal" data-target="#logoutModal" style="cursor:pointer">
-            
-                Cerrar sesión   
-                <i class="bi bi-box-arrow-right"></i>
-            </a>
-        </div>
+  <div class="dropdown-content">
+  <p class="btn-cerrar-sesion" style="color:black" onclick=cerrar()>Cerrar sesión</p>
+  </div>
+
     </li>
+
+
+    
+
+
 </div>
    <div class="footer">
        <p>© Copyright 2022 | Sistema de Gestión de Espacios Comunes | IES Ciudad Escolar</p>
 </div>
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">¿Seguro que desea cerrar sesión?</h3>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Seleccione "cerrar sesión" abajo si está seguro de cerrar la sesión.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="?c=logout" >Cerrar sesión</a>
-                </div>
-            </div>
-        </div>
-    </div>         
+       
 </body>
 
 </html>
@@ -378,6 +395,40 @@ for (i = 0; i < dropdown.length; i++) {
   dropdownContent.style.display = "block";
   }
   });
+}
+
+function cerrar(){
+  const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: '¿Desea cerrar sesión?',
+  text: "",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Si, cerrar sesión',
+  cancelButtonText: 'No, cancelar',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+    
+    window.location.href = "?c=logout";
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'Cancelado',
+      'Puede continuar en el SGEC',
+      'error'
+    )
+  }
+})
 }
 </script>
 

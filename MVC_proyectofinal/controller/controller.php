@@ -24,7 +24,12 @@ class Control{
     function principal(){
         include_once ("views/principal.php");
     }
-
+    function ayuda(){
+        include_once ("views/ayuda.php");
+    }
+    function configuracion(){
+        include_once ("views/configuracion.php");
+    }
     function c_contra(){
         include_once ("views/cambiar_contra.php");
     }
@@ -83,7 +88,6 @@ class Control{
         
         $result=$this->crud->verificarUsuario($correo,$contrasena);
         $result2=$this->crud->verificarContra($correo);
-        
         if($result){
 
             if($result2){
@@ -93,7 +97,7 @@ class Control{
 
                 header("location:?c=principal"); 
             }else{
-                
+                $_SESSION['correo']=$correo;
                 header("location:?c=c_contra&correo=$correo"); 
             }             
         }else{

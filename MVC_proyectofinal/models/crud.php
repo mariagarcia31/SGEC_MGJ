@@ -21,11 +21,13 @@ class Crud extends Conexion{
             if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
                 
                 
+                $_SESSION['correo']=$correo;
 
                 $sql="SELECT * FROM usuarios WHERE correo ='$correo'";
                 $consulta=$this->conexion->prepare($sql);
                 $consulta->execute();
                 $verif3=$consulta->fetch();
+                $_SESSION['correo']=$correo;
 
                 
                 $sql="SELECT count(*) FROM usuarios WHERE correo ='$correo' and contra='$contrasena'";
@@ -37,12 +39,12 @@ class Crud extends Conexion{
                 if($verif4[0]>0){
                     $idSesion =$verif3["id"];
                     $nombre =$verif3["nombre"];
-
                     $_SESSION['id']=$idSesion;
                     $_SESSION['nombre']=$nombre;
-                    
+
 
                     $rol =$verif3["rol"];
+                 
 
                     $sql="SELECT * FROM roles WHERE id ='$rol'";
                     $consulta=$this->conexion->prepare($sql);
@@ -67,7 +69,7 @@ class Crud extends Conexion{
 
                     $_SESSION['id']=$idSesion;
                     $_SESSION['nombre']=$nombre;
-                    
+
 
                     $rol =$verif3["rol"];
 
