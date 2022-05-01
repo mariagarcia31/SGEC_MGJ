@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-05-2022 a las 14:31:25
+-- Tiempo de generación: 02-05-2022 a las 01:40:23
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -76,7 +76,7 @@ CREATE TABLE `aulas` (
 --
 
 INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`, `imagen`) VALUES
-('Aula 100', 'Pabellon 3, Planta baja, Puerta 4ª', 'tv, ordenadores', 30, 1, 'libs/img/upload/aula1.jpg'),
+('Aula 100', 'Pabellon 3, Planta baja, Puerta 4ª', 'tv, ordenadores', 30, 1, 'libs/img/upload/2F22C3B6-24F0-4518-9A67-784374EB740B.jpeg'),
 ('Aula 515', 'Pabellón 5, Planta 1ª, Puerta 1ª', 'Mesas, Sillas', 30, 0, 'libs/img/upload/aula1.jpg'),
 ('aula 7', 'l', 'l', 9, 0, 'libs/img/upload/aulaDefecto.jpeg'),
 ('Aula 700', 'Pabellon 3', 'Tv', 70, 1, 'libs/img/upload/aula1.jpg'),
@@ -152,8 +152,7 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(148, 'Aula 100', 1, '2022-05-05', 'DAM 1', 'Charla', '11:30AM - 12:30AM', '2022-04-29 18:19:59'),
-(149, 'Aula Polivalente', 1, '2022-05-03', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-29 21:26:44'),
+(149, 'Aula Polivalente', 1, '2022-05-03', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-04-29 21:26:44'),
 (150, 'Aula Polivalente', 1, '2022-05-03', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 21:27:25'),
 (151, 'Aula Polivalente', 1, '2022-05-03', 'DAM 2', 'Charla', '10:30AM - 11:30AM', '2022-04-29 21:29:57'),
 (152, 'Aula Polivalente', 1, '2022-05-09', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-04-29 21:30:38'),
@@ -171,7 +170,17 @@ INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`,
 (164, 'Aula 700', 1, '2022-05-11', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 22:18:41'),
 (165, 'Aula 100', 1, '2022-05-03', 'DAM 1', 'examem', '09:30AM - 10:30AM', '2022-04-29 22:27:49'),
 (166, 'Aula Polivalente', 1, '2022-05-05', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-30 21:07:07'),
-(167, 'Aula 100', 1, '2022-05-05', 'DAM 1', 'Examen', '08:30AM - 09:30AM', '2022-05-01 11:58:30');
+(167, 'Aula 100', 1, '2022-05-05', 'DAM 1', 'Examen', '08:30AM - 09:30AM', '2022-05-01 11:58:30'),
+(168, 'Aula prueba 2', 1, '2022-05-10', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-05-01 12:32:47'),
+(169, 'Aula 100', 1, '2022-05-02', 'DAM 1', 'Examen', '08:30AM - 09:30AM', '2022-05-01 12:36:02'),
+(170, 'Aula 100', 1, '2022-05-02', 'DAM 1', 'examen', '09:30AM - 10:30AM', '2022-05-01 15:44:56'),
+(171, 'Aula 100', 1, '2022-05-05', 'DAM 1', 'Examen', '10:30AM - 11:30AM', '2022-05-01 16:44:22'),
+(172, 'Aula 100', 1, '2022-05-03', 'DAM 1', 'Examen', '10:30AM - 11:30AM', '2022-05-01 17:12:22'),
+(173, 'Aula 100', 1, '2022-05-04', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-05-01 22:04:12'),
+(174, 'Aula 700', 1, '2022-05-06', 'DAM 1', 'Charla', '13:30PM - 14:30PM', '2022-05-01 22:09:50'),
+(175, 'Aula 100', 1, '2022-05-06', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-05-01 22:47:02'),
+(176, 'Aula 100', 1, '2022-05-03', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-05-01 22:47:07'),
+(177, 'Aula 100', 5, '2022-05-02', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-05-01 23:37:40');
 
 -- --------------------------------------------------------
 
@@ -224,9 +233,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `primerApellido`, `segundoApellido`, `usuario`, `puesto`, `contra`, `confirmacion`, `rol`) VALUES
-(1, 'Maria', 'maria@gmail.com', '', '', '', '', '$2y$10$c2SFZOk086XjKe.XkDKPOOwXfnaFpqNaQ9Et6iAVmJHP2PNLDrWMK', 1, 1),
-(4, 'Nombre', 'Correo', 'Primer Apellido', 'Segundo Apellido', 'Usuario', 'Puesto\r\n', 'Usuario', 0, 2),
-(5, 'Ana', 'aamaagu372@ciudadescolarfp.es', 'Amate', 'Aguado', 'aamaagu372', 'Intervención Sociocomunitaria-Profesores de Enseñanza Secundaria\r\n', 'aamaagu372', 0, 2),
+(1, 'Maria', 'maria@gmail.com', 'García', 'Perez', 'maria123', 'Administradora', '$2y$10$c2SFZOk086XjKe.XkDKPOOwXfnaFpqNaQ9Et6iAVmJHP2PNLDrWMK', 1, 1),
+(5, 'Ana', 'aamaagu372@ciudadescolarfp.es', 'Amate', 'Aguado', 'aamaagu372', 'Intervención Sociocomunitaria-Profesores de Enseñanza Secundaria\r\n', '$2y$10$whfec1hkABlYjI8LjU87keRta8vs3e1n5rvb.ZuRsftLVoW5zSmaC', 1, 2),
 (6, 'Isabel', 'iarvmoy077@ciudadescolarfp.es', 'Arévalo', 'Moyano', 'iarvmoy077', 'Música-Profesores de Enseñanza Secundaria\r\n', 'iarvmoy077', 0, 2),
 (7, 'Patricia', 'parrcor997@ciudadescolarfp.es', 'Arroyo', 'Cortázar', 'parrcor997', 'Procesos de Producción Agraria-Profesores de Enseñanza Secundaria\r\n', 'parrcor997', 0, 2),
 (8, 'Nuria', 'nbalrin331@ciudadescolarfp.es', 'Ballesteros', 'Rincón', 'nbalrin331', 'Orientación Educativa-Profesores de Enseñanza Secundaria\r\n', 'nbalrin331', 0, 2),
@@ -350,7 +358,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `festivos`
 --
 ALTER TABLE `festivos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos`
@@ -362,7 +370,7 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`

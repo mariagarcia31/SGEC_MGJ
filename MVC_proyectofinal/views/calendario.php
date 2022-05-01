@@ -324,8 +324,9 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
     </div>
     
     <?php } ?>
-    <div class="col-lg-2 boton mx-auto">
-    <h5 class='text-center float-left' style='margin-top:7%'><i class="bi bi-circle-fill" style='color:green'> Disponible</i><br><br><i class="bi bi-circle-fill" style='color:#df4759;'> Reservado</i></h5>
+    <div class="col-lg-12 boton mx-auto">
+    <h5 style='margin-top:7%;'><i class="bi bi-circle-fill" style='color:green'> Disponible</i></h5>
+    <i class="bi bi-circle-fill" style='color:#df4759;'> Reservado</i></h5>
         </div>
     </div>
        </div>
