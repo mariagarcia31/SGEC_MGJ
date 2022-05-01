@@ -262,7 +262,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
   </div> 
 
 <div id="myModal" class="modal" role="dialog">
-        <div class="modal-dialog" style="position:absolute; top:20px; left: calc(50% - 250px)">
+        <div class="modal-dialog" style="width: 95%;">
             <div class="modal-content">
                 <div >
                     <button type="button" class="close" data-dismiss="modal" style="margin-left:5%;margin-top:2%;">&times;</button>
