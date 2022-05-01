@@ -76,13 +76,13 @@
 
 <!-- Search box. -->
 <div class="col-12" style="margin-left:15px">
-<div class="rounded border p-3" style="width: 30%;">
+<div class="rounded border p-3 barra">
 <i class="bi bi-search" style="font-size: 20px;padding-right: 10px;margin-left:3%;"></i>
 <input type="text" id="search" placeholder="Buscar por nombre..."  style="width: 80%; font-size:18px; border:none;"/>
 </div>
    <!-- Suggestions will be displayed in below div. -->
 
-   <div id="displaySearch" style="width: 18%;position:fixed;z-index:90;margin-left:30px"></div>
+   <div id="displaySearch" class="resultadosBusqueda "style="position:fixed;z-index:90;margin-left:30px"></div>
 </div>
 
 

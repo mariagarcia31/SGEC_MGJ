@@ -107,10 +107,7 @@ li.page-item.active a.page-link{
     margin-left: 5px;
   }
   
-  .active:after {
-     ";
-  }
-  
+
   .panel {
     padding: 0 18px;
     background-color: white;
@@ -118,3 +115,5 @@ li.page-item.active a.page-link{
     overflow: hidden;
     transition: max-height 0.2s ease-out;
   }
+
+  

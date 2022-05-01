@@ -51,87 +51,165 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
         .mx-auto{
             text-align:center
         }
-        @media screen and (max-width:1200px){
-            table{
-                width:40%
-            }
+       
+
+        @media only screen 
+        and (min-device-width: 320px) 
+        and (max-device-width: 812px)
+         {
             body{
             overflow-x: hidden;
         }
-        .col-md-2.boton{
-                width:40%;
-                text-align:center
-            }
-            .tramos{
-                display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-            }
-            
+           
+        .diaSemana{
+            border:none !important; 
+            background-color:#cb4f24 !important; 
+            color:white !important; 
+            width:fit-content !important; 
+            font-size:8px !important;
         }
-        @media screen and (max-width:890px){
-            td{
-                padding:0px;
-                font-size:12px
-            }
+        .calendario{
+            width: 100% !important;
+            padding:5 !important;
+            margin-bottom:30% !important;
+        }
+
+        .dia{
+            font-size:8px !important;
+        }
+        .hora{
+            font-size:8px !important;
+        }
+
+        .botonReservar{
+            color:white !important;
+            height: 16px !important;
+        }
+        .botonReservado{
+            color:white !important;
+            height: 30px !important;
+        }
+
+        .textoBotonReservar{
+
+            font-size:8px !important;
+        }
+        
+        
+        .botonCambiarVista{
+            font-size:8px;color:white !important;
+        }
+
+        .nombreSemana{
+            display:inline-block !important;
+            margin-left:2% !important;
+            margin-right:2% !important;
+            font-size:18px !important;
+            color:#cb4f24 !important;
+        }
+
+        .flechaCambiarSemana{
+            font-size:18px !important;
+            color:#212529 !important;
+        }
+
+        .nombreAula{
+            color:#202020 !important;
+            background-color:white !important;
+            font-size:20px !important;
+
+        }
+        .volver{
+            font-size:10px !important;
+            color:#202020 !important;
+        }
+        
+        .centrar{
+            margin-left:25% !important;
+            margin-right:auto !important;
+        }
+
+        }
+
+
+      
+
+          
+        @media screen 
+        and (min-device-width: 813px) 
+        and (max-device-width: 1600px) 
+        and (-webkit-min-device-pixel-ratio: 1) { 
             body{
             overflow-x: hidden;
         }
-            .header{
-                font-size:12px
-            }
-            .mx-auto{
-                font-size:12px
-            }
-            td h4{
-                font-size:12px
-            }
-            td a{
-                font-size:12px
-            }
-            .btn.btn-info{
-                color: #fff;
-                background-color: #36b9cc;
-                border-color: #36b9cc;
-                font-size: 12px !important;
-                padding: 3px !important;
-            }
-            #calendario{
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-content: center;
-                justify-content: center;
-                align-items: center;
-            }
-            h3{
-                font-size: 1.1rem !important;
-            }
-            .btn.btn-xs{
-                font-size: 12px;
-            }
-            
+           
+        .diaSemana{
+            border:none !important; 
+            background-color:#cb4f24 !important; 
+            color:white !important; 
+            width:fit-content !important; 
+            font-size:16px !important;
+        }
+        .calendario{
+            width: 75% !important;
+            padding:5 !important;
+            margin-bottom:10% !important;
+        }
 
+        .dia{
+            font-size:14px !important;
+        }
+        .hora{
+            font-size:14px !important;
+        }
+
+
+        .botonReservar{
+            color:white !important;
             
         }
 
-        @media screen and (max-width:690px){
-            body{
-            overflow-x: hidden;
-        }
-            .btn.btn-info {
+        .textoBotonReservar{
 
-                font-size: 9px !important;
-            }
-            .table>:not(caption)>*>* {
-                padding:0.1rem !important;
-            }
-            .btn.btn-info {
-                font-size: 7px !important;
-            }
+            font-size:14px !important;
+        }
+        
+        .botonCambiarVista{
+            font-size:15px;color:white !important;
+        }
+
+        .nombreSemana{
+            display:inline-block !important;
+            margin-left:2% !important;
+            margin-right:2% !important;
+            font-size:25px !important;
+            color:#cb4f24 !important;
+        }
+
+        .flechaCambiarSemana{
+            font-size:25px !important;
+            color:#212529 !important;
+        }
+
+        .nombreAula{
+            color:#202020 !important;
+            background-color:white !important;
+            font-size:35px !important;
+
+        }
+        .volver{
+            font-size:17px !important;
+            color:#202020 !important;
+        }
+        .container{
+            width:90%;
+        }
+        .boton{
+            width: 30%;
+        }
+        .reservado{
+            margin-left:auto;
+        }
         }
 
     </style>
@@ -158,14 +236,15 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
 
   <div class="row"> 
+  <a href="?c=principal" title="Cancelar" ><button type="button" class="close"><i class="bi bi-arrow-return-left volver"> Ver aulas</i></button></a>
+
    <div class="col-md-12 "> 
-   <a href="?c=principal" title="Cancelar"><button type="button" class="close" style="font-size:3.5em"><i class="bi bi-arrow-return-left"><p style="font-size:small">Ver aulas</p></i></button></a>
     
-    <div id="calendario" style="width: 65%;padding:5" class=' mx-auto rounded'> 
+   <div id="calendario" class='mx-auto rounded calendario'> 
     
     <?php if(isset($_GET['id'])){ ?>
 
-           <h1 class='mx-auto' style='color:#202020; background-color:white;'> Reserva para el <?php echo $_GET['id'] ?></h1>
+           <h1 class='mx-auto nombreAula' > Reserva para el <?php echo $_GET['id'] ?></h1>
      <?php 
     }
       

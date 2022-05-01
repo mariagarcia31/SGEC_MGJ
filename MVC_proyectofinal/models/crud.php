@@ -238,23 +238,23 @@ class Crud extends Conexion{
         $dayOfWeek = $dateComponents['wday'];
     
         //cremaos el calendario
-         
-
-        $calendar = "<table class=' table table-bordered '>";
+        $calendar = "<div class='table-responsive' style='border:none;'>";
+        
+        $calendar .= "<table class=' table table-bordered border' style='width:100%'>";
         
         
-        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month-1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month-1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-left' style='font-size:30px; color:#212529;'></i></a>";   
-        $calendar .= "<h3 style='display:inline-block;margin-left:2%; margin-right:2%;font-size:30px; color:#cb4f24'>$monthName $year</h3>";
-        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-right' style='font-size:30px;color:#212529;'></i></a><br>";
+        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month-1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month-1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-left flechaCambiarMes'></i></a>";   
+        $calendar .= "<h3 class='nombreMes'>$monthName $year</h3>";
+        $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-right flechaCambiarMes'></i></a><br>";
         
-        $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week' style='font-size:15px;color:white;'> Vista semanal</i></button></a><br><br>";
+        $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week botonCambiarVista'> Vista semanal</i></button></a><br><br>";
 
 
         $calendar .= "<tr>";
     
         // Creamos las cabeceras
         foreach($daysOfWeek as $day) {
-            $calendar .= "<th  class='header' style='border:none; background-color:#cb4f24; color:white'>$day</th>";
+            $calendar .= "<th class='diaSemana'><b>$day</b></th>";
         } 
         
         // creamos el resto del calendario
@@ -281,20 +281,19 @@ class Crud extends Conexion{
               
              $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
              $date = "$year-$month-$currentDayRel";
-             $today = $date==date('Y-m-d')? "today" : "";
              $date2 = date('Y-m-d', strtotime("+14 day"));
              $finde= $this->esFinde($date);
              $festivo= $this->esFestivo($date);
              if($festivo){
-                $calendar.="<td><h4 style='color:#B8B8B8'>Festivo<br>$festivo</h4></td> ";
+                $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>Festivo<br>$festivo</h4></td> ";
             }
              else if($date<date('Y-m-d')||$date>$date2||$finde==1){
-                 $calendar.="<td><h4 style='color:#D8D8D8'>$currentDay</h4> ";
+                 $calendar.="<td><h4 class='dia' style='color:#D8D8D8;'>$currentDay</h4> ";
              }
 
              else{
                  
-                 $calendar.="<td class='$today' onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4>$currentDay</h4> <a href='?c=calendario&date=".$date."&id=".$idAula."&month=$month&year=$year' class='btn btn-xs' style='background-color:#cb4f24;color:white' >Horarios</a>";
+                 $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4 class='dia'>$currentDay</h4><a href='?c=calendario&date=".$date."&id=".$idAula."&month=$month&year=$year' class='btn btn-xs botonReservar' ><p class='textoBotonReservar'><b>Horarios</b></p></a>";
              }
              $calendar .="</td>";
              $currentDay++;
@@ -311,6 +310,8 @@ class Crud extends Conexion{
          
         $calendar .= "</tr>";
         $calendar .= "</table>";
+        $calendar .= "</div>";
+        
         return $calendar;
     }
 
@@ -334,19 +335,19 @@ class Crud extends Conexion{
             $idAula=$_GET['id'];
         }
            
+        $calendar = "<div class='table-responsive' style='border:none;'>";
+        $calendar .= "<table class=' table table-bordered border' style='width:100%'>";
         
-        $calendar = "<table class=' table table-bordered'>";
         
         
-        
-        $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."&week=".($week-1)."&year=".$year."'><i class='bi bi-chevron-left' style='font-size:30px; color:#212529;'></i></a>";   
-        $calendar .= "<h3 style='display:inline-block;margin-left:2%; margin-right:2%;font-size:30px; color:#cb4f24'>Semana del $primerDiaSemana</h3>";
-        $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."&week=".($week+1)."&year=".$year."'><i class='bi bi-chevron-right' style='font-size:30px;color:#212529;'></i></a><br>";
-        $calendar.= "<a href='?c=calendario&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week' style='font-size:15px;color:white;'> Vista mensual</i></button></a><br><br>";
+        $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."&week=".($week-1)."&year=".$year."'><i class='bi bi-chevron-left flechaCambiarSemana'></i></a>";   
+        $calendar .= "<h3 class='nombreSemana'>Semana del $primerDiaSemana</h3>";
+        $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."&week=".($week+1)."&year=".$year."'><i class='bi bi-chevron-right flechaCambiarSemana'></i></a><br>";
+        $calendar.= "<a href='?c=calendario&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week botonCambiarVista'> Vista mensual</i></button></a><br><br>";
 
 
         $calendar .= "<tr>";
-        $calendar .= "<th  class='header' style='border:none; background-color:#cb4f24; color:white'>Horarios</th>";
+        $calendar .= "<th  class='diaSemana' >Horarios</th>";
         
         $hoy = date('Y-m-d');
         
@@ -357,7 +358,7 @@ class Crud extends Conexion{
         // Creamos las cabeceras
         foreach($daysOfWeek as $day) {
             $fecha = $dt->format('Y-m-d');
-            $calendar .= "<th class='header' style='border:none; background-color:#cb4f24; color:white'>$day<br><h5>$fecha</h5></th>";
+            $calendar .= "<th class='diaSemana'>$day<p>$fecha</p></th>";
             $dt->modify('+1 day');
         } 
         $dt = new DateTime;
@@ -374,7 +375,7 @@ class Crud extends Conexion{
         
         foreach($horarios as $hora) {
 
-            $calendar.="<tr><td><h4>$hora</h4></td> ";
+            $calendar.="<tr><td><h4 class='hora'>$hora</h4></td> ";
 
             while ($week == $dt->format('W')){
 
@@ -384,11 +385,11 @@ class Crud extends Conexion{
                 $booking=$this->seteaDate2($_GET['id'],$fecha);
 
                 if($festivo){
-                    $calendar.="<td><h5 style='color:#B8B8B8'>Festivo<br>$festivo</h5></td> ";
+                    $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>Festivo<br>$festivo</h5></td> ";
                 }
 
                 else if($fecha<$hoy||$fecha>$maximoDiasSiguientes||$finde==1){
-                    $calendar.="<td><h4 style='color:#D8D8D8'></h4></td> ";
+                    $calendar.="<td><h4 class='dia' style='color:#D8D8D8'></h4></td> ";
                 }
 
 
@@ -396,12 +397,12 @@ class Crud extends Conexion{
 
                     $clave = array_search($hora, $booking[0]);
     
-                    $calendar.="<td><h4 class='btn btn-danger btn-xs' disabled>Reservado<br>Prof. ".$booking[1][$clave]."</h4></td> ";
+                    $calendar.="<td><a class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>Prof. ".$booking[1][$clave]."</p></a></td> ";
                     
                  }
 
                 else{
-                    $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4></h4> <a href='?c=calendarioSemanal&date=".$fecha."&id=".$idAula."&hora=".$hora."&week=".$week."&year=".$year."' class='btn btn-success btn-xs' >Reservar</a></td>";
+                    $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><a href='?c=calendarioSemanal&date=".$fecha."&id=".$idAula."&hora=".$hora."&week=".$week."&year=".$year."' class='btn btn-success btn-xs botonReservar' ><p class='textoBotonReservar'>Reservar</p></a></td>";
 
                 }
 
@@ -421,6 +422,7 @@ class Crud extends Conexion{
             $week = $dt->format('W');
         }
         $calendar .= "</table>";
+        $calendar.="</div>";
         
         return $calendar;
     }

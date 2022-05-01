@@ -410,7 +410,8 @@ $("#myModal").modal();
                        <div class="col-md-12 ">';
         echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  ";
        
-       echo                    '<table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
+       echo ' <div class="table-responsive-sm">
+       <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
 
         echo "<tr >";
 
@@ -459,6 +460,7 @@ $("#myModal").modal();
   
   ?>
            </table>
+        </div>
         </div>
         
     

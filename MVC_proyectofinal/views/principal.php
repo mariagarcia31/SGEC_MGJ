@@ -45,6 +45,34 @@ include "menu.php"?>
 .busqueda:hover {
     background-color:#D8D8D8; 
 }
+@media screen 
+        and (min-device-width: 320px) 
+        and (max-device-width: 812px) 
+        and (-webkit-min-device-pixel-ratio: 1) { 
+        
+        .barra{
+            width: 90% !important;
+        }
+        .resultadosBusqueda{
+            width: 60% !important;
+        }
+    }
+
+@media screen 
+        and (min-device-width: 813px) 
+        and (max-device-width: 1600px) 
+        and (-webkit-min-device-pixel-ratio: 1) { 
+        
+        .barra{
+            width: 30% !important;
+        }
+
+        .resultadosBusqueda{
+            width: 18% !important;
+        }
+    }
+
+
 
 
     </style>

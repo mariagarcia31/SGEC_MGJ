@@ -240,7 +240,7 @@ $("#myModal").modal();
     
                 <div class="col-md-12 " style="border:none">
 <h1 style="color:#1A3C40; text-align:center; margin-bottom:5%; background-color:white" >RESERVAS</h1>
-                    <table class="table table-striped" style="text-align: center;">
+                    
                     <?php 
                     if(isset($_SESSION['error2'])){
                         echo $_SESSION['error2'];
@@ -259,9 +259,9 @@ $("#myModal").modal();
        echo '
        <div class="row">
            
-                       <div class="col-md-12">
-                      
-                           <table class="table table-striped bg-white" style="text-align: center;">';
+                       <div class="col-md-12">';
+ echo '<div class="table-responsive-sm">
+       <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
 
         echo "<tr >";
 
@@ -310,6 +310,7 @@ $("#myModal").modal();
   
   ?>
            </table>
+        </div>
         </div>
         
     </div>
