@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-04-2022 a las 20:51:45
+-- Tiempo de generación: 01-05-2022 a las 14:31:25
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -67,19 +67,25 @@ CREATE TABLE `aulas` (
   `ubicacion` varchar(220) NOT NULL,
   `informacion` varchar(220) NOT NULL,
   `aforo` int(100) NOT NULL,
-  `habilitado` tinyint(1) NOT NULL
+  `habilitado` tinyint(1) NOT NULL,
+  `imagen` varchar(80) NOT NULL DEFAULT '''libs/img/upload/aulaDefecto.jpeg'''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `aulas`
 --
 
-INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`) VALUES
-('Aula 100', 'Pabellon 3, Planta baja, Puerta 4ª', 'tv, ordenadores', 30, 1),
-('Aula 515', 'Pabellón 5, Planta 1ª, Puerta 1ª', 'Mesas, Sillas', 30, 0),
-('Aula 700', 'Pabellon 3', 'Tv', 70, 1),
-('Aula 815', 'Pabellón 10, Planta 2ª, Puerta 1ª', 'Tv, Ordenadores, Sillas, Mesas', 30, 1),
-('Aula Polivalente', 'Pabellón 10, Planta 1ª, Puerta 1ª', 'Mesas, Sillas, Pizarras', 70, 1);
+INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`, `imagen`) VALUES
+('Aula 100', 'Pabellon 3, Planta baja, Puerta 4ª', 'tv, ordenadores', 30, 1, 'libs/img/upload/aula1.jpg'),
+('Aula 515', 'Pabellón 5, Planta 1ª, Puerta 1ª', 'Mesas, Sillas', 30, 0, 'libs/img/upload/aula1.jpg'),
+('aula 7', 'l', 'l', 9, 0, 'libs/img/upload/aulaDefecto.jpeg'),
+('Aula 700', 'Pabellon 3', 'Tv', 70, 1, 'libs/img/upload/aula1.jpg'),
+('aula 8', 'l', 'l', 7, 1, 'libs/img/upload/aula1.jpg'),
+('Aula 815', 'Pabellón 10, Planta 2ª, Puerta 1ª', 'Tv, Ordenadores, Sillas, Mesas', 30, 1, 'libs/img/upload/aulaDefecto.jpeg'),
+('Aula Auxiliar', 'Pabellón 5', 'tv', 29, 0, 'libs/img/upload/aulaDefecto.jpeg'),
+('Aula Extra', 'Pabellón 3', 'Tv', 50, 0, 'libs/img/upload/aulaDefecto.jpeg'),
+('Aula Polivalente', 'Pabellón 10, Planta 1ª, Puerta 1ª', 'Mesas, Sillas, Pizarras', 70, 1, 'libs/img/upload/aula1.jpg'),
+('Aula prueba 2', 'Pabellon 3', 'tv', 33, 1, 'libs/img/upload/aula1.jpg');
 
 -- --------------------------------------------------------
 
@@ -163,7 +169,9 @@ INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`,
 (162, 'Aula Polivalente', 1, '2022-05-04', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 22:18:22'),
 (163, 'Aula Polivalente', 1, '2022-05-06', 'DAM 1', 'Charla', '13:30PM - 14:30PM', '2022-04-29 22:18:29'),
 (164, 'Aula 700', 1, '2022-05-11', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-29 22:18:41'),
-(165, 'Aula 100', 1, '2022-05-03', 'DAM 1', 'examem', '09:30AM - 10:30AM', '2022-04-29 22:27:49');
+(165, 'Aula 100', 1, '2022-05-03', 'DAM 1', 'examem', '09:30AM - 10:30AM', '2022-04-29 22:27:49'),
+(166, 'Aula Polivalente', 1, '2022-05-05', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-04-30 21:07:07'),
+(167, 'Aula 100', 1, '2022-05-05', 'DAM 1', 'Examen', '08:30AM - 09:30AM', '2022-05-01 11:58:30');
 
 -- --------------------------------------------------------
 
@@ -354,7 +362,7 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
