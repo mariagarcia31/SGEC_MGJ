@@ -179,19 +179,19 @@ $("#myModal").modal();
                                                    
                                                            echo '<div class="form-group">
                                                             <label for="">ID</label>';
-                                                            echo "<input class='form-control' type='number'  name='dato[]' value='' ></input>";
+                                                            echo "<input class='form-control' type='number'  name='dato[]' value='' required ></input>";
                                                             echo '</div>';
                                                           
                                                             echo '<div class="form-group">
                                                             <label for="">Nombre</label>';
-                                                            echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
+                                                            echo "<input class='form-control' type='text'  name='dato[]' value='' required ></input>";
                                                             echo '</div>';
                                                 
                                                             
                                                       
                                                             echo '<div class="form-group">
                                                             <label for="">Crud roles</label>';
-                                                            echo "<select name='dato[]' class='form-control' >
+                                                            echo "<select name='dato[]' class='form-control' required >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";
@@ -199,7 +199,7 @@ $("#myModal").modal();
                                                           
                                                                 echo '<div class="form-group">
                                                                 <label for="">Crud usuarios</label>';
-                                                                echo "<select name='dato[]' class='form-control' >
+                                                                echo "<select name='dato[]' class='form-control' required >
                                                                 <option value='0' selected>No</option>
                                                                 <option value='1' selected>Si</option>
                                                                 </select>";                                                                
@@ -207,7 +207,7 @@ $("#myModal").modal();
                                                              
                                                                 echo '<div class="form-group">
                                                             <label for="">Crud aulas</label>';
-                                                            echo "<select name='dato[]' class='form-control' >
+                                                            echo "<select name='dato[]' class='form-control' required >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";                                                            
@@ -215,7 +215,7 @@ $("#myModal").modal();
                                                                
                                                             echo '<div class="form-group">
                                                             <label for="">Crud reservas</label>';
-                                                            echo "<select name='dato[]' class='form-control' >
+                                                            echo "<select name='dato[]' class='form-control' required >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";                                                            
@@ -223,7 +223,7 @@ $("#myModal").modal();
                                                             
                                                             echo '<div class="form-group">
                                                             <label for="">Crud grupos</label>';
-                                                            echo "<select name='dato[]' class='form-control' >
+                                                            echo "<select name='dato[]' class='form-control' required >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";                                                            
@@ -232,11 +232,29 @@ $("#myModal").modal();
                                                            
                                                             echo '<div class="form-group">
                                                             <label for="">Actualizar BBDD</label>';
-                                                            echo "<select name='dato[]' class='form-control' >
+                                                            echo "<select name='dato[]' class='form-control' required >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";                                                           
                                                             echo '</div>';
+
+                                                            echo '<div class="form-group">
+                                                            <label for="">Crud festivos</label>';
+                                                            echo "<select name='dato[]' class='form-control' required >
+                                                            <option value='0' selected>No</option>
+                                                            <option value='1' selected>Si</option>
+                                                            </select>";                                                           
+                                                            echo '</div>';
+                                                           
+
+                                                            echo '<div class="form-group">
+                                                            <label for="">Estadísticas</label>';
+                                                            echo "<select name='dato[]' class='form-control' required >
+                                                            <option value='0' selected>No</option>
+                                                            <option value='1' selected>Si</option>
+                                                            </select>";                                                           
+                                                            echo '</div>';
+                                                           
                                                            
                                                 
                                                            
@@ -246,7 +264,7 @@ $("#myModal").modal();
                                                     
                                                     echo '<div class="modal-footer">';
                                                     echo "<input class='btn btn-primary' type='submit'  name='agregar-ult' value='Crear'></input> ";
-                                                    echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
+                                                    echo '<a href="?c=crudRoles&page='.$_GET['page'].'"><button type="button" class="btn btn-danger">Cancelar</button></a>';
                                                     echo '</div>';
                                                     echo "</form>";
                                                     echo '</div>';
@@ -371,7 +389,31 @@ $("#myModal").modal();
                                                                         <option value='1' selected>Si</option>";
                                                                     }
                                                                     echo "</select></div>";
+                                                                }elseif($i==8){
+                                                                    echo '<div class="form-group">
+                                                                    <label for="">Crud festivos</label><select name="dato[]" class="form-control" required>';
+                                                                    if($nombre_columna[$i]==0){
+                                                                        echo "  <option value='0' selected>No</option>
+                                                                        <option value='1' >Si</option>";
+                                                                    }else{
+                                                                        echo "  <option value='0' >No</option>
+                                                                        <option value='1' selected>Si</option>";
+                                                                    }
+                                                                    echo "</select></div>";
+                                                                }elseif($i==9){
+                                                                    echo '<div class="form-group">
+                                                                    <label for="">Estadísticas</label><select name="dato[]" class="form-control" required>';
+                                                                    if($nombre_columna[$i]==0){
+                                                                        echo "  <option value='0' selected>No</option>
+                                                                        <option value='1' >Si</option>";
+                                                                    }else{
+                                                                        echo "  <option value='0' >No</option>
+                                                                        <option value='1' selected>Si</option>";
+                                                                    }
+                                                                    echo "</select></div>";
                                                                 }
+                                                                
+                                                                
                                                                 
                                                 
                                                            
@@ -385,8 +427,7 @@ $("#myModal").modal();
                                                     
                                                     echo '<div class="modal-footer">';
                                                     echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
-                                                    echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
-                                                    echo '</div>';
+                                                    echo '<button type="button" class="btn btn-danger cancelar" data-dismiss="modal">Cancelar</button>';                                                    echo '</div>';
                                                     echo "</form>";
                                                     echo '</div>';
                                                     echo '</div>';
@@ -496,6 +537,19 @@ for($i=1;$i<=$total_pages;$i++){
 ?>
   </ul>
 </nav>
+<script>
+$(".cancelar").click(function(){
 
+<?php 
+    if(isset($_SESSION["modificar"])){
+        unset($_SESSION["modificar"]);
+    }
+
+    ?>
+    
+});
+
+
+</script>
 </body>
 </html>

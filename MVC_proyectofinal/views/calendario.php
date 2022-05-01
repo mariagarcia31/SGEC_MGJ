@@ -123,8 +123,9 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
             width: 50%;
         }
         .centrar{
-            margin-left:25% !important;
-            margin-right:auto !important;
+            display: flex;
+    flex-direction: column;
+    align-items: center;
         }
 
         }
@@ -330,7 +331,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
        </div>
         </div>
 <div id="myModal" class="modal" role="dialog">
-        <div class="modal-dialog" style="width: 80%;">
+        <div class="modal-dialog" style="width: 95%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -375,8 +376,10 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
                                     <input required type="text" class="form-control" name="motivo">
                                 </div>
                                 <div class="form-group pull-right">
-                                    <button name="submit" type="submit" class="btn btn-info">Reservar</button>
+                                    <button name="submit" type="submit" class="btn btn-success">Reservar</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                 </div>
+                                
                             </form>
                         </div>
                     </div>

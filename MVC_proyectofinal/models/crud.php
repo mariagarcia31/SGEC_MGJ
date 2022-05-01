@@ -351,6 +351,7 @@ class Crud extends Conexion{
         
         $hoy = date('Y-m-d');
         
+        /*SI SE QUIERE CAMBIAR EL MAXIMO DE DÍAS SIGUIENTES ENTRE LOS QUE SE PUEDE RESERVAR */
         $maximoDiasSiguientes = date('Y-m-d', strtotime("+14 day"));
 
 
@@ -1806,7 +1807,7 @@ function actualizarFestivos($indic){
 
 function crearFestivos($indic){
 
-        $comprobar="SELECT * FROM festivos WHERE id='".$indic[0]."';";
+        $comprobar="SELECT * FROM festivos WHERE Nombre='".$indic[0]."';";
         $consulta_comprobar=$this->conexion->prepare($comprobar);
         $consulta_comprobar->execute();
         $resultado_comprobar=$consulta_comprobar->fetchAll();
@@ -1815,21 +1816,17 @@ function crearFestivos($indic){
         }
         
         else{
-            $id = $indic[0];
-            $nombre = $indic[1];
-            $fechainicio =$indic[2];
-           
+            
+            $nombre = $indic[0];
+            $fechainicio =$indic[1];
             $fechafin =$indic[2];
-            if($fechainicio<$fechafin){
-                echo "no";
-            }
-            else{
-                $comprobar="INSERT INTO  festivos VALUES ($id,'$nombre','$fechainicio','$fechafin');";
+            
+                $comprobar="INSERT INTO  festivos (Nombre, fechaInicio, fechaFinal) VALUES ('$nombre','$fechainicio','$fechafin');";
                 $consulta_comprobar=$this->conexion->prepare($comprobar);
                 $consulta_comprobar->execute();
                 
                 return true;
-            }
+            
 
             
 

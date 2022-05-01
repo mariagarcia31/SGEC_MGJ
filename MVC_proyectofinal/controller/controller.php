@@ -1159,7 +1159,13 @@ function crearFestivos(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe un festivo con ese nombre</div>";
+        $_SESSION["vacio"]="  <script>    Swal.fire({
+            icon: 'warning',
+            title: 'Ya existe un festivo con ese nombre',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>
+    ";
         
         header("location:?c=crudFestivos&page=".$_GET["pag"]."&crear=1");
     }

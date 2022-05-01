@@ -59,28 +59,28 @@ if(isset($_GET["crear"])){
     
     echo '<div class="form-group">
     <label for="">Nombre: </label>';
-            echo "<input class='form-control' type='text' name='dato[]' ></input></div>";
+            echo "<input class='form-control' type='text' name='dato[]' required></input></div>";
 
     echo '<div class="form-group">
         <label for="">Ubicación: </label>';
 
-            echo "<input class='form-control' type='text' name='dato[]' ></input></div>";
+            echo "<input class='form-control' type='text' name='dato[]' required></input></div>";
 
     echo '<div class="form-group">
         <label for="">Información: </label>';
 
-            echo "<input class='form-control' type='text' name='dato[]' ></input></div>";
+            echo "<input class='form-control' type='text' name='dato[]' required></input></div>";
 
     echo '<div class="form-group">
         <label for="">Aforo: </label>';
 
-            echo "<input class='form-control' type='number' name='dato[]' ></input></div>";
+            echo "<input class='form-control' type='number' name='dato[]'required ></input></div>";
 
     echo '<div class="form-group">
         <label for="">Habilitado: </label>';
         
 
-            echo "<select class='form-control' name='dato[]' ></input>
+            echo "<select class='form-control' name='dato[]' required></input>
             <option value ='1' selected> Sí </option>
             <option value ='0' > No </option>
             
@@ -90,8 +90,8 @@ if(isset($_GET["crear"])){
         <label for="">Imágen: </label>';
     echo "<input type='file' name='files'/></div>";
             
-    echo "<input class='btn btn-primary'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
-    echo "<input  class='btn btn-danger'type='submit'  name='cancelar' value='Cancelar'></input>";
+    echo "<input class='btn btn-success'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
+    echo '<a href="?c=crudAulas&page='.$_GET['page'].'"><button type="button" class="btn btn-danger">Cancelar</button></a>';
 
     echo "</form>";
     echo '</div>';
@@ -138,28 +138,28 @@ if(isset($_SESSION["modificar"])){
            if($i===0){
             echo '<div class="form-group">
             <label for="">ID: </label>';
-            echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' ></input></div>";
+            echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input></div>";
 
            }
            
             else if($i===1){
                 echo '<div class="form-group">
                 <label for="">Ubicación: </label>';
-                echo "<input class='form-control' type='text' name='dato[]' value='".$nombre_columna[$i]."' ></input></div>";
+                echo "<input class='form-control' type='text' name='dato[]' value='".$nombre_columna[$i]."' required></input></div>";
 
             }
 
             else if($i===2){
                 echo '<div class="form-group">
                 <label for="">Información: </label>';
-                echo "<input class='form-control' type='text' name='dato[]' value='".$nombre_columna[$i]."' ></input></div>";
+                echo "<input class='form-control' type='text' name='dato[]' value='".$nombre_columna[$i]."' required></input></div>";
 
             }
 
             else if($i===3){
                 echo '<div class="form-group">
                 <label for="">Aforo: </label>';
-                echo "<input class='form-control' type='number' name='dato[]' value='".$nombre_columna[$i]."' ></input></div>";
+                echo "<input class='form-control' type='number' name='dato[]' value='".$nombre_columna[$i]."' required></input></div>";
 
             }
 
@@ -189,7 +189,7 @@ if(isset($_SESSION["modificar"])){
     echo "<input type='file' name='files'/></div>";
     
     echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input>  ";
-    echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
+    echo '<button type="button" class="btn btn-danger cancelar" data-dismiss="modal">Cancelar</button>';
 
     echo "</form>";
     echo '</div>';
@@ -367,6 +367,19 @@ for($i=1;$i<=$total_pages;$i++){
 ?>
   </ul>
 </nav>
+<script>
+$(".cancelar").click(function(){
 
+<?php 
+    if(isset($_SESSION["modificar"])){
+        unset($_SESSION["modificar"]);
+    }
+
+    ?>
+    
+});
+
+
+</script>
 </body>
 </html>

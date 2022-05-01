@@ -221,7 +221,7 @@ $("#myModal").modal();
     
     echo '<div class="modal-footer">';
     echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
-    echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
+    echo '<button type="button" class="btn btn-danger cancelar" data-dismiss="modal">Cancelar</button>';                                                    echo '</div>';
     echo '</div>';
     echo "</form>";
     echo '</div>';
@@ -404,6 +404,20 @@ picker.addEventListener('input', function(e){
 
   }
 });
+
+</script>
+<script>
+$(".cancelar").click(function(){
+
+<?php 
+    if(isset($_SESSION["modificar"])){
+        unset($_SESSION["modificar"]);
+    }
+
+    ?>
+    
+});
+
 
 </script>
 </body>

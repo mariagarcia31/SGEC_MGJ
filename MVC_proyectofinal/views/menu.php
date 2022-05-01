@@ -123,7 +123,8 @@ hr{
     padding:7px;
     text-align:center;
     z-index:4;
-    color:white
+    color:white;
+    margin-top: 5% !important;
 }
 @media only screen 
         and (min-device-width: 320px) 
@@ -437,11 +438,7 @@ swalWithBootstrapButtons.fire({
     /* Read more about handling dismissals below */
     result.dismiss === Swal.DismissReason.cancel
   ) {
-    swalWithBootstrapButtons.fire(
-      'Cancelado',
-      'Puede continuar en el SGEC',
-      'error'
-    )
+   
   }
 })
 }

@@ -160,29 +160,25 @@ $("#myModal").modal();
                
                                         
                                 
-                echo '<div class="form-group">
-                    <label for="">ID</label>';
-                    echo "<input class='form-control' type='number'  name='dato[]' value='' ></input>";
-                    echo '</div>';
                 
                     echo '<div class="form-group">
                     <label for="">Nombre</label>';
-                    echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
+                    echo "<input class='form-control' type='text'  name='dato[]' value='' required ></input>";
                     echo '</div>';
                                     
                                                 
                                           
                     echo '<div class="form-group">
                     <label for="">Fecha inicio</label>';
-                    echo "<input class='form-control' id='date1' type='date'  name='dato[]' value='' ></input>";
+                    echo "<input class='form-control' id='date1' type='date'  name='dato[]' value='' required ></input>";
                     echo '</div>';
                     echo '<div class="form-group">
                     <label for="">Fecha fin</label>';
-                    echo "<input class='form-control' id='date2' type='date'  name='dato[]' value='' ></input>";
+                    echo "<input class='form-control' id='date2' type='date'  name='dato[]' value='' required></input>";
                     echo '</div>';
                     echo '<div class="modal-footer">';
                     echo "<input class='btn btn-primary' type='submit'  name='agregar-ult' value='Crear'></input> ";
-                    echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
+                    echo '<a href="?c=crudFestivos&page='.$_GET['page'].'"><button type="button" class="btn btn-danger">Cancelar</button></a>';
                     echo '</div>';
                     echo "</form>";
                     echo '</div>';
@@ -219,13 +215,13 @@ $("#myModal").modal();
                                 if($i==0){
                                 echo '<div class="form-group">
                                     <label for="">ID</label>';
-                                    echo "<input class='form-control' type='number' readonly name='dato[]' value='".$nombre_columna[$i]."' ></input>";
+                                    echo "<input class='form-control' type='number' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                                     echo '</div>';
                                 }
                                 elseif($i==1){
                                     echo '<div class="form-group">
                                     <label for="">Nombre</label>';
-                                    echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' ></input>";
+                                    echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                                     echo '</div>';
 
                                     
@@ -234,14 +230,14 @@ $("#myModal").modal();
                                 elseif($i==2){
                                     echo '<div class="form-group">
                                     <label for="">Fecha inicio</label>';
-                                    echo "<input class='form-control' id='date1' type='date'  name='dato[]' value='".$nombre_columna[$i]."' ></input>";
+                                    echo "<input class='form-control' id='date1' type='date'  name='dato[]' value='".$nombre_columna[$i]."' required ></input>";
                                     echo '</div>';
                                     
                                     }
                                     elseif($i==3){
                                         echo '<div class="form-group">
                                     <label for="">Fecha fin</label>';
-                                    echo "<input class='form-control' id='date2' type='date'  name='dato[]' value='".$nombre_columna[$i]."' ></input>";
+                                    echo "<input class='form-control' id='date2' type='date'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                                     echo '</div>';
                                     }
 
@@ -258,7 +254,7 @@ $("#myModal").modal();
                             
                             echo '<div class="modal-footer">';
                             echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
-                            echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
+                            echo '<button type="button" class="btn btn-danger cancelar" data-dismiss="modal">Cancelar</button>';                                                    echo '</div>';
                             echo '</div>';
                             echo "</form>";
                             echo '</div>';
@@ -399,6 +395,20 @@ if (date1>date2){
 }
   
 });
+
+</script>
+<script>
+$(".cancelar").click(function(){
+
+<?php 
+    if(isset($_SESSION["modificar"])){
+        unset($_SESSION["modificar"]);
+    }
+
+    ?>
+    
+});
+
 
 </script>
 </body>

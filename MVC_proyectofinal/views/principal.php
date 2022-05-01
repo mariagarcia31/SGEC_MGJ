@@ -102,7 +102,7 @@ include "menu.php"?>
   
 
 
-<section class="pt-5 pb-5 mt-5 ml-5">
+<section class="pt-5 pb-5 mt-5 ml-5 mr-5">
 
     <div class="container">
         

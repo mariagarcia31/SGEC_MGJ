@@ -79,6 +79,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
         }
         .hora{
             font-size:8px !important;
+            color: #cb4f24  !important; 
         }
 
         .botonReservar{
@@ -265,7 +266,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
         <div class="modal-dialog" style="width: 95%;">
             <div class="modal-content">
                 <div >
-                    <button type="button" class="close" data-dismiss="modal" style="margin-left:5%;margin-top:2%;">&times;</button>
+                <a href="?c=calendarioSemanal&date=<?php echo $_GET['date'] ?>&id=<?php echo $_GET['id'] ?>&week=<?php echo $_GET['week'] ?>&year=<?php echo $_GET['year'] ?>"><button type="button" class="close" style="margin-left:5%;margin-top:2%;">&times;</button></a>
                         
                 </div>
                 <div class="modal-header">
@@ -310,7 +311,9 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
                                     <input required type="text" class="form-control" name="motivo">
                                 </div>
                                 <div class="form-group pull-right">
-                                    <button name="submit" type="submit" class="btn btn-info">Reservar</button>
+                                    <button name="submit" type="submit" class="btn btn-success">Reservar</button>
+                                    <a href="?c=calendarioSemanal&date=<?php echo $_GET['date'] ?>&id=<?php echo $_GET['id'] ?>&week=<?php echo $_GET['week'] ?>&year=<?php echo $_GET['year'] ?>"><button type="button" class="btn btn-danger">Cancelar</button></a>
+
                                 </div>
                             </form>
                         </div>
@@ -345,7 +348,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
    
 
     
-    <?php if(isset($_GET['date'])){ ?>    
+    <?php if(isset($_GET['hora'])){ ?>    
     
     <script>
 

@@ -159,24 +159,24 @@ $("#myModal").modal();
                                 
                 echo '<div class="form-group">
                     <label for="">ID</label>';
-                    echo "<input class='form-control' type='number'  name='dato[]' value='' ></input>";
+                    echo "<input class='form-control' type='number'  name='dato[]' value='' required></input>";
                     echo '</div>';
                 
                     echo '<div class="form-group">
                     <label for="">Nombre</label>';
-                    echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
+                    echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
                     echo '</div>';
                                     
                                                 
                                           
                     echo '<div class="form-group">
                     <label for="">Departamento</label>';
-                    echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
+                    echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
                     echo '</div>';
                   
                     echo '<div class="modal-footer">';
                     echo "<input class='btn btn-primary' type='submit'  name='agregar-ult' value='Crear'></input> ";
-                    echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
+                    echo '<a href="?c=crudGrupos&page='.$_GET['page'].'"><button type="button" class="btn btn-danger">Cancelar</button></a>';
                     echo '</div>';
                     echo "</form>";
                     echo '</div>';
@@ -245,7 +245,7 @@ $("#myModal").modal();
                             
                             echo '<div class="modal-footer">';
                             echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
-                            echo "<input class='btn btn-danger' type='submit'  name='cancelar' value='Cancelar'></input>";
+                            echo '<button type="button" class="btn btn-danger cancelar" data-dismiss="modal">Cancelar</button>';                                                    echo '</div>';
                             echo '</div>';
                             echo "</form>";
                             echo '</div>';
@@ -360,6 +360,19 @@ for($i=1;$i<=$total_pages;$i++){
 ?>
   </ul>
 </nav>
+<script>
+$(".cancelar").click(function(){
 
+<?php 
+    if(isset($_SESSION["modificar"])){
+        unset($_SESSION["modificar"]);
+    }
+
+    ?>
+    
+});
+
+
+</script>
 </body>
 </html>
