@@ -125,12 +125,14 @@ hr{
     z-index:4;
     color:white
 }
-@media screen and (max-width: 890px) {
+@media only screen 
+        and (min-device-width: 320px) 
+        and (max-device-width: 812px) {
   .nav{
       padding:50px
   }
   .cabecera-todo{
-      display:none
+      display:none !important
   }
 } 
 .cabecera{

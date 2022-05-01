@@ -136,7 +136,7 @@ include "menu.php"?>
             <div class="col-md-4 mb-4 mt-1 p-5">
                 <div class="card mt-2 " >
                     <div class="card text-white bg-info mb-3">
-                        <div class="card-header" style="background: #2FA4FF">
+                        <div class="card-header" style="background:  ">
 
                             <h1 class="card-title" style="text-align:center;margin-top:2%"><?php echo $row['id']; ?></h1>
                         </div>
