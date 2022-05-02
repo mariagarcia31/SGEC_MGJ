@@ -235,9 +235,10 @@ $("#myModal").modal();
 ?>
 <div class="container" style="margin-top:5%">
 
-
+<?php include "barraBusquedaMisReservas/barra.php"; ?>
 
 <div class="row">
+
     
                 <div class="col-md-12 " style="border:none">
 <h1 style="color:#1A3C40; text-align:center; margin-bottom:5%; background-color:white" >MIS  RESERVAS</h1>
