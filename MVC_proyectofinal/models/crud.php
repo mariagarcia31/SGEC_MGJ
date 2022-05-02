@@ -1559,34 +1559,29 @@ class Crud extends Conexion{
                 $getTextLine = fgets($open);
                 $explodeLine = explode(",",$getTextLine);
                 list($nombre,$primerApellido,$segundoApellido,$usuario,$correo,$puesto) = $explodeLine;
-                $qry = "SELECT * from usuarios where correo='".$correo."' ; ";
-                $consulta= $this->conexion->prepare($qry);
-                $consulta->execute();
-                $resultado_nombres=$consulta->fetchAll();
-                if($resultado_nombres==null){
-                    $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, puesto,contra, confirmacion, rol) values('$nombre','$correo','$primerApellido','$segundoApellido','$usuario','$puesto','$usuario','0','2'); ";
-                    $consulta=$this->conexion->prepare($qry);
-                    $consulta->execute();
-
-                   return true;  
-
-                    
+                if($nombre==="Nombre"){
+                    continue;
                 }else{
-                    echo "error";
+                    $qry = "SELECT * from usuarios where correo='".$correo."' ; ";
+                    $consulta= $this->conexion->prepare($qry);
+                    $consulta->execute();
+                    $resultado_nombres=$consulta->fetchAll();
+                    if($resultado_nombres==null){
+                        $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, puesto,contra, confirmacion, rol) values('$nombre','$correo','$primerApellido','$segundoApellido','$usuario','$puesto','$usuario','0','2'); ";
+                        $consulta=$this->conexion->prepare($qry);
+                        $consulta->execute();
+    
+                    }
                 }
+               
+                
             }
         
             
         }
         fclose($open);
-        if($resultado_nombres==null){
-        return true;     
-
-        }
-        else{
-            return true;
-    
-        }
+        return true;
+       
     
     
 }
