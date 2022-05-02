@@ -18,12 +18,45 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="../MVC_proyectofinal/libs/css/estilos.css">
+<link rel="stylesheet" href="libs/css/estilos.css">
 <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/cssc/login&check.css">
 
 <style>
-  
+   .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  padding:50px;
+  display: flex;
+    justify-content: center;
+    align-items:center !important;
+    margin-top:50px !important
+}
+.card img{
+  width:100px
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.container{
+  display: flex;
+    justify-content: center;
+    margin-bottom:100px
+}
+form{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+input{
+  margin:10px !important
+}
+.form{
+  box-shadow:none !important
+}
   </style>
 </head>
 <body>

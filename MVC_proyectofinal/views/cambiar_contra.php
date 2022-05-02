@@ -21,7 +21,6 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra'])){
     <meta charset="UTF-8">
     <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/cssc/login&check.css">
-    <link rel="stylesheet" href="../MVC_proyectofinal/libs/css/estilos.css">
 
     <title>Cambio de Contraseña</title>
     <?php include "menu.php";

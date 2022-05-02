@@ -16,11 +16,202 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../MVC_proyectofinal/libs/css/estilos.css">
+    <link rel="stylesheet" href="libs/css/estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <title>Calendario Semanal</title>
     <style>
+        .row{
+            margin:0px !important
+        }
+        .tramos{
+            margin-bottom:100px
+        }
+        body{
+            overflow-x: hidden !important;
+        }
+        .btn-group-xs>.btn, .btn-xs {
+            padding: 1px 5px;
+            font-size: 16px !important;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+        a:hover{
+            text-decoration:none !important
+        }
+
+
+        .close {
+            font-size: 4rem !important;
+            margin-top: 50px;
+            margin-left: 50px;
+            float: left !important;
+            background: none;
+            border: none;
+        }
+        .mx-auto{
+            text-align:center
+        }
+       
+
+        @media only screen 
+        and (min-device-width: 320px) 
+        and (max-device-width: 812px)
+         {
+            body{
+            overflow-x: hidden;
+        }
+           
+        .diaSemana{
+            border:none !important; 
+            background-color:#cb4f24 !important; 
+            color:white !important; 
+            width:fit-content !important; 
+            font-size:8px !important;
+        }
+        .calendario{
+            width: 100% !important;
+            padding:5 !important;
+            margin-bottom:30% !important;
+        }
+
+        .dia{
+            font-size:8px !important;
+        }
+        .hora{
+            font-size:8px !important;
+            color: #cb4f24  !important; 
+        }
+
+        .botonReservar{
+            color:white !important;
+            height: 16px !important;
+        }
+        .botonReservado{
+            color:white !important;
+            height: 30px !important;
+        }
+
+        .textoBotonReservar{
+
+            font-size:8px !important;
+        }
         
+        
+        .botonCambiarVista{
+            font-size:8px;color:white !important;
+        }
+
+        .nombreSemana{
+            display:inline-block !important;
+            margin-left:2% !important;
+            margin-right:2% !important;
+            font-size:18px !important;
+            color:#cb4f24 !important;
+        }
+
+        .flechaCambiarSemana{
+            font-size:18px !important;
+            color:#212529 !important;
+        }
+
+        .nombreAula{
+            color:#202020 !important;
+            background-color:white !important;
+            font-size:20px !important;
+
+        }
+        .volver{
+            font-size:10px !important;
+            color:#202020 !important;
+        }
+        
+        .centrar{
+            margin-left:25% !important;
+            margin-right:auto !important;
+        }
+
+        }
+
+
+      
+
+          
+        @media screen 
+        and (min-device-width: 813px) 
+        and (max-device-width: 1600px) 
+        and (-webkit-min-device-pixel-ratio: 1) { 
+            body{
+            overflow-x: hidden;
+        }
+           
+        .diaSemana{
+            border:none !important; 
+            background-color:#cb4f24 !important; 
+            color:white !important; 
+            width:fit-content !important; 
+            font-size:16px !important;
+        }
+        .calendario{
+            width: 75% !important;
+            padding:5 !important;
+            margin-bottom:10% !important;
+        }
+
+        .dia{
+            font-size:14px !important;
+        }
+        .hora{
+            font-size:14px !important;
+        }
+
+
+        .botonReservar{
+            color:white !important;
+            
+        }
+
+        .textoBotonReservar{
+
+            font-size:14px !important;
+        }
+        
+        .botonCambiarVista{
+            font-size:15px;color:white !important;
+        }
+
+        .nombreSemana{
+            display:inline-block !important;
+            margin-left:2% !important;
+            margin-right:2% !important;
+            font-size:25px !important;
+            color:#cb4f24 !important;
+        }
+
+        .flechaCambiarSemana{
+            font-size:25px !important;
+            color:#212529 !important;
+        }
+
+        .nombreAula{
+            color:#202020 !important;
+            background-color:white !important;
+            font-size:35px !important;
+
+        }
+        .volver{
+            font-size:17px !important;
+            color:#202020 !important;
+        }
+        .container{
+            width:90%;
+        }
+        .boton{
+            width: 30%;
+        }
+        .reservado{
+            margin-left:auto;
+        }
+        }
 
     </style>
 <script>

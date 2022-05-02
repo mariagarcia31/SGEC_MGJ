@@ -11,13 +11,250 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../MVC_proyectofinal/libs/css/estilos.css">
+    <link rel="stylesheet" href="libs/css/estilos.css">
 
 <style>
             body{
             overflow-x: hidden;
         }
- 
+    .nav{
+        display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    /* margin: 15px; */
+    background-color: #212529;
+    padding: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    }
+
+    .cabecera, .cabecera-todo{
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .logoEnlace{
+        margin-right: 5rem;
+    }
+
+
+    li.nav-item{
+        float: right;
+    right: 0px;
+    top: 0px;
+    position: absolute !important;
+    margin: 15px;
+}
+    
+    .menu {
+        position: absolute;
+    top: 30px;
+    left: 20px;
+        margin:0px 15px !important;
+        color: rgba(255, 255, 255, 0.7) !important
+    }
+    .menu:hover{
+        color: rgba(255, 255, 255, 0.5) !important
+    }
+   /* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 999; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #212529; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+.closebtn{
+    color:#375458;
+
+}
+.closebtn:hover{
+    color:#1A3C40;
+    background:none;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 42px !important;
+    margin-left: 50px;
+}
+/* The navigation menu links */
+.sidenav a {
+padding: 20px 8px 20px 32px;
+  text-decoration: none !important;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.btn-menu:hover {
+    color: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+
+}
+hr{
+    margin:0px !important
+}
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+.footer{
+    background-color: #212529; /* Black*/
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    padding:7px;
+    text-align:center;
+    z-index:4;
+    color:white;
+    margin-top: 5% !important;
+}
+@media only screen 
+        and (min-device-width: 320px) 
+        and (max-device-width: 812px) {
+  .nav{
+      padding:50px
+  }
+  .cabecera-todo{
+      display:none !important
+  }
+} 
+.cabecera{
+  font-size: 1.75rem !important; 
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+} 
+.glyphicon {
+    position: relative;
+    top: 0px !important;
+    margin-left: 15px;
+    font-size: 25px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.menu:hover{
+    cursor:pointer
+}
+a:visited{
+    text-decoration:none
+}
+
+hr{
+    margin:0px !important;
+    color:white
+}
+body {
+  font-family: "Lato", sans-serif;
+}
+
+
+
+/* Style the sidenav links and the dropdown button */
+ .dropdown-btn {
+  padding: 15px 8px 15px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: whitesmoke;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: white;
+}
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #545454;
+  padding-left: 8px;
+  color:white !important
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.btn-cerrar-sesion{
+    color: black;
+    font-size: 14px !important;
+    padding: 0px;
+    margin-bottom: 0px !important;
+}
+.btn-cerrar-sesion:hover{
+    cursor:pointer !important
+}
+.swal2-confirm.btn.btn-success{
+    margin-left: 10px;
+    font-size: 13px;
+}
+.swal2-cancel.btn.btn-danger{
+    margin-left: 10px;
+    font-size: 13px;
+}
+.dropdown-btn.btn-menu.active{
+  color:gray !important
+}
 
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

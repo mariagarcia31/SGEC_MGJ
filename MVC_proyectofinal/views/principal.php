@@ -17,7 +17,7 @@ include "menu.php"?>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <title>Principal</title>
-    <link rel="stylesheet" href="../MVC_proyectofinal/libs/css/estilos.css">
+    <link rel="stylesheet" href="libs/css/estilos.css">
 
 <style>
     .card {
@@ -49,6 +49,32 @@ include "menu.php"?>
 #search:focus{
     outline: none !important;
 }
+@media screen 
+        and (min-device-width: 320px) 
+        and (max-device-width: 812px) 
+        and (-webkit-min-device-pixel-ratio: 1) { 
+        
+        .barra{
+            width: 90% !important;
+        }
+        .resultadosBusqueda{
+            width: 60% !important;
+        }
+    }
+
+@media screen 
+        and (min-device-width: 813px) 
+        and (max-device-width: 1600px) 
+        and (-webkit-min-device-pixel-ratio: 1) { 
+        
+        .barra{
+            width: 30% !important;
+        }
+
+        .resultadosBusqueda{
+            width: 18% !important;
+        }
+    }
 
 
 

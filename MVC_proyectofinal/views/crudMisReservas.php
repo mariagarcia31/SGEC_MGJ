@@ -17,8 +17,6 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
   
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="../MVC_proyectofinal/libs/css/estilos.css">
-
 <script>
 $(document).ready(function(){
     $(".alert").delay( 2200 ).fadeOut(1100);
