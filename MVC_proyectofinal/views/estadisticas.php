@@ -91,6 +91,8 @@ catch(\PDOException $ex){
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../MVC_proyectofinal/libs/css/estilos.css">
+
 <script>
 window.onload = function() {
     

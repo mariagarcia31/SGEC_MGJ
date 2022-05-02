@@ -22,6 +22,7 @@ $(document).ready(function(){
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../MVC_proectofinal/libs/css/estilos.css">
 
 </head>
 <body>
