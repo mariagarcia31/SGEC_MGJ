@@ -1552,14 +1552,26 @@ class Crud extends Conexion{
         $info = new SplFileInfo($filename);
         $extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);
       
-         if($extension == 'csv'){
+         if($extension === 'csv' || $extension==='txt'){
             $filename = $_FILES['file']['tmp_name'];
             $open = fopen($filename, "r");
             while (!feof($open)){
                 $getTextLine = fgets($open);
                 $explodeLine = explode(",",$getTextLine);
-                list($nombre,$primerApellido,$segundoApellido,$usuario,$correo,$puesto) = $explodeLine;
-                if($nombre==="Nombre"){
+                list($nombre,$primerApellido,$segundoApellido,$usuario,$puesto) = $explodeLine;
+                /*Lo que hacemos es con utf8_encode mostrar todo con tildes y con la función trim eliminamos las comillas dobles si las hubiera
+                porque en el csv de prueba venía con comillas dobles entonces si existen las elimina*/
+                $nombre1=utf8_encode(trim($nombre,'"'));
+                $primerApellido1=utf8_encode(trim($primerApellido,'"'));
+                $segundoApellido1=utf8_encode(trim($segundoApellido,'"'));
+                $usuario1=utf8_encode(trim($usuario,'"'));
+                $puesto1=utf8_encode(trim($puesto,'"'));
+                $puestoDef=explode("-", $puesto1);
+                $correo=$usuario1."@ciudadescolarfp.es";
+                echo "hola";
+                echo $getTextLine[0];
+                // Eliminamos la cabecera
+                if($nombre=="Nombre" || $nombre=="" || $nombre=='"Nombre"'){
                     continue;
                 }else{
                     $qry = "SELECT * from usuarios where correo='".$correo."' ; ";
@@ -1567,24 +1579,27 @@ class Crud extends Conexion{
                     $consulta->execute();
                     $resultado_nombres=$consulta->fetchAll();
                     if($resultado_nombres==null){
-                        $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, puesto,contra, confirmacion, rol) values('$nombre','$correo','$primerApellido','$segundoApellido','$usuario','$puesto','$usuario','0','2'); ";
+                        $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, puesto,contra, confirmacion, rol) values('$nombre1','$correo','$primerApellido1','$segundoApellido1','$usuario1','".$puestoDef[0]."','$usuario1','0','2'); ";
                         $consulta=$this->conexion->prepare($qry);
                         $consulta->execute();
-    
                     }
+    
                 }
-               
-                
             }
-        
             
+            fclose($open);
+            return true;    
+        }else{
+            return false;
         }
-        fclose($open);
-        return true;
+        
+         
+    }
+        
        
     
     
-}
+
 
      /*************************************  FIN MODELO DE USUARIOS   ********************************/
 

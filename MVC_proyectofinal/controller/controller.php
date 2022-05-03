@@ -97,6 +97,18 @@ class Control{
               
             header("location:?c=crudUsuarios&page=".$_GET['pag'].""); 
             
+           }else{
+            $_SESSION["exito"]=" 
+        
+
+            <script>    Swal.fire({
+                icon: 'error',
+                title: 'La extensión del archivo debe ser .csv/.txt',
+                showConfirmButton: false,
+                timer: 2500
+              });</script>";
+              
+            header("location:?c=crudUsuarios&page=".$_GET['pag'].""); 
            }
         
     }
@@ -150,7 +162,7 @@ class Control{
  
     function cambio_contra(){
 
-        $result=$this->crud->contraNueva($_GET["_correo"],$_POST["contrasena1"],$_POST["contrasena2"]);
+        $result=$this->crud->contraNueva($_POST["_correo"],$_POST["contrasena1"],$_POST["contrasena2"]);
 
         if($result){
             $_SESSION["cambiado"]="ok";
@@ -163,10 +175,10 @@ class Control{
             <script>     Swal.fire({
                 icon: 'warning',
                 title: 'Oops...',
-                text: 'Las contraseñas deben ser iguales',
+                text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es',
                 footer: ''
               })</script>";
-            header("location:?c=c_contra&correo=".$_GET['_correo']."");     
+            header("location:?c=c_contra");     
         }
 
 
