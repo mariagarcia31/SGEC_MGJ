@@ -18,19 +18,20 @@ class Crud extends Conexion{
     function verificarUsuario($correo,$contrasena){
         try{
 
-            if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+            if (filter_var($correo, FILTER_VALIDATE_EMAIL) || $correo) {
                 
                 
                 $_SESSION['correo']=$correo;
 
-                $sql="SELECT * FROM usuarios WHERE correo ='$correo'";
+                $sql="SELECT * FROM usuarios WHERE (correo ='$correo' or usuario='$correo')";
                 $consulta=$this->conexion->prepare($sql);
                 $consulta->execute();
                 $verif3=$consulta->fetch();
-                $_SESSION['correo']=$correo;
 
                 
-                $sql="SELECT count(*) FROM usuarios WHERE correo ='$correo' and contra='$contrasena'";
+
+                
+                $sql="SELECT count(*) FROM usuarios WHERE (usuario='$correo' or correo ='$correo') and contra='$contrasena'";
                 $consulta=$this->conexion->prepare($sql);
                 $consulta->execute();
                 $verif4=$consulta->fetch();
@@ -61,7 +62,7 @@ class Crud extends Conexion{
                     $_SESSION['crudFestivos']=$verif4['crud_festivos'];
 
                     $_SESSION['contra']=$contrasena;
-                    $_SESSION['correo']=$nombre;
+                    $_SESSION['correo']=$correo;
 
               
 
@@ -94,8 +95,9 @@ class Crud extends Conexion{
                     $_SESSION['crudFestivos']=$verif4['crud_festivos'];
 
                     $_SESSION['contra']=$contrasena;
-                    $_SESSION['correo']=$nombre;
-                    $_SESSION["cambiado"]="ok";
+                    $_SESSION['correo']=$correo;
+                    
+                    //$_SESSION["cambiado"]="ok";
 
 
                     return true;
@@ -133,14 +135,15 @@ class Crud extends Conexion{
     }
 
 
-    function contraNueva($correo,$contraN,$contraN2){
+    function contraNueva($correo,$contraN,$contraN2,$n_correo){
 
         try{
 
-            if($contraN == $contraN2){
+            
+            if($contraN == $contraN2 && (strpos($n_correo, "@") && (strpos($n_correo, "ciudadescolarfp") || strpos($n_correo, "educa.madrid")) && strpos($n_correo, "."))){
 
                 $contra=password_hash("$contraN", PASSWORD_DEFAULT);
-                $sql="CALL cambiarContra('$correo','$contra')";
+                $sql="CALL cambiarContra('$correo','$contra','$n_correo')";
                 $con=$this->conexion->prepare($sql);
                 $con->execute();
                 

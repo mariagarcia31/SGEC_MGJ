@@ -4,7 +4,7 @@ class Precio{
 
     public function conexion(){
         try{
-            $conexion=new PDO("mysql:host=localhost;dbname=sgec","root","");
+            $conexion=new PDO("mysql:host=localhost:33065;dbname=sgec","root","");
             $conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
             return $conexion;
         }
@@ -45,7 +45,26 @@ else{
 }
 
 
-exit();
 
+
+?>
+
+<form action="" method="post">
+    Correo<input type="email" name="correo" >
+    <input type="submit" name="enviar">
+</form>
+
+<?php  
+
+    if(isset($_POST["enviar"])){
+        $correo=$_POST["correo"];
+        
+
+        if(strpos($correo, "@") && (strpos($correo, "ciudadescolar") || strpos($correo, "educa.madrid")) && strpos($correo, ".")){
+            echo "funciona";
+        }else{
+            echo "no funciona";
+        }
+    }
 
 ?>

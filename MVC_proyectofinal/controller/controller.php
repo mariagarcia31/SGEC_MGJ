@@ -130,12 +130,12 @@ class Control{
             if($result2){
 
                 if(isset($_POST['recordar'])) {
-                    
+                    $_SESSION["cambiado"]="ok";
                     setcookie("contrasena",$contrasena,time()+600);
                     setcookie("correo",$correo,time()+600);
                     header("location:?c=principal"); 
                 }else{
-
+                    $_SESSION["cambiado"]="ok";
                     header("location:?c=principal"); 
                 }
  
@@ -161,24 +161,40 @@ class Control{
 
  
     function cambio_contra(){
-
-        $result=$this->crud->contraNueva($_POST["_correo"],$_POST["contrasena1"],$_POST["contrasena2"]);
+        $n_correo=$_POST["n_correo"];
+        
+        $result=$this->crud->contraNueva($_GET["correo"],$_POST["contrasena1"],$_POST["contrasena2"],$n_correo);
 
         if($result){
             $_SESSION["cambiado"]="ok";
             header("location:?c=principal"); 
             
         }else{
-            $_SESSION["error2"]="
+            if(isset($_GET["conf"])){
+                $_SESSION["error2"]="
         
 
-            <script>     Swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es',
-                footer: ''
-              })</script>";
-            header("location:?c=c_contra");     
+                <script>     Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es',
+                    footer: ''
+                })</script>";
+                header("location:?c=configuracion&page=1");     
+
+            }else{
+                $_SESSION["error2"]="
+        
+
+                <script>     Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es',
+                    footer: ''
+                  })</script>";
+                header("location:?c=c_contra&correo=".$_GET["correo"]."");     
+            }
+           
         }
 
 
