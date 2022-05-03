@@ -53,7 +53,7 @@ if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
             <hr>
         
             <form class="login-form" action="?c=verificar" method="post">
-                <input type="email"  name="correo" placeholder="Correo" required>
+                <input type="text"  name="correo" placeholder="Correo electrónico o usuario" required>
                <input type="password" name="contrasena" placeholder="Contraseña" required>
   
                <div class="custom-control custom-checkbox text-start">

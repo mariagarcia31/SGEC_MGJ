@@ -18,19 +18,19 @@ class Crud extends Conexion{
     function verificarUsuario($correo,$contrasena){
         try{
 
-            if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+           
                 
                 
                 $_SESSION['correo']=$correo;
 
-                $sql="SELECT * FROM usuarios WHERE correo ='$correo'";
+                $sql="SELECT * FROM usuarios WHERE correo ='$correo' or usuario='$correo'";
                 $consulta=$this->conexion->prepare($sql);
                 $consulta->execute();
                 $verif3=$consulta->fetch();
                 $_SESSION['correo']=$correo;
 
                 
-                $sql="SELECT count(*) FROM usuarios WHERE correo ='$correo' and contra='$contrasena'";
+                $sql="SELECT count(*) FROM usuarios WHERE correo ='$correo' or usuario='$correo' and contra='$contrasena'";
                 $consulta=$this->conexion->prepare($sql);
                 $consulta->execute();
                 $verif4=$consulta->fetch();
@@ -103,10 +103,7 @@ class Crud extends Conexion{
                     return false;
                 }
 
-            } else {
-               return false;
-            }
-
+            
         }catch(PDOException $e){
                 return $e;
         }
