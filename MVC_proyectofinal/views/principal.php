@@ -16,7 +16,7 @@ include "menu.php"?>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
-    <title>Principal</title>
+    <title>SGEC</title>
     <link rel="stylesheet" href="libs/css/estilos.css">
 
 <style>

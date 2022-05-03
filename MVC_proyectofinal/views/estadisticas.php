@@ -1,3 +1,8 @@
+<html>
+    <head>
+        <title>Estadísticas</title>
+</head>
+</html>
 <?php
 
 if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSION["cambiado"]) ){
