@@ -18,7 +18,7 @@ class Crud extends Conexion{
     function verificarUsuario($correo,$contrasena){
         try{
 
-           
+            if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
                 
                 
                 $_SESSION['correo']=$correo;
@@ -103,7 +103,10 @@ class Crud extends Conexion{
                     return false;
                 }
 
-            
+            } else {
+               return false;
+            }
+
         }catch(PDOException $e){
                 return $e;
         }
