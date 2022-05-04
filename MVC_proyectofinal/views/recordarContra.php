@@ -17,7 +17,7 @@
 <body>
             <h1>Recordar contraseña</h1>
 
-            <form class="login-form" action="?=recordarContra" method="POST">
+            <form class="login-form" action="?c=recordarContra" method="POST">
             <input type="text" name="correo" placeholder="Correo electrónico" required>    
 
                 <input type="submit" value="enviar" name="enviar">

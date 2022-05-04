@@ -22,11 +22,10 @@ class Control{
     }
 
     function recordarContra(){
-            
             if(isset($_POST["enviar"])){
                 $correo=$_POST["correo"];
                 $result=$this->crud->recordarContra($correo);            
-            
+
             }
         
     }
