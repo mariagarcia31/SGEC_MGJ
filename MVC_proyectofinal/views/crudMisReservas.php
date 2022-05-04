@@ -349,7 +349,7 @@ echo "<br>";
             <li class="page-item active" >
 
 				<!--con un bucle mostramos todas las páginas que hay-->
-				<?php for($i=0;$i<=$total_pages;$i++): 
+				<?php for($i=0;$i<=$total_pages;$i++){ 
                     if($i==$_GET["page"]){
 
                     
@@ -364,7 +364,7 @@ echo "<br>";
 
 				<?php }
               
-                endfor ?>
+                    }?>
                     </li>
 
 				<!--Para ir a la página siguiente en el enlace ponemos que le lleve a la página actual +1-->
