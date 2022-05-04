@@ -10,7 +10,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
 
 ?>
-<html lang="en">
+<html lang="en" style="    overflow-x: hidden;">
 <head>
   
     <title>Document</title>
