@@ -216,8 +216,9 @@ class Control{
                 showConfirmButton: false,
                 timer: 1500
               });</script>";
-              
-            header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id']."&month=".$_GET['month']."&year=".$_GET['year'].""); 
+              $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Se ha confirmado la reserva para ".$_GET["id"]." el día ".$_GET["date"]. " en el tramo ".$_POST["timeslot"], $_SESSION["correo"]);
+            
+              header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id']."&month=".$_GET['month']."&year=".$_GET['year'].""); 
             
         }else{
 
@@ -244,7 +245,8 @@ class Control{
                 showConfirmButton: false,
                 timer: 1500
               });</script>";
-              
+              $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Se ha confirmado la reserva para ".$_GET["id"]." el día ".$_GET["date"]. " en el tramo ".$_POST["timeslot"], $_SESSION["correo"]);
+
             header("location:?c=calendarioSemanal&id=".$_GET['id']."&week=".$_GET['week']."&year=".$_GET['year'].""); 
             
         }else{

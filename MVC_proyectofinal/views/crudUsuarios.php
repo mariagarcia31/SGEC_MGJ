@@ -461,7 +461,10 @@ echo "<br>";
 		</ul>
     </nav>
 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> desarrollo-maria
 <script>
 $(".cancelar").click(function(){
 

@@ -1,5 +1,9 @@
 <?php
-
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
+        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/Exception.php';
+        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/PHPMailer.php';
+        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/SMTP.php';
 include("conexion.php");
 
 class Crud extends Conexion{
@@ -14,7 +18,24 @@ class Crud extends Conexion{
     }
 
 
+    function enviarCorreo($asunto,$cuerpo,$correo){
 
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        
+        $mail->From = "mail@gmail.com"; 
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls'; 
+        $mail->Host = "smtp.gmail.com"; 
+        $mail->Port = 587;
+        $mail->Username ='sgec.ciudadescolar@gmail.com';
+        $mail->Password = 'Mariagerardoyjossue1'; 
+        $mail->AddAddress($correo);
+        $mail->Subject = $asunto;
+        $mail->Body = $cuerpo;
+        $mail->Send();
+
+    }
     function verificarUsuario($correo,$contrasena){
         try{
 
