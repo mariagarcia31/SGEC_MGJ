@@ -461,7 +461,6 @@ echo "<br>";
 		</ul>
     </nav>
 </div>
-<?php } ?>
 <script>
 $(".cancelar").click(function(){
 
