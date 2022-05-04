@@ -34,8 +34,10 @@ class Crud extends Conexion{
         $mail->Subject = $asunto;
         $mail->Body = $cuerpo;
         $mail->Send();
+       
 
     }
+
     function verificarUsuario($correo,$contrasena){
         try{
 

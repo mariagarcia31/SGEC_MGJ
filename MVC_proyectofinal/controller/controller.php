@@ -21,6 +21,7 @@ class Control{
         include_once ("views/index.php");
     }
 
+
     function principal(){
         include_once ("views/principal.php");
     }
@@ -30,6 +31,7 @@ class Control{
     function configuracion(){
         include_once ("views/configuracion.php");
     }
+    
     function c_contra(){
         include_once ("views/cambiar_contra.php");
     }
@@ -116,7 +118,7 @@ class Control{
 
 
 
-  
+ 
 
     function verificar(){
    

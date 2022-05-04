@@ -1,13 +1,6 @@
 <?php 
 
-if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
-    header ('Location:?c=principal');
 
-}else{
-
-    $contra1="";
-    $usu1="";   
-}
 
 ?>
 
@@ -61,7 +54,9 @@ if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
                <label class="custom-control-label" for="checkbox-1">Recordar contraseña</label>
         </div>
                 <button >Entrar</button>
+                
             </form>
+            <a href="views/recordarContra.php">He olvidado mi contraseña</a>
             <?php if(isset($_SESSION["error"])){ ?>     
                  <div class='alert  '><?php echo $_SESSION["error"];?></div>                     
             <?php   unset($_SESSION["error"]);
