@@ -403,7 +403,7 @@ $("#myModal").modal();
         
        // echo "</table>";
   
-  ?>
+        ?>
            </table>
         </div>
         </div>
@@ -461,7 +461,7 @@ echo "<br>";
 		</ul>
     </nav>
 </div>
-<?php } ?>
+
 <script>
 $(".cancelar").click(function(){
 
