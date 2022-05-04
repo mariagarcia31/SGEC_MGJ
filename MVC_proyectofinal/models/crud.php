@@ -281,7 +281,7 @@ class Crud extends Conexion{
                  $dayOfWeek = 0;
                  $calendar .= "</tr><tr>";
              }
-              
+            
              $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
              $date = "$year-$month-$currentDayRel";
              $date2 = date('Y-m-d', strtotime("+14 day"));
