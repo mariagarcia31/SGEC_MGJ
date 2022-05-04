@@ -20,7 +20,7 @@ class Crud extends Conexion{
         $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $contra= substr(str_shuffle($permitted_chars), 0, 10);
         $sql="UPDATE usuarios SET contra = '$contra', confirmacion=0 WHERE correo = '$correo';";
-        $consulta=$this->conn->prepare($sql);
+        $consulta=$this->conexion->prepare($sql);
         $consulta->execute();
         $mail = new PHPMailer();
         $mail->IsSMTP();
@@ -35,6 +35,7 @@ class Crud extends Conexion{
         $mail->Subject = "Cambio de contrasena";
         $mail->Body = "Su contraseña temporal es ".$contra;
         $mail->Send();
+        return true;
     }
 
     function enviarCorreo($asunto,$cuerpo,$correo){

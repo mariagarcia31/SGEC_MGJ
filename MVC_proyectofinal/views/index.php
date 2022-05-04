@@ -56,7 +56,7 @@
                 <button >Entrar</button>
                 
             </form>
-            <a href="views/recordarContra.php">He olvidado mi contraseña</a>
+            <a href="?c=recordarContra">He olvidado mi contraseña</a>
             <?php if(isset($_SESSION["error"])){ ?>     
                  <div class='alert  '><?php echo $_SESSION["error"];?></div>                     
             <?php   unset($_SESSION["error"]);

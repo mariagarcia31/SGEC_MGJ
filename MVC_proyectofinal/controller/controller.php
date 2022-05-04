@@ -21,16 +21,23 @@ class Control{
         include_once ("views/index.php");
     }
 
-    function recordarContra(){
-            if(isset($_POST["enviar"])){
-                $correo=$_POST["correo"];
-                $result=$this->crud->recordarContra($correo);            
 
-            }
-        
-    }
     function principal(){
         include_once ("views/principal.php");
+    }
+    function recordarContra(){
+        include_once ("views/recordarContra.php");
+    }
+    function enviarContraNueva(){
+            $correo=$_POST["correo"];
+            $result=$this->crud->recordarContra($correo);            
+            if($result){
+                header("location:?c=principal"); 
+            }else{
+                header("location:?c=principal"); 
+            }
+         
+       
     }
     function ayuda(){
         include_once ("views/ayuda.php");
