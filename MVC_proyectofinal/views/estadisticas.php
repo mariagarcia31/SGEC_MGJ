@@ -89,7 +89,7 @@ catch(\PDOException $ex){
 ?>
 
 
-<html lang="en">
+<html lang="en" style="    overflow-x: hidden;">
 <head>
   
     <title>Estadísticas</title>

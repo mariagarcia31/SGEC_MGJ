@@ -10,7 +10,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
 
 ?>
-<html lang="en">
+<html lang="en" style="    overflow-x: hidden;">
 <head>
   
     <title>Gestionar roles</title>
@@ -95,7 +95,7 @@ if($count[0]==0){
 }
 else{
 
-$iteams_pagina=3;
+$iteams_pagina=6;
 
 $total_pages=ceil($count[0]/$iteams_pagina);
 
@@ -452,9 +452,9 @@ $("#myModal").modal();
         echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  ";
        
        echo ' <div class="table-responsive-sm">
-       <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
+       <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%;margin-left:-60px">';
 
-        echo "<tr >";
+        echo "<tr ><th>Eliminar</th>";
 
         foreach($result[1] as $indice){
             echo "<th>".$indice."</th>";
@@ -467,11 +467,12 @@ $("#myModal").modal();
         echo "</tr>";
         ?>
 <form action="?c=borrarRoles&pag=<?php echo $_GET["page"]?>" method="post"> 
-<input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style='float:right;' >
+<input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="float:right;   margin-top: -43px; font-size:14px " >
 <?php
         
         foreach($result[0] as $indice=>$dato){
-        
+            echo "<td><input type='checkbox' name='eliminar[]' value=' ".$dato['id']."'</td>";
+
             foreach($dato as $x=>$y){
         
             
@@ -484,7 +485,7 @@ $("#myModal").modal();
             ?>
             
 
-            <td><input type="checkbox" name="eliminar[]" value="<?php echo $dato["id"]?>">
+            <td>
             
             <a class="btn btn-danger"  href="?c=borrarRoles&id=<?php echo $dato["id"] ?>&pag=<?php echo $_GET["page"]?>"><i class="bi bi-trash"></i></a>
         
@@ -520,23 +521,44 @@ echo "<br>";
 //listado
 
 ?>
-<nav aria-label="..." class="contenedor-paginador" >
-  <ul class="pagination pagination-mg justify-content-center">
+<div style="margin-bottom: 100px;
+    display: flex;
+    justify-content: center">
+    <nav aria-label="...">
+		<ul class="pagination">
+		<li style="<?php echo $_GET['page']==1 ? 'display:none' : '' ?>" class="page-item">
+				<a class="page-link" href="inicio.php?c=crudRoles&page=<?php echo $_GET['page']-1?>"><</a>
+			</li>
+            <li class="page-item active" >
 
-<?php
-for($i=1;$i<=$total_pages;$i++){
-    if($i==$page){
-        echo "<li class='page-item active'><a class='page-link'>".$i."</a></li>";
-    }else{
-        echo "<li class='page-item'><a class='page-link' href='?c=crudRoles&page=$i'>$i</a></li>";
-        
-    }
-}
+				<!--con un bucle mostramos todas las páginas que hay-->
+				<?php for($i=0;$i<=$total_pages;$i++): 
+                    if($i==$_GET["page"]){
 
-}
-?>
-  </ul>
-</nav>
+                    
+                    ?>
+                    <a class="page-link" style="color: white!important;
+                    background-color: #212529!important;" href="inicio.php?c=crudRoles&page=<?php echo $_GET['page']?>"><?php echo $i ?></a>
+                    </li>
+                    
+                    <li class="page-item" style="<?php echo $i==$total_pages ? 'display:none' : '' ?>">
+                    <a class="page-link" href="inicio.php?c=crudRoles&page=<?php echo $_GET['page']+1?>"><?php echo $i+1 ?></a>
+
+
+				<?php }
+              
+                endfor ?>
+                    </li>
+
+				<!--Para ir a la página siguiente en el enlace ponemos que le lleve a la página actual +1-->
+                
+                <li style="<?php echo $_GET['page']==$total_pages ? 'display:none' : '' ?>">
+				<a class="page-link" href="inicio.php?c=crudRoles&page=<?php echo $_GET['page']+1?>">></a>
+			</li>				
+		</ul>
+    </nav>
+</div>
+<?php } ?>
 <script>
 $(".cancelar").click(function(){
 

@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" style="    overflow-x: hidden;">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
