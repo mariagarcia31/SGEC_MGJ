@@ -296,7 +296,7 @@ class Crud extends Conexion{
 
              else{
                  
-                 $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4 class='dia'>$currentDay</h4><a href='?c=calendario&date=".$date."&id=".$idAula."&month=$month&year=$year' class='btn btn-xs botonReservar' ><p class='textoBotonReservar'><b>Horarios</b></p></a>";
+                 $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4 class='dia'>$currentDay</h4><a href='?c=calendario&date=".$date."&id=".$idAula."&month=$month&year=$year' class='btn btn-xs botonReservar' onClick='scroll(0, 100);' ><p class='textoBotonReservar'><b>Horarios</b></p></a>";
              }
              $calendar .="</td>";
              $currentDay++;

@@ -19,6 +19,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
     <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/css/estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Vista mensual</title>
     <style>
         .row{
@@ -281,8 +282,13 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 ?>
 <script type="text/javascript">
    $(document).ready(function(){
-     var divLoc = $('#fixed').offset();
-     $('html, body').animate({scrollTop: divLoc.top}, "medium");
+    window.scroll({
+  top: 500,
+  left: 100,
+  behavior: 'smooth'
+});
+
+
  });
  </script>
 
