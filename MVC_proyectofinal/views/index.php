@@ -45,15 +45,15 @@
             <h2>Iniciar Sesión</h2>
             <hr>
         
-            <form class="login-form" action="?c=verificar" method="post">
-                <input type="text"  name="correo" placeholder="Correo electrónico o usuario" required>
-               <input type="password" name="contrasena" placeholder="Contraseña" required>
+            <form class="login-form" action="?c=verificar" method="post" id="formulario">
+                <input type="text"  id="correo" name="correo" placeholder="Correo electrónico o usuario" required>
+               <input type="password" id="contra" name="contrasena" placeholder="Contraseña" required>
   
                <div class="custom-control custom-checkbox text-start">
                <input type="checkbox" class="custom-control-input" id="checkbox-1" name="recordar" value="recordar" style="width:5%" > 
                <label class="custom-control-label" for="checkbox-1">Recordar contraseña</label>
         </div>
-                <button >Entrar</button>
+                <input type="submit" value="Entrar" name="entrar" >
                 
             </form>
             <a href="?c=recordarContra">He olvidado mi contraseña</a>
@@ -64,6 +64,30 @@
         }?>
         </div>
     </div>
+    <script>
+       document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("formulario").addEventListener('submit', validarFormulario); 
+    });
+
+        function validarFormulario(evento) {
+        evento.preventDefault();
+        var usuario = document.getElementById('correo').value;
+        if(  /^\w+([\.-]?\w+)*@(?:|ciudadescolarfp|educa.madrid)\.(?:|org|es)+$/.test(usuario)) {
+            this.submit();
+
+        }else{
+            Swal.fire({
+                        icon: 'warning',
+                        text: 'El dominio del correo debe ser @ciudadescolarfp.es o educa.madrid.org',
+                        showConfirmButton: false,
+                        timer: 4500
+                    });
+            return false;
+
+        }
+
+}
+        </script>
 
 
 
