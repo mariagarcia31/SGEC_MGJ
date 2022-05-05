@@ -24,6 +24,21 @@
             z-index:4;
             color:white
         }
+
+    #iniciar{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #537efd;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
     </style>
 </head>
 
@@ -53,7 +68,7 @@
                <input type="checkbox" class="custom-control-input" id="checkbox-1" name="recordar" value="recordar" style="width:5%" > 
                <label class="custom-control-label" for="checkbox-1">Recordar contraseña</label>
         </div>
-                <input type="submit" value="Entrar" name="entrar" >
+                <input type="submit" value="Entrar" name="entrar" id="iniciar" >
                 
             </form>
             <a href="?c=recordarContra">He olvidado mi contraseña</a>
