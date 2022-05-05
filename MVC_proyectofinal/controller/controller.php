@@ -30,9 +30,9 @@ class Control{
     }
     function enviarContraNueva(){
             $correo=$_POST["correo"];
-            $result=$this->crud->recordarContra($correo); 
+            $resultado=$this->crud->recordarContra($correo); 
 
-            if($result){
+            if($resultado){
                 
                 header("location:?c=principal"); 
             }else{
