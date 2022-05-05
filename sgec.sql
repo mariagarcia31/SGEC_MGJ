@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2022 a las 16:26:34
+-- Tiempo de generación: 05-05-2022 a las 20:10:05
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -82,10 +82,28 @@ INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`, `i
 ('Aula 700', 'Pabellon 3', 'Tv', 70, 1, 'libs/img/upload/aula1.jpg'),
 ('aula 8', 'l', 'l', 7, 1, 'libs/img/upload/aula1.jpg'),
 ('Aula 815', 'Pabellón 10, Planta 2ª, Puerta 1ª', 'Tv, Ordenadores, Sillas, Mesas', 30, 1, 'libs/img/upload/aulaDefecto.jpeg'),
-('Aula Auxiliar', 'Pabellón 5', 'tv', 29, 0, 'libs/img/upload/aulaDefecto.jpeg'),
 ('Aula Extra', 'Pabellón 3', 'Tv', 50, 0, 'libs/img/upload/aulaDefecto.jpeg'),
-('Aula Polivalente', 'Pabellón 10, Planta 1ª, Puerta 1ª', 'Mesas, Sillas, Pizarras', 70, 1, 'libs/img/upload/aula1.jpg'),
+('Aula Polivalente', 'Pabellón 10, Planta 1ª, Puerta 1ª', 'Mesas, Sillas, Pizarras', 790, 1, 'libs/img/upload/aula1.jpg'),
 ('Aula prueba 2', 'Pabellon 3', 'tv', 33, 1, 'libs/img/upload/aula1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `configuracion`
+--
+
+CREATE TABLE `configuracion` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `valor` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `configuracion`
+--
+
+INSERT INTO `configuracion` (`id`, `nombre`, `valor`) VALUES
+(1, 'Máximo de días siguientes para reservar', '14');
 
 -- --------------------------------------------------------
 
@@ -105,8 +123,7 @@ CREATE TABLE `festivos` (
 --
 
 INSERT INTO `festivos` (`id`, `Nombre`, `fechaInicio`, `fechaFinal`) VALUES
-(1, 'Semana Santa', '2022-04-04', '2022-04-18'),
-(2, 'Día del Trabajador', '2022-04-12', '2022-04-26');
+(1, 'Semana Santa', '2022-04-04', '2022-04-18');
 
 -- --------------------------------------------------------
 
@@ -128,7 +145,10 @@ INSERT INTO `grupos` (`id`, `nombre`, `departamento`) VALUES
 (1, 'DAW 2', 'Informática'),
 (2, 'DAM 2', 'Informática'),
 (3, 'DAW 1', 'Informática'),
-(4, 'DAM 1', 'Informática');
+(4, 'DAM 1', 'Informática'),
+(5, 'DAW 5', 'Infornática'),
+(6, 'DAW 6', 'Informática'),
+(7, 'DAM 7', 'Informatica');
 
 -- --------------------------------------------------------
 
@@ -172,15 +192,6 @@ CREATE TABLE `reservas` (
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `reservas`
---
-
-INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(178, 'Aula 100', 1, '2022-05-17', 'DAM 1', 'charla', '10:30AM - 11:30AM', '2022-05-04 14:55:45'),
-(180, 'Aula 100', 1, '2022-05-11', 'DAM 1', 'charla', '10:30AM - 11:30AM', '2022-05-04 15:20:33'),
-(182, 'Aula 815', 1, '2022-05-11', 'DAM 1', 'charla', '08:30AM - 09:30AM', '2022-05-04 21:49:13');
-
 -- --------------------------------------------------------
 
 --
@@ -197,16 +208,17 @@ CREATE TABLE `roles` (
   `crud_grupos` tinyint(1) NOT NULL,
   `actualizar_bbdd` tinyint(1) NOT NULL,
   `crud_festivos` tinyint(1) NOT NULL,
-  `estadisticas` tinyint(1) NOT NULL
+  `estadisticas` tinyint(1) NOT NULL,
+  `crud_configuracion` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `roles` (`id`, `nombre`, `crud_roles`, `crud_usuarios`, `crud_aulas`, `crud_reservas`, `crud_grupos`, `actualizar_bbdd`, `crud_festivos`, `estadisticas`) VALUES
-(1, 'adminstrador', 1, 1, 1, 1, 1, 1, 1, 1),
-(2, 'profesor', 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `roles` (`id`, `nombre`, `crud_roles`, `crud_usuarios`, `crud_aulas`, `crud_reservas`, `crud_grupos`, `actualizar_bbdd`, `crud_festivos`, `estadisticas`, `crud_configuracion`) VALUES
+(1, 'adminstrador', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 'Profesor', 0, 0, 0, 0, 0, 0, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -232,9 +244,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `primerApellido`, `segundoApellido`, `usuario`, `puesto`, `contra`, `confirmacion`, `rol`) VALUES
-(1, 'Maria', 'mariagarcia.daw@ciudadescolarfp.es', 'García', 'Perez', 'maria123', 'Administradora', 'M5JGbNd0hy', 0, 1),
-(3, 'prueba', 'prueba@gmail.com', 'garcia', 'valero', 'mariagarcia', 'prueba', '12345', 0, 2),
-(75, 'Jossue', 'josue@ciudadescolarfp.es', 'buenaño', 'peña', 'josu', 'fisica', '$2y$10$SpZrXU.wXTNfQaGypHPCU.rEkDN5bYDEMisAAyJUQ2cG4DBUlFXtG', 1, 2);
+(1, 'Maria', 'mariagarcia.daw@ciudadescolarfp.es', 'García', 'Perez', 'maria123', 'Administradora', '$2y$10$eF7yZrthW5tC4DmtdRw.0ePcWKAJiDiaC64.2QNXfjOrQatuU.lZ6', 1, 1),
+(75, 'Jossue', 'josue@ciudadescolarfp.es', 'buenaño', 'peña', 'josu', 'fisica', '$2y$10$SpZrXU.wXTNfQaGypHPCU.rEkDN5bYDEMisAAyJUQ2cG4DBUlFXtG', 1, 2),
+(78, 'Gerardo', 'gerardopimentel.daw@ciudadescolarfp.es', 'Pimentel', 'Andres', 'gerardpm', 'Profe', '$2y$10$dbURiABwmulO1adHZnaF2uXlN45wtg1KqMGfnRQ0HFAZ3qW4HsWJK', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -245,6 +257,13 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `primerApellido`, `segundoApel
 --
 ALTER TABLE `aulas`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `configuracion`
+--
+ALTER TABLE `configuracion`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `festivos`
@@ -292,6 +311,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `configuracion`
+--
+ALTER TABLE `configuracion`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `festivos`
 --
 ALTER TABLE `festivos`
@@ -301,7 +326,7 @@ ALTER TABLE `festivos`
 -- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `historial`
@@ -313,7 +338,7 @@ ALTER TABLE `historial`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=306;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -325,7 +350,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- Restricciones para tablas volcadas
