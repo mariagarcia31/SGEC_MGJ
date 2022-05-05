@@ -45,6 +45,9 @@ class Control{
     function configuracion(){
         include_once ("views/configuracion.php");
     }
+    function calendarioDiario(){
+        include_once ("views/calendarioDiario.php");
+    }
     
     function c_contra(){
         include_once ("views/cambiar_contra.php");
@@ -273,6 +276,36 @@ class Control{
        
 
     }
+
+    function reservaDiaria(){
+
+
+        $resultado=$this->crud->reservar($_SESSION['id'],$_POST['grupo'],$_POST['motivo'],$_POST['timeslot'],$_GET['id'],$_GET['date']);
+
+        if($resultado){
+
+            $_SESSION["msg"]=" 
+        
+
+            <script>    Swal.fire({
+                icon: 'success',
+                title: 'Reserva realizada con éxito',
+                showConfirmButton: false,
+                timer: 1500
+              });</script>";
+              $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Se ha confirmado la reserva para ".$_GET["id"]." el día ".$_GET["date"]. " en el tramo ".$_POST["timeslot"], $_SESSION["correo"]);
+
+            header("location:?c=calendarioDiario&date=".$_GET['date'].""); 
+            
+        }else{
+
+            $_SESSION["msg"]="<div class='alert  '>Ya reservado</div>";
+            header("location:?c=calendarioDiario&date=".$_GET['date'].""); 
+        }
+       
+
+    }
+    
     
     
     /******************************   CONTROLADOR MIS RESERVAS  ********************************/

@@ -18,6 +18,8 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 $dataPoints = array();
 $dataPoints2 = array();
 $dataPoints3 = array();
+$dataPoints4 = array();
+$dataPoints5= array();
 //Best practice is to create a separate file for handling connection to database
 try{
      // Creating a new connection.
@@ -64,6 +66,7 @@ try{
         }
 
 
+
     if(isset($_POST['fechaInicio'])){
 
         $fechaInicio=$_POST['fechaInicio'];
@@ -71,12 +74,38 @@ try{
 
             $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad' from reservas WHERE fecha >= '$fechaInicio' AND fecha <= '$fechaFinal';"); 
             $handle->execute(); 
-            $result = $handle->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = $handle->fetchAll(PDO::FETCH_ASSOC);
+        
+
+            if(isset($_POST['grupo']) ){
+
+                $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad', grupo AS 'Grupo' from reservas WHERE fecha >= '$fechaInicio' AND fecha <= '$fechaFinal' GROUP BY grupo;"); 
+                $handle->execute(); 
+                $result = $handle->fetchAll(\PDO::FETCH_OBJ);
+                foreach($result as $row){
+                    array_push($dataPoints4, array("y"=> $row->Cantidad, "label"=> $row->Grupo));
+                }
+        
+            
+                
+            }
+
+            
+        if(isset($_POST['aula']) ){
+
+
+            $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad', idAula AS 'Aula' from reservas WHERE fecha >= '$fechaInicio' AND fecha <= '$fechaFinal' GROUP BY idAula;"); 
+            $handle->execute(); 
+            $result = $handle->fetchAll(\PDO::FETCH_OBJ);
+            foreach($result as $row){
+                array_push($dataPoints5, array("y"=> $row->Cantidad, "label"=> $row->Aula));
+            }
         
             
         }
-    
-        else{}  
+            
+        }
+
     
 
 
@@ -147,7 +176,43 @@ var chart3 = new CanvasJS.Chart("chartContainer3", {
 	}]
 });
 chart3.render();
- 
+
+<?php if(isset($_POST['grupo'])){ ?>
+
+var chart4 = new CanvasJS.Chart("chartContainer4", {
+	theme: "light1",
+	animationEnabled: true,
+	
+	data: [{
+		type: "doughnut",
+		indexLabel: "{label} - {y}",
+		yValueFormatString: "#,##",
+		showInLegend: true,
+		legendText: "{label} : {y}",
+		dataPoints: <?php echo json_encode($dataPoints4, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart4.render();
+
+<?php } ?>
+
+<?php if(isset($_POST['aula'])){ ?>
+
+var chart5 = new CanvasJS.Chart("chartContainer5", {
+	theme: "light1",
+	animationEnabled: true,
+	
+	data: [{
+		type: "doughnut",
+		indexLabel: "{label} - {y}",
+		yValueFormatString: "#,##",
+		showInLegend: true,
+		legendText: "{label} : {y}",
+		dataPoints: <?php echo json_encode($dataPoints5, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart5.render();
+ <?php }?>
 }
 </script>
 
@@ -207,26 +272,34 @@ chart3.render();
         </div>
         
         <form class="mx-auto" method="post" action="">
-            <div class="form-row mx-auto border pb-4 rounded">
+            <div class="form-row mx-auto pb-4 rounded">
                 
-                <h3 style="display:inline-block;margin-left: 3%;">Desde: </h3>
+                <h4 style="display:inline-block;margin-left: 1%;">Desde: </h4>
                 <input type="date" id="date1" class="form-control" style="width:25%;display:inline-block;margin-left: 1%;" placeholder="Desde" name="fechaInicio" required>
                 
-                <h3 style="display:inline-block;margin-left: 3%;">Hasta: </h3>
+                <h4 style="display:inline-block;margin-left: 1%;">Hasta: </h4>
                 <input type="date" id="date2" class="form-control"style="width:25%;display:inline-block;margin-left: 1%;" placeholder="Hasta" name="fechaFinal" required>
-                
-                <button type="submit" class="btn btn-primary" style="margin-left:3%"><i class="bi bi-search"></i> Buscar</button>
+                <h4 style="display:inline-block;margin-left: 1%;margin-right: 1%;">Filtrar por: </h4>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="aula" name="aula">
+                    <label class="form-check-label" for="inlineCheckbox1">Aula</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="grupo" name="grupo">
+                    <label class="form-check-label" for="inlineCheckbox2">Grupo</label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-left:1%"><i class="bi bi-search"></i> Buscar</button>
                 
             </div>
         </form>
 
-        <div id="chartContainer4" style="height: 250px; width: 100%;">
+        <div style="height: 250px; width: 100%;">
         <?php 
 
         if(isset($_POST['fechaInicio'])){
             echo "<b><h1 class='text-center'style='margin-top:5%;'>";
-            print_r($result[0]['Cantidad']);
-            echo " Reservas";
+            print_r($resultado[0]['Cantidad']);
+            echo " Reservas totales";
             echo "</h1></b>";
             echo "<h3 class='text-center'> Desde el ".$_POST['fechaInicio']." hasta el ".$_POST['fechaFinal'];
             echo "</h3>";
@@ -237,6 +310,29 @@ chart3.render();
         ?>
     
         </div>
+
+        <?php if(isset($_POST['grupo'])){ ?>
+
+        <div  class="rounded" style="background-color:#212529;margin-bottom:3%;">
+            <h1 class="text-center" style="color:#F0F0F0" >Número de reservas por Grupos</h1>
+            <?php echo "<h3 class='text-center' style='color:white' > Desde el ".$_POST['fechaInicio']." hasta el ".$_POST['fechaFinal']; ?>
+        </div>
+
+        <div id="chartContainer4" style="height: 370px; width: 100%;"></div>
+
+        <?php }?>
+
+        <?php if(isset($_POST['aula'])){ ?>
+
+        <div  class="rounded" style="background-color:#212529;margin-bottom:3%;">
+            <h1 class="text-center" style="color:#F0F0F0" >Número de reservas por Aulas</h1>
+            <?php echo "<h3 class='text-center' style='color:white' > Desde el ".$_POST['fechaInicio']." hasta el ".$_POST['fechaFinal']; ?>
+        </div>
+
+        <div id="chartContainer5" style="height: 370px; width: 100%;"></div>
+        <?php }?>
+        
+    
     </div>
 
 </div>

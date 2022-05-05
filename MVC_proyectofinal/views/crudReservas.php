@@ -234,7 +234,7 @@ $("#myModal").modal();
 ?>
 <div class="container" style="margin-top:5%">
 
-
+<?php include "barraBusquedaReservas/barra.php"; ?>
 
 <div class="row">
     

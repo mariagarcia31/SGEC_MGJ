@@ -491,6 +491,118 @@ class Crud extends Conexion{
 
 
 
+
+
+
+
+
+    function build_calendar_diario(){
+
+        $aulas=array();
+        $datos=$this->aulasDisponibles();
+
+        foreach($datos as $aula){
+            foreach($aula as $nombre){
+                array_push($aulas, $nombre);
+            }
+        }
+
+        $date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');
+        $prev_date = date('Y-m-d', strtotime($date .' -1 day'));
+        $next_date = date('Y-m-d', strtotime($date .' +1 day'));
+                // Define key-value array
+        $days_dias = array(
+            'Monday'=>'Lunes',
+            'Tuesday'=>'Martes',
+            'Wednesday'=>'Miércoles',
+            'Thursday'=>'Jueves',
+            'Friday'=>'Viernes',
+            'Saturday'=>'Sábado',
+            'Sunday'=>'Domingo'
+            );
+            
+            //lookup dia based on day name
+            $dia =  $days_dias[date('l', strtotime($date))];
+
+        $horarios=array('08:30AM - 09:30AM', '09:30AM - 10:30AM', '10:30AM - 11:30AM', '11:30AM - 12:30AM', '12:30AM - 13:30PM', '13:30PM - 14:30PM');              
+ 
+        $calendar = "<div class='table-responsive' style='border:none;'>";
+        $calendar .= "<table class=' table table-bordered border' style='width:100%'>";
+        
+        
+        
+        $calendar.= "<a href='?c=calendarioDiario&date=".$prev_date."'><i class='bi bi-chevron-left flechaCambiarSemana'></i></a>";   
+        $calendar .= "<h3 class='nombreSemana'>Horarios del día  $dia $date</h3>";
+        $calendar.= "<a href='?c=calendarioDiario&date=".$next_date."'><i class='bi bi-chevron-right flechaCambiarSemana'></i></a><br>";
+
+
+        $calendar .= "<tr>";
+        $calendar .= "<th  class='diaSemana' >Horarios</th>";
+        
+        $hoy = date('Y-m-d');
+        
+        /*SI SE QUIERE CAMBIAR EL MAXIMO DE DÍAS SIGUIENTES ENTRE LOS QUE SE PUEDE RESERVAR */
+        $maximoDiasSiguientes = date('Y-m-d', strtotime(' +14 day'));
+
+
+
+        // Creamos las cabeceras
+        foreach($aulas as $nombre) {
+            
+            $calendar .= "<th class='diaSemana'>$nombre</th>";
+            
+        } 
+
+ 
+        $calendar .= "</tr>";
+
+        
+        foreach($horarios as $hora) {
+
+            $calendar.="<tr><td><h4 class='hora'>$hora</h4></td> ";
+
+            foreach($aulas as $nombre){
+                
+                
+                $finde= $this->esFinde($date);
+                $festivo= $this->esFestivo($date);
+                $booking=$this->seteaDate2($nombre, $date);
+
+                if($festivo){
+                    $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>Festivo<br>$festivo</h5></td> ";
+                }
+
+                else if($date<$hoy||$date>$maximoDiasSiguientes||$finde==1){
+                    $calendar.="<td><h4 class='dia' style='color:#D8D8D8'></h4></td> ";
+                }
+
+
+                else if(in_array($hora, $booking[0])){
+
+                    $clave = array_search($hora, $booking[0]);
+    
+                    $calendar.="<td><a class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>Prof. ".$booking[1][$clave]."</p></a></td> ";
+                    
+                 }
+
+                else{
+                    $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><a href='?c=calendarioDiario&date=".$date."&id=".$nombre."&hora=".$hora."' class='btn btn-success btn-xs botonReservar' ><p class='textoBotonReservar'>Reservar</p></a></td>";
+
+                }
+            
+            } 
+    
+            $calendar.="</tr>";
+            
+        }
+        $calendar .= "</table>";
+        $calendar.="</div>";
+        
+        return $calendar;
+    }
+
+
+
     function timeslots($duration, $cleanup, $start, $end){
 
         $start = new DateTime($start);
@@ -562,6 +674,8 @@ class Crud extends Conexion{
         $datos[1]=$nombres;
         return $datos;
     }
+
+
 
     function esFestivo($date){
 

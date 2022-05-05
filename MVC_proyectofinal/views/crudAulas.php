@@ -247,9 +247,10 @@ $_SESSION['cuantas']=count($result[0]);
 
 
 <div class="row" style="margin-top:5%">
-    
+<?php include "barraBusquedaAulas/barra.php"; ?>
                 <div class="col-md-12 ">
-                <h1 style="color:black; text-align:center; margin-bottom:0%; background-color:white" >AULAS</h1>
+                    
+                <h1 class="titulo" style="color:black; text-align:center; margin-bottom:0%; background-color:white" >AULAS</h1>
                     
                     
                     <?php

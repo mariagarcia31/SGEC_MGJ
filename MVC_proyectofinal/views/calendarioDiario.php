@@ -242,14 +242,11 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
    <div class="col-md-12 "> 
     
    <div id="calendario" class='mx-auto rounded calendario'> 
-    
-    <?php if(isset($_GET['id'])){ ?>
 
-           <h1 class='mx-auto nombreAula' > Reserva para el <?php echo $_GET['id'] ?></h1>
      <?php 
-    }
+    
       
-        echo $this->crud->build_calendar_semanal(); 
+        echo $this->crud->build_calendar_diario(); 
       
 
       if(isset($_SESSION["msg"])){
@@ -266,7 +263,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
         <div class="modal-dialog" style="width: 95%;">
             <div class="modal-content">
                 <div >
-                <a href="?c=calendarioSemanal&date=<?php echo $_GET['date'] ?>&id=<?php echo $_GET['id'] ?>&week=<?php echo $_GET['week'] ?>&year=<?php echo $_GET['year'] ?>"><button type="button" class="close" style="margin-left:5%;margin-top:2%;">&times;</button></a>
+                <a href="?c=calendarioDiario&date=<?php echo $_GET['date'] ?>&id=<?php echo $_GET['id'] ?>"><button type="button" class="close" style="margin-left:5%;margin-top:2%;">&times;</button></a>
                         
                 </div>
                 <div class="modal-header">
@@ -275,7 +272,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="?c=reservaSemanal&id=<?php echo $_GET['id']?>&date=<?php echo $_GET['date'] ?>&week=<?php echo $_GET['week']?>&year=<?php echo $_GET['year']?>" method="post">
+                            <form action="?c=reservaDiaria&id=<?php echo $_GET['id']?>&date=<?php echo $_GET['date'] ?>" method="post">
                                <div class="form-group">
                                     <label for="">Franja</label>
                                     <input readonly type="text" class="form-control" id="timeslot" name="timeslot" value="<?php echo $_GET['hora']?>">
@@ -312,7 +309,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
                                 </div>
                                 <div class="form-group pull-right">
                                     <button name="submit" type="submit" class="btn btn-success">Reservar</button>
-                                    <a href="?c=calendarioSemanal&date=<?php echo $_GET['date'] ?>&id=<?php echo $_GET['id'] ?>&week=<?php echo $_GET['week'] ?>&year=<?php echo $_GET['year'] ?>"><button type="button" class="btn btn-danger">Cancelar</button></a>
+                                    <a href="?c=calendarioDiario&date=<?php echo $_GET['date'] ?>"><button type="button" class="btn btn-danger">Cancelar</button></a>
 
                                 </div>
                             </form>

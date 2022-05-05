@@ -108,7 +108,7 @@ include "menu.php"?>
         
         <div class="row">
        <?php include "barraBusqueda/barra.php"; ?>
-           
+       <a href="?c=calendarioDiario"> <button class="btn btn-secondary float-right w-4 mr-5 mt-5" style="font-size:1.4rem;" ><i class="bi bi-calendar2-event mr-2"> </i> Ver disponibilidad por días</button></a>
             <div class="col-12" >
             
                 <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
