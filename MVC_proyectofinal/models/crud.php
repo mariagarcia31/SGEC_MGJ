@@ -34,7 +34,7 @@ class Crud extends Conexion{
             $mail->SMTPSecure = 'tls'; 
             $mail->Host = "smtp.gmail.com"; 
             $mail->Port = 587;
-            $mail->Username ='sgec.ciudadescolar@gmail.com';
+            $mail->Username ='sgec.iesciudadescolar@gmail.com';
             $mail->Password = 'Mariagerardoyjossue1'; 
             $mail->AddAddress($correo);
             $mail->Subject = "Cambio de contrasena";
@@ -55,7 +55,7 @@ class Crud extends Conexion{
         $mail->SMTPSecure = 'tls'; 
         $mail->Host = "smtp.gmail.com"; 
         $mail->Port = 587;
-        $mail->Username ='sgec.ciudadescolar@gmail.com';
+        $mail->Username ='sgec.iesciudadescolar@gmail.com';
         $mail->Password = 'Mariagerardoyjossue1'; 
         $mail->AddAddress($correo);
         $mail->Subject = $asunto;
@@ -608,29 +608,6 @@ class Crud extends Conexion{
         return $calendar;
     }
 
-
-
-    function timeslots($duration, $cleanup, $start, $end){
-
-        $start = new DateTime($start);
-        $end = new DateTime($end);
-        $interval = new DateInterval("PT".$duration."M");
-        $cleanupInterval = new DateInterval("PT".$cleanup."M");
-        $slots = array();
-        
-        for($intStart = $start; $intStart<$end; $intStart->add($interval)->add($cleanupInterval)){
-            $endPeriod = clone $intStart;
-            $endPeriod->add($interval);
-            if($endPeriod>$end){
-                break;
-            }
-            
-            $slots[] = $intStart->format("H:iA")." - ". $endPeriod->format("H:iA");
-            
-        }
-        
-        return $slots;
-    }
 
 
 

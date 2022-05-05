@@ -79,7 +79,7 @@ try{
 
             if(isset($_POST['grupo']) ){
 
-                $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad', grupo AS 'Grupo' from reservas WHERE fecha >= '$fechaInicio' AND fecha <= '$fechaFinal' GROUP BY grupo;"); 
+                $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad', grupo AS 'Grupo' from historial WHERE fecha >= '$fechaInicio' AND fecha <= '$fechaFinal' GROUP BY grupo;"); 
                 $handle->execute(); 
                 $result = $handle->fetchAll(\PDO::FETCH_OBJ);
                 foreach($result as $row){
@@ -94,7 +94,7 @@ try{
         if(isset($_POST['aula']) ){
 
 
-            $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad', idAula AS 'Aula' from reservas WHERE fecha >= '$fechaInicio' AND fecha <= '$fechaFinal' GROUP BY idAula;"); 
+            $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad', idAula AS 'Aula' from historial WHERE fecha >= '$fechaInicio' AND fecha <= '$fechaFinal' GROUP BY idAula;"); 
             $handle->execute(); 
             $result = $handle->fetchAll(\PDO::FETCH_OBJ);
             foreach($result as $row){
