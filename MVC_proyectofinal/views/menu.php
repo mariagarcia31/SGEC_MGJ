@@ -327,6 +327,7 @@ body {
   if($_SESSION['actualizarBBDD']==1){
 
   echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar</a>  <hr class="sidebar-divider">';
+  
 
   }else{echo"";}
   if($_SESSION['estadisticas']==1){
@@ -334,12 +335,20 @@ body {
     echo '  <a class="btn-menu" href="?c=estadisticas&page=1"><i class="bi bi-bar-chart-line"></i>  Estadísticas</a>  <hr class="sidebar-divider">';
     
   }else{echo"";}
+
+  if($_SESSION['crudConfiguracion']==1){
+
+    echo '  <a class="btn-menu" href="?c=crudConfiguracion&page=1"><i class="bi bi-gear"></i>  Configuracion</a>  <hr class="sidebar-divider">';
+    
+  }else{echo"";}
 }
+
+
 
 
 echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle"></i>  Ayuda</a>
 <hr class="sidebar-divider">
-<a class="btn-menu" href="?c=configuracion&page=1"><i class="bi bi-gear"></i>  Configuración</a>
+<a class="btn-menu" href="?c=configuracionPerfil&page=1"><i class="bi bi-person-fill"></i> Perfil</a>
 </div>
 ';
 ?>

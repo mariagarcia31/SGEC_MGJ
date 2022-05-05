@@ -15,13 +15,13 @@ class Precio{
         }
     }
       /*************************************  MODELO DE AULAS   ********************************/
-      function aulasDisponibles(){
-        $comprobar="SELECT id FROM `aulas` WHERE habilitado = 1 GROUP BY id";
+      function maximoDiasSiguientes(){
+        $comprobar="SELECT valor FROM `configuracion` WHERE nombre = 'Máximo de días siguientes para reservar'";
         $consulta_comprobar=$this->conexion()->prepare($comprobar);
         $consulta_comprobar->execute();
-        $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+        $resultado_comprobar=$consulta_comprobar->fetch();
        
-        return $resultado_comprobar;
+        return $resultado_comprobar['valor'];
 
     }
       
@@ -34,11 +34,9 @@ class Precio{
 
 
 $precio=new Precio();
-$datos= $precio->aulasDisponibles();
-foreach($datos as $aula){
-    foreach($aula as $nombre){
-        print_r($nombre);
-    }
-}
+$datos= $precio->maximoDiasSiguientes();
+
+        print_r($datos);
+
 
 ?>

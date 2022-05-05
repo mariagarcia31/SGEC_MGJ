@@ -62,6 +62,9 @@ if($count[0]==0){
                 echo '<th> crud_reservas</th>';
                 echo '<th> crud_grupos</th>';
                 echo '<th> actualizar_bbdd</th>';
+                echo '<th> crud_festivos</th>';
+                echo '<th> estadisticas</th>';
+                echo '<th> crud_configuracion</th>';
 
                 echo '</tr>';
                 echo '<tr>';
@@ -69,6 +72,9 @@ if($count[0]==0){
                 echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:220px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:80px'></input></td>";
+                echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
+                echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
+                echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
@@ -255,6 +261,14 @@ $("#myModal").modal();
                                                             </select>";                                                           
                                                             echo '</div>';
                                                            
+                                                            echo '<div class="form-group">
+                                                            <label for="">Crud configuración</label>';
+                                                            echo "<select name='dato[]' class='form-control' required >
+                                                            <option value='0' selected>No</option>
+                                                            <option value='1' selected>Si</option>
+                                                            </select>";                                                           
+                                                            echo '</div>';
+                                                           
                                                            
                                                 
                                                            
@@ -403,6 +417,17 @@ $("#myModal").modal();
                                                                 }elseif($i==9){
                                                                     echo '<div class="form-group">
                                                                     <label for="">Estadísticas</label><select name="dato[]" class="form-control" required>';
+                                                                    if($nombre_columna[$i]==0){
+                                                                        echo "  <option value='0' selected>No</option>
+                                                                        <option value='1' >Si</option>";
+                                                                    }else{
+                                                                        echo "  <option value='0' >No</option>
+                                                                        <option value='1' selected>Si</option>";
+                                                                    }
+                                                                    echo "</select></div>";
+                                                                }elseif($i==10){
+                                                                    echo '<div class="form-group">
+                                                                    <label for="">Crud configuración</label><select name="dato[]" class="form-control" required>';
                                                                     if($nombre_columna[$i]==0){
                                                                         echo "  <option value='0' selected>No</option>
                                                                         <option value='1' >Si</option>";

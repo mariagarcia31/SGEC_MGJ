@@ -107,7 +107,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
         <div class="tab">
         <button class="tablinks" onclick="openFaqs(event, 'reservar')" id="defaultOpen">Reservas</button>
         <button class="tablinks" onclick="openFaqs(event, 'misreservas')">Gestionar mis reservas</button>
-        <button class="tablinks" onclick="openFaqs(event, 'configuracion')">Configuración</button>
+        <button class="tablinks" onclick="openFaqs(event, 'configuracion')">Perfil</button>
         </div>
 
         <div id="reservar" class="tabcontent">

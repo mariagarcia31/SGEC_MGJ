@@ -143,6 +143,7 @@ class Crud extends Conexion{
                     $_SESSION['actualizarBBDD']=$verif4['actualizar_bbdd'];
                     $_SESSION['estadisticas']=$verif4['estadisticas'];
                     $_SESSION['crudFestivos']=$verif4['crud_festivos'];
+                    $_SESSION['crudConfiguracion']=$verif4['crud_configuracion'];
 
                     $_SESSION['contra']=$contrasena;
                     $_SESSION['correo']=$correo;
@@ -246,11 +247,21 @@ class Crud extends Conexion{
     function esFinde($date) {
         return (date('N', strtotime($date)) >= 6);
     }
+
+    function maximoDiasSiguientes(){
+        $comprobar="SELECT valor FROM `configuracion` WHERE nombre = 'Máximo de días siguientes para reservar'";
+        $consulta_comprobar=$this->conexion()->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetch();
+       
+        return $resultado_comprobar['valor'];
+
+    }
     
 
     function build_calendar($month, $year){
         
-
+        $maximoDiasSiguientes=$this->maximoDiasSiguientes();
         $bookings = array();
 
         $sql="SELECT * from reservas where MONTH(fecha) = :mes AND YEAR(fecha)=:ano";
@@ -304,7 +315,7 @@ class Crud extends Conexion{
         }
         //numero de la semana del primer día del mes
         $dayOfWeek = $dateComponents['wday'];
-    
+        
         //cremaos el calendario
         $calendar = "<div class='table-responsive' style='border:none;'>";
         
@@ -349,7 +360,7 @@ class Crud extends Conexion{
             
              $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
              $date = "$year-$month-$currentDayRel";
-             $date2 = date('Y-m-d', strtotime("+14 day"));
+             $date2 = date('Y-m-d', strtotime("+$maximoDiasSiguientes day"));
              $finde= $this->esFinde($date);
              $festivo= $this->esFestivo($date);
              if($festivo){
@@ -384,7 +395,7 @@ class Crud extends Conexion{
     }
 
     function build_calendar_semanal(){
-
+        $maximoDiasSiguientes=$this->maximoDiasSiguientes();
         $dt = new DateTime;
         if (isset($_GET['year']) && isset($_GET['week'])) {
             $dt->setISODate($_GET['year'], $_GET['week']);
@@ -420,7 +431,7 @@ class Crud extends Conexion{
         $hoy = date('Y-m-d');
         
         /*SI SE QUIERE CAMBIAR EL MAXIMO DE DÍAS SIGUIENTES ENTRE LOS QUE SE PUEDE RESERVAR */
-        $maximoDiasSiguientes = date('Y-m-d', strtotime("+14 day"));
+        $maximoDiasSiguientes = date('Y-m-d', strtotime("+$maximoDiasSiguientes day"));
 
 
 
@@ -504,7 +515,7 @@ class Crud extends Conexion{
 
 
     function build_calendar_diario(){
-
+        $maximoDiasSiguientes=$this->maximoDiasSiguientes();
         $aulas=array();
         $datos=$this->aulasDisponibles();
 
@@ -549,7 +560,7 @@ class Crud extends Conexion{
         $hoy = date('Y-m-d');
         
         /*SI SE QUIERE CAMBIAR EL MAXIMO DE DÍAS SIGUIENTES ENTRE LOS QUE SE PUEDE RESERVAR */
-        $maximoDiasSiguientes = date('Y-m-d', strtotime(' +14 day'));
+        $maximoDiasSiguientes = date('Y-m-d', strtotime("+$maximoDiasSiguientes day"));
 
 
 
@@ -888,6 +899,33 @@ class Crud extends Conexion{
 
                    
             $sql="SELECT * FROM grupos ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $consult=$consulta->fetchAll(PDO::FETCH_ASSOC);
+            $keys=array_keys($consult[0]);
+            return array($consult,$keys);
+        }
+       
+        
+
+    }
+
+    function crudConfiguracion($opc,$iteams_pagina=null,$offset=null){
+        if($opc==1){
+
+            $sql="SELECT count(*) FROM configuracion";
+
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $count=$consulta->fetch(PDO::FETCH_NUM);
+            
+            return $count;
+        }
+        elseif($opc==2){
+
+                   
+            $sql="SELECT * FROM configuracion ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -2012,6 +2050,130 @@ function crearFestivos($indic){
 
  /*************************************  FIN MODELO DE FESTIVOS   ********************************/
 
+
+
+
+/*************************************  MODELO DE CONFIGURACION   ********************************/
+function borrarUnoaUnoConfiguracion($selec){
+            
+    $sql="DELETE FROM configuracion WHERE  id='$selec'";
+    $consulta=$this->conexion->prepare($sql);
+    $consulta->execute();
+    return true;
+        
+}
+
+function borrarConfiguracion($selec){
+  
+    if(empty($selec)){
+       
+        return false;
+    }
+    else{
+      
+        foreach($selec as $valores){
+            $sql="DELETE FROM configuracion WHERE  id='$valores'";
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            
+        }
+        return true;
+    }
+    
+    }  
+
+
+
+
+
+
+    function modifConfiguracion($id){
+
+     
+        $nombres="SELECT * FROM configuracion WHERE id=:cod;";
+        $consulta_nombres=$this->conexion->prepare($nombres);
+        $consulta_nombres->bindParam(':cod',$id);
+        $consulta_nombres->execute();
+        $resultado_nombres=$consulta_nombres->fetchAll();
+
+        return $resultado_nombres;
+    }
+
+
+function actualizarConfiguracion($indic){
+    $comprobar="SELECT * FROM configuracion WHERE id='".$indic[0]."';";
+    $consulta_comprobar=$this->conexion->prepare($comprobar);
+    $consulta_comprobar->execute();
+    $resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
+
+    $resultado = array_diff($resultado_comprobar, $indic);
+
+   /*SI DEJO ESTO LA ACTUALIZACIÓN NO VA
+    if(empty($resultado)){
+        return false;
+    }
+    */
+       
+            $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='configuracion';";
+            $consulta_nombres=$this->conexion->prepare($nombres);
+            $consulta_nombres->execute();
+            $resultado_nombres=$consulta_nombres->fetchAll();
+                foreach($resultado_nombres as $nombre_columna){	
+                    for($i=0;$i<count($nombre_columna)/2;$i++){
+                        $nombress[]=$nombre_columna;
+                    }
+                }
+    
+                for($i=0;$i<count($nombress);$i++){
+                    
+                    $sql="UPDATE configuracion SET  ".$nombress[$i][0]."=:data  WHERE id='".$indic[0]."';";
+                    $stmt=$this->conexion->prepare($sql);
+                    $stmt->bindParam(":data",$indic[$i]);
+                    $stmt->execute();
+                    
+                    
+                }
+            return true;
+        
+        }      
+    
+
+function crearConfiguracion($indic){
+
+        $comprobar="SELECT * FROM configuracion WHERE id='".$indic[0]."';";
+        $consulta_comprobar=$this->conexion->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll();
+        if(count($resultado_comprobar)>0){
+            return false;
+        }
+        
+        else{
+
+            $id = $indic[0];
+            $nombre = $indic[1];
+            $valor =$indic[2];
+           
+            
+
+            
+            $comprobar="INSERT INTO  configuracion VALUES ($id,'$nombre','$valor');";
+            $consulta_comprobar=$this->conexion->prepare($comprobar);
+            $consulta_comprobar->execute();
+            
+            return true;
+
+            
+        
+    }
+
+
+        
+}
+
+
+
+ /*************************************  FIN MODELO DE CONFIGURACION ********************************/
 
 
 
