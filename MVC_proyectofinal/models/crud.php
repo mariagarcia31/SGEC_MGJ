@@ -17,25 +17,32 @@ class Crud extends Conexion{
         $this->conexion=parent::conexion();
     }
     function recordarContra($correo){
-        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $contra= substr(str_shuffle($permitted_chars), 0, 10);
-        $sql="UPDATE usuarios SET contra = '$contra', confirmacion=0 WHERE correo = '$correo';";
+        $sql="SELECT * FROM usuarios WHERE correo = '$correo';";
         $consulta=$this->conexion->prepare($sql);
         $consulta->execute();
-        $mail = new PHPMailer();
-        $mail->IsSMTP();
-        $mail->From = "mail@gmail.com"; 
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls'; 
-        $mail->Host = "smtp.gmail.com"; 
-        $mail->Port = 587;
-        $mail->Username ='sgec.ciudadescolar@gmail.com';
-        $mail->Password = 'Mariagerardoyjossue1'; 
-        $mail->AddAddress($correo);
-        $mail->Subject = "Cambio de contrasena";
-        $mail->Body = "Su contraseña temporal es ".$contra;
-        $mail->Send();
-        return true;
+        $resultado=$consulta->fetch();
+        if($resultado!=null){
+            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $contra= substr(str_shuffle($permitted_chars), 0, 10);
+            $sql="UPDATE usuarios SET contra = '$contra', confirmacion=0 WHERE correo = '$correo';";
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $mail = new PHPMailer();
+            $mail->IsSMTP();
+            $mail->From = "mail@gmail.com"; 
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'tls'; 
+            $mail->Host = "smtp.gmail.com"; 
+            $mail->Port = 587;
+            $mail->Username ='sgec.ciudadescolar@gmail.com';
+            $mail->Password = 'Mariagerardoyjossue1'; 
+            $mail->AddAddress($correo);
+            $mail->Subject = "Cambio de contrasena";
+            $mail->Body = "Su contraseña temporal es ".$contra;
+            $mail->Send();
+            return true;
+        }
+       
     }
 
     function enviarCorreo($asunto,$cuerpo,$correo){

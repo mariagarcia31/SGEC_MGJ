@@ -30,11 +30,23 @@ class Control{
     }
     function enviarContraNueva(){
             $correo=$_POST["correo"];
-            $result=$this->crud->recordarContra($correo);            
-            if($result){
+            $resultado=$this->crud->recordarContra($correo); 
+
+            if($resultado){
+                
                 header("location:?c=principal"); 
             }else{
-                header("location:?c=principal"); 
+                $_SESSION["error"]="
+        
+
+        <script>     Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El correo no se encuentra registrado.',
+            footer: ''
+          })</script>";  
+          header("location:?c=principal"); 
+
             }
          
        

@@ -71,10 +71,22 @@
 
         function validarFormulario(evento) {
         evento.preventDefault();
-        var usuario = document.getElementById('correo').value;
-        if(  /^\w+([\.-]?\w+)*@(?:|ciudadescolarfp|educa.madrid)\.(?:|org|es)+$/.test(usuario)) {
-            this.submit();
+        var correo = document.getElementById('correo').value;
+        var contra = document.getElementById('correo').value;
 
+        if(  /^\w+([\.-]?\w+)*@(?:|ciudadescolarfp|educa.madrid)\.(?:|org|es)+$/.test(correo)) {
+            if(correo.lenght==0||contra.lenght==0){
+                Swal.fire({
+                        icon: 'warning',
+                        text: 'Debes rellenar todos los campos',
+                        showConfirmButton: false,
+                        timer: 4500
+                    });
+            return false;
+            }else{
+                this.submit();
+
+            }
         }else{
             Swal.fire({
                         icon: 'warning',
@@ -85,6 +97,7 @@
             return false;
 
         }
+        
 
 }
         </script>

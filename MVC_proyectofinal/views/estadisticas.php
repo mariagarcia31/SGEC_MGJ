@@ -33,7 +33,7 @@ try{
                         )
                     );
 	
-    $handle = $link->prepare('select idAula AS "Aula",  COUNT(id) AS "Cantidad" from reservas GROUP BY idAula'); 
+    $handle = $link->prepare('select idAula AS "Aula",  COUNT(id) AS "Cantidad" from historial GROUP BY idAula'); 
     $handle->execute(); 
     $result = $handle->fetchAll(\PDO::FETCH_OBJ);
 		
@@ -42,7 +42,7 @@ try{
     }
 
 
-    $handle = $link->prepare('select grupo AS "Familia",  COUNT(id) AS "Cantidad" from reservas GROUP BY grupo;'); 
+    $handle = $link->prepare('select grupo AS "Familia",  COUNT(id) AS "Cantidad" from historial GROUP BY grupo;'); 
     $handle->execute(); 
     $result = $handle->fetchAll(\PDO::FETCH_OBJ);
 
@@ -54,7 +54,7 @@ try{
         
     $handle = $link->prepare("
         select CONCAT(DATE_FORMAT(fecha, '%M', 'es_ES'), ' ', year(fecha)) AS 'Mes',count(id) AS 'Cantidad'
-        from reservas
+        from historial
         group by year(fecha),month(fecha)
         order by year(fecha),month(fecha);"); 
                                     
@@ -72,7 +72,7 @@ try{
         $fechaInicio=$_POST['fechaInicio'];
         $fechaFinal=$_POST['fechaFinal'];
 
-            $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad' from reservas WHERE fecha >= '$fechaInicio' AND fecha <= '$fechaFinal';"); 
+            $handle = $link->prepare("SELECT COUNT(id) AS 'Cantidad' from historial WHERE fecha >= '$fechaInicio' AND fecha <= '$fechaFinal';"); 
             $handle->execute(); 
             $resultado = $handle->fetchAll(PDO::FETCH_ASSOC);
         
