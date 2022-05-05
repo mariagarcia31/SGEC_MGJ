@@ -219,7 +219,22 @@ class Crud extends Conexion{
       
       
     }
+    function obtieneRoles(){
+        try{
+            $sql='SELECT id FROM roles';
 
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $consult=$consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $consult;
+
+        }catch(PDOException){
+           
+            return [];
+        }
+      
+      
+    }
 
     function esFinde($date) {
         return (date('N', strtotime($date)) >= 6);

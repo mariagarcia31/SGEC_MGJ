@@ -214,7 +214,13 @@ $("#myModal").modal();
         echo $_SESSION['vacio'];
         unset($_SESSION['vacio']);
     }
-                            
+                            $roles=$this->crud->obtieneRoles();
+                           foreach($roles as $rol=>$rolito){
+                               foreach($rolito as $rol2){
+                                   $rolesDisponibles[]=$rol2;
+                               }
+                           }
+                           
                             foreach($resu as $nombre_columna){
                                 for($i=0;$i<count($nombre_columna)/2;$i++){
                                    if($i==0){
@@ -282,18 +288,22 @@ $("#myModal").modal();
                         
                                         else if($i==9){
                                             echo '<div class="form-group">
-                                            <label for="">Rol</label>';
-                                            echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
-                                            echo '</div>';
-                                        }
+                                            <label for="">Rol</label><select name="dato[]" class="form-control" required>';
+                                            for($e=0;$e<count($rolesDisponibles);$e++){
+                                                 if($rolesDisponibles[$e]==$nombre_columna[$i]){
+                                                     echo "<option selected value='".$rolesDisponibles[$e]."'>".$rolesDisponibles[$e]."</option>";
+ 
+                                                 }else{
+                                                     echo "<option value='".$rolesDisponibles[$e]."'>".$rolesDisponibles[$e]."</option>";
+ 
+                                                 }
+ 
+                                            }
+
+                                            echo "</select></div>";
                                         
-                        
-                                   
-                                   
-                                   
-                        
-                                   
-                                    
+                                        }
+
                                 }
                             }
                             
