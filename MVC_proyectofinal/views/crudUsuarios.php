@@ -73,7 +73,7 @@ $("#myModal").modal();
 </script>
 
 <div class="row" style="margin-top:5%">
-<?php include "barraBusquedaReservas/barra.php"; ?>
+<?php include "barraBusquedaUsuarios/barra.php"; ?>
                 <div class="col-md-12 ">
                 <h1 style="color:black; text-align:center; margin-bottom:0%; background-color:white" >Usuarios</h1>
                     

@@ -33,10 +33,11 @@ if (isset($_POST['search'])) {
 //Search box value assigning to $Name variable.
 
    $Name = $_POST['search'];
-   $usuario=$_SESSION['id'];
+   $page = $_POST['page'];
+  
 //Search query.
 
-   $Query = "SELECT * FROM reservas WHERE idAula LIKE '%$Name%' OR fecha LIKE '%$Name%' AND idUsuario = '$usuario'  ORDER BY fecha LIMIT 10 ";
+   $Query = "SELECT * FROM festivos WHERE Nombre LIKE '%$Name%' ORDER BY id LIMIT 10 ";
 
 //Query execution
 
@@ -45,7 +46,7 @@ if (isset($_POST['search'])) {
 //Creating unordered list to display result.
 
    echo '
-   <form action="?c=borrar" method="post"> 
+   <form action="?c=borrarFestivos&pag='.$page.'" method="post"> 
    <ul class="list-group">
 
    ';
@@ -65,8 +66,8 @@ if (isset($_POST['search'])) {
    
    <!-- Assigning searched result in "Search box" in "search.php" file. -->
    <li class="list-group-item busqueda" style="font-size: 15px;"  >
-       <?php echo "Reserva:  ".$Result['idAula']." Fecha: ".$Result['fecha']." Hora: ".$Result['hora']; ?>
-       <a class="btn btn-danger float-right ml-2"  href="?c=borrar&id=<?php echo $Result["id"] ?>"><i class="bi bi-trash"></i></a>
+       <?php echo $Result['Nombre']; ?>
+       <a class="btn btn-danger float-right ml-2"  href="?c=borrarFestivos&id=<?php echo $Result["id"] ?>&pag=<?php echo $page ?>"><i class="bi bi-trash"></i></a>
        <button  title="Modificar" class="btn btn-primary float-right" name="modificar" value="<?php echo $Result["id"] ?>"> <i class="bi bi-pencil-square"></i></button>
 
        </li></a>

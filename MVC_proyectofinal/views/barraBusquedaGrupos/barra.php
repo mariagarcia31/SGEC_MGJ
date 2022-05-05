@@ -42,9 +42,13 @@
         
         .barra{
             width: 90% !important;
+            
+        }
+        .titulo{
+            margin-top:5%;
         }
         .resultadosBusqueda{
-            width: 60% !important;
+            width: 90% !important;
         }
     }
 
@@ -54,11 +58,13 @@
         and (-webkit-min-device-pixel-ratio: 1) { 
         
         .barra{
-            width: 30% !important;
+            width: 20% !important;
+            margin-left:16%;
         }
 
         .resultadosBusqueda{
-            width: 45% !important;
+            width: 25% !important;
+            margin-left:16%;
         }
     }
 
@@ -88,7 +94,7 @@
  $(document).ready(function() {
  
  //On pressing a key on "Search box" in "search.php" file. This function will be called.
-
+ var pagina = $('#page').val();
  $("#search").keyup(function() {
 
      //Assigning search box value to javascript variable named as "name".
@@ -119,7 +125,7 @@
 
              //Data will be sent to "ajax.php".
 
-             url: "views/barraBusquedaMisReservas/ajax.php",
+             url: "views/barraBusquedaGrupos/ajax.php",
 
              //Data, that will be sent to "ajax.php".
 
@@ -127,7 +133,9 @@
 
                  //Assigning value of "name" into "search" variable.
 
-                 search: name
+                 search: name,
+
+                 page: pagina
 
              },
 
@@ -157,10 +165,11 @@
 <div class="rounded p-3 barra" style='border: 1px solid  #212529;'>
 <i class="bi bi-search" style="font-size: 20px;padding-right: 10px;margin-left:3%;"></i>
 <input type="text" id="search" placeholder="Buscar por nombre..."  style="width: 80%; font-size:18px; border:none"/>
+<input type="hidden" id="page"  value="<?php echo $_GET['page']?>"/>
 </div>
    <!-- Suggestions will be displayed in below div. -->
 
-   <div id="displaySearch" class="resultadosBusqueda "style="position:fixed;z-index:90;margin-left:30px"></div>
+   <div id="displaySearch" class="resultadosBusqueda "style="position:fixed;z-index:90;"></div>
 </div>
 
 

@@ -88,7 +88,7 @@
  $(document).ready(function() {
  
  //On pressing a key on "Search box" in "search.php" file. This function will be called.
-
+ var pagina = $('#page').val();
  $("#search").keyup(function() {
 
      //Assigning search box value to javascript variable named as "name".
@@ -127,7 +127,8 @@
 
                  //Assigning value of "name" into "search" variable.
 
-                 search: name
+                 search: name,
+                 page: pagina
 
              },
 
@@ -157,6 +158,7 @@
 <div class="rounded p-3 barra" style='border: 1px solid  #212529;'>
 <i class="bi bi-search" style="font-size: 20px;padding-right: 10px;margin-left:3%;"></i>
 <input type="text" id="search" placeholder="Buscar por nombre..."  style="width: 80%; font-size:18px; border:none"/>
+<input type="hidden" id="page"  value="<?php echo $_GET['page']?>"/>
 </div>
    <!-- Suggestions will be displayed in below div. -->
 
