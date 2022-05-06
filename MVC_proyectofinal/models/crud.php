@@ -319,7 +319,7 @@ class Crud extends Conexion{
         //cremaos el calendario
         $calendar = "<div class='table-responsive' style='border:none;'>";
         
-        $calendar .= "<table class=' table table-bordered border' style='width:100%'>";
+        $calendar .= "<table class=' table table-bordered border' style='width:100%;border:1px solid white !important'>";
         
         
         $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month-1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month-1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-left flechaCambiarMes'></i></a>";   
@@ -415,7 +415,7 @@ class Crud extends Conexion{
         }
            
         $calendar = "<div class='table-responsive' style='border:none;'>";
-        $calendar .= "<table class=' table table-bordered border' style='width:100%'>";
+        $calendar .= "<table class=' table table-bordered border' style='width:100%;border:1px solid white !important'>";
         
         
         
@@ -545,7 +545,7 @@ class Crud extends Conexion{
         $horarios=array('08:30AM - 09:30AM', '09:30AM - 10:30AM', '10:30AM - 11:30AM', '11:30AM - 12:30AM', '12:30AM - 13:30PM', '13:30PM - 14:30PM');              
  
         $calendar = "<div class='table-responsive' style='border:none;'>";
-        $calendar .= "<table class=' table table-bordered border' style='width:100%'>";
+        $calendar .= "<table class=' table table-bordered border' style='width:100%;;border:1px solid white !important'>";
         
         
         

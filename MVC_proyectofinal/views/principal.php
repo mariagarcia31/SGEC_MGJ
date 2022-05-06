@@ -60,6 +60,16 @@ include "menu.php"?>
         .resultadosBusqueda{
             width: 60% !important;
         }
+
+        #search{
+            width: 70% !important;
+            margin-bottom: 8% !important;
+        }
+        .vistaDiaria{
+            float:left !important;
+            margin-left: 9% !important;
+        }
+       
     }
 
 @media screen 
@@ -74,6 +84,8 @@ include "menu.php"?>
         .resultadosBusqueda{
             width: 18% !important;
         }
+
+      
     }
 
 
@@ -107,8 +119,8 @@ include "menu.php"?>
     <div class="container">
         
         <div class="row">
+            
        <?php include "barraBusqueda/barra.php"; ?>
-       <a href="?c=calendarioDiario"> <button class="btn btn-secondary float-right w-4 mr-5 mt-5" style="font-size:1.4rem;" ><i class="bi bi-calendar2-event mr-2"> </i> Ver disponibilidad por días</button></a>
             <div class="col-12" >
             
                 <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
@@ -138,7 +150,7 @@ include "menu.php"?>
      
         
             <div class="col-md-4 mb-4 mt-1 p-5">
-                <div class="card mt-2 "  >
+                <div class="card mt-2 " style="border-radius: 1.2rem;"  >
                     <div class="card text-white bg-info mb-0" style="border:none !important;">
                         <div class="card-header" style="border:none !important;">
 

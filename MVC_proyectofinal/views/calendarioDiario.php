@@ -213,6 +213,14 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
         }
         }
 
+        th:first-of-type {
+        border-top-left-radius: 15px !important;
+        }
+        th:last-of-type {
+        border-top-right-radius: 15px !important;
+        }
+
+
     </style>
 <script>
  /** Change the style **/
