@@ -375,7 +375,7 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
                 src="libs/img/undraw_profile.svg">
         </a>
   <div class="dropdown-content">
-  <p class="btn-cerrar-sesion" style="color:black" onclick=cerrar()>Cerrar sesión</p>
+  <p class="btn-cerrar-sesion" style="color:black" onclick=cerrar()><i class="bi bi-box-arrow-right mr-2"></i> Cerrar sesión</p>
   </div>
 
     </li>
