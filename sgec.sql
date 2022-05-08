@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2022 a las 19:42:35
+-- Tiempo de generación: 08-05-2022 a las 20:05:18
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -76,16 +76,12 @@ CREATE TABLE `aulas` (
 --
 
 INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`, `imagen`) VALUES
-('Aula 100', 'Pabellon 3, Planta baja, Puerta 4ª', 'tv, ordenadores', 30, 1, 'libs/img/upload/2F22C3B6-24F0-4518-9A67-784374EB740B.jpeg'),
-('Aula 515', 'Pabellón 5, Planta 1ª, Puerta 1ª', 'Mesas, Sillas', 30, 0, 'libs/img/upload/aula1.jpg'),
-('aula 7', 'l', 'l', 9, 0, 'libs/img/upload/aulaDefecto.jpeg'),
-('Aula 700', 'Pabellon 3', 'Tv', 70, 1, 'libs/img/upload/aula1.jpg'),
-('aula 8', 'l', 'l', 7, 1, 'libs/img/upload/aula1.jpg'),
-('Aula 815', 'Pabellón 10, Planta 2ª, Puerta 1ª', 'Tv, Ordenadores, Sillas, Mesas', 30, 1, 'libs/img/upload/aulaDefecto.jpeg'),
-('Aula Auxiliar2a', 'a', 'a', 12, 0, 'libs/img/upload/aulaDefecto.jpeg'),
-('Aula Extra', 'Pabellón 3', 'Tv', 50, 0, 'libs/img/upload/aulaDefecto.jpeg'),
-('Aula Polivalente', 'Pabellón 10, Planta 1ª, Puerta 1ª', 'Mesas, Sillas, Pizarras', 790, 1, 'libs/img/upload/aula1.jpg'),
-('Aula prueba 2', 'Pabellon 3', 'tv', 33, 1, 'libs/img/upload/aula1.jpg');
+('Aula polivalente', 'Al lado de cafetería', 'Pizarra pequeña, ordenador, proyector, altavoces y sillas', 100, 1, 'libs/img/upload/IMG-6104.jpg'),
+('El bosque', 'Pabellón 1 planta 1', 'Mesa, sillas y sofá', 15, 1, 'libs/img/upload/IMG-6108.jpg'),
+('Espacio Erasmus', 'Pabellón 1, planta 1ª', 'Mesas y sillas', 10, 1, 'libs/img/upload/IMG-6093.jpg'),
+('Sala de reuniones (112)', 'Pabellón 1, planta 1ª', 'Pizarra digital , mesas y sillas', 16, 1, 'libs/img/upload/IMG-6095.jpg'),
+('Sala de reuniones (301)', 'Pabellón 3, planta 1ª', 'Mesas y sillas', 5, 1, 'libs/img/upload/IMG-6102.jpg'),
+('Sala de reuniones (311)', 'Pabellón 3, planta 1ª', 'Mesas y sillas', 5, 1, 'libs/img/upload/IMG-6100.jpg');
 
 -- --------------------------------------------------------
 
@@ -192,19 +188,6 @@ CREATE TABLE `reservas` (
   `hora` varchar(255) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `reservas`
---
-
-INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(306, 'Aula 100', 78, '2022-05-19', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-05-05 18:11:09'),
-(307, 'Aula 815', 78, '2022-05-06', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-05-06 13:41:43'),
-(308, 'Aula 100', 78, '2022-05-09', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-05-08 17:18:27'),
-(309, 'Aula 100', 78, '2022-05-09', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-05-08 17:36:16'),
-(310, 'Aula 100', 78, '2022-05-09', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-05-08 17:37:12'),
-(311, 'Aula 100', 78, '2022-05-09', 'DAM 1', 'Charla', '11:30AM - 12:30AM', '2022-05-08 17:38:30'),
-(312, 'Aula 100', 78, '2022-05-09', 'DAM 1', 'Charla', '12:30AM - 13:30PM', '2022-05-08 17:39:19');
 
 -- --------------------------------------------------------
 
