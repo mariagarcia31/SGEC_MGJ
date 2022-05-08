@@ -249,7 +249,7 @@ class Crud extends Conexion{
     }
 
     function maximoDiasSiguientes(){
-        $comprobar="SELECT valor FROM `configuracion` WHERE nombre = 'Máximo de días siguientes para reservar'";
+        $comprobar="SELECT valor FROM `configuracion` WHERE id = 1";
         $consulta_comprobar=$this->conexion()->prepare($comprobar);
         $consulta_comprobar->execute();
         $resultado_comprobar=$consulta_comprobar->fetch();
