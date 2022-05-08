@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2022 a las 20:10:05
+-- Tiempo de generación: 08-05-2022 a las 19:42:35
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -82,6 +82,7 @@ INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`, `i
 ('Aula 700', 'Pabellon 3', 'Tv', 70, 1, 'libs/img/upload/aula1.jpg'),
 ('aula 8', 'l', 'l', 7, 1, 'libs/img/upload/aula1.jpg'),
 ('Aula 815', 'Pabellón 10, Planta 2ª, Puerta 1ª', 'Tv, Ordenadores, Sillas, Mesas', 30, 1, 'libs/img/upload/aulaDefecto.jpeg'),
+('Aula Auxiliar2a', 'a', 'a', 12, 0, 'libs/img/upload/aulaDefecto.jpeg'),
 ('Aula Extra', 'Pabellón 3', 'Tv', 50, 0, 'libs/img/upload/aulaDefecto.jpeg'),
 ('Aula Polivalente', 'Pabellón 10, Planta 1ª, Puerta 1ª', 'Mesas, Sillas, Pizarras', 790, 1, 'libs/img/upload/aula1.jpg'),
 ('Aula prueba 2', 'Pabellon 3', 'tv', 33, 1, 'libs/img/upload/aula1.jpg');
@@ -191,6 +192,19 @@ CREATE TABLE `reservas` (
   `hora` varchar(255) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
+(306, 'Aula 100', 78, '2022-05-19', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-05-05 18:11:09'),
+(307, 'Aula 815', 78, '2022-05-06', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-05-06 13:41:43'),
+(308, 'Aula 100', 78, '2022-05-09', 'DAM 1', 'Charla', '08:30AM - 09:30AM', '2022-05-08 17:18:27'),
+(309, 'Aula 100', 78, '2022-05-09', 'DAM 1', 'Charla', '09:30AM - 10:30AM', '2022-05-08 17:36:16'),
+(310, 'Aula 100', 78, '2022-05-09', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-05-08 17:37:12'),
+(311, 'Aula 100', 78, '2022-05-09', 'DAM 1', 'Charla', '11:30AM - 12:30AM', '2022-05-08 17:38:30'),
+(312, 'Aula 100', 78, '2022-05-09', 'DAM 1', 'Charla', '12:30AM - 13:30PM', '2022-05-08 17:39:19');
 
 -- --------------------------------------------------------
 
@@ -338,7 +352,7 @@ ALTER TABLE `historial`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=306;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
