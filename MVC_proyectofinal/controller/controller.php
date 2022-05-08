@@ -252,7 +252,7 @@ class Control{
                 showConfirmButton: false,
                 timer: 1500
               });</script>";
-              $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Hola ".$_SESSION["nombre"].",\nSe ha confirmado su reserva con los siguientes datos:\n\n - Aula:  ".$_GET["id"].".\n\n - Fecha: ".$_GET["date"]. ". \n\n - Hora: ".$_POST["timeslot"].".\n\nPara evitar perjudicar a otras personas, se ruega puntualidad; si llega tarde a su reserva no se le podrá garantizar el tiempo necesario.\n\nSi desea cancelar o modificar su cita, puede hacerlo en el apartado 'Mis Reservas' de nuestra web.", $_SESSION["correo"]);
+              $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Hola ".$_SESSION["nombre"].",\nSe ha confirmado su reserva con los siguientes datos:\n\n - Aula:  ".$_GET["id"].".\n\n - Fecha: ".$_GET["date"]. ". \n\n - Hora: ".$_POST["timeslot"].".\n\nPara evitar perjudicar a otras personas, se ruega puntualidad; si llega tarde a su reserva no se le podrá garantizar el tiempo necesario.\n\nSi desea cancelar o modificar su cita, puede hacerlo en el apartado 'Mis Reservas' de nuestra web. \n\n\nIES Ciudad Escolar - Sistema de Gestión de Espacios Comunes", $_SESSION["correo"]);
             
               header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id']."&month=".$_GET['month']."&year=".$_GET['year'].""); 
             
@@ -281,7 +281,7 @@ class Control{
                 showConfirmButton: false,
                 timer: 1500
               });</script>";
-              $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Hola ".$_SESSION["nombre"].",\nSe ha confirmado su reserva con los siguientes datos:\n\n - Aula:  ".$_GET["id"].".\n\n - Fecha: ".$_GET["date"]. ". \n\n - Hora: ".$_POST["timeslot"].".\n\nPara evitar perjudicar a otras personas, se ruega puntualidad; si llega tarde a su reserva no se le podrá garantizar el tiempo necesario.\n\nSi desea cancelar o modificar su cita, puede hacerlo en el apartado 'Mis Reservas' de nuestra web.", $_SESSION["correo"]);
+              $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Hola ".$_SESSION["nombre"].",\nSe ha confirmado su reserva con los siguientes datos:\n\n - Aula:  ".$_GET["id"].".\n\n - Fecha: ".$_GET["date"]. ". \n\n - Hora: ".$_POST["timeslot"].".\n\nPara evitar perjudicar a otras personas, se ruega puntualidad; si llega tarde a su reserva no se le podrá garantizar el tiempo necesario.\n\nSi desea cancelar o modificar su cita, puede hacerlo en el apartado 'Mis Reservas' de nuestra web. \n\n\nIES Ciudad Escolar - Sistema de Gestión de Espacios Comunes", $_SESSION["correo"]);
 
             header("location:?c=calendarioSemanal&id=".$_GET['id']."&week=".$_GET['week']."&year=".$_GET['year'].""); 
             
@@ -310,7 +310,7 @@ class Control{
                 showConfirmButton: false,
                 timer: 1500
               });</script>";
-              $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Hola ".$_SESSION["nombre"].",\nSe ha confirmado su reserva con los siguientes datos:\n\n - Aula:  ".$_GET["id"].".\n\n - Fecha: ".$_GET["date"]. ". \n\n - Hora: ".$_POST["timeslot"].".\n\nPara evitar perjudicar a otras personas, se ruega puntualidad; si llega tarde a su reserva no se le podrá garantizar el tiempo necesario.\n\nSi desea cancelar o modificar su cita, puede hacerlo en el apartado 'Mis Reservas' de nuestra web.", $_SESSION["correo"]);
+              $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Hola ".$_SESSION["nombre"].",\nSe ha confirmado su reserva con los siguientes datos:\n\n - Aula:  ".$_GET["id"].".\n\n - Fecha: ".$_GET["date"]. ". \n\n - Hora: ".$_POST["timeslot"].".\n\nPara evitar perjudicar a otras personas, se ruega puntualidad; si llega tarde a su reserva no se le podrá garantizar el tiempo necesario.\n\nSi desea cancelar o modificar su cita, puede hacerlo en el apartado 'Mis Reservas' de nuestra web. \n\n\nIES Ciudad Escolar - Sistema de Gestión de Espacios Comunes", $_SESSION["correo"]);
 
             header("location:?c=calendarioDiario&date=".$_GET['date'].""); 
             

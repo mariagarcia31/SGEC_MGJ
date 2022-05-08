@@ -38,7 +38,7 @@ class Crud extends Conexion{
             $mail->Password = 'Mariagerardoyjossue1'; 
             $mail->AddAddress($correo);
             $mail->Subject = "Cambio de contrasena";
-            $mail->Body = "Su contraseña temporal es ".$contra;
+            $mail->Body = "Hola ".$resultado[1].",\n\nSu contraseña temporal es: ".$contra."\n\nPara activar su cuenta debe ingresar en nuestra web utilizando esta contraseña y seguidamente se le pedirá ingresar una nueva contraseña.\n\n\nIES Ciudad Escolar - Sistema de Gestión de Espacios Comunes";
             $mail->Send();
             return true;
         }
