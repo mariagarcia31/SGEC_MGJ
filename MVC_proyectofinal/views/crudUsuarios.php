@@ -344,9 +344,9 @@ $("#myModal").modal();
            
                        <div class="col-md-12 ">';
                        echo "<form action='' method='post' >
-                            <input class='btn btn-primary' type='submit' name='cargar' value='Cargar Usuarios'>
+                            <input class='btn btn-primary' style='font-size:14px' type='submit' name='cargar' value='Cargar Usuarios'>
                             </form>";
-        echo "<a href='?c=crudUsuarios&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  ";
+        echo "<a href='?c=crudUsuarios&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>  ";
        
        echo '<div class="table-responsive-sm">
        <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
