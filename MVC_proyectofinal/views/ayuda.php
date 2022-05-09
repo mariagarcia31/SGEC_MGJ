@@ -147,7 +147,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
         <div id="configuracion" class="tabcontent">
             <button class="accordion">¿Cómo cambiar la contraseña?</button>
             <div class="panel">
-            <p>Dirígete a "menu>Configuración" y se te mostrarán los datos de tu perfil, allí encontrarás un formulario con el cambio de contraseña, introduce la nueva contraseña y pulsa el botón "Confirmar".</p>
+            <p>Dirígete a "Perfil" y se te mostrarán los datos de tu perfil, allí encontrarás un formulario con el cambio de contraseña, introduce la nueva contraseña y pulsa el botón "Confirmar".</p>
             </div>
 
             <button class="accordion">¿Cómo cambiar el nombre de usuario?</button>
@@ -157,7 +157,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
             <button class="accordion">¿Cómo cambiar el correo electrónico?</button>
             <div class="panel">
-            <p>Este dato sólo lo puede modificar el administrador.</p>
+            <p>Desde "Perfil" puedes modificar tu correo electrónico.</p>
             </div>
         </div>
     </div>
