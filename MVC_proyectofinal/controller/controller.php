@@ -457,7 +457,15 @@ function borrarReservas(){
             header("location:?c=crudReservas&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ninguna reserva para eliminar</div>";
+            $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No se ha seleccionado ninguna reserva para eliminar.',
+                footer: ''
+              })</script>";
             header("location:?c=crudReservas&page=".$_GET["pag"]."");
         }
     
@@ -575,7 +583,15 @@ function borrarAulas(){
             header("location:?c=crudAulas&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningún aula para eliminar</div>";
+            $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No se ha seleccionado ningún aula para eliminar.',
+                footer: ''
+              })</script>";
             header("location:?c=crudAulas&page=".$_GET["pag"]."");
         }
     
@@ -716,7 +732,15 @@ function borrarRoles(){
             header("location:?c=crudRoles&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningún Rol para eliminar</div>";
+            $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No se ha seleccionado ningún rol para eliminar.',
+                footer: ''
+              })</script>";
             header("location:?c=crudRoles&page=".$_GET["pag"]."");
         }
     
@@ -859,7 +883,15 @@ function borrarUsuarios(){
             header("location:?c=crudUsuarios&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningún usuario para eliminar</div>";
+            $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No se ha seleccionado ningún usuario para eliminar.',
+                footer: ''
+              })</script>";
             header("location:?c=crudUsuarios&page=".$_GET["pag"]."");
         }
     
@@ -1003,7 +1035,15 @@ function borrarGrupos(){
             header("location:?c=crudGrupos&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningún grupo para eliminar</div>";
+            $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No se ha seleccionado ningún grupo para eliminar.',
+                footer: ''
+              })</script>";
             header("location:?c=crudGrupos&page=".$_GET["pag"]."");
         }
     
@@ -1148,7 +1188,15 @@ function borrarFestivos(){
             header("location:?c=crudFestivos&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningún festivo para eliminar</div>";
+            $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No se ha seleccionado ningún festivo para eliminar.',
+                footer: ''
+              })</script>";
             header("location:?c=crudFestivos&page=".$_GET["pag"]."");
         }
     
@@ -1300,7 +1348,15 @@ function borrarConfiguracion(){
             header("location:?c=crudConfiguracion&page=".$_GET["pag"]."");
             }
         }else{
-            $_SESSION["error2"]="<div class='alert  '>No se ha seleccionado ningúna configuración para eliminar</div>";
+            $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No se ha seleccionado ninguna configuración para eliminar.',
+                footer: ''
+              })</script>";
             header("location:?c=crudConfiguracion&page=".$_GET["pag"]."");
         }
     

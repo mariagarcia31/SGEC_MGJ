@@ -336,7 +336,7 @@ $("#myModal").modal();
        
 <?php
 
-       echo '<div class="container" style="margin-top:60px;margin:65px">
+       echo '<div class="container" style="margin-top:60px;margin:auto 130px">
 
 
 
