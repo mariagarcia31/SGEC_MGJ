@@ -363,7 +363,7 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
 <span class="glyphicon glyphicon-align-justify"></span>
 </span>
 <div class="cabecera-todo">
-    <a class="logoEnlace" href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img class="logo" style="    width: 175px;
+    <a class="logoEnlace" href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img slt="logo" class="logo" style="    width: 175px;
     height: 75px;" src="libs/img/logo_ciudadescolar.png"></a>
     <h3 class="cabecera">Sistema de Gestión de Espacios Comunes</h3>
 </div>
@@ -372,7 +372,7 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <h5 style="color: rgba(255, 255, 255, 0.7); display:inline-block" ><?php echo $_SESSION['nombre'];?></h5>
             <img class="img-profile rounded-circle" style="width:40px"
-                src="libs/img/undraw_profile.svg">
+                src="libs/img/undraw_profile.svg" alt="avatar">
         </a>
   <div class="dropdown-content">
   <p class="btn-cerrar-sesion" style="color:black" onclick=cerrar()><i class="bi bi-box-arrow-right mr-2"></i> Cerrar sesión</p>

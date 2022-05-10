@@ -157,7 +157,7 @@ include "menu.php"?>
                             <h1 class="card-title" style="text-align:center;margin-top:2%"><?php echo $row['id']; ?></h1>
                         </div>
                     </div>
-                    <img class="img-fluid"  src="<?=$row['imagen']?>" style="height:250px !important">
+                    <img alt="imagen de aula" class="img-fluid"  src="<?=$row['imagen']?>" style="height:250px !important">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item " style="font-size:1.3rem" >• Aforo: <?php echo $row['aforo']; ?></li>
                         <li class="list-group-item " style="font-size:1.3rem">• Herramientas: <?php echo $row['informacion']; ?></li>

@@ -308,7 +308,7 @@ $_SESSION['cuantas']=count($result[0]);
             foreach($dato as $x=>$y){
         
                 if($x=='imagen'){
-                    echo "<td><img src='".$y."' class='img-fluid img-thumbnail' style='width:70px; height:60px;'></td>";
+                    echo "<td><img alt='imagen-aula' src='".$y."' class='img-fluid img-thumbnail' style='width:70px; height:60px;'></td>";
                 }
                 else{
                 echo "<td>".$y."</td>";
