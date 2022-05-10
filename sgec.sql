@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2022 a las 20:05:18
+-- Tiempo de generación: 10-05-2022 a las 09:11:09
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -241,9 +241,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `primerApellido`, `segundoApellido`, `usuario`, `puesto`, `contra`, `confirmacion`, `rol`) VALUES
-(1, 'Maria', 'mariagarcia.daw@ciudadescolarfp.es', 'García', 'Perez', 'maria123', 'Administradora', '$2y$10$eF7yZrthW5tC4DmtdRw.0ePcWKAJiDiaC64.2QNXfjOrQatuU.lZ6', 1, 1),
-(75, 'Jossue', 'josue@ciudadescolarfp.es', 'buenaño', 'peña', 'josu', 'fisica', '$2y$10$SpZrXU.wXTNfQaGypHPCU.rEkDN5bYDEMisAAyJUQ2cG4DBUlFXtG', 1, 2),
-(78, 'Gerardo', 'gerardopimentel.daw@ciudadescolarfp.es', 'Pimentel', 'Andres', 'gerardpm', 'Profe', '$2y$10$dbURiABwmulO1adHZnaF2uXlN45wtg1KqMGfnRQ0HFAZ3qW4HsWJK', 1, 1);
+(1, 'Maria', 'mariagarcia.daw@ciudadescolarfp.es', 'García', 'Valero', 'Maria', 'Informática', '$2y$10$eF7yZrthW5tC4DmtdRw.0ePcWKAJiDiaC64.2QNXfjOrQatuU.lZ6', 1, 1),
+(2, 'Jossue', 'anthonyjossuebuenano.daw@ciudadescolarfp.es', 'buenaño', 'peña', 'josu', 'Informático', '$2y$10$SpZrXU.wXTNfQaGypHPCU.rEkDN5bYDEMisAAyJUQ2cG4DBUlFXtG', 1, 1),
+(3, 'Gerardo', 'gerardopimentel.daw@ciudadescolarfp.es', 'Pimentel', 'Serrano', 'gerardo', 'Informático', '$2y$10$dbURiABwmulO1adHZnaF2uXlN45wtg1KqMGfnRQ0HFAZ3qW4HsWJK', 1, 1),
+(4, 'Vicky', 'victoria.gonzalez@ciudadescolarfp.es', 'gonzález', 'gonzález', 'vicky', 'Profesora', '1234', 0, 1);
 
 --
 -- Índices para tablas volcadas

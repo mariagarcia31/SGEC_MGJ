@@ -202,8 +202,16 @@ class Control{
         $result=$this->crud->contraNueva($_GET["correo"],$_POST["contrasena1"],$_POST["contrasena2"],$n_correo);
 
         if($result){
-            $_SESSION["cambiado"]="ok";
-            header("location:?c=principal"); 
+            $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'success',
+                title: '',
+                text: 'Los datos se han modificado correctamente. Vuelva a iniciar sesión.',
+                footer: ''
+              })</script>";
+              header("location:?c=configuracionPerfil&page=1");     
             
         }else{
             if(isset($_GET["conf"])){
@@ -213,7 +221,7 @@ class Control{
                 <script>     Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es',
+                    text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es. El correo no se debe encontrar registrado',
                     footer: ''
                 })</script>";
                 header("location:?c=configuracionPerfil&page=1");     
@@ -225,7 +233,7 @@ class Control{
                 <script>     Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es',
+                    text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es. El correo no se debe encontrar registrado',
                     footer: ''
                   })</script>";
                 header("location:?c=c_contra&correo=".$_GET["correo"]."");     

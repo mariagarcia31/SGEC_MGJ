@@ -190,20 +190,28 @@ class Crud extends Conexion{
     function contraNueva($correo,$contraN,$contraN2,$n_correo){
 
         try{
+            $sql="SELECT correo FROM usuarios WHERE correo='$correo' OR correo='$n_correo';";
+            $con=$this->conexion->prepare($sql);
+            $con->execute();
+            $consult=$con->fetchAll(PDO::FETCH_ASSOC);
+            if($consult==null){
+                if($contraN == $contraN2 && (strpos($n_correo, "@") && (strpos($n_correo, "ciudadescolarfp") || strpos($n_correo, "educa.madrid")) && strpos($n_correo, "."))){
 
-            
-            if($contraN == $contraN2 && (strpos($n_correo, "@") && (strpos($n_correo, "ciudadescolarfp") || strpos($n_correo, "educa.madrid")) && strpos($n_correo, "."))){
-
-                $contra=password_hash("$contraN", PASSWORD_DEFAULT);
-                $sql="CALL cambiarContra('$correo','$contra','$n_correo')";
-                $con=$this->conexion->prepare($sql);
-                $con->execute();
-                
-                return true;
-                
+                    $contra=password_hash("$contraN", PASSWORD_DEFAULT);
+                    $sql="CALL cambiarContra('$correo','$contra','$n_correo')";
+                    $con=$this->conexion->prepare($sql);
+                    $con->execute();
+                    
+                    return true;
+                    
+                }else{
+                    return false;
+                }
             }else{
                 return false;
             }
+            
+            
 
         }catch(PDOException $e){
             return $e;
