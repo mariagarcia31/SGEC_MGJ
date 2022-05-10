@@ -7,7 +7,7 @@ session_start();
 
 $con = MySQLi_connect(
 
-   "localhost", //Server host name.
+   "127.0.0.1:33065", //Server host name.
 
    "root", //Database username.
 

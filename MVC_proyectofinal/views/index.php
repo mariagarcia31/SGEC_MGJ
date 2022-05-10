@@ -79,43 +79,7 @@
         }?>
         </div>
     </div>
-    <script>
-       document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById("formulario").addEventListener('submit', validarFormulario); 
-    });
-
-        function validarFormulario(evento) {
-        evento.preventDefault();
-        var correo = document.getElementById('correo').value;
-        var contra = document.getElementById('correo').value;
-
-        if(  /^\w+([\.-]?\w+)*@(?:|ciudadescolarfp|educa.madrid)\.(?:|org|es)+$/.test(correo)) {
-            if(correo.lenght==0||contra.lenght==0){
-                Swal.fire({
-                        icon: 'warning',
-                        text: 'Debes rellenar todos los campos',
-                        showConfirmButton: false,
-                        timer: 4500
-                    });
-            return false;
-            }else{
-                this.submit();
-
-            }
-        }else{
-            Swal.fire({
-                        icon: 'warning',
-                        text: 'El dominio del correo debe ser @ciudadescolarfp.es o educa.madrid.org',
-                        showConfirmButton: false,
-                        timer: 4500
-                    });
-            return false;
-
-        }
-        
-
-}
-        </script>
+ 
 
 
 

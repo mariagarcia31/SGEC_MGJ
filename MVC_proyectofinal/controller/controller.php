@@ -187,7 +187,7 @@ class Control{
         <script>     Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Correo o contraseña incorrecta.',
+            text: 'Correo o Usuario o contraseña incorrecta.',
             footer: ''
           })</script>";  
             header("location: ?c=home");  
@@ -202,44 +202,49 @@ class Control{
         $result=$this->crud->contraNueva($_GET["correo"],$_POST["contrasena1"],$_POST["contrasena2"],$n_correo);
 
         if($result){
-            $_SESSION["error2"]="
-        
 
-            <script>     Swal.fire({
-                icon: 'success',
-                title: '',
-                text: 'Los datos se han modificado correctamente. Vuelva a iniciar sesión.',
-                footer: ''
-              })</script>";
-              header("location:?c=configuracionPerfil&page=1");     
-            
-        }else{
             if(isset($_GET["conf"])){
+                  
                 $_SESSION["error2"]="
-        
-
+                <script>     Swal.fire({
+                    icon: 'success',
+                    title: 'Cambiado con existo',
+                    text: ' Vuelve a iniciar sesion',
+                    footer: ''
+                })</script>";
+                header("location:?c=configuracionPerfil&page=1"); 
+            }else{
+                $_SESSION["cambiado"]="ok";
+                header("location:?c=principal");  
+            }
+               
+            
+        }elseif(isset($_GET["conf"])){
+                
+                $_SESSION["error2"]="
                 <script>     Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
                     text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es. El correo no se debe encontrar registrado',
                     footer: ''
                 })</script>";
-                header("location:?c=configuracionPerfil&page=1");     
+                header("location:?c=configuracionPerfil&page=1"); 
+               
 
-            }else{
-                $_SESSION["error2"]="
-        
+        }else{
+            $_SESSION["error2"]="
+    
 
-                <script>     Swal.fire({
-                    icon: 'warning',
-                    title: 'Oops...',
-                    text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es. El correo no se debe encontrar registrado',
-                    footer: ''
-                  })</script>";
-                header("location:?c=c_contra&correo=".$_GET["correo"]."");     
-            }
-           
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es. El correo no se debe encontrar registrado',
+                footer: ''
+                })</script>";
+            header("location:?c=c_contra&correo=".$_GET["correo"]."");     
         }
+           
+        
 
 
     }

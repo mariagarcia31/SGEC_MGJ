@@ -1,9 +1,9 @@
 <?php
         use PHPMailer\PHPMailer\PHPMailer;
         use PHPMailer\PHPMailer\Exception;
-        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/Exception.php';
-        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/PHPMailer.php';
-        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/SMTP.php';
+        require 'C:/xampp/htdocs/php/git_proyecto/SGEC_MGJ/PHPMailer/src/Exception.php';
+        require 'C:/xampp/htdocs/php/git_proyecto/SGEC_MGJ/PHPMailer/src/PHPMailer.php';
+        require 'C:/xampp/htdocs/php/git_proyecto/SGEC_MGJ/PHPMailer/src/SMTP.php';
 include("conexion.php");
 
 class Crud extends Conexion{
@@ -195,7 +195,7 @@ class Crud extends Conexion{
             $con->execute();
             $consult=$con->fetchAll(PDO::FETCH_ASSOC);
             if($consult==null){
-                if($contraN == $contraN2 && (strpos($n_correo, "@") && (strpos($n_correo, "ciudadescolarfp") || strpos($n_correo, "educa.madrid")) && strpos($n_correo, "."))){
+                if($contraN == $contraN2 && (strpos($n_correo, "@ciudadescolarfp.es") || strpos($n_correo, "@ciudadescolarfp.com"))){
 
                     $contra=password_hash("$contraN", PASSWORD_DEFAULT);
                     $sql="CALL cambiarContra('$correo','$contra','$n_correo')";
