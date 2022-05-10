@@ -262,7 +262,7 @@ body {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body style="font-size:12px !important">
 
 <div id="mySidenav" class="sidenav" style="z-index:999">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -324,12 +324,12 @@ body {
   }else{echo"";}
   echo " </div>  <hr class='sidebar-divider'>";
 
-  if($_SESSION['actualizarBBDD']==1){
+  /*if($_SESSION['actualizarBBDD']==1){
 
   echo '  <a class="btn-menu" href="?c=actualizarBbdd&page=1"><i class="bi bi-arrow-bar-up"></i>  Actualizar</a>  <hr class="sidebar-divider">';
   
 
-  }else{echo"";}
+  }else{echo"";}*/
   if($_SESSION['estadisticas']==1){
 
     echo '  <a class="btn-menu" href="?c=estadisticas&page=1"><i class="bi bi-bar-chart-line"></i>  Estadísticas</a>  <hr class="sidebar-divider">';

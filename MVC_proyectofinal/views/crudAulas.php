@@ -24,7 +24,7 @@ $(document).ready(function(){
 <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
 
 </head>
-<body>
+<body style="font-size:12px !important">
 
   
   
@@ -55,7 +55,7 @@ if(isset($_GET["crear"])){
         unset($_SESSION['vacio']);
     }
 
-    echo "<form action='?c=crearAulas&pag=".$_GET['page']."' method='post' enctype='multipart/form-data'>";
+    echo "<form style='font-size:14px' action='?c=crearAulas&pag=".$_GET['page']."' method='post' enctype='multipart/form-data'>";
     
     echo '<div class="form-group">
     <label for="">Nombre: </label>';
@@ -90,8 +90,8 @@ if(isset($_GET["crear"])){
         <label for="">Imágen: </label>';
     echo "<input type='file' name='files'/></div>";
             
-    echo "<input class='btn btn-success'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
-    echo '<a href="?c=crudAulas&page='.$_GET['page'].'"><button type="button" class="btn btn-danger">Cancelar</button></a>';
+    echo "<input class='btn btn-success'  type='submit'  name='agregar-ult' value='Crear' style='font-size:14px'>  </input>";
+    echo '<a href="?c=crudAulas&page='.$_GET['page'].'"><button style="font-size:14px" type="button" class="btn btn-danger">Cancelar</button></a>';
 
     echo "</form>";
     echo '</div>';
@@ -126,7 +126,7 @@ if(isset($_SESSION["modificar"])){
               <h3 class="modal-title" id="exampleModalLongTitle">Modificar aula</h3>
             </div>
             <div class="modal-body">';
-    echo "<form action='?c=modificarAulas&pag=".$_GET['page']."' method='post' enctype='multipart/form-data' >";
+    echo "<form style='font-size:14px' action='?c=modificarAulas&pag=".$_GET['page']."' method='post' enctype='multipart/form-data' >";
     if(isset($_SESSION['vacio'])){
         echo $_SESSION['vacio'];
         unset($_SESSION['vacio']);
@@ -189,7 +189,7 @@ if(isset($_SESSION["modificar"])){
     echo "<input type='file' name='files'/></div>";
     
     echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input>  ";
-    echo '<button type="button" class="btn btn-danger cancelar" data-dismiss="modal">Cancelar</button>';
+    echo '<button type="button" class="btn btn-danger cancelar" style="font-size:14px" data-dismiss="modal">Cancelar</button>';
 
     echo "</form>";
     echo '</div>';
@@ -209,7 +209,7 @@ if($count[0]==0){
     <div class="col-md-12 ">
     <h1 class="display-3"> No se han creado aulas aún</h1>';
  
-    echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>
+    echo "<a style='font-size:14px' href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>
   
     ";
     
@@ -278,7 +278,7 @@ $_SESSION['cuantas']=count($result[0]);
 
 
                        <div class="col-md-12 ">';
-        echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  ";
+        echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>  ";
        
        echo '<div class="table-responsive-sm">
        <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
@@ -297,7 +297,7 @@ $_SESSION['cuantas']=count($result[0]);
         echo "</tr>";
         ?>
         
-        <form action="?c=borrarAulas&pag=<?php echo $_GET["page"]?>" method="post"> 
+        <form style='font-size:14px' action="?c=borrarAulas&pag=<?php echo $_GET["page"]?>" method="post"> 
             <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="float:right;   margin-top: -43px; font-size:14px " >
 
         

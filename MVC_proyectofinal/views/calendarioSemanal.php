@@ -238,14 +238,14 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
 
 </head>
-<body>
+<body style="font-size:12px !important">
     
 <?php include "menu.php"?>
 
 
 
   <div class="row"> 
-  <a href="?c=principal" title="Cancelar" ><button type="button" class="close"><i class="bi bi-arrow-return-left volver"> Ver aulas</i></button></a>
+  <a href="?c=principal" title="Cancelar" style='font-size:14px' ><button type="button" class="close"><i class="bi bi-arrow-return-left volver"> Ver aulas</i></button></a>
 
    <div class="col-md-12 "> 
     
@@ -283,7 +283,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="?c=reservaSemanal&id=<?php echo $_GET['id']?>&date=<?php echo $_GET['date'] ?>&week=<?php echo $_GET['week']?>&year=<?php echo $_GET['year']?>" method="post">
+                            <form style='font-size:14px' action="?c=reservaSemanal&id=<?php echo $_GET['id']?>&date=<?php echo $_GET['date'] ?>&week=<?php echo $_GET['week']?>&year=<?php echo $_GET['year']?>" method="post">
                                <div class="form-group">
                                     <label for="">Franja</label>
                                     <input readonly type="text" class="form-control" id="timeslot" name="timeslot" value="<?php echo $_GET['hora']?>">
@@ -320,7 +320,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
                                 </div>
                                 <div class="form-group pull-right">
                                     <button name="submit" type="submit" class="btn btn-success">Reservar</button>
-                                    <a href="?c=calendarioSemanal&date=<?php echo $_GET['date'] ?>&id=<?php echo $_GET['id'] ?>&week=<?php echo $_GET['week'] ?>&year=<?php echo $_GET['year'] ?>"><button type="button" class="btn btn-danger">Cancelar</button></a>
+                                    <a href="?c=calendarioSemanal&date=<?php echo $_GET['date'] ?>&id=<?php echo $_GET['id'] ?>&week=<?php echo $_GET['week'] ?>&year=<?php echo $_GET['year'] ?>"><button type="button" class="btn btn-danger" style='font-size:14px'>Cancelar</button></a>
 
                                 </div>
                             </form>

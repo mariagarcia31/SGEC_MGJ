@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 }
 </style>
-<body>
+<body style="font-size:12px !important">
 
 <?php include "menu.php";
 
@@ -112,7 +112,7 @@ $("#myModal").modal();
         </div>
         <div class="modal-body">';
 
-        echo "<form action='?c=crearUsuarios&pag=".$_GET['page']."' method='post'>";
+        echo "<form style='font-size:14px' action='?c=crearUsuarios&pag=".$_GET['page']."' method='post'>";
         if(isset($_SESSION['vacio'])){
             echo $_SESSION['vacio'];
             unset($_SESSION['vacio']);
@@ -192,8 +192,8 @@ $("#myModal").modal();
                                 
                                 
                                 echo '<div class="modal-footer">';
-                                echo "<input class='btn btn-success' type='submit'  name='agregar-ult' value='Crear'></input> ";
-                                echo '<a href="?c=crudUsuarios&page='.$_GET['page'].'"><button type="button" class="btn btn-danger">Cancelar</button></a>';
+                                echo "<input class='btn btn-success' type='submit' style='font-size:14px' name='agregar-ult' value='Crear'></input> ";
+                                echo '<a href="?c=crudUsuarios&page='.$_GET['page'].'"><button type="button" style="font-size:14px" class="btn btn-danger">Cancelar</button></a>';
 
                                 echo '</div>';
                                 echo "</form>";
@@ -225,7 +225,7 @@ $("#myModal").modal();
         </div>
         <div class="modal-body">';
 
-    echo "<form action='?c=modificarUsuarios&pag=".$_GET['page']."' method='post'>";
+    echo "<form style='font-size:14px' action='?c=modificarUsuarios&pag=".$_GET['page']."' method='post'>";
     if(isset($_SESSION['vacio'])){
         echo $_SESSION['vacio'];
         unset($_SESSION['vacio']);
@@ -320,7 +320,7 @@ $("#myModal").modal();
                             
                             echo '<div class="modal-footer">';
                             echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
-                            echo '<button type="button" class="btn btn-danger cancelar" data-dismiss="modal">Cancelar</button>';                           
+                            echo '<button type="button" class="btn btn-danger cancelar" style="font-size:14px" data-dismiss="modal">Cancelar</button>';                           
                             echo '</div>';
                             echo "</form>";
                             echo '</div>';
@@ -343,7 +343,7 @@ $("#myModal").modal();
        <div class="row">
            
                        <div class="col-md-12 ">';
-                       echo "<form action='' method='post' >
+                       echo "<form style='font-size:14px' action='' method='post' >
                             <input class='btn btn-primary' style='font-size:14px' type='submit' name='cargar' value='Cargar Usuarios'>
                             </form>";
         echo "<a href='?c=crudUsuarios&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>  ";
@@ -371,14 +371,14 @@ $("#myModal").modal();
                       <h3 class="modal-title" id="exampleModalLongTitle">Cargar usuario</h3>
                     </div>
                     <div class="modal-body">';
-            echo '<div class="form"><form class="login-form" class="form" enctype="multipart/form-data" method="post" action="?c=cargarUsuarios&pag='.$_GET["page"].'">
+            echo '<div class="form"><form style="font-size:14px" class="login-form" class="form" enctype="multipart/form-data" method="post" action="?c=cargarUsuarios&pag='.$_GET["page"].'">
                     <input type="file" name="file" id="file">
                   
 
                     </div>';            
 
             echo '<div class="modal-footer">  <input type="submit" class="btn btn-success" value="Cargar" name="enviar">
-            <input type="submit" class="btn btn-danger" value="Cancelar" name="cancelar"></div></form></div></div></div></div>';
+            <input type="submit" class="btn btn-danger" value="Cancelar" style="font-size:14px" name="cancelar"></div></form></div></div></div></div>';
      
                                         
                                   
@@ -387,7 +387,7 @@ $("#myModal").modal();
         }
 
         ?>
-<form action="?c=borrarUsuarios&pag=<?php echo $_GET["page"]?>" method="post"> 
+<form style='font-size:14px' action="?c=borrarUsuarios&pag=<?php echo $_GET["page"]?>" method="post"> 
 <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="float:right;   margin-top: -43px; font-size:14px " >
 <?php
         

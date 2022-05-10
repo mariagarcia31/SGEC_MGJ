@@ -46,7 +46,7 @@ if (isset($_POST['search'])) {
 //Creating unordered list to display result.
 
    echo '
-   <form action="?c=borrarUsuarios&pag='.$page.'" method="post"> 
+   <form style="font-size:14px" action="?c=borrarUsuarios&pag='.$page.'" method="post"> 
    <ul class="list-group">
 
    ';

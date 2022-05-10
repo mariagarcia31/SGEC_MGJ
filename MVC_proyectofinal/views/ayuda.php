@@ -91,7 +91,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
   }
   </style>
 </head>
-<body>
+<body style="font-size:12px !important">
 
   
   
@@ -100,7 +100,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
     ?>
 
 
-<body>
+<body style="font-size:12px !important">
     <div class="container">
         <h2>Preguntas más frecuentes</h2>
 

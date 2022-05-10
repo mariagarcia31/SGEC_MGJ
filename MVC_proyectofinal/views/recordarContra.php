@@ -28,7 +28,7 @@
     </style>
 </head>
 
-<body>
+<body style="font-size:12px !important">
 
     <nav class="navbar navbar-expand-lg navbar-light" style="background: #212529;justify-content: left;">
         <div>
@@ -38,7 +38,7 @@
             <h4 style="color:rgba(255, 255, 255, 0.9); display:inline-block;"> Sistema de Gestión de Espacios Comunes</h4>
         </div>
     </nav>
-    <a href="?c=principal" title="Cancelar" ><button type="button" class="close"><i class="bi bi-arrow-return-left volver"> Volver a Inicio de sesión</i></button></a>
+    <a href="?c=principal" title="Cancelar" style='font-size:14px'><button type="button" class="close"><i class="bi bi-arrow-return-left volver"> Volver a Inicio de sesión</i></button></a>
 
     <div class="login-page border" style="padding:0%; margin-top:4%">
 
@@ -47,7 +47,7 @@
             <hr>
         
 
-            <form class="login-form" action="?c=enviarContraNueva" method="POST">
+            <form style='font-size:14px' class="login-form" action="?c=enviarContraNueva" method="POST">
             <input type="text" name="correo" placeholder="Correo electrónico" required>    
 
                <button>Enviar</button>

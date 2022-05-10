@@ -29,14 +29,14 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra'])){
     ?>
 </head>
 
-<body>
+<body style="font-size:12px !important">
 
     <div class="login-page">
         <div style="position: relative;text-align:center;">
             <h1>Cambio de datos</h1>
         </div>
         <div class="form">
-            <form class="login-form" action="?c=cambio_contra&correo=<?php echo $_GET["correo"]?>" method="post">
+            <form style='font-size:14px' class="login-form" action="?c=cambio_contra&correo=<?php echo $_GET["correo"]?>" method="post">
             <input type="email" name="n_correo" placeholder="Correo electrónico" required>    
             <input type="password" value="" name="contrasena1" placeholder="Contraseña Nueva" required>
                <input type="password" value="" name="contrasena2" placeholder="Confirmar Contraseña" required>

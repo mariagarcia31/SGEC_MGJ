@@ -24,7 +24,7 @@ $(document).ready(function(){
 <link rel="stylesheet" href="libs/bootstrap-5.1.3-dist/css/bootstrap.min.css">
 
 </head>
-<body>
+<body style="font-size:12px !important">
 
 <?php include "menu.php";
 
@@ -38,7 +38,7 @@ if($count[0]==0){
     <div class="col-md-12 ">
     <h1 class="display-3"> No se han creado Roles aún</h1>';
  
-    echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>
+    echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>
   
     ";
     if(isset($_GET["crear"])){
@@ -51,7 +51,7 @@ if($count[0]==0){
         display: flex;
         align-items: center;
         justify-content: center;
-        align-content: center;'><form action='?c=crearRoles&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
+        align-content: center;'><form style='font-size:14px' action='?c=crearRoles&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
         
                 echo '<tr>';
                 echo '<th> id</th>';
@@ -61,7 +61,7 @@ if($count[0]==0){
                 echo '<th> crud_aulas</th>';
                 echo '<th> crud_reservas</th>';
                 echo '<th> crud_grupos</th>';
-                echo '<th> actualizar_bbdd</th>';
+               // echo '<th> actualizar_bbdd</th>';
                 echo '<th> crud_festivos</th>';
                 echo '<th> estadisticas</th>';
                 echo '<th> crud_configuracion</th>';
@@ -75,7 +75,7 @@ if($count[0]==0){
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
-                echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
+              //  echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
@@ -83,8 +83,8 @@ if($count[0]==0){
                 echo '</tr>';
 
                 echo "</table>";
-        echo "<input class='btn btn-primary'  type='submit'  name='agregar-ult' value='Crear'>  </input>";
-        echo "<input  class='btn btn-danger'type='submit'  name='cancelar' value='Cancelar'></input>";
+        echo "<input class='btn btn-primary'  type='submit' style='font-size:14px' name='agregar-ult' value='Crear'>  </input>";
+        echo "<input  class='btn btn-danger'type='submit' style='font-size:14px' name='cancelar' value='Cancelar'></input>";
 
         echo "</form></div>";
 
@@ -176,7 +176,7 @@ $("#myModal").modal();
                             </div>
                             <div class="modal-body">';
                     
-                            echo "<form action='?c=crearRoles&pag=".$_GET['page']."' method='post'>";
+                            echo "<form style='font-size:14px' action='?c=crearRoles&pag=".$_GET['page']."' method='post'>";
                             if(isset($_SESSION['vacio'])){
                                 echo $_SESSION['vacio'];
                                 unset($_SESSION['vacio']);
@@ -236,13 +236,13 @@ $("#myModal").modal();
                                                             echo '</div>';
                                                 
                                                            
-                                                            echo '<div class="form-group">
+                                                          /*  echo '<div class="form-group">
                                                             <label for="">Actualizar BBDD</label>';
                                                             echo "<select name='dato[]' class='form-control' required >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";                                                           
-                                                            echo '</div>';
+                                                            echo '</div>';*/
 
                                                             echo '<div class="form-group">
                                                             <label for="">Crud festivos</label>';
@@ -277,8 +277,8 @@ $("#myModal").modal();
                                                     
                                                     
                                                     echo '<div class="modal-footer">';
-                                                    echo "<input class='btn btn-primary' type='submit'  name='agregar-ult' value='Crear'></input> ";
-                                                    echo '<a href="?c=crudRoles&page='.$_GET['page'].'"><button type="button" class="btn btn-danger">Cancelar</button></a>';
+                                                    echo "<input class='btn btn-primary' type='submit' style='font-size:14px' name='agregar-ult' value='Crear'></input> ";
+                                                    echo '<a href="?c=crudRoles&page='.$_GET['page'].'"><button type="button" style="font-size:14px" class="btn btn-danger">Cancelar</button></a>';
                                                     echo '</div>';
                                                     echo "</form>";
                                                     echo '</div>';
@@ -305,7 +305,7 @@ $("#myModal").modal();
                                 </div>
                                 <div class="modal-body">';
                         
-                            echo "<form action='?c=modificarRoles&pag=".$_GET['page']."' method='post'>";
+                            echo "<form style='font-size:14px' action='?c=modificarRoles&pag=".$_GET['page']."' method='post'>";
                             if(isset($_SESSION['vacio'])){
                                 echo $_SESSION['vacio'];
                                 unset($_SESSION['vacio']);
@@ -393,7 +393,7 @@ $("#myModal").modal();
                                                                     }
                                                                     echo "</select></div>";
                                                                 }elseif($i==7){
-                                                                    echo '<div class="form-group">
+                                                                  /*  echo '<div class="form-group">
                                                                     <label for="">Actualizar bbdd</label><select name="dato[]" class="form-control" required>';
                                                                     if($nombre_columna[$i]==0){
                                                                         echo "  <option value='0' selected>No</option>
@@ -402,7 +402,7 @@ $("#myModal").modal();
                                                                         echo "  <option value='0' >No</option>
                                                                         <option value='1' selected>Si</option>";
                                                                     }
-                                                                    echo "</select></div>";
+                                                                    echo "</select></div>";*/
                                                                 }elseif($i==8){
                                                                     echo '<div class="form-group">
                                                                     <label for="">Crud festivos</label><select name="dato[]" class="form-control" required>';
@@ -452,7 +452,7 @@ $("#myModal").modal();
                                                     
                                                     echo '<div class="modal-footer">';
                                                     echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
-                                                    echo '<button type="button" class="btn btn-danger cancelar" data-dismiss="modal">Cancelar</button>';                                                    echo '</div>';
+                                                    echo '<button type="button" class="btn btn-danger cancelar" style="font-size:14px" data-dismiss="modal">Cancelar</button>';                                                    echo '</div>';
                                                     echo "</form>";
                                                     echo '</div>';
                                                     echo '</div>';
@@ -467,14 +467,14 @@ $("#myModal").modal();
        
 <?php
 
-       echo '<div class="container" style="margin-top:60px;">
+       echo '<div class="container" style="margin-top:60px; margin:auto 150px">
 
 
 
        <div class="row">
            
                        <div class="col-md-12 ">';
-        echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear'  class='btn btn-success'> Agregar</button></a>  ";
+        echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>  ";
        
        echo ' <div class="table-responsive-sm">
        <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%;margin-left:-60px">';
@@ -491,7 +491,7 @@ $("#myModal").modal();
         
         echo "</tr>";
         ?>
-<form action="?c=borrarRoles&pag=<?php echo $_GET["page"]?>" method="post"> 
+<form style='font-size:14px' action="?c=borrarRoles&pag=<?php echo $_GET["page"]?>" method="post"> 
 <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="float:right;   margin-top: -43px; font-size:14px " >
 <?php
         

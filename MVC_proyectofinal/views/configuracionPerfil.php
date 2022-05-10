@@ -59,7 +59,7 @@ input{
 }
   </style>
 </head>
-<body>
+<body style="font-size:12px !important">
 
   
   
@@ -69,7 +69,7 @@ input{
     ?>
 
 
-<body>
+<body style="font-size:12px !important">
   <div class="container">
 
     <div class="card">
@@ -78,7 +78,7 @@ input{
         <p><b><?php echo $_SESSION['correo']; ?></b></p> 
        
         <div class="form">
-            <form class="login-form" action="?c=cambio_contra&correo=<?php echo $_SESSION["correo"] ?>&conf=1" method="post">
+            <form style='font-size:14px' class="login-form" action="?c=cambio_contra&correo=<?php echo $_SESSION["correo"] ?>&conf=1" method="post">
                 <input type="email" name="n_correo" placeholder="Correo electrónico" required>    
 
                 <input type="password"  name="contrasena1" placeholder="Contraseña Nueva" required>

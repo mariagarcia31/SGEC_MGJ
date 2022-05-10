@@ -217,7 +217,7 @@ chart5.render();
 </script>
 
 </head>
-<body>
+<body style="font-size:12px !important">
 
 <?php include "menu.php";?>
 <?php if(isset($_POST['fechaInicio'])){?>
@@ -271,7 +271,7 @@ chart5.render();
             <h1 class="text-center" style="color:#F0F0F0" >Número de reservas entre dos fechas </h1>
         </div>
         
-        <form class="mx-auto" method="post" action="">
+        <form style='font-size:14px' class="mx-auto" method="post" action="">
             <div class="form-row mx-auto pb-4 rounded">
                 
                 <h4 style="display:inline-block;margin-left: 1%;">Desde: </h4>

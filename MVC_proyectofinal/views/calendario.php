@@ -236,7 +236,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 </script>
 
 </head>
-<body>
+<body style="font-size:12px !important">
     
 <?php include "menu.php"?>
 
@@ -247,7 +247,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
 
   <div class="row"> 
-  <a href="?c=principal" title="Cancelar" ><button type="button" class="close"><i class="bi bi-arrow-return-left volver"> Ver aulas</i></button></a>
+  <a href="?c=principal" style='font-size:14px' title="Cancelar" ><button type="button" class="close"><i class="bi bi-arrow-return-left volver"> Ver aulas</i></button></a>
 
    <div class="col-md-12 "> 
     
@@ -352,7 +352,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="?c=reserva&id=<?php echo $_GET['id']?>&date=<?php echo $_GET['date'] ?>&month=<?php echo $_GET['month']?>&year=<?php echo $_GET['year']?>" method="post">
+                            <form style='font-size:14px' action="?c=reserva&id=<?php echo $_GET['id']?>&date=<?php echo $_GET['date'] ?>&month=<?php echo $_GET['month']?>&year=<?php echo $_GET['year']?>" method="post">
                                <div class="form-group">
                                     <label for="">Franja</label>
                                     <input readonly type="text" class="form-control" id="timeslot" name="timeslot">
@@ -389,7 +389,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
                                 </div>
                                 <div class="form-group pull-right">
                                     <button name="submit" type="submit" class="btn btn-success">Reservar</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <button style='font-size:14px' type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                 </div>
                                 
                             </form>

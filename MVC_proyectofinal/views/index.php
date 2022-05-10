@@ -42,7 +42,7 @@
     </style>
 </head>
 
-<body>
+<body style="font-size:12px !important">
 
     <nav class="navbar navbar-expand-lg navbar-light" style="background: #212529;justify-content: left;">
         <div>
@@ -60,7 +60,7 @@
             <h2>Iniciar Sesión</h2>
             <hr>
         
-            <form class="login-form" action="?c=verificar" method="post" id="formulario">
+            <form style='font-size:14px' class="login-form" action="?c=verificar" method="post" id="formulario">
                 <input type="text"  id="correo" name="correo" placeholder="Correo electrónico o usuario" required>
                <input type="password" id="contra" name="contrasena" placeholder="Contraseña" required>
   

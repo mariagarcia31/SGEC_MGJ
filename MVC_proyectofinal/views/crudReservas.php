@@ -31,7 +31,7 @@ $(document).ready(function(){
 <!--JS below-->
 
 </head>
-<body>
+<body style="font-size:12px !important">
 
 <?php include "menu.php";
 
@@ -91,7 +91,7 @@ $("#myModal").modal();
         </div>
         <div class="modal-body">';
 
-    echo "<form action='?c=modificarReservas&pag=".$_GET['page']."' method='post'>";
+    echo "<form style='font-size:14px' action='?c=modificarReservas&pag=".$_GET['page']."' method='post'>";
     if(isset($_SESSION['vacio'])){
         echo $_SESSION['vacio'];
         unset($_SESSION['vacio']);
@@ -220,7 +220,7 @@ $("#myModal").modal();
     
     echo '<div class="modal-footer">';
     echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
-    echo '<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>';
+    echo '<button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size:14px">Cancelar</button>';
     echo '</div>';
     echo "</form>";
     echo '</div>';
@@ -275,7 +275,7 @@ $("#myModal").modal();
         
         echo "</tr>";
         ?>
-<form action="?c=borrarReservas&pag=<?php echo $_GET["page"]?>" method="post"> 
+<form style='font-size:14px' action="?c=borrarReservas&pag=<?php echo $_GET["page"]?>" method="post"> 
 <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="float:right;   margin-top: -43px; font-size:14px ">
         <?php
         
