@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-05-2022 a las 09:13:34
+-- Tiempo de generación: 10-05-2022 a las 17:31:29
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -120,7 +120,8 @@ CREATE TABLE `festivos` (
 --
 
 INSERT INTO `festivos` (`id`, `Nombre`, `fechaInicio`, `fechaFinal`) VALUES
-(1, 'Semana Santa', '2022-04-04', '2022-04-18');
+(1, 'Semana Santa', '2022-04-04', '2022-04-18'),
+(6, 'san isidro', '2022-05-16', '2022-05-16');
 
 -- --------------------------------------------------------
 
@@ -189,6 +190,13 @@ CREATE TABLE `reservas` (
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
+(313, 'Sala de reuniones (112)', 1, '2022-05-13', 'DAM 1', 'maria', '09:30AM - 10:30AM', '2022-05-10 08:51:32');
+
 -- --------------------------------------------------------
 
 --
@@ -203,7 +211,6 @@ CREATE TABLE `roles` (
   `crud_aulas` tinyint(1) NOT NULL,
   `crud_reservas` tinyint(1) NOT NULL,
   `crud_grupos` tinyint(1) NOT NULL,
-  `actualizar_bbdd` tinyint(1) NOT NULL,
   `crud_festivos` tinyint(1) NOT NULL,
   `estadisticas` tinyint(1) NOT NULL,
   `crud_configuracion` tinyint(1) NOT NULL
@@ -213,9 +220,10 @@ CREATE TABLE `roles` (
 -- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `roles` (`id`, `nombre`, `crud_roles`, `crud_usuarios`, `crud_aulas`, `crud_reservas`, `crud_grupos`, `actualizar_bbdd`, `crud_festivos`, `estadisticas`, `crud_configuracion`) VALUES
-(1, 'adminstrador', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(2, 'Profesor', 0, 0, 0, 0, 0, 0, 0, 1, 0);
+INSERT INTO `roles` (`id`, `nombre`, `crud_roles`, `crud_usuarios`, `crud_aulas`, `crud_reservas`, `crud_grupos`, `crud_festivos`, `estadisticas`, `crud_configuracion`) VALUES
+(1, 'adminstrador', 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 'Profesor', 0, 0, 0, 0, 0, 0, 1, 0),
+(3, 'jefe departamento', 1, 1, 1, 1, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -244,8 +252,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `primerApellido`, `segundoApel
 (1, 'Maria', 'mariagarcia.daw@ciudadescolarfp.es', 'García', 'Valero', 'Maria', 'Informática', '$2y$10$eF7yZrthW5tC4DmtdRw.0ePcWKAJiDiaC64.2QNXfjOrQatuU.lZ6', 1, 1),
 (2, 'Jossue', 'anthonyjossuebuenano.daw@ciudadescolarfp.es', 'buenaño', 'peña', 'josu', 'Informático', '$2y$10$SpZrXU.wXTNfQaGypHPCU.rEkDN5bYDEMisAAyJUQ2cG4DBUlFXtG', 1, 1),
 (3, 'Gerardo', 'gerardopimentel.daw@ciudadescolarfp.es', 'Pimentel', 'Serrano', 'gerardo', 'Informático', '$2y$10$dbURiABwmulO1adHZnaF2uXlN45wtg1KqMGfnRQ0HFAZ3qW4HsWJK', 1, 1),
-(4, 'Vicky', 'victoria.gonzalez@ciudadescolarfp.es', 'gonzález', 'gonzález', 'vicky', 'Profesora', '1234', 0, 1);
-
+(4, 'Vicky', 'victoria.gonzalez@ciudadescolarfp.es', 'gonzález', 'gonzález', 'vicky', 'Profesora', '1234', 0, 1)
 --
 -- Índices para tablas volcadas
 --
@@ -318,7 +325,7 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `festivos`
 --
 ALTER TABLE `festivos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos`
@@ -336,7 +343,7 @@ ALTER TABLE `historial`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -348,7 +355,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- Restricciones para tablas volcadas
