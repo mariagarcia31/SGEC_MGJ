@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-05-2022 a las 09:11:09
+-- Tiempo de generación: 10-05-2022 a las 09:13:34
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -77,10 +77,10 @@ CREATE TABLE `aulas` (
 
 INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`, `imagen`) VALUES
 ('Aula polivalente', 'Al lado de cafetería', 'Pizarra pequeña, ordenador, proyector, altavoces y sillas', 100, 1, 'libs/img/upload/IMG-6104.jpg'),
-('El bosque', 'Pabellón 1 planta 1', 'Mesa, sillas y sofá', 15, 1, 'libs/img/upload/IMG-6108.jpg'),
-('Espacio Erasmus', 'Pabellón 1, planta 1ª', 'Mesas y sillas', 10, 1, 'libs/img/upload/IMG-6093.jpg'),
+('El bosque', 'Pabellón 1, planta 2ª', 'Mesa, sillas y sofá', 15, 0, 'libs/img/upload/IMG-6108.jpg'),
+('Espacio Erasmus', 'Pabellón 1, planta 2ª', 'Mesas y sillas', 10, 1, 'libs/img/upload/IMG-6093.jpg'),
 ('Sala de reuniones (112)', 'Pabellón 1, planta 1ª', 'Pizarra digital , mesas y sillas', 16, 1, 'libs/img/upload/IMG-6095.jpg'),
-('Sala de reuniones (301)', 'Pabellón 3, planta 1ª', 'Mesas y sillas', 5, 1, 'libs/img/upload/IMG-6102.jpg'),
+('Sala de reuniones (301)', 'Pabellón 3, planta 2ª', 'Mesas y sillas', 5, 1, 'libs/img/upload/IMG-6102.jpg'),
 ('Sala de reuniones (311)', 'Pabellón 3, planta 1ª', 'Mesas y sillas', 5, 1, 'libs/img/upload/IMG-6100.jpg');
 
 -- --------------------------------------------------------
