@@ -43,22 +43,27 @@
     <div class="login-page border" style="padding:0%; margin-top:4%">
 
         <div class="form">
-            <h2>Recordar contraseña</h2>
+            <h2>Cambiar contraseña</h2>
             <hr>
-        
+            
 
             <form style='font-size:14px' class="login-form" action="?c=enviarContraNueva" method="POST">
             <input type="text" name="correo" placeholder="Correo electrónico" required>    
 
-               <button>Enviar</button>
+               <button type="submit">Enviar</button>
+               
+               <p class="mt-4"><small>Se le enviará un correo a la dirección ingresada con una nueva contraseña, la cual debe utilizar para iniciar sesión y se le pedirá cambiarla por una personal.</small></p>
             </form>
+
+            <?php 
+            
+               if(isset($_SESSION["error"])){     
+                    echo $_SESSION["error"];
+                    unset($_SESSION["error"]);
+               }?> 
     </div>
     </div>
 
 </body>
 
 </html>
-<?php
-
-
-        ?>

@@ -1,9 +1,9 @@
 <?php
         use PHPMailer\PHPMailer\PHPMailer;
         use PHPMailer\PHPMailer\Exception;
-        require 'C:/xampp/htdocs/php/git_proyecto/SGEC_MGJ/PHPMailer/src/Exception.php';
-        require 'C:/xampp/htdocs/php/git_proyecto/SGEC_MGJ/PHPMailer/src/PHPMailer.php';
-        require 'C:/xampp/htdocs/php/git_proyecto/SGEC_MGJ/PHPMailer/src/SMTP.php';
+        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/Exception.php';
+        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/PHPMailer.php';
+        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/SMTP.php';
 include("conexion.php");
 
 function printSricptBan(){
@@ -12,18 +12,17 @@ function printSricptBan(){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Has alcanzado el límite de intentos para iniciar sesión (3), por lo que debes esperar 30 min para intentarlo nuevamente',
+                text: 'Has alcanzado el límite de intentos para iniciar sesión (3), por lo que debes esperar 30 segundos para intentarlo nuevamente',
                 footer: ''
             })
             window.onload = updateClock;
-            var totalTime = 10;
+            var totalTime = 30;
             function updateClock() {
-            document.getElementById('countdown').innerHTML = totalTime;
+   
             if(totalTime==0){
                 $('#correo').attr('readonly', false);
                 $('#contra').attr('readonly', false);
                 $('#iniciar').removeAttr('disabled');
-                console.log('Final');
             }else{
 
                 $('#correo').attr('readonly', true);
@@ -221,18 +220,18 @@ class Crud extends Conexion{
     }
 
 
-    function contraNueva($correo,$contraN,$contraN2,$n_correo){
+    function contraNueva($correo,$contraN,$contraN2){
 
         try{
-            $sql="SELECT correo FROM usuarios WHERE correo='$correo' OR correo='$n_correo';";
+            $sql="SELECT * FROM usuarios WHERE correo='$correo';";
             $con=$this->conexion->prepare($sql);
             $con->execute();
             $consult=$con->fetchAll(PDO::FETCH_ASSOC);
-            if($consult==null){
-                if($contraN == $contraN2 && (strpos($n_correo, "@ciudadescolarfp.es") || strpos($n_correo, "@ciudadescolarfp.com"))){
+            if($consult[0]!=NULL){
+                if($contraN == $contraN2 && (strpos($correo, "@ciudadescolarfp.es") || strpos($correo, "@ciudadescolarfp.com"))){
 
                     $contra=password_hash("$contraN", PASSWORD_DEFAULT);
-                    $sql="CALL cambiarContra('$correo','$contra','$n_correo')";
+                    $sql="CALL cambiarContra('$correo','$contra')";
                     $con=$this->conexion->prepare($sql);
                     $con->execute();
                     

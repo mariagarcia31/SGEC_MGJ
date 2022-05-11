@@ -9,7 +9,35 @@ if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
     $contra1="";
     $usu1="";   
 }
+if(!isset($_SESSION["intentos"])){
+    $_SESSION["intentos"]=0;
+}
 
+$connection = MySQLi_connect(
+
+    "localhost", //Server host name.
+ 
+    "root", //Database username.
+ 
+    "", //Database password.
+ 
+    "sgec" //Database name or anything you would like to call it.
+ 
+ );
+
+mysqli_set_charset($connection, "utf8");
+            $ip = $_SERVER["REMOTE_ADDR"];
+            if($ip=="::1"){
+                $ip="127.0.0.1";
+            }
+
+            $result = mysqli_query($connection, "SELECT COUNT(*) FROM `ip` WHERE `address` LIKE '$ip' AND `timestamp` > (now() - interval 10 minute)");
+            $count = mysqli_fetch_array($result, MYSQLI_NUM);
+
+            if($count[0] >= 3){
+                $_SESSION['intentos'] = 3;
+            }
+           
 ?>
 
 <html lang="en" style="    overflow-x: hidden;">
@@ -48,8 +76,12 @@ if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
     cursor: pointer;
 }
 <?php 
+
+
         $timeresta=0;
-        if(isset($_SESSION["timeBan"])){
+
+
+        if(isset($_SESSION["timeBan"]) && $_SESSION["intentos"]>=3){
           
             $timeBan=$_SESSION["timeBan"];
             $timeresta=time()-$timeBan;
@@ -57,15 +89,20 @@ if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
                 ?>
                     #correo,#contra,#iniciar {
                         pointer-events: none;
+                        
                     }             
                 <?php
                 //printSrciptBan();
                // header("location:?c=home&ban=1");
             }else{
                 unset($_SESSION["timeBan"]);
-                unset($_SESSION["intentos"]);
+                
             }
         }
+
+
+        
+
        
 ?>
 
@@ -106,7 +143,6 @@ if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
                 
             </form>
           
-            <span id="countdown"></span>
 
 
 
@@ -115,18 +151,17 @@ if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
 
             <?php 
             
-               if(isset($_SESSION["error"]) && isset($_SESSION['intentos'])){ ?>     
-                    <div class='alert  '><?php echo $_SESSION["error"];?></div>                     
+               if(isset($_SESSION["error"])){     
+                    echo $_SESSION["error"];?>                   
                <?php   
-                       echo $_SESSION['intentos'];
+                      
                        unset($_SESSION["error"]);
-                       if($_SESSION['intentos']==3){
+                       if($_SESSION['intentos']>=3){
                           
                           $_SESSION["timeBan"]=time();
                           
                             printSricptBan();
                              
-                               unset($_SESSION['intentos']);
                            } 
                            
                        } 

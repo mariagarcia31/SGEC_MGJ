@@ -37,13 +37,12 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra'])){
         </div>
         <div class="form">
             <form style='font-size:14px' class="login-form" action="?c=cambio_contra&correo=<?php echo $_GET["correo"]?>" method="post">
-            <input type="email" name="n_correo" placeholder="Correo electrónico" required>    
             <input type="password" value="" name="contrasena1" placeholder="Contraseña Nueva" required>
                <input type="password" value="" name="contrasena2" placeholder="Confirmar Contraseña" required>
                 <button>Confirmar</button>
             </form>
             <?php if(isset($_SESSION["error2"])){ ?>     
-                 <div class='alert  '><?php echo $_SESSION["error2"];?></div>                     
+                 <?php echo $_SESSION["error2"];?>               
             <?php   unset($_SESSION["error2"]);
     
         }?>

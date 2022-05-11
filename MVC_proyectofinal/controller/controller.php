@@ -45,7 +45,7 @@ class Control{
             text: 'El correo no se encuentra registrado.',
             footer: ''
           })</script>";  
-          header("location:?c=principal"); 
+          header("location:?c=recordarContra"); 
 
             }
          
@@ -155,6 +155,18 @@ class Control{
  
 
     function verificar(){
+
+        $connection = MySQLi_connect(
+
+            "localhost", //Server host name.
+         
+            "root", //Database username.
+         
+            "", //Database password.
+         
+            "sgec" //Database name or anything you would like to call it.
+         
+         );
         
 
         $correo=$_POST["correo"];
@@ -163,12 +175,22 @@ class Control{
         $result=$this->crud->verificarUsuario($correo,$contrasena);
         $result2=$this->crud->verificarContra($correo);
 
-        if(!isset($_SESSION['intentos'])){
-            $_SESSION['intentos'] = 0;}
+       
 
         if($result){
 
             if($result2){
+
+                mysqli_set_charset($connection, "utf8");
+                $ip = $_SERVER["REMOTE_ADDR"];
+
+                if($ip=="::1"){
+                    $ip="127.0.0.1";
+                }
+
+                mysqli_query($connection, "DELETE FROM `ip` WHERE `address` LIKE '$ip' AND `timestamp` < now();");    
+                
+                unset($_SESSION["intentos"]);
 
                 if(isset($_POST['recordar'])) {
                     $_SESSION["cambiado"]="ok";
@@ -179,24 +201,42 @@ class Control{
                     $_SESSION["cambiado"]="ok";
                     header("location:?c=principal"); 
                 }
+
+                
  
             }else{
                 $_SESSION['correo']=$correo;
                 header("location:?c=c_contra&correo=$correo"); 
             }             
         }else{
-            
-            $_SESSION['intentos'] = $_SESSION['intentos'] + 1;
-          
+            if(!isset($_SESSION["intentos"])){
+                $_SESSION["intentos"]=0;
+            }
+                      
             $_SESSION["error"]="
         
-
             <script>     Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Correo o Usuario o contraseña incorrecta.',
                 footer: ''
             })</script>";  
+            
+            
+             mysqli_set_charset($connection, "utf8");
+            $ip = $_SERVER["REMOTE_ADDR"];
+            if($ip=="::1"){
+                $ip="127.0.0.1";
+            }
+            mysqli_query($connection, "INSERT INTO `ip` (`address` ,`timestamp`)VALUES ('$ip',CURRENT_TIMESTAMP)");
+            $result = mysqli_query($connection, "SELECT COUNT(*) FROM `ip` WHERE `address` LIKE '$ip' AND `timestamp` > (now() - interval 10 minute)");
+            $count = mysqli_fetch_array($result, MYSQLI_NUM);
+
+            if($count[0] >= 3){
+                $_SESSION['intentos'] = 3;
+            }
+                        
+
                 header("location: ?c=home");  
           
         }
@@ -204,9 +244,8 @@ class Control{
 
  
     function cambio_contra(){
-        $n_correo=$_POST["n_correo"];
-        
-        $result=$this->crud->contraNueva($_GET["correo"],$_POST["contrasena1"],$_POST["contrasena2"],$n_correo);
+
+        $result=$this->crud->contraNueva($_GET["correo"],$_POST["contrasena1"],$_POST["contrasena2"]);
 
         if($result){
 
@@ -232,7 +271,7 @@ class Control{
                 <script>     Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es. El correo no se debe encontrar registrado',
+                    text: 'Las contraseñas deben ser iguales',
                     footer: ''
                 })</script>";
                 header("location:?c=configuracionPerfil&page=1"); 
@@ -245,7 +284,7 @@ class Control{
             <script>     Swal.fire({
                 icon: 'warning',
                 title: 'Oops...',
-                text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es. El correo no se debe encontrar registrado',
+                text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es.',
                 footer: ''
                 })</script>";
             header("location:?c=c_contra&correo=".$_GET["correo"]."");     

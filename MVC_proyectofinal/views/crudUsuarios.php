@@ -279,9 +279,10 @@ $("#myModal").modal();
                                         echo '</div>';
                                         }
                                     elseif($i==7){
-                                      
-                                        echo "<input class='form-control' type='hidden'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
-                                     
+                                        echo '<div class="form-group">
+                                        <label for="">Contraseña</label>';
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                        echo '</div>';
                                         }
                     
                                        elseif($i==8){
