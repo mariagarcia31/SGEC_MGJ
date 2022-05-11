@@ -1,6 +1,14 @@
 <?php 
 
 
+if((isset($_COOKIE['contrasena'])) && (isset($_COOKIE['correo']))){
+    header ('Location:?c=principal');
+
+}else{
+
+    $contra1="";
+    $usu1="";   
+}
 
 ?>
 
@@ -39,8 +47,31 @@
     transition: all 0.3 ease;
     cursor: pointer;
 }
+<?php 
+        $timeresta=0;
+        if(isset($_SESSION["timeBan"])){
+          
+            $timeBan=$_SESSION["timeBan"];
+            $timeresta=time()-$timeBan;
+            if(($timeresta)<30){
+                ?>
+                    #correo,#contra,#iniciar {
+                        pointer-events: none;
+                    }             
+                <?php
+                //printSrciptBan();
+               // header("location:?c=home&ban=1");
+            }else{
+                unset($_SESSION["timeBan"]);
+                unset($_SESSION["intentos"]);
+            }
+        }
+       
+?>
+
     </style>
 </head>
+
 
 <body style="font-size:12px !important">
 
@@ -53,30 +84,58 @@
         </div>
     </nav>
 
+    
     <div class="login-page border" style="padding:0%; margin-top:4%">
         
         <div class="form">
         
             <h2>Iniciar Sesión</h2>
             <hr>
-        
-            <form style='font-size:14px' class="login-form" action="?c=verificar" method="post" id="formulario">
-                <input type="text"  id="correo" name="correo" placeholder="Correo electrónico o usuario" required>
+      
+            <form style='font-size:14px' class="login-form" action="?c=verificar" method="post" id="formulario" >
+                <input type="text"  id="correo" name="correo" placeholder="Correo electrónico o usuario" required >
+
+
                <input type="password" id="contra" name="contrasena" placeholder="Contraseña" required>
   
                <div class="custom-control custom-checkbox text-start">
                <input type="checkbox" class="custom-control-input" id="checkbox-1" name="recordar" value="recordar" style="width:5%" > 
                <label class="custom-control-label" for="checkbox-1">Recordar contraseña</label>
         </div>
-                <input type="submit" value="Entrar" name="entrar" id="iniciar" >
+                <input type="submit" value="Entrar" name="entrar" id="iniciar" dis >
                 
             </form>
+          
+            <span id="countdown"></span>
+
+
+
+
             <a href="?c=recordarContra">He olvidado mi contraseña</a>
-            <?php if(isset($_SESSION["error"])){ ?>     
-                 <div class='alert  '><?php echo $_SESSION["error"];?></div>                     
-            <?php   unset($_SESSION["error"]);
-    
-        }?>
+
+            <?php 
+            
+               if(isset($_SESSION["error"]) && isset($_SESSION['intentos'])){ ?>     
+                    <div class='alert  '><?php echo $_SESSION["error"];?></div>                     
+               <?php   
+                       echo $_SESSION['intentos'];
+                       unset($_SESSION["error"]);
+                       if($_SESSION['intentos']==3){
+                          
+                          $_SESSION["timeBan"]=time();
+                          
+                            printSricptBan();
+                             
+                               unset($_SESSION['intentos']);
+                           } 
+                           
+                       } 
+ 
+             ?>
+
+           
+           
+            
         </div>
     </div>
  
@@ -89,4 +148,3 @@
 </body>
 
 </html>
-

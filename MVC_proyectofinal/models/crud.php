@@ -6,6 +6,40 @@
         require 'C:/xampp/htdocs/php/git_proyecto/SGEC_MGJ/PHPMailer/src/SMTP.php';
 include("conexion.php");
 
+function printSricptBan(){
+    ?>
+        <script>  
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Has alcanzado el límite de intentos para iniciar sesión (3), por lo que debes esperar 30 min para intentarlo nuevamente',
+                footer: ''
+            })
+            window.onload = updateClock;
+            var totalTime = 10;
+            function updateClock() {
+            document.getElementById('countdown').innerHTML = totalTime;
+            if(totalTime==0){
+                $('#correo').attr('readonly', false);
+                $('#contra').attr('readonly', false);
+                $('#iniciar').removeAttr('disabled');
+                console.log('Final');
+            }else{
+
+                $('#correo').attr('readonly', true);
+                $('#contra').attr('readonly', true);
+                $('#iniciar').attr('disabled', 'disabled');
+                totalTime-=1;
+                setTimeout("updateClock()",1000);
+                
+            }
+            }
+                        
+            </script>
+    <?php
+}
+
+
 class Crud extends Conexion{
 
     private $conexion;

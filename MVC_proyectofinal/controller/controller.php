@@ -155,12 +155,17 @@ class Control{
  
 
     function verificar(){
-   
+        
+
         $correo=$_POST["correo"];
         $contrasena=$_POST["contrasena"];
         
         $result=$this->crud->verificarUsuario($correo,$contrasena);
         $result2=$this->crud->verificarContra($correo);
+
+        if(!isset($_SESSION['intentos'])){
+            $_SESSION['intentos'] = 0;}
+
         if($result){
 
             if($result2){
@@ -181,16 +186,18 @@ class Control{
             }             
         }else{
             
+            $_SESSION['intentos'] = $_SESSION['intentos'] + 1;
+          
             $_SESSION["error"]="
         
 
-        <script>     Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Correo o Usuario o contraseña incorrecta.',
-            footer: ''
-          })</script>";  
-            header("location: ?c=home");  
+            <script>     Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Correo o Usuario o contraseña incorrecta.',
+                footer: ''
+            })</script>";  
+                header("location: ?c=home");  
           
         }
     }
