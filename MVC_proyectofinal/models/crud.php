@@ -133,7 +133,7 @@ class Crud extends Conexion{
                     $sql="SELECT * FROM roles WHERE id ='$rol'";
                     $consulta=$this->conexion->prepare($sql);
                     $consulta->execute();
-                    $verif4=$consulta->fetch();
+                    $verif4=$consulta->fetch(); 
                 
                     $_SESSION['crudRoles']=$verif4['crud_roles'];
                     $_SESSION['crudUsuarios']=$verif4['crud_usuarios'];
@@ -229,14 +229,20 @@ class Crud extends Conexion{
             $consult=$con->fetchAll(PDO::FETCH_ASSOC);
             if($consult[0]!=NULL){
                 if($contraN == $contraN2 && (strpos($correo, "@ciudadescolarfp.es") || strpos($correo, "@ciudadescolarfp.com"))){
+                    $expresion='/^\\S*(?=\\S{8,})(?=\\S*[\\+|\\|\\-|\\/])(?=\\S[a-z])(?=\\S*[A-Z])(?=\\S*[\\d])\\S*$/';
 
-                    $contra=password_hash("$contraN", PASSWORD_DEFAULT);
-                    $sql="CALL cambiarContra('$correo','$contra')";
-                    $con=$this->conexion->prepare($sql);
-                    $con->execute();
-                    
-                    return true;
-                    
+                    if(preg_match($expresion, $contraN)){
+                        $contra=password_hash("$contraN", PASSWORD_DEFAULT);
+                        $sql="CALL cambiarContra('$correo','$contra')";
+                        $con=$this->conexion->prepare($sql);
+                        $con->execute();
+                        
+                        return true;
+                        
+                    }else{
+                        return false;
+                    }
+                  
                 }else{
                     return false;
                 }

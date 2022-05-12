@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSION["cambiado"]) ){
+if ((isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSION["cambiado"]) && isset($_SESSION["crudFestivos"]))){
         
 }else{
     header('Location:?c=home');

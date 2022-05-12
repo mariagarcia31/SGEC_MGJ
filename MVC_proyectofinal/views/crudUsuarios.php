@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSION["cambiado"]) ){
+if ((isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSION["cambiado"]) && isset($_SESSION["crudUsuarios"]))){
         
 }else{
     header('Location:?c=home');
@@ -337,7 +337,7 @@ $("#myModal").modal();
        
 <?php
 
-       echo '<div class="container" style="margin-top:60px;margin:auto 130px">
+       echo '<div class="container" style="margin-top:60px;margin:auto 50px">
 
 
 

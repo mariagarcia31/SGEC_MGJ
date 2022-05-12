@@ -254,7 +254,7 @@ class Control{
                 $_SESSION["error2"]="
                 <script>     Swal.fire({
                     icon: 'success',
-                    title: 'Cambiado con existo',
+                    title: 'Cambiado con éxtio',
                     text: ' Vuelve a iniciar sesion',
                     footer: ''
                 })</script>";
@@ -271,7 +271,7 @@ class Control{
                 <script>     Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: 'Las contraseñas deben ser iguales',
+                    text: 'Las contraseñas deben ser iguales y deben contener una mayúscula, un caracter especial, un número y una longitud mínima de 8 caracteres.',
                     footer: ''
                 })</script>";
                 header("location:?c=configuracionPerfil&page=1"); 
@@ -279,14 +279,12 @@ class Control{
 
         }else{
             $_SESSION["error2"]="
-    
-
             <script>     Swal.fire({
                 icon: 'warning',
                 title: 'Oops...',
-                text: 'Las contraseñas deben ser iguales y el correo debe ser con dominio @ciudadescolarfp.es.',
+                text: 'Las contraseñas deben ser iguales y deben contener una mayúscula, un caracter especial, un número y una longitud mínima de 8 caracteres.',
                 footer: ''
-                })</script>";
+            })</script>";
             header("location:?c=c_contra&correo=".$_GET["correo"]."");     
         }
            
