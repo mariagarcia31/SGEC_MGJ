@@ -271,7 +271,7 @@ class Control{
                 <script>     Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: 'Las contraseñas deben ser iguales y deben contener una mayúscula, un caracter especial, un número y una longitud mínima de 8 caracteres.',
+                    text: 'Las contraseñas deben ser iguales y deben contener una mayúscula, un caracter especial (+, -, / o \ ), un número y una longitud mínima de 8 caracteres.',
                     footer: ''
                 })</script>";
                 header("location:?c=configuracionPerfil&page=1"); 
@@ -282,7 +282,7 @@ class Control{
             <script>     Swal.fire({
                 icon: 'warning',
                 title: 'Oops...',
-                text: 'Las contraseñas deben ser iguales y deben contener una mayúscula, un caracter especial, un número y una longitud mínima de 8 caracteres.',
+                text: 'Las contraseñas deben ser iguales y deben contener una mayúscula, un caracter especial (+, -, / o \ ), un número y una longitud mínima de 8 caracteres.',
                 footer: ''
             })</script>";
             header("location:?c=c_contra&correo=".$_GET["correo"]."");     
