@@ -802,7 +802,7 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT * FROM reservas WHERE idUsuario ='$idUsuario' ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+            $sql="SELECT id,idAula, fecha, hora, grupo, motivo, fecha_creacion FROM reservas WHERE idUsuario ='$idUsuario' ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -833,7 +833,10 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT * FROM reservas ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+            $sql="SELECT reservas.id,  usuarios.nombre, usuarios.primerApellido, reservas.grupo, reservas.idAula, reservas.fecha, reservas.hora, reservas.motivo, reservas.fecha_creacion
+            FROM reservas
+            inner join usuarios
+            on reservas.idUsuario=usuarios.id LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();

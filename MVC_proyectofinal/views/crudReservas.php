@@ -266,7 +266,11 @@ $("#myModal").modal();
         echo "<tr ><th>Eliminar</th>";
 
         foreach($result[1] as $indice){
-            echo "<th>".$indice."</th>";
+            if($indice=="id"){
+
+            }else{
+                echo "<th>".$indice."</th>";
+            }
         }
         
         echo "<th>Borrar</th>";
@@ -284,8 +288,17 @@ $("#myModal").modal();
 
             foreach($dato as $x=>$y){
         
-            
-                echo "<td>".$y."</td>";
+               
+                        if(is_numeric($y)){
+                            
+                        }else{
+                            echo "<td>".$y."</td>";
+                        }
+                        
+
+                    
+
+                
                 
                 //$vivienda=new Vivienda($y);
                 //$i=new Vivienda($dato["id"],$dato["tipo"],$dato["zona"],$dato["direccion"],$dato["ndormitorios"],$dato["tamano"],$dato["precio"]);           
