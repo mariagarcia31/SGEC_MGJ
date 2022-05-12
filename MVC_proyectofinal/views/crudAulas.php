@@ -137,8 +137,8 @@ if(isset($_SESSION["modificar"])){
         for($i=0;$i<count($nombre_columna)/2;$i++){
            if($i===0){
             echo '<div class="form-group">
-            <label for="">ID: </label>';
-            echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input></div>";
+           ';
+            echo "<input class='form-control' type='hidden' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input></div>";
 
            }
            

@@ -475,7 +475,15 @@ class Control{
             unset($_SESSION["modificar"]);
             header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
         }else{
-            $_SESSION["error2"]="<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
+            $_SESSION["error2"]="<script>     swal({
+                title: 'Ya existe una reserva con ese día, fecha y aula. ',
+                  text: '',
+                  type: 'warning',
+                  showCancelButton: false,
+                  confirmButtonColor: '#3085d6',
+                  confirmButtonText: 'Entendido'
+        
+                });</script>";     
             header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
 
         }
@@ -751,7 +759,15 @@ function crearAulas(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe un aula con ese nombre</div>";
+        $_SESSION["vacio"]="<script>     swal({
+            title: 'Ya existe un aula con este nombre. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";     
         
         header("location:?c=crudAulas&page=".$_GET["pag"]."&crear=1");
     }
@@ -901,7 +917,15 @@ function crearRoles(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe un rol con ese nombre</div>";
+        $_SESSION["vacio"]="<script>     swal({
+            title: 'Ya existe un rol con este nombre. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";     
         
         header("location:?c=crudRoles&page=".$_GET["pag"]."&crear=1");
     }
@@ -1052,7 +1076,15 @@ function crearUsuarios(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe un usuario con ese nombre</div>";
+        $_SESSION["vacio"]="<script>     swal({
+            title: 'Ya existe un usuario con ese nombre. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";     
         
         header("location:?c=crudUsuarios&page=".$_GET["pag"]."&crear=1");
     }
@@ -1176,7 +1208,7 @@ function crearGrupos(){
 
         header("location:?c=crudGrupos&page=".$_GET["pag"]."");
     }
-    else if($_POST['dato'][0]==null || $_POST['dato'][1]==null || $_POST['dato'][2]==null){
+    else if($_POST['dato'][0]==null || $_POST['dato'][1]==null ){
         $_SESSION["vacio"]="  <script>    Swal.fire({
             icon: 'warning',
             title: 'Debe rellenar todos los campos',
@@ -1206,7 +1238,15 @@ function crearGrupos(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe un grupo con ese nombre</div>";
+        $_SESSION["vacio"]=" <script>     swal({
+            title: 'Ya existe un grupo con ese nombre. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";     
         
         header("location:?c=crudGrupos&page=".$_GET["pag"]."&crear=1");
     }
@@ -1360,13 +1400,15 @@ function crearFestivos(){
     }
     else{
         
-        $_SESSION["vacio"]="  <script>    Swal.fire({
-            icon: 'warning',
-            title: 'Ya existe un festivo con ese nombre',
-            showConfirmButton: false,
-            timer: 1500
-          });</script>
-    ";
+        $_SESSION["vacio"]=" <script>     swal({
+            title: 'Ya existe un festivo con ese nombre. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";    
         
         header("location:?c=crudFestivos&page=".$_GET["pag"]."&crear=1");
     }
@@ -1519,8 +1561,15 @@ function crearConfiguracion(){
     }
     else{
         
-        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> Ya existe una configuración con ese nombre</div>";
-        
+        $_SESSION["vacio"]=" <script>     swal({
+            title: 'Ya existe una configuración con ese nombre. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";    
         header("location:?c=crudConfiguración&page=".$_GET["pag"]."&crear=1");
     }
     

@@ -277,7 +277,7 @@ class Crud extends Conexion{
     }
     function obtieneRoles(){
         try{
-            $sql='SELECT id FROM roles';
+            $sql='SELECT id,nombre FROM roles';
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -833,7 +833,7 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT reservas.id,  usuarios.nombre, usuarios.primerApellido, reservas.grupo, reservas.idAula, reservas.fecha, reservas.hora, reservas.motivo, reservas.fecha_creacion
+            $sql="SELECT reservas.id,  usuarios.nombre as 'Nombre', usuarios.primerApellido as 'Apellido', reservas.grupo, reservas.idAula as' Aula', reservas.fecha, reservas.hora, reservas.motivo, reservas.fecha_creacion
             FROM reservas
             inner join usuarios
             on reservas.idUsuario=usuarios.id LIMIT ".$iteams_pagina." OFFSET ".$offset."";
@@ -864,7 +864,11 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT id, nombre, primerApellido, segundoApellido, usuario, correo, puesto, confirmacion, rol FROM usuarios ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+            $sql="SELECT usuarios.id, usuarios.nombre as 'Nombre', usuarios.primerApellido as'1º apellido', usuarios.segundoApellido as '2º apellido', usuarios.usuario, usuarios.correo, usuarios.puesto, usuarios.confirmacion, usuarios.rol, roles.nombre as 'Rol'
+            FROM usuarios 
+            INNER JOIN roles
+            on usuarios.rol=roles.id
+            ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -892,7 +896,8 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT * FROM roles ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+            $sql="SELECT id, nombre as 'Nombre', crud_roles as 'Gestionar roles', crud_usuarios as 'Gestionar usuarios', crud_aulas as 'Gestionar aulas', crud_grupos as 'Gestionar grupos', crud_festivos as 'Gestionar festivos', estadisticas as 'Gestionar estadísticas', crud_configuracion as 'Gestionar configuracion'
+             FROM roles ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -1631,7 +1636,7 @@ class Crud extends Conexion{
 
     function crearRoles($indic){
 
-            $comprobar="SELECT * FROM roles WHERE id='".$indic[0]."';";
+            /*$comprobar="SELECT * FROM roles WHERE id='".$indic[0]."';";
             $consulta_comprobar=$this->conexion->prepare($comprobar);
             $consulta_comprobar->execute();
             $resultado_comprobar=$consulta_comprobar->fetchAll();
@@ -1639,19 +1644,19 @@ class Crud extends Conexion{
                 return false;
 			}
             
-			else{
-                $id = $indic[0];
-				$nombre = $indic[1];
-				$crud_roles =$indic[2];
-				$crud_usuarios = $indic[3];
-				$crud_aulas = $indic[4];
-                $crud_reservas = $indic[5];
-				$crud_grupos = $indic[6];
-                $crud_festivos = $indic[7];
-                $estadisticas = $indic[8];
-                $configuracion = $indic[9];
+			else{*/
+                
+				$nombre = $indic[0];
+				$crud_roles =$indic[1];
+				$crud_usuarios = $indic[2];
+				$crud_aulas = $indic[3];
+                $crud_reservas = $indic[4];
+				$crud_grupos = $indic[5];
+                $crud_festivos = $indic[6];
+                $estadisticas = $indic[7];
+                $configuracion = $indic[8];
 				
-                $comprobar="INSERT INTO  roles VALUES ($id,'$nombre',$crud_roles,$crud_usuarios,$crud_aulas, $crud_reservas, $crud_grupos, $crud_festivos, $estadisticas, $configuracion);";
+                $comprobar="INSERT INTO  roles VALUES ('','$nombre',$crud_roles,$crud_usuarios,$crud_aulas, $crud_reservas, $crud_grupos, $crud_festivos, $estadisticas, $configuracion);";
                 $consulta_comprobar=$this->conexion->prepare($comprobar);
                 $consulta_comprobar->execute();
                 
@@ -1659,7 +1664,7 @@ class Crud extends Conexion{
 
 				
 			
-		}
+		//}
 
 
 			
@@ -1904,14 +1909,14 @@ function borrarGrupos($selec){
 
 
 function actualizarGrupos($indic){
-    $comprobar="SELECT * FROM grupos WHERE id='".$indic[0]."';";
+   /* $comprobar="SELECT * FROM grupos WHERE id='".$indic[0]."';";
     $consulta_comprobar=$this->conexion->prepare($comprobar);
     $consulta_comprobar->execute();
     $resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
 
     $resultado = array_diff($resultado_comprobar, $indic);
 
-   /*SI DEJO ESTO LA ACTUALIZACIÓN NO VA
+   SI DEJO ESTO LA ACTUALIZACIÓN NO VA
     if(empty($resultado)){
         return false;
     }
@@ -1943,7 +1948,7 @@ function actualizarGrupos($indic){
 
 function crearGrupos($indic){
 
-        $comprobar="SELECT * FROM grupos WHERE id='".$indic[0]."';";
+        $comprobar="SELECT * FROM grupos WHERE nombre='".$indic[0]."';";
         $consulta_comprobar=$this->conexion->prepare($comprobar);
         $consulta_comprobar->execute();
         $resultado_comprobar=$consulta_comprobar->fetchAll();
@@ -1952,14 +1957,13 @@ function crearGrupos($indic){
         }
         
         else{
-            $id = $indic[0];
-            $nombre = $indic[1];
-            $departamento =$indic[2];
+            $nombre = $indic[0];
+            $departamento =$indic[1];
            
             
 
             
-            $comprobar="INSERT INTO  grupos VALUES ($id,'$nombre','$departamento');";
+            $comprobar="INSERT INTO  grupos VALUES ('','$nombre','$departamento');";
             $consulta_comprobar=$this->conexion->prepare($comprobar);
             $consulta_comprobar->execute();
             

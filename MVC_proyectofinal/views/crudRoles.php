@@ -183,10 +183,10 @@ $("#myModal").modal();
                             }
                                                     
                                                    
-                                                           echo '<div class="form-group">
+                                                          /* echo '<div class="form-group">
                                                             <label for="">ID</label>';
                                                             echo "<input class='form-control' type='number'  name='dato[]' value='' required ></input>";
-                                                            echo '</div>';
+                                                            echo '</div>';*/
                                                           
                                                             echo '<div class="form-group">
                                                             <label for="">Nombre</label>';
@@ -314,9 +314,8 @@ $("#myModal").modal();
                                                     foreach($resu as $nombre_columna){
                                                         for($i=0;$i<count($nombre_columna)/2;$i++){
                                                            if($i==0){
-                                                           echo '<div class="form-group">
-                                                            <label for="">ID</label>';
-                                                            echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                                           echo '<div class="form-group">';
+                                                            echo "<input class='form-control' type='hidden' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                                                             echo '</div>';
                                                            }
                                                            elseif($i==1){
@@ -477,12 +476,16 @@ $("#myModal").modal();
         echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>  ";
        
        echo ' <div class="table-responsive-sm">
-       <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%;margin-left:-60px">';
+       <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%;">';
 
         echo "<tr ><th>Eliminar</th>";
 
         foreach($result[1] as $indice){
-            echo "<th>".$indice."</th>";
+            if($indice=="id"){
+
+            }else{
+                echo "<th>".$indice."</th>";
+            }
         }
         
         echo "<th>Borrar</th>";
@@ -501,7 +504,12 @@ $("#myModal").modal();
             foreach($dato as $x=>$y){
         
             
-                echo "<td>".$y."</td>";
+                if($x=="id"){
+                            
+                }else{
+                    echo "<td>".$y."</td>";
+                }
+                
                 
                 //$vivienda=new Vivienda($y);
                 //$i=new Vivienda($dato["id"],$dato["tipo"],$dato["zona"],$dato["direccion"],$dato["ndormitorios"],$dato["tamano"],$dato["precio"]);           

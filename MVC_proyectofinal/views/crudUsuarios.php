@@ -82,9 +82,18 @@ $("#myModal").modal();
                                                $roles=$this->crud->obtieneRoles();
                                                foreach($roles as $rol=>$rolito){
                                                    foreach($rolito as $rol2){
-                                                       $rolesDisponibles[]=$rol2;
+                                                       if(is_string($rol2)){
+                                                        $rolesNombre[]=$rolito["nombre"];
+                                                       }else{
+                                                        $rolesId[]=$rol2;
+                                                       }
+                                                       
                                                    }
                                                }
+                                               
+                                           
+                                         
+                                            
                     /*AGREGAR AQUI EL FORMULARIO PARA CREAR */
                     
                   
@@ -167,12 +176,12 @@ $("#myModal").modal();
                                            
                                         echo '<div class="form-group">
                                         <label for="">Rol</label><select name="dato[]" class="form-control" required>';
-                                        for($e=0;$e<count($rolesDisponibles);$e++){
-                                             if($rolesDisponibles[$e]==$nombre_columna[$i]){
-                                                 echo "<option selected value='".$rolesDisponibles[$e]."'>".$rolesDisponibles[$e]."</option>";
+                                        for($e=0;$e<count($rolesId);$e++){
+                                             if($rolesId[$e]==$nombre_columna[$i]){
+                                                 echo "<option selected value='".$rolesId[$e]."'>".$rolesNombre[$e]."</option>";
 
                                              }else{
-                                                 echo "<option value='".$rolesDisponibles[$e]."'>".$rolesDisponibles[$e]."</option>";
+                                                 echo "<option value='".$rolesId[$e]."'>".$rolesNombre[$e]."</option>";
 
                                              }
 
@@ -235,9 +244,8 @@ $("#myModal").modal();
                             foreach($resu as $nombre_columna){
                                 for($i=0;$i<count($nombre_columna)/2;$i++){
                                    if($i==0){
-                                   echo '<div class="form-group">
-                                    <label for="">ID</label>';
-                                    echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                   echo '<div class="form-group">';
+                                    echo "<input class='form-control' type='hidden' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                                     echo '</div>';
                                    }
                                    elseif($i==1){
@@ -279,9 +287,9 @@ $("#myModal").modal();
                                         echo '</div>';
                                         }
                                     elseif($i==7){
-                                        echo '<div class="form-group">
-                                        <label for="">Contraseña</label>';
-                                        echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                        echo '<div class="form-group">';
+                                        
+                                        echo "<input class='form-control' type='hidden'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                                         echo '</div>';
                                         }
                     
@@ -301,12 +309,12 @@ $("#myModal").modal();
                                         else if($i==9){
                                             echo '<div class="form-group">
                                             <label for="">Rol</label><select name="dato[]" class="form-control" required>';
-                                            for($e=0;$e<count($rolesDisponibles);$e++){
-                                                 if($rolesDisponibles[$e]==$nombre_columna[$i]){
-                                                     echo "<option selected value='".$rolesDisponibles[$e]."'>".$rolesDisponibles[$e]."</option>";
+                                            for($e=0;$e<count($rolesId);$e++){
+                                                 if($rolesId[$e]==$nombre_columna[$i]){
+                                                     echo "<option selected value='".$rolesId[$e]."'>".$rolesNombre[$e]."</option>";
  
                                                  }else{
-                                                     echo "<option value='".$rolesDisponibles[$e]."'>".$rolesDisponibles[$e]."</option>";
+                                                     echo "<option value='".$rolesId[$e]."'>".$rolesNombre[$e]."</option>";
  
                                                  }
  
@@ -355,7 +363,13 @@ $("#myModal").modal();
         echo "<tr >";
 
         foreach($result[1] as $indice){
-            echo "<th>".$indice."</th>";
+            if($indice=="id"||$indice=="rol"){
+
+            }else{
+                echo "<th>".$indice."</th>";
+            }
+            
+           
         }
         
         echo "<th>Borrar</th>";
@@ -395,8 +409,16 @@ $("#myModal").modal();
         foreach($result[0] as $indice=>$dato){
         
             foreach($dato as $x=>$y){
-                
+                if($x=="rol"||$x=="id"){
+                    
+                }else{
                     echo "<td>".$y."</td>";
+                }
+                
+                   
+                
+                
+                   
 
                 
             

@@ -213,9 +213,8 @@ $("#myModal").modal();
                             foreach($resu as $nombre_columna){
                             for($i=0;$i<count($nombre_columna)/2;$i++){
                                 if($i==0){
-                                echo '<div class="form-group">
-                                    <label for="">ID</label>';
-                                    echo "<input class='form-control' type='number' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                echo '<div class="form-group">';
+                                    echo "<input class='form-control' type='hidden' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
                                     echo '</div>';
                                 }
                                 elseif($i==1){
@@ -289,7 +288,11 @@ $("#myModal").modal();
        echo "<tr ><th>Eliminar</th>";
 
         foreach($result[1] as $indice){
-            echo "<th>".$indice."</th>";
+            if($indice=="id"){
+
+            }else{
+                echo "<th>".$indice."</th>";
+            }
         }
         
         echo "<th>Borrar</th>";
@@ -308,8 +311,11 @@ $("#myModal").modal();
             foreach($dato as $x=>$y){
         
             
-                echo "<td>".$y."</td>";
-                
+                if($x=="id"){
+                            
+                }else{
+                    echo "<td>".$y."</td>";
+                }                
                 //$vivienda=new Vivienda($y);
                 //$i=new Vivienda($dato["id"],$dato["tipo"],$dato["zona"],$dato["direccion"],$dato["ndormitorios"],$dato["tamano"],$dato["precio"]);           
             }

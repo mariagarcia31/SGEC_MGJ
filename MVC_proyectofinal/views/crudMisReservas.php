@@ -102,9 +102,8 @@ $("#myModal").modal();
     foreach($resu as $nombre_columna){
         for($i=0;$i<count($nombre_columna)/2;$i++){
            if($i==0){
-           echo '<div class="form-group">
-            <label for="">ID</label>';
-            echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+           echo '<div class="form-group">';
+            echo "<input class='form-control' type='hidden' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
             echo '</div>';
            }
            elseif($i==1){
@@ -134,9 +133,8 @@ $("#myModal").modal();
        }
 
            elseif($i==2){
-            echo '<div class="form-group">
-             <label for="">Usuario</label>';
-             echo "<input class='form-control' type='text' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+            echo '<div class="form-group">';
+             echo "<input class='form-control' type='hidden' readonly name='dato[]' value='".$nombre_columna[$i]."' required></input>";
              echo '</div>';
             }
 
