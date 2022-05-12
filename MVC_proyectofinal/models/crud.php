@@ -1,9 +1,9 @@
 <?php
         use PHPMailer\PHPMailer\PHPMailer;
         use PHPMailer\PHPMailer\Exception;
-        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/Exception.php';
-        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/PHPMailer.php';
-        require 'C:/xampp/htdocs/SGEC_MGJ/PHPMailer/src/SMTP.php';
+        require 'PHPMailer/src/Exception.php';
+        require 'PHPMailer/src/PHPMailer.php';
+        require 'PHPMailer/src/SMTP.php';
 include("conexion.php");
 
 function printSricptBan(){
