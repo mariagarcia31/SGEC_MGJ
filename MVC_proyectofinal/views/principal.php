@@ -20,6 +20,9 @@ include "menu.php"?>
     <link rel="stylesheet" href="libs/css/estilos.css">
 
 <style>
+    hr{
+        color:white
+    }
     .card {
 
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

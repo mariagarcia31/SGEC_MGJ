@@ -34,6 +34,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra'])){
     <div class="login-page">
         <div style="position: relative;text-align:center;">
             <h1>Cambio de datos</h1>
+            <p>Recuerda que la contraseña debe incluir al menos 8 caracteres, una mayúscula, un número y un caracter especial (+,-,/ o \).</p>
         </div>
         <div class="form">
             <form style='font-size:14px' class="login-form" action="?c=cambio_contra&correo=<?php echo $_GET["correo"]?>" method="post">

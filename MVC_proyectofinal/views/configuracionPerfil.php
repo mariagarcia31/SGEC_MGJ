@@ -79,12 +79,15 @@ input{
         <p><b><?php echo $_SESSION['correo']; ?></b></p> 
        
         <div class="form">
+
             <form style='font-size:14px' class="login-form" action="?c=cambio_contra&correo=<?php echo $_SESSION["correo"] ?>&conf=1" method="post">  
 
                 <input type="password"  name="contrasena1" placeholder="Contraseña Nueva" required>
                <input type="password" name="contrasena2" placeholder="Confirmar Contraseña" required>
                 <button>Confirmar</button>
             </form>
+            <p>Recuerda que la contraseña debe incluir al menos 8 caracteres, una mayúscula, un número y un caracter especial (+,-,/ o \).</p>
+
             <?php if(isset($_SESSION["error2"])){ ?>     
                  <?php echo $_SESSION["error2"];?>               
             <?php   unset($_SESSION["error2"]);
