@@ -244,7 +244,7 @@ $("#myModal").modal();
                             }
                             
                             echo '<div class="modal-footer">';
-                            echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input> ";
+                            echo "<input class='btn btn-primary' type='submit' style='font-size:14px'  name='modificar-ult' value='Actualizar'></input> ";
                             echo '<button type="button" class="btn btn-danger cancelar" style="font-size:14px" data-dismiss="modal">Cancelar</button>';                                                    echo '</div>';
                             echo '</div>';
                             echo "</form>";

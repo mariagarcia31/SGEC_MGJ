@@ -1644,10 +1644,9 @@ class Crud extends Conexion{
 				$crud_aulas = $indic[4];
                 $crud_reservas = $indic[5];
 				$crud_grupos = $indic[6];
-				$actualizar_bbdd = $indic[7];
-                $crud_festivos = $indic[8];
-                $estadisticas = $indic[9];
-                $configuracion = $indic[10];
+                $crud_festivos = $indic[7];
+                $estadisticas = $indic[8];
+                $configuracion = $indic[9];
 				
                 $comprobar="INSERT INTO  roles VALUES ($id,'$nombre',$crud_roles,$crud_usuarios,$crud_aulas, $crud_reservas, $crud_grupos, $crud_festivos, $estadisticas, $configuracion);";
                 $consulta_comprobar=$this->conexion->prepare($comprobar);

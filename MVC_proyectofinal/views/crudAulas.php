@@ -188,7 +188,7 @@ if(isset($_SESSION["modificar"])){
         <label for="">Imágen: </label>';
     echo "<input type='file' name='files'/></div>";
     
-    echo "<input class='btn btn-primary' type='submit'  name='modificar-ult' value='Actualizar'></input>  ";
+    echo "<input class='btn btn-primary' type='submit' style='font-size:14px' name='modificar-ult' value='Actualizar'></input>  ";
     echo '<button type="button" class="btn btn-danger cancelar" style="font-size:14px" data-dismiss="modal">Cancelar</button>';
 
     echo "</form>";
