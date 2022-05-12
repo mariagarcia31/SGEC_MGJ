@@ -223,17 +223,17 @@ class Crud extends Conexion{
     function contraNueva($correo,$contraN,$contraN2){
 
         try{
-            $sql="SELECT * FROM usuarios WHERE correo='$correo';";
+            $sql="SELECT * FROM usuarios WHERE correo='$correo' OR usuario='$correo';";
             $con=$this->conexion->prepare($sql);
             $con->execute();
             $consult=$con->fetchAll(PDO::FETCH_ASSOC);
             if($consult[0]!=NULL){
-                if($contraN == $contraN2 && (strpos($correo, "@ciudadescolarfp.es") || strpos($correo, "@ciudadescolarfp.com"))){
+                if($contraN == $contraN2){
                     $expresion='/^\\S*(?=\\S{8,})(?=\\S*[\\+|\\|\\-|\\/])(?=\\S[a-z])(?=\\S*[A-Z])(?=\\S*[\\d])\\S*$/';
 
                     if(preg_match($expresion, $contraN)){
                         $contra=password_hash("$contraN", PASSWORD_DEFAULT);
-                        $sql="CALL cambiarContra('$correo','$contra')";
+                        $sql="CALL cambiarContra('$correo','$contraN')";
                         $con=$this->conexion->prepare($sql);
                         $con->execute();
                         

@@ -242,7 +242,7 @@ class Control{
         }
     }
 
- 
+  
     function cambio_contra(){
 
         $result=$this->crud->contraNueva($_GET["correo"],$_POST["contrasena1"],$_POST["contrasena2"]);
