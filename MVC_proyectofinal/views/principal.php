@@ -89,7 +89,12 @@ include "menu.php"?>
     }
 
 
-
+    a:link, a:visited, a:active, a:hover {
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:none !important;
+}
 
     </style>
 </head>
@@ -150,7 +155,8 @@ include "menu.php"?>
      
         
             <div class="col-md-4 mb-4 mt-1 p-5">
-                <div class="card mt-2 " style="border-radius: 1.2rem;"  >
+                <a  href="?c=calendario&id=<?php echo $row['id']?>" style="tex-decoration:none">
+                <div class="card mt-2 " style="border-radius: 1.2rem;" >
                     <div class="card text-white bg-info mb-0" style="border:none !important;">
                         <div class="card-header" style="border:none !important;">
 
@@ -175,7 +181,7 @@ include "menu.php"?>
                             </div>
                     </div>
                 </div>
-
+                                </a>
             </div>
         
         <?php if ($contador==$cuantasAulas||$contador==3||$contador==6||$contador==9||$contador==12||$contador==15||$contador==18||$contador==21||$contador==24||$contador==27||$contador==30||$contador==33||$contador==36||$contador==39){?>
