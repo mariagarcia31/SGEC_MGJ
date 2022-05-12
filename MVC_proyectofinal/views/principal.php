@@ -163,7 +163,7 @@ a:hover{
                             <h1 class="card-title" style="text-align:center;margin-top:2%"><?php echo $row['id']; ?></h1>
                         </div>
                     </div>
-                    <img alt="imagen de aula" class="img-fluid"  src="<?=$row['imagen']?>" style="height:250px !important">
+                    <img alt="imagen de aula" class="img-fluid"  src="<?=$row['imagen']?>" style="height:250px !important; width:100%">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item " style="font-size:1.3rem" >• Aforo: <?php echo $row['aforo']; ?></li>
                         <li class="list-group-item " style="font-size:1.3rem">• Herramientas: <?php echo $row['informacion']; ?></li>
