@@ -51,7 +51,15 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
         .mx-auto{
             text-align:center
         }
-       
+        .swal-height{
+            height:18vh;
+            font-size:1rem;
+        }
+
+        .swal2-loader{
+           
+            font-size:2.5rem;
+        }
 
         @media only screen 
         and (min-device-width: 320px) 
@@ -83,7 +91,8 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
         }
 
         .botonReservar{
-            color:white !important;
+            background-color:none !important;
+            color:gray !important;
             height: 16px !important;
         }
         .botonReservado{
@@ -95,6 +104,11 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
             font-size:8px !important;
         }
+         .textoBotonReservar:hover{
+
+            color:#212529!important;
+        }
+        
         
         
         .botonCambiarVista{
@@ -166,7 +180,8 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
 
         .botonReservar{
-            color:white !important;
+            background-color:none !important;
+            color:gray !important;
             
         }
 
@@ -174,6 +189,12 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
             font-size:14px !important;
         }
+        
+        .textoBotonReservar:hover{
+
+            color:#212529!important;
+        }
+        
         
         .botonCambiarVista{
             font-size:15px;color:white !important;

@@ -206,7 +206,7 @@ class Control{
  
             }else{
                 $_SESSION['correo']=$correo;
-                header("location:?c=c_contra&correo=$correo"); 
+                header("location:?c=c_contra"); 
             }             
         }else{
             if(!isset($_SESSION["intentos"])){
@@ -245,7 +245,7 @@ class Control{
   
     function cambio_contra(){
 
-        $result=$this->crud->contraNueva($_GET["correo"],$_POST["contrasena1"],$_POST["contrasena2"]);
+        $result=$this->crud->contraNueva($_SESSION['correo'],$_POST["contrasena1"],$_POST["contrasena2"]);
 
         if($result){
 
@@ -303,19 +303,46 @@ class Control{
             $_SESSION["msg"]=" 
         
 
-            <script>    Swal.fire({
-                icon: 'success',
-                title: 'Reserva realizada con éxito',
-                showConfirmButton: false,
-                timer: 1500
-              });</script>";
+            <script>    
+            let timerInterval
+            Swal.fire({
+              title: 'Reservando...',
+              customClass: 'swal-height',
+              html: 'Por favor espere',
+              timer: 4000,
+              allowEscapeKey: false,
+                allowOutsideClick: false,
+              timerProgressBar: false,
+              didOpen: () => {
+                customClass: 'swal2-loader',
+                Swal.showLoading()
+                
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Reserva realizada con éxito',
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+            })
+              </script>";
               $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Hola ".$_SESSION["nombre"].",\nSe ha confirmado su reserva con los siguientes datos:\n\n - Aula:  ".$_GET["id"].".\n\n - Fecha: ".$_GET["date"]. ". \n\n - Hora: ".$_POST["timeslot"].".\n\nPara evitar perjudicar a otras personas, se ruega puntualidad; si llega tarde a su reserva no se le podrá garantizar el tiempo necesario.\n\nSi desea cancelar o modificar su cita, puede hacerlo en el apartado 'Mis Reservas' de nuestra web. \n\n\nIES Ciudad Escolar - Sistema de Gestión de Espacios Comunes", $_SESSION["correo"]);
             
               header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id']."&month=".$_GET['month']."&year=".$_GET['year'].""); 
             
         }else{
 
-            $_SESSION["msg"]="<div class='alert  '>Ya reservado</div>";
+            $_SESSION["msg"]="<script>    
+            Swal.fire({
+                icon: 'error',
+                title: 'Otra persona ya ha realizado esta reserva, intente con otra hora o fecha',
+                showConfirmButton: false,
+                timer: 2000
+              });</script>";
             header("location:?c=calendario&date=".$_GET['date']."&id=".$_GET['id']."&month=".$_GET['month']."&year=".$_GET['year'].""); 
         }
        
@@ -332,19 +359,46 @@ class Control{
             $_SESSION["msg"]=" 
         
 
-            <script>    Swal.fire({
-                icon: 'success',
-                title: 'Reserva realizada con éxito',
-                showConfirmButton: false,
-                timer: 1500
-              });</script>";
+            <script>    
+            let timerInterval
+            Swal.fire({
+              title: 'Reservando...',
+              customClass: 'swal-height',
+              html: 'Por favor espere',
+              timer: 4000,
+              allowEscapeKey: false,
+                allowOutsideClick: false,
+              timerProgressBar: false,
+              didOpen: () => {
+                customClass: 'swal2-loader',
+                Swal.showLoading()
+                
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Reserva realizada con éxito',
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+            })
+              </script>";
               $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Hola ".$_SESSION["nombre"].",\nSe ha confirmado su reserva con los siguientes datos:\n\n - Aula:  ".$_GET["id"].".\n\n - Fecha: ".$_GET["date"]. ". \n\n - Hora: ".$_POST["timeslot"].".\n\nPara evitar perjudicar a otras personas, se ruega puntualidad; si llega tarde a su reserva no se le podrá garantizar el tiempo necesario.\n\nSi desea cancelar o modificar su cita, puede hacerlo en el apartado 'Mis Reservas' de nuestra web. \n\n\nIES Ciudad Escolar - Sistema de Gestión de Espacios Comunes", $_SESSION["correo"]);
 
             header("location:?c=calendarioSemanal&id=".$_GET['id']."&week=".$_GET['week']."&year=".$_GET['year'].""); 
             
         }else{
 
-            $_SESSION["msg"]="<div class='alert  '>Ya reservado</div>";
+            $_SESSION["msg"]="<script>    
+            Swal.fire({
+                icon: 'error',
+                title: 'Otra persona ya ha realizado esta reserva, intente con otra hora o fecha',
+                showConfirmButton: false,
+                timer: 2000
+              });</script>";
             header("location:?c=calendarioSemanal&id=".$_GET['id']."&week=".$_GET['week']."&year=".$_GET['year'].""); 
         }
        
@@ -361,19 +415,46 @@ class Control{
             $_SESSION["msg"]=" 
         
 
-            <script>    Swal.fire({
-                icon: 'success',
-                title: 'Reserva realizada con éxito',
-                showConfirmButton: false,
-                timer: 1500
-              });</script>";
+            <script>    
+            let timerInterval
+            Swal.fire({
+              title: 'Reservando...',
+              customClass: 'swal-height',
+              html: 'Por favor espere',
+              timer: 4000,
+              allowEscapeKey: false,
+                allowOutsideClick: false,
+              timerProgressBar: false,
+              didOpen: () => {
+                customClass: 'swal2-loader',
+                Swal.showLoading()
+                
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Reserva realizada con éxito',
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+            })
+              </script>";
               $this->crud->enviarCorreo("SGEC-Confirmacion de reserva", "Hola ".$_SESSION["nombre"].",\nSe ha confirmado su reserva con los siguientes datos:\n\n - Aula:  ".$_GET["id"].".\n\n - Fecha: ".$_GET["date"]. ". \n\n - Hora: ".$_POST["timeslot"].".\n\nPara evitar perjudicar a otras personas, se ruega puntualidad; si llega tarde a su reserva no se le podrá garantizar el tiempo necesario.\n\nSi desea cancelar o modificar su cita, puede hacerlo en el apartado 'Mis Reservas' de nuestra web. \n\n\nIES Ciudad Escolar - Sistema de Gestión de Espacios Comunes", $_SESSION["correo"]);
 
             header("location:?c=calendarioDiario&date=".$_GET['date'].""); 
             
         }else{
 
-            $_SESSION["msg"]="<div class='alert  '>Ya reservado</div>";
+            $_SESSION["msg"]="<script>    
+            Swal.fire({
+                icon: 'error',
+                title: 'Otra persona ya ha realizado esta reserva, intente con otra hora o fecha',
+                showConfirmButton: false,
+                timer: 2000
+              });</script>";
             header("location:?c=calendarioDiario&date=".$_GET['date'].""); 
         }
        

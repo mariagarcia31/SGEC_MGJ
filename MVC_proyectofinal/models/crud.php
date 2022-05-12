@@ -420,7 +420,7 @@ class Crud extends Conexion{
 
              else{
                  
-                 $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4 class='dia'>$currentDay</h4><a href='?c=calendario&date=".$date."&id=".$idAula."&month=$month&year=$year' class='btn btn-xs botonReservar' onClick='scroll(0, 100);' ><p class='textoBotonReservar'><b>Horarios</b></p></a>";
+                 $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><h4 class='dia'>$currentDay</h4><a href='?c=calendario&date=".$date."&id=".$idAula."&month=$month&year=$year' class='btn btn-xs botonReservar' onClick='scroll(0, 100);' ><p class='textoBotonReservar'><b><i class='bi bi-eye'></i> Ver disponibilidad</b></p></a>";
              }
              $calendar .="</td>";
              $currentDay++;
@@ -530,7 +530,7 @@ class Crud extends Conexion{
                  }
 
                 else{
-                    $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><a href='?c=calendarioSemanal&date=".$fecha."&id=".$idAula."&hora=".$hora."&week=".$week."&year=".$year."' class='btn btn-success btn-xs botonReservar' ><p class='textoBotonReservar'>Reservar</p></a></td>";
+                    $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><a href='?c=calendarioSemanal&date=".$fecha."&id=".$idAula."&hora=".$hora."&week=".$week."&year=".$year."' class='btn btn-xs botonReservar' ><p class='textoBotonReservar'>Reservar</p></a></td>";
 
                 }
 
@@ -652,7 +652,7 @@ class Crud extends Conexion{
                  }
 
                 else{
-                    $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><a href='?c=calendarioDiario&date=".$date."&id=".$nombre."&hora=".$hora."' class='btn btn-success btn-xs botonReservar' ><p class='textoBotonReservar'>Reservar</p></a></td>";
+                    $calendar.="<td onMouseOver='overStyle(this)' onMouseOut='outStyle(this)'><a href='?c=calendarioDiario&date=".$date."&id=".$nombre."&hora=".$hora."' class='btn btn-xs botonReservar' ><p class='textoBotonReservar'>Reservar</p></a></td>";
 
                 }
             
