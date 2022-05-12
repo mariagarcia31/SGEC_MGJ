@@ -363,7 +363,7 @@ echo '  <a class="btn-menu" href="?c=ayuda&page=1"><i class="bi bi-info-circle">
 <span class="glyphicon glyphicon-align-justify"></span>
 </span>
 <div class="cabecera-todo">
-    <a class="logoEnlace" href="https://www.educa2.madrid.org/web/centro.ies.ciudadescolar.madrid" target="_blank"><img slt="logo" class="logo" style="    width: 175px;
+    <a class="logoEnlace" href="?c=principal&page=1" ><img slt="logo" class="logo" style="    width: 175px;
     height: 75px;" src="libs/img/logo_ciudadescolar.png"></a>
     <h3 class="cabecera">Sistema de Gestión de Espacios Comunes</h3>
 </div>
