@@ -802,7 +802,7 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT id,idAula, fecha, hora, grupo, motivo, fecha_creacion FROM reservas WHERE idUsuario ='$idUsuario' ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+            $sql="SELECT id,idAula as 'Aula', fecha as 'Fecha', hora as 'Hora', grupo as 'Grupo', motivo as 'Motivo', fecha_creacion as 'Fecha creación' FROM reservas WHERE idUsuario ='$idUsuario' ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -1347,7 +1347,7 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT * FROM aulas ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+            $sql="SELECT id, id as 'Nombre', ubicacion as 'Ubicación', informacion as'Información', aforo as 'Aforo', habilitado as 'Habilitado', imagen FROM aulas ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
@@ -1636,16 +1636,6 @@ class Crud extends Conexion{
 
     function crearRoles($indic){
 
-            /*$comprobar="SELECT * FROM roles WHERE id='".$indic[0]."';";
-            $consulta_comprobar=$this->conexion->prepare($comprobar);
-            $consulta_comprobar->execute();
-            $resultado_comprobar=$consulta_comprobar->fetchAll();
-            if(count($resultado_comprobar)>0){
-                return false;
-			}
-            
-			else{*/
-                
 				$nombre = $indic[0];
 				$crud_roles =$indic[1];
 				$crud_usuarios = $indic[2];
@@ -1662,12 +1652,6 @@ class Crud extends Conexion{
                 
                 return true;
 
-				
-			
-		//}
-
-
-			
 	}
 
     
@@ -2196,34 +2180,14 @@ function actualizarConfiguracion($indic){
 
 function crearConfiguracion($indic){
 
-        $comprobar="SELECT * FROM configuracion WHERE id='".$indic[0]."';";
-        $consulta_comprobar=$this->conexion->prepare($comprobar);
-        $consulta_comprobar->execute();
-        $resultado_comprobar=$consulta_comprobar->fetchAll();
-        if(count($resultado_comprobar)>0){
-            return false;
-        }
-        
-        else{
-
-            $id = $indic[0];
             $nombre = $indic[1];
             $valor =$indic[2];
-           
-            
 
-            
-            $comprobar="INSERT INTO  configuracion VALUES ($id,'$nombre','$valor');";
+            $comprobar="INSERT INTO  configuracion VALUES ('','$nombre','$valor');";
             $consulta_comprobar=$this->conexion->prepare($comprobar);
             $consulta_comprobar->execute();
             
             return true;
-
-            
-        
-    }
-
-
         
 }
 

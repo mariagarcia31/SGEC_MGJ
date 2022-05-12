@@ -392,17 +392,6 @@ $("#myModal").modal();
                                                                     }
                                                                     echo "</select></div>";
                                                                 }elseif($i==7){
-                                                                  /*  echo '<div class="form-group">
-                                                                    <label for="">Actualizar bbdd</label><select name="dato[]" class="form-control" required>';
-                                                                    if($nombre_columna[$i]==0){
-                                                                        echo "  <option value='0' selected>No</option>
-                                                                        <option value='1' >Si</option>";
-                                                                    }else{
-                                                                        echo "  <option value='0' >No</option>
-                                                                        <option value='1' selected>Si</option>";
-                                                                    }
-                                                                    echo "</select></div>";*/
-                                                                }elseif($i==8){
                                                                     echo '<div class="form-group">
                                                                     <label for="">Crud festivos</label><select name="dato[]" class="form-control" required>';
                                                                     if($nombre_columna[$i]==0){
@@ -413,7 +402,7 @@ $("#myModal").modal();
                                                                         <option value='1' selected>Si</option>";
                                                                     }
                                                                     echo "</select></div>";
-                                                                }elseif($i==9){
+                                                                }elseif($i==8){
                                                                     echo '<div class="form-group">
                                                                     <label for="">Estadísticas</label><select name="dato[]" class="form-control" required>';
                                                                     if($nombre_columna[$i]==0){
@@ -424,7 +413,7 @@ $("#myModal").modal();
                                                                         <option value='1' selected>Si</option>";
                                                                     }
                                                                     echo "</select></div>";
-                                                                }elseif($i==10){
+                                                                }elseif($i==9){
                                                                     echo '<div class="form-group">
                                                                     <label for="">Crud configuración</label><select name="dato[]" class="form-control" required>';
                                                                     if($nombre_columna[$i]==0){

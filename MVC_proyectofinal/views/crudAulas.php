@@ -287,7 +287,11 @@ $_SESSION['cuantas']=count($result[0]);
         echo "<tr ><th>Eliminar</th>";
 
         foreach($result[1] as $indice){
-            echo "<th>".$indice."</th>";
+            if($indice=="id"){
+
+            }else{
+                echo "<th>".$indice."</th>";
+            }
         }
         
         echo "<th>Borrar</th>";
@@ -306,13 +310,17 @@ $_SESSION['cuantas']=count($result[0]);
             echo "<td><input type='checkbox' name='eliminar[]' value=' ".$dato['id']."'</td>";
 
             foreach($dato as $x=>$y){
-        
-                if($x=='imagen'){
-                    echo "<td><img alt='imagen-aula' src='".$y."' class='img-fluid img-thumbnail' style='width:70px; height:60px;'></td>";
-                }
-                else{
-                echo "<td>".$y."</td>";
-                }
+                if($x=="id"){
+                            
+                }elseif($x=='imagen'){
+                   
+                        echo "<td><img alt='imagen-aula' src='".$y."' class='img-fluid img-thumbnail' style='width:70px; height:60px;'></td>";
+                    
+                    
+                }else{
+                    echo "<td>".$y."</td>";
+                    }
+                
             }
       
             ?>
