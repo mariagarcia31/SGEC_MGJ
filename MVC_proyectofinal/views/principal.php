@@ -155,7 +155,12 @@ a:hover{
      
         
             <div class="col-md-4 mb-4 mt-1 p-5">
-                <a  href="?c=calendario&id=<?php echo $row['id']?>" style="tex-decoration:none">
+            <?php if($row['habilitado']==0) {?>
+                <a href="?c=principal">
+
+                                <?php } else{?>
+                                    <a href="?c=calendario&id=<?php echo $row['id']?>">
+                                <?php } ?>
                 <div class="card mt-2 " style="border-radius: 1.2rem;" >
                     <div class="card text-white bg-info mb-0" style="border:none !important;">
                         <div class="card-header" style="border:none !important;">
