@@ -157,7 +157,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
             <button class="accordion">¿Cómo cambiar el correo electrónico?</button>
             <div class="panel">
-            <p>Desde "Perfil" puedes modificar tu correo electrónico.</p>
+            <p>Este dato sólo lo puede modificar el administrador.</p>
             </div>
         </div>
     </div>
