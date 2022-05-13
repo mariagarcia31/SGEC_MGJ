@@ -80,12 +80,16 @@ $("#myModal").modal();
                     
                     <?php
                                                $roles=$this->crud->obtieneRoles();
+                                              
                                                foreach($roles as $rol=>$rolito){
+                                                 
                                                    foreach($rolito as $rol2){
-                                                       if(is_string($rol2)){
-                                                        $rolesNombre[]=$rolito["nombre"];
-                                                       }else{
+                                             
+                                                       if(is_numeric($rol2)){
                                                         $rolesId[]=$rol2;
+
+                                                       }else{
+                                                        $rolesNombre[]=$rolito["nombre"];
                                                        }
                                                        
                                                    }
