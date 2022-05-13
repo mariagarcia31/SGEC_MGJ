@@ -481,7 +481,7 @@ class Control{
                   });</script>";                
                   $cuantos=count($_POST["eliminar"]);
                 if($_SESSION['cuantas']==$cuantos){
-                    header("location:?c=crudMisReservas&page=".$_GET["pag"]-1 ."");
+                    header("location:?c=crudMisReservas&page=".($_GET["pag"]-1)."");
                 }
                 else{
                 header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
@@ -597,7 +597,7 @@ function borrarReservas(){
                 timer: 1500
               });</script>";                $cuantos=count($_POST["eliminar"]);
             if($_SESSION['cuantas']==$cuantos){
-                header("location:?c=crudReservas&page=".$_GET["pag"]-1 ."");
+                header("location:?c=crudReservas&page=".($_GET["pag"]-1)."");
             }
             else{
             header("location:?c=crudReservas&page=".$_GET["pag"]."");
@@ -723,7 +723,7 @@ function borrarAulas(){
           });</script>";
             $cuantos=count($_POST["eliminar"]);
             if($_SESSION['cuantas']==$cuantos){
-                header("location:?c=crudAulas&page=".$_GET["pag"]-1 ."");
+                header("location:?c=crudAulas&page=".($_GET["pag"]-1)."");
             }
             else{
             header("location:?c=crudAulas&page=".$_GET["pag"]."");
@@ -880,7 +880,7 @@ function borrarRoles(){
           });</script>";
             $cuantos=count($_POST["eliminar"]);
             if($_SESSION['cuantas']==$cuantos){
-                header("location:?c=crudRoles&page=".$_GET["pag"]-1 ."");
+                header("location:?c=crudRoles&page=".($_GET["pag"]-1)."");
             }
             else{
             header("location:?c=crudRoles&page=".$_GET["pag"]."");
@@ -1039,7 +1039,7 @@ function borrarUsuarios(){
           });</script>";
             $cuantos=count($_POST["eliminar"]);
             if($_SESSION['cuantas']==$cuantos){
-                header("location:?c=crudUsuarios&page=".$_GET["pag"]-1 ."");
+                header("location:?c=crudUsuarios&page=".($_GET["pag"]-1)."");
             }
             else{
             header("location:?c=crudUsuarios&page=".$_GET["pag"]."");
@@ -1199,7 +1199,7 @@ function borrarGrupos(){
           });</script>";
             $cuantos=count($_POST["eliminar"]);
             if($_SESSION['cuantas']==$cuantos){
-                header("location:?c=crudGrupos&page=".$_GET["pag"]-1 ."");
+                header("location:?c=crudGrupos&page=".($_GET["pag"]-1)."");
             }
             else{
             header("location:?c=crudGrupos&page=".$_GET["pag"]."");
@@ -1360,7 +1360,7 @@ function borrarFestivos(){
           });</script>";
             $cuantos=count($_POST["eliminar"]);
             if($_SESSION['cuantas']==$cuantos){
-                header("location:?c=crudFestivos&page=".$_GET["pag"]-1 ."");
+                header("location:?c=crudFestivos&page=".($_GET["pag"]-1)."");
             }
             else{
             header("location:?c=crudFestivos&page=".$_GET["pag"]."");
@@ -1522,7 +1522,7 @@ function borrarConfiguracion(){
           });</script>";
             $cuantos=count($_POST["eliminar"]);
             if($_SESSION['cuantas']==$cuantos){
-                header("location:?c=crudConfiguracion&page=".$_GET["pag"]-1 ."");
+                header("location:?c=crudConfiguracion&page=".($_GET["pag"]-1)."");
             }
             else{
             header("location:?c=crudConfiguracion&page=".$_GET["pag"]."");
