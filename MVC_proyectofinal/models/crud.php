@@ -233,7 +233,7 @@ class Crud extends Conexion{
 
                     if(preg_match($expresion, $contraN)){
                         $contra=password_hash("$contraN", PASSWORD_DEFAULT);
-                        $sql="CALL cambiarContra('$correo','$contraN')";
+                        $sql="CALL cambiarContra('$correo','$contra')";
                         $con=$this->conexion->prepare($sql);
                         $con->execute();
                         
