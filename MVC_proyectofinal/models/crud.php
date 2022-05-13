@@ -896,7 +896,7 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT id, nombre as 'Nombre', crud_roles as 'Gestionar roles', crud_usuarios as 'Gestionar usuarios', crud_aulas as 'Gestionar aulas', crud_grupos as 'Gestionar grupos', crud_festivos as 'Gestionar festivos', estadisticas as 'Gestionar estadísticas', crud_configuracion as 'Gestionar configuracion'
+            $sql="SELECT id, nombre as 'Nombre', crud_roles as 'Gestionar roles', crud_usuarios as 'Gestionar usuarios',crud_reservas as 'Gestionar reservas', crud_aulas as 'Gestionar aulas', crud_grupos as 'Gestionar grupos', crud_festivos as 'Gestionar festivos', estadisticas as 'Gestionar estadísticas', crud_configuracion as 'Gestionar configuracion'
              FROM roles ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);

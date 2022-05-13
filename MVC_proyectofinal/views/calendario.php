@@ -268,7 +268,7 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
   <div class="row"> 
   <a href="?c=principal" style='font-size:14px' title="Cancelar" ><button type="button" class="close"><i class="bi bi-arrow-return-left volver"> Ver aulas</i></button></a>
 
-   <div class="col-md-12 "> 
+   <div class="col-md-12 " style="margin-bottom:100px"> 
     
     <div id="calendario" class='mx-auto rounded calendario'> 
     
