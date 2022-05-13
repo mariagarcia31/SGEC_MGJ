@@ -647,7 +647,7 @@ class Crud extends Conexion{
 
                     $clave = array_search($hora, $booking[0]);
     
-                    $calendar.="<td><a class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>Prof. ".$booking[1][$clave]."</p></a></td> ";
+                    $calendar.="<td><a class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>".$booking[1][$clave]." ".$booking[2][$clave]."<br>"."(".$booking[3][$clave].")"."</p></a></td> ";
                     
                  }
 
