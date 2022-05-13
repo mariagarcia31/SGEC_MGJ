@@ -525,7 +525,7 @@ class Crud extends Conexion{
 
                     $clave = array_search($hora, $booking[0]);
     
-                    $calendar.="<td><a class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>Prof. ".$booking[1][$clave]."</p></a></td> ";
+                    $calendar.="<td><a class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>".$booking[1][$clave]." ".$booking[2][$clave]."<br>"."(".$booking[3][$clave].")"."</p></a></td> ";
                     
                  }
 
@@ -687,7 +687,9 @@ class Crud extends Conexion{
         $datos = array();
         $bookings = array();
         $nombres = array();
-       
+       $apellidos=array();
+       $puestos=array();
+
         $sql="SELECT * from reservas where idAula = :id AND fecha = :fecha";
         $consulta=$this->conexion->prepare($sql);
         $consulta->bindParam(":id",$id);
@@ -702,11 +704,14 @@ class Crud extends Conexion{
 
                     $bookings[]= $x["hora"];
                     $idReservaUsuario=$x["idUsuario"];
-                    $comprobar="SELECT nombre FROM `usuarios` WHERE id = '$idReservaUsuario'";
+                    $comprobar="SELECT nombre, primerApellido, puesto FROM `usuarios` WHERE id = '$idReservaUsuario'";
                     $consulta_comprobar=$this->conexion->prepare($comprobar);
                     $consulta_comprobar->execute();
                     $resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
                     $nombres[]= $resultado_comprobar['nombre'];
+                    $apellidos[]= $resultado_comprobar['primerApellido'];
+                    $puestos[]= $resultado_comprobar['puesto'];
+
                    
                }      
                
@@ -715,6 +720,8 @@ class Crud extends Conexion{
         }
         $datos[0]=$bookings;
         $datos[1]=$nombres;
+        $datos[2]=$apellidos;
+        $datos[3]=$puestos;
         return $datos;
     }
 
