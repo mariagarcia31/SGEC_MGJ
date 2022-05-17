@@ -4,7 +4,7 @@ class Precio{
 
     public function conexion(){
         try{
-            $conexion=new PDO("mysql:host=localhost;dbname=sgec","root","");
+            $conexion=new PDO("mysql:host=localhost:33065;dbname=sgec","root","");
             $conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
             return $conexion;
         }
@@ -27,16 +27,19 @@ class Precio{
       
      /*************************************  FIN MODELO DE AULAS  ********************************/
    
-       
+    function ver($correo){
+        $sql="SELECT * FROM usuarios WHERE (correo='$correo' OR usuario='$correo');";
+        $con=$this->conexion()->prepare($sql);
+        $con->execute();
+        $consult=$con->fetchAll(PDO::FETCH_ASSOC);
+        return $consult[0]["id"];
+    }
 
 }
 
 
 
 $precio=new Precio();
-$datos= $precio->maximoDiasSiguientes();
 
-        print_r($datos);
-
-
+print_r($precio->ver("josu"));
 ?>

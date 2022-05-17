@@ -1,9 +1,9 @@
 <?php
         use PHPMailer\PHPMailer\PHPMailer;
         use PHPMailer\PHPMailer\Exception;
-        require 'PHPMailer/src/Exception.php';
-        require 'PHPMailer/src/PHPMailer.php';
-        require 'PHPMailer/src/SMTP.php';
+        require 'C:\xampp\htdocs\PHP\git_proyecto\SGEC_MGJ\PHPMailer/src/Exception.php';
+        require 'C:\xampp\htdocs\PHP\git_proyecto\SGEC_MGJ\PHPMailer/src/PHPMailer.php';
+        require 'C:\xampp\htdocs\PHP\git_proyecto\SGEC_MGJ\PHPMailer/src/SMTP.php';
 include("conexion.php");
 
 function printSricptBan(){
@@ -202,7 +202,9 @@ class Crud extends Conexion{
 
     function verificarContra($correo){
         try{
-            $sql="SELECT verificarContra(:email)";
+     
+         $sql="SELECT confirmacion from usuarios where (correo = :email or usuario = :email);";
+
             $consulta=$this->conexion->prepare($sql);
             $consulta->bindParam(":email",$correo);
             $consulta->execute();
@@ -233,7 +235,11 @@ class Crud extends Conexion{
 
                     if(preg_match($expresion, $contraN)){
                         $contra=password_hash("$contraN", PASSWORD_DEFAULT);
-                        $sql="CALL cambiarContra('$correo','$contra')";
+                        $sql="UPDATE usuarios
+                        set contra='$contra', correo='$correo' ,confirmacion=1
+                        where id=".$consult[0]["id"].";";
+
+
                         $con=$this->conexion->prepare($sql);
                         $con->execute();
                         

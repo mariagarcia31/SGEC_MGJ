@@ -15,7 +15,7 @@ if(!isset($_SESSION["intentos"])){
 
 $connection = MySQLi_connect(
 
-    "localhost", //Server host name.
+    "localhost:33065", //Server host name.
  
     "root", //Database username.
  
