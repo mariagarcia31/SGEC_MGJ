@@ -279,35 +279,20 @@ $("#myModal").modal();
         ?>
 <form style='font-size:14px' action="?c=borrarReservas&pag=<?php echo $_GET["page"]?>" method="post"> 
 <input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="float:right;   margin-top: -43px; font-size:14px ">
-        <?php
-        
+        <?php      
         foreach($result[0] as $indice=>$dato){
             echo "<td><input type='checkbox' name='eliminar[]' value=' ".$dato['id']."'</td>";
-
             foreach($dato as $x=>$y){
-        
-               
                         if($x=="id"){
                             
                         }else{
                             echo "<td>".$y."</td>";
                         }
-                        
-
-                    
-
-                
-                
-                //$vivienda=new Vivienda($y);
-                //$i=new Vivienda($dato["id"],$dato["tipo"],$dato["zona"],$dato["direccion"],$dato["ndormitorios"],$dato["tamano"],$dato["precio"]);           
-            }
+                 }
       
             ?>
-            
-
             <td>
             <a class="dltBtn btn btn-danger" data-id="<?php echo $dato["id"]; ?>" data-page="<?php echo $_GET["page"]; ?>" href="javascript:void(0)"><i class="bi bi-trash"></i></a>
-        
             </td>
             <td><button  title="Modificar" class="btn btn-primary" name="modificar" value="<?php echo $dato["id"] ?>"> <i class="bi bi-pencil-square"></i></button></td>
 
@@ -317,7 +302,7 @@ $("#myModal").modal();
         
             }
         
-       // echo "</table>";
+  
   
   ?>
            </table>
