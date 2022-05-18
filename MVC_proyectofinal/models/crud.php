@@ -909,7 +909,7 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT id, nombre as 'Nombre', crud_roles as 'Gestionar roles', crud_usuarios as 'Gestionar usuarios',crud_reservas as 'Gestionar reservas', crud_aulas as 'Gestionar aulas', crud_grupos as 'Gestionar grupos', crud_festivos as 'Gestionar festivos', estadisticas as 'Gestionar estadísticas', crud_configuracion as 'Gestionar configuracion'
+            $sql="SELECT id, nombre as 'Nombre', crud_usuarios as 'Gestionar usuarios',crud_reservas as 'Gestionar reservas', crud_aulas as 'Gestionar aulas', crud_grupos as 'Gestionar grupos', crud_festivos as 'Gestionar festivos', estadisticas as 'Gestionar estadísticas', crud_configuracion as 'Gestionar configuracion'
              FROM roles ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
@@ -1650,16 +1650,15 @@ class Crud extends Conexion{
     function crearRoles($indic){
 
 				$nombre = $indic[0];
-				$crud_roles =$indic[1];
-				$crud_usuarios = $indic[2];
-				$crud_aulas = $indic[3];
-                $crud_reservas = $indic[4];
-				$crud_grupos = $indic[5];
-                $crud_festivos = $indic[6];
-                $estadisticas = $indic[7];
-                $configuracion = $indic[8];
+				$crud_usuarios = $indic[1];
+				$crud_aulas = $indic[2];
+                $crud_reservas = $indic[3];
+				$crud_grupos = $indic[4];
+                $crud_festivos = $indic[5];
+                $estadisticas = $indic[6];
+                $configuracion = $indic[7];
 				
-                $comprobar="INSERT INTO  roles VALUES ('','$nombre',$crud_roles,$crud_usuarios,$crud_aulas, $crud_reservas, $crud_grupos, $crud_festivos, $estadisticas, $configuracion);";
+                $comprobar="INSERT INTO  roles VALUES ('','$nombre','0',$crud_usuarios,$crud_aulas, $crud_reservas, $crud_grupos, $crud_festivos, $estadisticas, $configuracion);";
                 $consulta_comprobar=$this->conexion->prepare($comprobar);
                 $consulta_comprobar->execute();
                 

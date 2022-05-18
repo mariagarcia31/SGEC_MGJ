@@ -435,13 +435,16 @@ $("#myModal").modal();
             
             <?php if($dato["rol"]==1){?>
             <td>No</td>
+            <td>No</td>
+
             <?php  }else{?>
             <td><input type="checkbox" name="eliminar[]" value="<?php echo $dato["id"]?>">
             
             <a class="btn btn-danger"  href="?c=borrarUsuarios&id=<?php echo $dato["id"] ?>&pag=<?php echo $_GET["page"]?>"><i class="bi bi-trash"></i></a>
             </td>
-            <?php }?>
             <td><button  title="Modificar" class="btn btn-primary" name="modificar" value="<?php echo $dato["id"] ?>"> <i class="bi bi-pencil-square"></i></button></td>
+
+            <?php }?>
 
 
             <?php

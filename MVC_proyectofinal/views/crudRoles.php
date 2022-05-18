@@ -56,7 +56,7 @@ if($count[0]==0){
                 echo '<tr>';
                 echo '<th> id</th>';
                 echo '<th> nombre</th>';
-                echo '<th> crud_roles</th>';
+               // echo '<th> crud_roles</th>';
                 echo '<th> crud_usuarios</th>';
                 echo '<th> crud_aulas</th>';
                 echo '<th> crud_reservas</th>';
@@ -70,7 +70,7 @@ if($count[0]==0){
                 echo '<tr>';
                 echo "<td><input type='number' name='dato[]' style='width:210px'></input></td>";
                 echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
-                echo "<td><input type='number' name='dato[]' style='width:220px'></input></td>";
+                //echo "<td><input type='number' name='dato[]' style='width:220px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:80px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
                 echo "<td><input type='number' name='dato[]' style='width:50px'></input></td>";
@@ -195,13 +195,13 @@ $("#myModal").modal();
                                                 
                                                             
                                                       
-                                                            echo '<div class="form-group">
+                                                          /*  echo '<div class="form-group">
                                                             <label for="">Crud roles</label>';
                                                             echo "<select name='dato[]' class='form-control' required >
                                                             <option value='0' selected>No</option>
                                                             <option value='1' selected>Si</option>
                                                             </select>";
-                                                            echo '</div>';
+                                                            echo '</div>';*/
                                                           
                                                                 echo '<div class="form-group">
                                                                 <label for="">Crud usuarios</label>';
@@ -329,7 +329,7 @@ $("#myModal").modal();
                                                 
                                                            elseif($i==2){
                                                             
-                                                                echo '<div class="form-group">
+                                                              /*  echo '<div class="form-group">
                                                                 <label for="">Crud roles</label><select name="dato[]" class="form-control" required>';
                                                                 if($nombre_columna[$i]==0){
                                                                     echo "  <option value='0' selected>No</option>
@@ -338,7 +338,7 @@ $("#myModal").modal();
                                                                     echo "  <option value='0' >No</option>
                                                                     <option value='1' selected>Si</option>";
                                                                 }
-                                                                echo "</select></div>";
+                                                                echo "</select></div>";*/
                                                             }
                                                 
                                                             elseif($i==3){
@@ -489,7 +489,6 @@ $("#myModal").modal();
         
         foreach($result[0] as $indice=>$dato){
             echo "<td><input type='checkbox' name='eliminar[]' value=' ".$dato['id']."'</td>";
-
             foreach($dato as $x=>$y){
         
             
@@ -504,10 +503,13 @@ $("#myModal").modal();
                 //$i=new Vivienda($dato["id"],$dato["tipo"],$dato["zona"],$dato["direccion"],$dato["ndormitorios"],$dato["tamano"],$dato["precio"]);           
             }
       
-            ?>
-            
+            if($dato["id"]==1){ ?>
+            <td>No</td>
+            <td>No</td>
 
-            <td>
+            <?php  }else{?>
+            
+                <td>
             
             <a class="btn btn-danger"  href="?c=borrarRoles&id=<?php echo $dato["id"] ?>&pag=<?php echo $_GET["page"]?>"><i class="bi bi-trash"></i></a>
         
@@ -515,7 +517,7 @@ $("#myModal").modal();
             <td><button  title="Modificar" class="btn btn-primary" name="modificar" value="<?php echo $dato["id"] ?>"> <i class="bi bi-pencil-square"></i></button></td>
 
 
-            <?php
+            <?php } 
             echo "</tr>";
         
             }
