@@ -326,7 +326,7 @@ $_SESSION['cuantas']=count($result[0]);
             ?>
 
             <td>
-            <a class="btn btn-danger"  href="?c=borrarAulas&id=<?php echo $dato["id"] ?>&pag=<?php echo $_GET["page"]?>"><i class="bi bi-trash"></i></a>
+            <a class="dltBtn btn btn-danger" data-id="<?php echo $dato["id"]; ?>" data-page="<?php echo $_GET["page"]; ?>" href="javascript:void(0)"><i class="bi bi-trash"></i></a>
         
             </td>
             <td><button  title="Modificar" class="btn btn-primary" name="modificar" value="<?php echo $dato["id"] ?>"> <i class="bi bi-pencil-square"></i></button></td>
@@ -340,6 +340,32 @@ $_SESSION['cuantas']=count($result[0]);
        // echo "</table>";
   
   ?>
+   <script>
+                $(document).ready(function(){
+                    $('.dltBtn').click(function(e){
+                        e.preventDefault();
+                        var id = $(this).attr('data-id');
+                        var page = $(this).attr('data-page');
+                        Swal.fire({
+                            title: '¿Desea eliminar este registro?',
+                            text: "Esta acción es irreversible",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#dc3545',
+                            cancelButtonColor: 'gray',
+                            confirmButtonText: 'Eliminar',
+                            cancelButtonText: 'Cancelar'
+
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "?c=borrarAulas&id="+id+"&pag="+page;
+ 
+                                }
+                        })
+                    });
+                });
+            </script>
+
            </table>
         </div>
         </div>

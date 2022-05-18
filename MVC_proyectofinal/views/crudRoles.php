@@ -12,7 +12,7 @@ if ((isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESS
 ?>
 <html lang="en" style="    overflow-x: hidden;">
 <head>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
     <title>Gestionar roles</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -483,7 +483,7 @@ $("#myModal").modal();
         
         echo "</tr>";
         ?>
-<form style='font-size:14px' action="?c=borrarRoles&pag=<?php echo $_GET["page"]?>" method="post"> 
+<form style='font-size:14px' action="?c=borrarRoles&pag=<?php echo $_GET["page"]?>" method="post" id="miFormulario"> 
 <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="float:right;   margin-top: -43px; font-size:14px " >
 <?php
         
@@ -507,11 +507,14 @@ $("#myModal").modal();
             <td>No</td>
             <td>No</td>
 
-            <?php  }else{?>
+            <?php  }else{
+                //<?php echo $dato["id"] 
+                //<?php echo $_GET["page"]
+                ?>
             
                 <td>
             
-            <a class="btn btn-danger"  href="?c=borrarRoles&id=<?php echo $dato["id"] ?>&pag=<?php echo $_GET["page"]?>"><i class="bi bi-trash"></i></a>
+           <a class="dltBtn btn btn-danger" data-id="<?php echo $dato["id"]; ?>" data-page="<?php echo $_GET["page"]; ?>" href="javascript:void(0)"><i class="bi bi-trash"></i></a>
         
             </td>
             <td><button  title="Modificar" class="btn btn-primary" name="modificar" value="<?php echo $dato["id"] ?>"> <i class="bi bi-pencil-square"></i></button></td>
@@ -526,6 +529,33 @@ $("#myModal").modal();
   
   ?>
            </table>
+
+           <script>
+                $(document).ready(function(){
+                    $('.dltBtn').click(function(e){
+                        e.preventDefault();
+                        var id = $(this).attr('data-id');
+                        var page = $(this).attr('data-page');
+                        Swal.fire({
+                            title: '¿Desea eliminar este registro?',
+                            text: "Esta acción es irreversible",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#dc3545',
+                            cancelButtonColor: 'gray',
+                            confirmButtonText: 'Eliminar',
+                            cancelButtonText: 'Cancelar'
+
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "?c=borrarRoles&id="+id+"&pag="+page;
+ 
+                                }
+                        })
+                    });
+                });
+            </script>
+
         </div>
         </div>
         
