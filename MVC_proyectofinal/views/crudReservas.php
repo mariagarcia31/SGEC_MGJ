@@ -237,7 +237,7 @@ $("#myModal").modal();
 <div class="row">
     
                 <div class="col-md-12 " style="border:none">
-<h1 style="color:#1A3C40; text-align:center; margin-bottom:5%; background-color:white" >RESERVAS</h1>
+<h1 style="color:#1A3C40; text-align:center; margin-bottom:5%; background-color:white; margin-top:50px" >RESERVAS</h1>
                     
                     <?php 
                     if(isset($_SESSION['error2'])){
@@ -259,7 +259,7 @@ $("#myModal").modal();
            
                        <div class="col-md-12">';
  echo '<div class="table-responsive-sm">
-       <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
+       <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:60px">';
 
         echo "<tr ><th>Eliminar</th>";
 
@@ -278,7 +278,11 @@ $("#myModal").modal();
         echo "</tr>";
         ?>
 <form style='font-size:14px' action="?c=borrarReservas&pag=<?php echo $_GET["page"]?>" method="post"> 
-<input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="float:right;   margin-top: -43px; font-size:14px ">
+<input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="    float: right;
+    font-size: 14px;
+    position: absolute;
+    right: 16px;
+    top: 0px; " >
         <?php      
         foreach($result[0] as $indice=>$dato){
             echo "<td><input type='checkbox' name='eliminar[]' value=' ".$dato['id']."'</td>";

@@ -38,7 +38,7 @@ if($count[0]==0){
     <div class="col-md-12 ">
     <h1 class="display-3"> No se han creado festivos aún</h1>';
  
-    echo "<a href='?c=crudFestivos&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>
+    echo "<a href='?c=crudFestivos&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px;margin-bottom:30px' class='btn btn-success'> Agregar</button></a>
   
     ";
     if(isset($_GET["crear"])){
@@ -125,7 +125,7 @@ $("#myModal").modal();
 <div class="row" style="margin-top:5%">
 <?php include "barraBusquedaFestivos/barra.php"; ?>
                 <div class="col-md-12 ">
-                <h1 style="color:black; text-align:center; margin-bottom:0%; background-color:white" >Festivos</h1>
+                <h1 style="color:black; text-align:center; margin-bottom:0%; background-color:white; margin-top:50px" >Festivos</h1>
                     
                     
                     <?php
@@ -280,7 +280,7 @@ $("#myModal").modal();
        <div class="row">
            
                        <div class="col-md-12 ">';
-        echo "<a href='?c=crudFestivos&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px'  class='btn btn-success'> Agregar</button></a>  ";
+        echo "<a href='?c=crudFestivos&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px;margin-bottom:30px'  class='btn btn-success'> Agregar</button></a>  ";
        
        echo '<div class="table-responsive-sm">
        <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
@@ -302,7 +302,11 @@ $("#myModal").modal();
         echo "</tr>";
         ?>
 <form style='font-size:14px' action="?c=borrarFestivos&pag=<?php echo $_GET["page"]?>" method="post"> 
-<input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="float:right;   margin-top: -43px; font-size:14px " >
+<input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="    float: right;
+    font-size: 14px;
+    position: absolute;
+    right: 16px;
+    top: 0px; " >
 <?php
         
         foreach($result[0] as $indice=>$dato){

@@ -865,8 +865,8 @@ function crearAulas(){
 /******************************   CONTROLADOR ROLES               ********************************/
 function borrarRoles(){
 
-        
     if(isset($_POST["borrar"])){
+       
         $result=$this->crud->borrarRoles($_POST["eliminar"]);
         if($result){
             $_SESSION["exito"]="

@@ -75,7 +75,7 @@ $("#myModal").modal();
 <div class="row" style="margin-top:5%">
 <?php include "barraBusquedaUsuarios/barra.php"; ?>
                 <div class="col-md-12 ">
-                <h1 style="color:black; text-align:center; margin-bottom:0%; background-color:white" >Usuarios</h1>
+                <h1 style="color:black; text-align:center; margin-top:30px;margin-bottom:0%; background-color:white; margin-top:50px" >Usuarios</h1>
                     
                     
                     <?php
@@ -349,7 +349,7 @@ $("#myModal").modal();
        
 <?php
 
-       echo '<div class="container" style="margin-top:60px;margin:auto 50px">
+       echo '<div class="container" style="margin-top:80px">
 
 
 
@@ -359,7 +359,7 @@ $("#myModal").modal();
                        echo "<form style='font-size:14px' action='' method='post' >
                             <input class='btn btn-primary' style='font-size:14px' type='submit' name='cargar' value='Cargar Usuarios'>
                             </form>";
-        echo "<a href='?c=crudUsuarios&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>  ";
+        echo "<a href='?c=crudUsuarios&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px; margin-bottom:30px'  class='btn btn-success'> Agregar</button></a>  ";
        
        echo '<div class="table-responsive-sm">
        <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
@@ -407,7 +407,11 @@ $("#myModal").modal();
 
         ?>
 <form style='font-size:14px' action="?c=borrarUsuarios&pag=<?php echo $_GET["page"]?>" method="post"> 
-<input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="float:right;   margin-top: -43px; font-size:14px " >
+<input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="    float: right;
+    font-size: 14px;
+    position: absolute;
+    right: 16px;
+    top: 0px; " >
 <?php
         
         foreach($result[0] as $indice=>$dato){

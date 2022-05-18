@@ -38,7 +38,7 @@ if($count[0]==0){
     <div class="col-md-12 ">
     <h1 class="display-3"> No se han creado Roles aún</h1>';
  
-    echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>
+    echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear' style='style='font-size:14px; margin-bottom:30px' class='btn btn-success'> Agregar</button></a>
   
     ";
     if(isset($_GET["crear"])){
@@ -83,7 +83,7 @@ if($count[0]==0){
                 echo '</tr>';
 
                 echo "</table>";
-        echo "<input class='btn btn-primary'  type='submit' style='font-size:14px' name='agregar-ult' value='Crear'>  </input>";
+        echo "<input class='btn btn-primary'  type='submit' style='font-size:14px;' name='agregar-ult' value='Crear'>  </input>";
         echo "<input  class='btn btn-danger'type='submit' style='font-size:14px' name='cancelar' value='Cancelar'></input>";
 
         echo "</form></div>";
@@ -133,7 +133,7 @@ $("#myModal").modal();
 <div class="row" style="margin-top:5%">
 <?php include "barraBusquedaRoles/barra.php"; ?>
                 <div class="col-md-12 ">
-                <h1 style="color:black; text-align:center; margin-bottom:0%; background-color:white" >ROLES</h1>
+                <h1 style="color:black; text-align:center; margin-bottom:0%; background-color:white; margin-top:50px" >ROLES</h1>
                     
                     
                     <?php
@@ -455,14 +455,14 @@ $("#myModal").modal();
        
 <?php
 
-       echo '<div class="container" style="margin-top:60px; margin:auto 150px">
+       echo '<div class="container" style="margin-top:60px; ">
 
 
 
        <div class="row">
            
                        <div class="col-md-12 ">';
-        echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>  ";
+        echo "<a href='?c=crudRoles&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px; margin-bottom:30px' class='btn btn-success'> Agregar</button></a>  ";
        
        echo ' <div class="table-responsive-sm">
        <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%;">';
@@ -483,8 +483,13 @@ $("#myModal").modal();
         
         echo "</tr>";
         ?>
-<form style='font-size:14px' action="?c=borrarRoles&pag=<?php echo $_GET["page"]?>" method="post" id="miFormulario"> 
-<input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="float:right;   margin-top: -43px; font-size:14px " >
+<form style='font-size:14px' action="?c=borrarRoles&pag=<?php echo $_GET["page"]?>" method="post" id="miFormulario" name="form"> 
+<input type='submit' name='borrar'  value='Borrar en lote' class='btn btn-danger' style="    float: right;
+    font-size: 14px;
+    position: absolute;
+    right: 16px;
+    top: 0px; " >
+
 <?php
         
         foreach($result[0] as $indice=>$dato){
@@ -531,6 +536,7 @@ $("#myModal").modal();
            </table>
 
            <script>
+
                 $(document).ready(function(){
                     $('.dltBtn').click(function(e){
                         e.preventDefault();
