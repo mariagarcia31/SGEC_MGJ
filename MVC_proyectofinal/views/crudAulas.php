@@ -90,7 +90,7 @@ if(isset($_GET["crear"])){
         <label for="">Imágen: </label>';
     echo "<input type='file' name='files'/></div>";
             
-    echo "<input class='btn btn-success'  type='submit'  name='agregar-ult' value='Crear' style='font-size:14px'>  </input>";
+    echo "<input class='btn btn-success'  type='submit'  name='agregar-ult' value='Crear' style='font-size:14px;'>  </input>";
     echo '<a href="?c=crudAulas&page='.$_GET['page'].'"><button style="font-size:14px" type="button" class="btn btn-danger">Cancelar</button></a>';
 
     echo "</form>";
@@ -209,7 +209,7 @@ if($count[0]==0){
     <div class="col-md-12 ">
     <h1 class="display-3"> No se han creado aulas aún</h1>';
  
-    echo "<a style='font-size:14px' href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>
+    echo "<a style='font-size:14px' href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px; margin-bottom:30px' class='btn btn-success'> Agregar</button></a>
   
     ";
     
@@ -250,7 +250,7 @@ $_SESSION['cuantas']=count($result[0]);
 <?php include "barraBusquedaAulas/barra.php"; ?>
                 <div class="col-md-12 ">
                     
-                <h1 class="titulo" style="color:black; text-align:center; margin-bottom:0%; background-color:white" >AULAS</h1>
+                <h1 class="titulo" style="color:black; text-align:center; margin-bottom:0%; background-color:white; margin-top:50px" >AULAS</h1>
                     
                     
                     <?php
@@ -278,7 +278,7 @@ $_SESSION['cuantas']=count($result[0]);
 
 
                        <div class="col-md-12 ">';
-        echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px' class='btn btn-success'> Agregar</button></a>  ";
+        echo "<a href='?c=crudAulas&page=".$_GET['page']."&crear=1'><button name='crear' style='font-size:14px;margin-bottom:30px !important;' class='btn btn-success'> Agregar</button></a>  ";
        
        echo '<div class="table-responsive-sm">
        <table class="table table-striped bg-white table-hover" style="text-align: center; margin-top:1%">';
@@ -302,7 +302,11 @@ $_SESSION['cuantas']=count($result[0]);
         ?>
         
         <form style='font-size:14px' action="?c=borrarAulas&pag=<?php echo $_GET["page"]?>" method="post"> 
-            <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="float:right;   margin-top: -43px; font-size:14px " >
+            <input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="    float: right;
+    font-size: 14px;
+    position: absolute;
+    right: 16px;
+    top: 0px; " >
 
         
         <?php
