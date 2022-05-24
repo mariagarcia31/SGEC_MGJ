@@ -62,6 +62,11 @@ include "menu.php"?>
         }
         .resultadosBusqueda{
             width: 60% !important;
+            position: absolute;
+            z-index: 90;
+            margin-left: 30px;
+            top: 39px;
+
         }
 
         #search{

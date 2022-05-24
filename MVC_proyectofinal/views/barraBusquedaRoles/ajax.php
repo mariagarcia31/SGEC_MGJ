@@ -67,7 +67,7 @@ if (isset($_POST['search'])) {
    <!-- Assigning searched result in "Search box" in "search.php" file. -->
    <li class="list-group-item busqueda" style="font-size: 15px;"  >
        <?php echo $Result['nombre']; ?>
-       <a class="btn btn-danger float-right ml-2"  href="?c=borrarRoles&id=<?php echo $Result["id"] ?>&pag=<?php echo $page ?>"><i class="bi bi-trash"></i></a>
+       <a class="dltBtn btn btn-danger float-right ml-2"   data-id="<?php echo $Result["id"]; ?>" data-page="<?php echo $page; ?>" href="javascript:void(0)"><i class="bi bi-trash"></i></a>
        <button  title="Modificar" class="btn btn-primary float-right" name="modificar" value="<?php echo $Result["id"] ?>"> <i class="bi bi-pencil-square"></i></button>
 
        </li></a>
@@ -82,3 +82,29 @@ if (isset($_POST['search'])) {
 ?>
 
 </ul> 
+  <script>
+
+                $(document).ready(function(){
+                    $('.dltBtn').click(function(e){
+                        e.preventDefault();
+                        var id = $(this).attr('data-id');
+                        var page = $(this).attr('data-page');
+                        Swal.fire({
+                            title: '¿Desea eliminar este registro?',
+                            text: "Esta acción es irreversible",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#dc3545',
+                            cancelButtonColor: 'gray',
+                            confirmButtonText: 'Eliminar',
+                            cancelButtonText: 'Cancelar'
+
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "?c=borrarRoles&id="+id+"&pag="+page;
+ 
+                                }
+                        })
+                    });
+                });
+            </script>

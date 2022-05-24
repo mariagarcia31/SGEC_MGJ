@@ -536,7 +536,7 @@ $("#myModal").modal();
            </table>
 
            <script>
-
+ 
                 $(document).ready(function(){
                     $('.dltBtn').click(function(e){
                         e.preventDefault();
