@@ -525,7 +525,10 @@ echo "<br>";
                     
                     <li class="page-item" style="<?php echo $i==$total_pages ? 'display:none' : '' ?>">
                     <a class="page-link" href="inicio.php?c=crudUsuarios&page=<?php echo $_GET['page']+1?>"><?php echo $i+1 ?></a>
-
+                    
+                    <li class="page-item" style="<?php echo $i==$total_pages||$i==($total_pages-1) ? 'display:none' : '' ?>"><a class="page-link">...</a></li>
+                    <li class="page-item" style="<?php echo $i==$total_pages||$i==($total_pages-1) ? 'display:none' : '' ?>">
+                    <a class="page-link" href="inicio.php?c=crudUsuarios&page=<?php echo $total_pages?>"><?php echo $total_pages ?></a>
 
 				<?php }
               

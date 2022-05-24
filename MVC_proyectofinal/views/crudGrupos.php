@@ -173,6 +173,30 @@ $("#myModal").modal();
                     <label for="">Departamento</label>';
                     echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
                     echo '</div>';
+
+
+
+                    echo '<div class="form-group">
+                    <label for="">Departamento </label>';
+        
+                        $departamentosDisponibles=$this->crud->departamentosDisponibles();
+        
+                        echo '<select name="dato[]" class="form-control" required>';
+        
+                        foreach($departamentosDisponibles as $nombresGrupos){
+                            foreach($nombresGrupos as $nombreGrupo){
+        
+                                if($nombreGrupo==$nombre_columna[$i]){
+        
+                                    echo '<option value="'.$nombreGrupo.'" selected>'.$nombreGrupo.'</option>';
+                                }
+                                else{
+                                    echo '<option value="'.$nombreGrupo.'">'.$nombreGrupo.'</option>';
+                                }
+                                
+                            }
+                        }
+                        echo '</select></div>';
                   
                     echo '<div class="modal-footer">';
                     echo "<input class='btn btn-primary' type='submit' style='font-size:14px' name='agregar-ult' value='Crear'></input> ";
@@ -227,9 +251,26 @@ $("#myModal").modal();
 
                                 elseif($i==2){
                                     echo '<div class="form-group">
-                                    <label for="">Departamento</label>';
-                                    echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
-                                    echo '</div>';
+                                    <label for="">Departamento </label>';
+                        
+                                        $departamentosDisponibles=$this->crud->departamentosDisponibles();
+                        
+                                        echo '<select name="dato[]" class="form-control" required>';
+                        
+                                        foreach($departamentosDisponibles as $nombresGrupos){
+                                            foreach($nombresGrupos as $nombreGrupo){
+                        
+                                                if($nombreGrupo==$nombre_columna[$i]){
+                        
+                                                    echo '<option value="'.$nombreGrupo.'" selected>'.$nombreGrupo.'</option>';
+                                                }
+                                                else{
+                                                    echo '<option value="'.$nombreGrupo.'">'.$nombreGrupo.'</option>';
+                                                }
+                                                
+                                            }
+                                        }
+                                        echo '</select></div>';
                                     }
 
                                 

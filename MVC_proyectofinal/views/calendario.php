@@ -343,7 +343,13 @@ if (isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSI
 
         $clave = array_search($hora, $booking[0]);
 
-        echo "<button class='btn btn-danger reservado' disabled>$hora<br>".$booking[1][$clave]." ".$booking[2][$clave]."<br>"."(".$booking[3][$clave].")"."</button> ";
+        echo "<button style='    width: 120px;
+        overflow: scroll;
+        white-space: normal;
+        max-width: auto;
+        /* background-color: orange; */
+        padding: 5px;
+        overflow-y: unset;' class='btn btn-danger reservado' disabled>$hora<br>".$booking[1][$clave]." ".$booking[2][$clave]."<br>"."(".$booking[3][$clave].")"."</button> ";
         ?>
         
         <?php }else{ ?>

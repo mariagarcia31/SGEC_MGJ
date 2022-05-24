@@ -459,7 +459,7 @@ class Crud extends Conexion{
         $year = $dt->format('o');
         $week = $dt->format('W');
         $horarios=array('08:30AM - 09:30AM', '09:30AM - 10:30AM', '10:30AM - 11:30AM', '11:30AM - 12:30AM', '12:30AM - 13:30PM', '13:30PM - 14:30PM');              
-        $daysOfWeek = array('Lunes','Martes','Miércoles','Jueves','Viernes','Sabado','Domingo');
+        $daysOfWeek = array('Lunes','Martes','Miércoles','Jueves','Viernes');
         $dateTime=$dt;
         $dateTime->setISODate($year,$week);
         $primerDiaSemana=$dateTime->format('Y-m-d');
@@ -476,7 +476,9 @@ class Crud extends Conexion{
         $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."&week=".($week-1)."&year=".$year."'><i class='bi bi-chevron-left flechaCambiarSemana'></i></a>";   
         $calendar .= "<h3 class='nombreSemana'>Semana del $primerDiaSemana</h3>";
         $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."&week=".($week+1)."&year=".$year."'><i class='bi bi-chevron-right flechaCambiarSemana'></i></a><br>";
-        $calendar.= "<a href='?c=calendario&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week botonCambiarVista'> Vista mensual</i></button></a><br><br>";
+        $calendar.= "<div style='    display: flex;
+        justify-content: center;'><a style='margin-right:10px; margin-bottom:10px' href='?c=calendario&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week botonCambiarVista'> Vista mensual</i></button></a><br><br>";
+        $calendar.= "<a href='?c=calendarioDiario' ><button class='btn btn-secondary'><i class='bi bi-calendar-week botonCambiarVista'> Vista diaria</i></button></a><br><br></div>";
 
 
         $calendar .= "<tr>";
@@ -519,10 +521,13 @@ class Crud extends Conexion{
                 $booking=$this->seteaDate2($_GET['id'],$fecha);
 
                 if($festivo){
-                    $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>Festivo<br>$festivo</h5></td> ";
+                    $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>$festivo</h5></td> ";
                 }
+                else if($finde==1){
+                    $calendar.="";
 
-                else if($fecha<$hoy||$fecha>$maximoDiasSiguientes||$finde==1){
+                }
+                else if($fecha<$hoy||$fecha>$maximoDiasSiguientes){
                     $calendar.="<td><h4 class='dia' style='color:#D8D8D8'></h4></td> ";
                 }
 
@@ -621,7 +626,7 @@ class Crud extends Conexion{
         // Creamos las cabeceras
         foreach($aulas as $nombre) {
             
-            $calendar .= "<th class='diaSemana'>$nombre</th>";
+            $calendar .= "<th class='diaSemana'><a class='enlace-diario' style='text-decoration:none;color:white' href='inicio.php?c=calendarioSemanal&id=$nombre'>$nombre</a></th><style>.enlace-diario:hover{font-size:16.5px}</style>";
             
         } 
 
@@ -653,7 +658,13 @@ class Crud extends Conexion{
 
                     $clave = array_search($hora, $booking[0]);
     
-                    $calendar.="<td><a class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>".$booking[1][$clave]." ".$booking[2][$clave]."<br>"."(".$booking[3][$clave].")"."</p></a></td> ";
+                    $calendar.="<td><a style='    width: 120px;
+                    overflow: scroll;
+                    white-space: normal;
+                    max-width: auto;
+                    /* background-color: orange; */
+                    padding: 5px;
+                    overflow-y: unset;' class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>".$booking[1][$clave]." ".$booking[2][$clave]."<br>"."(".$booking[3][$clave].")"."</p></a></td> ";
                     
                  }
 
@@ -716,7 +727,19 @@ class Crud extends Conexion{
                     $resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
                     $nombres[]= $resultado_comprobar['nombre'];
                     $apellidos[]= $resultado_comprobar['primerApellido'];
-                    $puestos[]= $resultado_comprobar['puesto'];
+                    $puesto= $resultado_comprobar['puesto'];
+
+                    $comprobar1="SELECT departamento FROM `departamentos` WHERE puesto = '$puesto'";
+                    $consulta_comprobar1=$this->conexion->prepare($comprobar1);
+                    $consulta_comprobar1->execute();
+                    $resultado_comprobar1=$consulta_comprobar1->fetch(PDO::FETCH_ASSOC);
+                    if($resultado_comprobar1==null){
+                        $puestos[]= "Agregar departamento";
+
+                    }else{
+                        $puestos[]= $resultado_comprobar1['departamento'];
+
+                    }
 
                    
                }      
@@ -1146,6 +1169,19 @@ class Crud extends Conexion{
     function gruposDisponibles(){
 
         $comprobar="SELECT nombre FROM `grupos` GROUP BY nombre";
+        $consulta_comprobar=$this->conexion->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+       
+        return $resultado_comprobar;
+
+    }
+
+
+    
+    function departamentosDisponibles(){
+
+        $comprobar="SELECT departamento FROM `departamentos` GROUP BY departamento";
         $consulta_comprobar=$this->conexion->prepare($comprobar);
         $consulta_comprobar->execute();
         $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);

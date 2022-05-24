@@ -167,7 +167,7 @@ $("#myModal").modal();
                     echo '</div>';
                                     
                                                 
-                                          
+                           
                     echo '<div class="form-group">
                     <label for="">Fecha inicio</label>';
                     echo "<input class='form-control' id='date1' type='date'  name='dato[]' value='' required ></input>";
