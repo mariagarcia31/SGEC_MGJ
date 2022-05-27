@@ -1915,7 +1915,6 @@ return false;}
                 $usuario1=utf8_encode(trim($usuario,'"'));
                 $puesto1=utf8_encode(trim($puesto,'"'));
                 $puestoDef=explode("-", $puesto1);
-                $correo=$usuario1."@ciudadescolarfp.es";
 
                 
 
@@ -1925,10 +1924,11 @@ return false;}
                    
                 }else{
 
-                    $qry = "SELECT * from usuarios where correo='".$correo."' ; ";
+                    $qry = "SELECT * from usuarios where usuario='".$usuario1."' ; ";
                     $consulta= $this->conexion->prepare($qry);
                     $consulta->execute();
                     $resultado_nombres=$consulta->fetchAll();
+                    
                     if($resultado_nombres==null){
                        
                         $qry = "SELECT * from puestos where nombre='".$puestoDef[0]."'";
