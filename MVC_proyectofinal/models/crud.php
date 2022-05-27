@@ -928,12 +928,11 @@ return false;}
         elseif($opc==2){
 
                    
-            $sql="SELECT usuarios.id, usuarios.nombre as 'Nombre', usuarios.primerApellido as'1º apellido', usuarios.segundoApellido as '2º apellido', usuarios.usuario, usuarios.correo, departamentos.departamento, usuarios.confirmacion, usuarios.rol, roles.nombre as 'Rol'
+            $sql="SELECT usuarios.id, usuarios.nombre as 'Nombre', usuarios.primerApellido as'1º apellido', usuarios.segundoApellido as '2º apellido', usuarios.usuario, usuarios.correo, usuarios.departamento, usuarios.confirmacion, usuarios.rol, roles.nombre as 'Rol'
             FROM usuarios 
             INNER JOIN roles
             on usuarios.rol=roles.id
-            INNER JOIN departamentos
-            on usuarios.puesto=departamentos.puesto
+
             ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
