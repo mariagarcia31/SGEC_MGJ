@@ -95,6 +95,23 @@ $("#myModal").modal();
                                                    }
                                                }
                                                
+
+                                               $departamentos=$this->crud->obtieneDepartamentos();
+                                              
+                                               foreach($departamentos as $depa=>$depar){
+                                                 
+                                                   foreach($depar as $depar2){
+                                             
+                                                       if(is_numeric($depar2)){
+                                                        $departamentosId[]=$depar2;
+
+                                                       }else{
+                                                        $departamentosNombre[]=$depar["nombre"];
+                                                       }
+                                                       
+                                                   }
+                                               }
+                                               
                                            
                                          
                                             
@@ -144,7 +161,7 @@ $("#myModal").modal();
                                   
                                         echo '<div class="form-group">
                                         <label for="">Correo</label>';
-                                        echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
+                                        echo "<input class='form-control' type='text'  name='dato[]' value='' ></input>";
                                         echo '</div>';
                                         echo '<div class="form-group">
                                         <label for="">Primer Apellido</label>';
@@ -159,9 +176,19 @@ $("#myModal").modal();
                                         echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
                                         echo '</div>';
                                         echo '<div class="form-group">
-                                        <label for="">Puesto</label>';
-                                        echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
-                                        echo '</div>';
+                                        <label for="">Departamento</label><select name="dato[]" class="form-control" required>';
+                                        for($e=0;$e<count($departamentosId);$e++){
+                                             if($departamentosId[$e]==$nombre_columna[$i]){
+                                                 echo "<option selected value='".$departamentosId[$e]."'>".$departamentosNombre[$e]."</option>";
+
+                                             }else{
+                                                 echo "<option value='".$departamentosId[$e]."'>".$departamentosNombre[$e]."</option>";
+
+                                             }
+
+                                        }
+
+                                        echo "</select></div>";
                                            echo '<div class="form-group">
                                             <label for="">Contraseña</label>';
                                             echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
@@ -264,7 +291,7 @@ $("#myModal").modal();
                                    elseif($i==2){
                                     echo '<div class="form-group">
                                     <label for="">Correo</label>';
-                                    echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
+                                    echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' ></input>";
                                     echo '</div>';
                                     }
                                     elseif($i==3){
@@ -286,9 +313,19 @@ $("#myModal").modal();
                                     }
                                     elseif($i==6){
                                         echo '<div class="form-group">
-                                        <label for="">Puesto</label>';
-                                        echo "<input class='form-control' type='text'  name='dato[]' value='".$nombre_columna[$i]."' required></input>";
-                                        echo '</div>';
+                                        <label for="">Departamento</label><select name="dato[]" class="form-control" required>';
+                                        for($e=0;$e<count($departamentosNombre);$e++){
+                                             if($departamentosNombre[$e]==$nombre_columna[$i]){
+                                                 echo "<option selected value='".$departamentosNombre[$e]."'>".$departamentosNombre[$e]."</option>";
+
+                                             }else{
+                                                 echo "<option value='".$departamentosNombre[$e]."'>".$departamentosNombre[$e]."</option>";
+
+                                             }
+
+                                        }
+
+                                        echo "</select></div>";
                                         }
                                     elseif($i==7){
                                         echo '<div class="form-group">';

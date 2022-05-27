@@ -54,7 +54,6 @@ if($count[0]==0){
         align-content: center;'><form style='font-size:14px' action='?c=crearGrupos&pag=".$_GET['page']."' method='post' > <table class='table table-striped bg-white ' style='margin-top:2%'>";
         
                 echo '<tr>';
-                echo '<th> id</th>';
                 echo '<th> nombre</th>';
                 echo '<th> departamento</th>';
                 ;
@@ -62,7 +61,6 @@ if($count[0]==0){
 
                 echo '</tr>';
                 echo '<tr>';
-                echo "<td><input type='number' name='dato[]' style='width:210px'></input></td>";
                 echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
                 echo "<td><input type='text' name='dato[]' style='width:220px'></input></td>";
                
@@ -106,7 +104,21 @@ $offset=($page-1) * $iteams_pagina;
 $result=$this->crud->crudGrupos(2,$iteams_pagina,$offset);
 
 $_SESSION['cuantas']=count($result[0]);
+$departamentos=$this->crud->obtieneDepartamentos();
+                                              
+                                               foreach($departamentos as $depa=>$depar){
+                                                 
+                                                   foreach($depar as $depar2){
+                                             
+                                                       if(is_numeric($depar2)){
+                                                        $departamentosId[]=$depar2;
 
+                                                       }else{
+                                                        $departamentosNombre[]=$depar["nombre"];
+                                                       }
+                                                       
+                                                   }
+                                               }
 
 
 ?>
@@ -169,34 +181,23 @@ $("#myModal").modal();
                                     
                                                 
                                           
-                    echo '<div class="form-group">
-                    <label for="">Departamento</label>';
-                    echo "<input class='form-control' type='text'  name='dato[]' value='' required></input>";
-                    echo '</div>';
-
+            
 
 
                     echo '<div class="form-group">
-                    <label for="">Departamento </label>';
-        
-                        $departamentosDisponibles=$this->crud->departamentosDisponibles();
-        
-                        echo '<select name="dato[]" class="form-control" required>';
-        
-                        foreach($departamentosDisponibles as $nombresGrupos){
-                            foreach($nombresGrupos as $nombreGrupo){
-        
-                                if($nombreGrupo==$nombre_columna[$i]){
-        
-                                    echo '<option value="'.$nombreGrupo.'" selected>'.$nombreGrupo.'</option>';
-                                }
-                                else{
-                                    echo '<option value="'.$nombreGrupo.'">'.$nombreGrupo.'</option>';
-                                }
-                                
-                            }
-                        }
-                        echo '</select></div>';
+                                        <label for="">Departamento</label><select name="dato[]" class="form-control" required>';
+                                        for($e=0;$e<count($departamentosNombre);$e++){
+                                             if($departamentosNombre[$e]==$nombre_columna[$i]){
+                                                 echo "<option selected value='".$departamentosNombre[$e]."'>".$departamentosNombre[$e]."</option>";
+
+                                             }else{
+                                                 echo "<option value='".$departamentosNombre[$e]."'>".$departamentosNombre[$e]."</option>";
+
+                                             }
+
+                                        }
+
+                                        echo "</select></div>";
                   
                     echo '<div class="modal-footer">';
                     echo "<input class='btn btn-primary' type='submit' style='font-size:14px' name='agregar-ult' value='Crear'></input> ";
@@ -251,26 +252,19 @@ $("#myModal").modal();
 
                                 elseif($i==2){
                                     echo '<div class="form-group">
-                                    <label for="">Departamento </label>';
-                        
-                                        $departamentosDisponibles=$this->crud->departamentosDisponibles();
-                        
-                                        echo '<select name="dato[]" class="form-control" required>';
-                        
-                                        foreach($departamentosDisponibles as $nombresGrupos){
-                                            foreach($nombresGrupos as $nombreGrupo){
-                        
-                                                if($nombreGrupo==$nombre_columna[$i]){
-                        
-                                                    echo '<option value="'.$nombreGrupo.'" selected>'.$nombreGrupo.'</option>';
-                                                }
-                                                else{
-                                                    echo '<option value="'.$nombreGrupo.'">'.$nombreGrupo.'</option>';
-                                                }
-                                                
-                                            }
-                                        }
-                                        echo '</select></div>';
+                                    <label for="">Departamento</label><select name="dato[]" class="form-control" required>';
+                                    for($e=0;$e<count($departamentosNombre);$e++){
+                                         if($departamentosNombre[$e]==$nombre_columna[$i]){
+                                             echo "<option selected value='".$departamentosNombre[$e]."'>".$departamentosNombre[$e]."</option>";
+
+                                         }else{
+                                             echo "<option value='".$departamentosNombre[$e]."'>".$departamentosNombre[$e]."</option>";
+
+                                         }
+
+                                    }
+
+                                    echo "</select></div>";
                                     }
 
                                 
@@ -379,7 +373,7 @@ $("#myModal").modal();
         </div>
         </div>
         
-        ?>
+        
    <script>
                 $(document).ready(function(){
                     $('.dltBtn').click(function(e){
