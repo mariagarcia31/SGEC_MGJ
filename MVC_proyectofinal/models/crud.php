@@ -300,6 +300,25 @@ class Crud extends Conexion{
       
     }
 
+
+    function obtieneDepartamentos(){
+        try{
+            $sql='SELECT id,nombre FROM departamentos GROUP BY nombre';
+
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $consult=$consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $consult;
+
+        }catch(PDOException){
+           
+            return [];
+        }
+      
+      
+    }
+
+
     function esFinde($date) {
 
         return (date('N', strtotime($date)) >= 6);
@@ -1047,7 +1066,9 @@ return false;}
         elseif($opc==2){
 
                    
-            $sql="SELECT * FROM grupos ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+            $sql="SELECT grupos.id, grupos.nombre as 'Grupo', grupos.departamento as 'Departamento' FROM grupos 
+         
+            ORDER BY grupos.id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->execute();
