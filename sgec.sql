@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2022 a las 13:28:18
+-- Tiempo de generación: 27-05-2022 a las 14:52:56
 -- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.4
+-- Versión de PHP: 8.1.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -14,47 +14,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sgec`
 --
-
-DELIMITER $$
---
--- Procedimientos
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cambiarContra` (IN `_correo` VARCHAR(150), IN `_contra` VARCHAR(250))   BEGIN
-	declare _id int;
-	select id into _id from usuarios where (correo = _correo or usuario = _correo);
-    
-	update usuarios
-		set contra=_contra, correo=_correo ,confirmacion=1
-		where id=_id;
-END$$
-
---
--- Funciones
---
-CREATE DEFINER=`root`@`localhost` FUNCTION `ValidarUsuario` (`_correo` VARCHAR(150), `_contra` VARCHAR(150)) RETURNS INT(11)  BEGIN
-	DECLARE aux int default null;
-
-	SELECT count(*) INTO aux FROM usuarios WHERE (correo = _correo or usuario = _correo) and contra=_contra;
-    
-IF aux = 0 THEN
-        return 0; -- NO EXISTE ESE USUARIO
-END IF;
-return 1; -- SÍ EXISTE ESE USUARIO
-
- END$$
-
-CREATE DEFINER=`root`@`localhost` FUNCTION `verificarContra` (`_correo` VARCHAR(50)) RETURNS INT(11)  BEGIN
-	DECLARE aux int default null;
-		select confirmacion into aux from usuarios where (correo = _correo or usuario = _correo);
-        
-IF aux = 0 THEN
-         return 0; -- No confirmado
-END IF;
-return 1; -- Si confirmado
-
- END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -110,7 +69,7 @@ INSERT INTO `configuracion` (`id`, `nombre`, `valor`) VALUES
 
 CREATE TABLE `departamentos` (
   `id` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(250) UNIQUE NOT NULL 
+  `nombre` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -118,41 +77,17 @@ CREATE TABLE `departamentos` (
 --
 
 INSERT INTO `departamentos` (`id`, `nombre`) VALUES
+(9, 'Dpto. Actividades Extraescolares'),
+(6, 'Dpto. Actividades Físicas'),
 (1, 'Dpto. Administración y Gestión'),
 (2, 'Dpto. Agrario'),
+(8, 'Dpto. Comercio y Marketing'),
+(5, 'Dpto. Fol'),
 (3, 'Dpto. Informatica'),
 (4, 'Dpto. Inglés'),
-(5, 'Dpto. Fol'),
-(6, 'Dpto. Actividades Físicas'),
-(7, 'Dpto. Servicios Culturales y a la Comunidad'),
-(8, 'Dpto. Comercio y Marketing'),
-(9, 'Dpto. Actividades Extraescolares');
-
+(7, 'Dpto. Servicios Culturales y a la Comunidad');
 
 -- --------------------------------------------------------
-
-
-CREATE TABLE `puestos` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `idDepartamento` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(250) UNIQUE NOT NULL 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-INSERT INTO `puestos` (`id`, `nombre`, `idDepartamento`) VALUES
-(1,'Intervención Sociocomunitaria', 5),
-(2, 'Organización y Gestión Comercial', 1),
-(3, 'Procesos de Producción Agraria', 2),
-(4, 'Informática', 3),
-(5, 'Inglés', 4),
-(6, 'Educación Física', 6),
-(7, 'Procesos de Gestión Administrativa', 1),
-(8, 'Procedimientos Sanitarios y Asistenciales', 7),
-(9, 'Sistemas y Aplicaciones Informáticas', 3),
-(10, 'Formación y Orientación Laboral', 5),
-(11, 'Servicios a la Comunidad', 7),
-(12, 'Procesos comerciales', 8),
-(13, 'Música', 9);
 
 --
 -- Estructura de tabla para la tabla `festivos`
@@ -236,6 +171,37 @@ CREATE TABLE `ip` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `puestos`
+--
+
+CREATE TABLE `puestos` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `idDepartamento` int(10) UNSIGNED NOT NULL,
+  `nombre` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `puestos`
+--
+
+INSERT INTO `puestos` (`id`, `idDepartamento`, `nombre`) VALUES
+(1, 5, 'Intervención Sociocomunitaria'),
+(2, 1, 'Organización y Gestión Comercial'),
+(3, 2, 'Procesos de Producción Agraria'),
+(4, 3, 'Informática'),
+(5, 4, 'Inglés'),
+(6, 6, 'Educación Física'),
+(7, 1, 'Procesos de Gestión Administrativa'),
+(8, 7, 'Procedimientos Sanitarios y Asistenciales'),
+(9, 3, 'Sistemas y Aplicaciones Informáticas'),
+(10, 5, 'Formación y Orientación Laboral'),
+(11, 7, 'Servicios a la Comunidad'),
+(12, 8, 'Procesos comerciales'),
+(13, 9, 'Música');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `reservas`
 --
 
@@ -297,11 +263,11 @@ INSERT INTO `roles` (`id`, `nombre`, `crud_roles`, `crud_usuarios`, `crud_aulas`
 CREATE TABLE `usuarios` (
   `id` int(11) UNSIGNED NOT NULL,
   `nombre` varchar(150) NOT NULL,
-  `correo` varchar(150) NOT NULL,
+  `correo` varchar(150) DEFAULT NULL,
   `primerApellido` varchar(50) NOT NULL,
   `segundoApellido` varchar(50) NOT NULL,
   `usuario` varchar(50) NOT NULL,
-  `puesto` varchar(250) NOT NULL,
+  `departamento` varchar(250) NOT NULL,
   `contra` varchar(150) NOT NULL,
   `confirmacion` tinyint(1) NOT NULL,
   `rol` int(6) UNSIGNED NOT NULL
@@ -332,7 +298,13 @@ ALTER TABLE `configuracion`
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
+-- Indices de la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
+--
 -- Indices de la tabla `festivos`
 --
 ALTER TABLE `festivos`
@@ -350,6 +322,14 @@ ALTER TABLE `grupos`
 --
 ALTER TABLE `historial`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `puestos`
+--
+ALTER TABLE `puestos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`),
+  ADD KEY `fk_id_departamento` (`idDepartamento`);
 
 --
 -- Indices de la tabla `reservas`
@@ -376,21 +356,18 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
-ALTER TABLE `departamentos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
-
-  --
-ALTER TABLE `puestos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
-
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
 --
 ALTER TABLE `configuracion`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `festivos`
@@ -411,6 +388,12 @@ ALTER TABLE `historial`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
 
 --
+-- AUTO_INCREMENT de la tabla `puestos`
+--
+ALTER TABLE `puestos`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
@@ -429,15 +412,14 @@ ALTER TABLE `usuarios`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
-ALTER TABLE `departamentos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
-
-ALTER TABLE `puestos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `puestos`
+--
+ALTER TABLE `puestos`
+  ADD CONSTRAINT `fk_id_departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `reservas`
@@ -451,23 +433,4 @@ ALTER TABLE `reservas`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `fk_id_rol` FOREIGN KEY (`rol`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE `puestos`
-  ADD CONSTRAINT `fk_id_departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---DELIMITER $$
---
--- Eventos
---
--- CREATE DEFINER=`root`@`localhost` EVENT `almacenamiento` ON SCHEDULE EVERY 1 DAY STARTS '2022-05-05 16:24:53' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
--- INSERT INTO `historial` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`,`motivo`, `hora`, `fecha_creacion`)
---  SELECT `id`, `idAula`, `idUsuario`, `fecha`, `grupo`,`motivo`, `hora`, `fecha_creacion`
---  FROM `reservas` 
---  WHERE `fecha` <  CURDATE();
-  
---  DELETE FROM `reservas` WHERE `fecha` < CURDATE();
-  
---  END$$
-
---DELIMITER ;
 COMMIT;

@@ -1938,7 +1938,7 @@ return false;}
         
                         if($resultado_puestos==null){
                         
-                            $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, departamento,contra, confirmacion, rol) values('$nombre1','$correo','$primerApellido1','$segundoApellido1','$usuario1','Sin departamento asignado','$usuario1','0','2'); ";
+                            $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, departamento,contra, confirmacion, rol) values('$nombre1',null,'$primerApellido1','$segundoApellido1','$usuario1','Sin departamento asignado','$usuario1','0','2'); ";
                         $consulta=$this->conexion->prepare($qry);
                         $consulta->execute();
                             
@@ -1955,7 +1955,7 @@ return false;}
                         $resultado_departamentos=$consulta->fetchAll();
                         $nombreDpto = $resultado_departamentos[0]['nombre'];
 
-                        $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, departamento,contra, confirmacion, rol) values('$nombre1','$correo','$primerApellido1','$segundoApellido1','$usuario1','$nombreDpto','$usuario1','0','2'); ";
+                        $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, departamento,contra, confirmacion, rol) values('$nombre1',null,'$primerApellido1','$segundoApellido1','$usuario1','$nombreDpto','$usuario1','0','2'); ";
                         $consulta=$this->conexion->prepare($qry);
                         $consulta->execute();
 
