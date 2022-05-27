@@ -103,8 +103,9 @@ class Control{
     function crudFestivos(){
         include_once ("views/crudFestivos.php");
     }
-    function crudDepartamentos(){
-        include_once ("views/crudDepartamentos.php");
+   
+    function crudDias(){
+        include_once ("views/crudDias.php");
     }
     function estadisticas(){
         include_once ("views/estadisticas.php");
@@ -1506,37 +1507,28 @@ function crearFestivos(){
 
 
 
-
-
-
-
-
-
-
-
-
-/******************************   CONTROLADOR DEPARTAMENTOS            ********************************/
-function borrarDepartamentos(){
+/******************************   CONTROLADOR DIAS NO DISPONIBLES           ********************************/
+function borrarDias(){
 
         
     if(isset($_POST["borrar"])){
-        $result=$this->crud->borrarDepartamentos($_POST["eliminar"]);
+        $result=$this->crud->borrarDias($_POST["eliminar"]);
         if($result){
             $_SESSION["exito"]="
         
 
         <script>    Swal.fire({
             icon: 'success',
-            title: 'Departamento eliminado con éxito',
+            title: 'Días no disponibles eliminados con éxito',
             showConfirmButton: false,
             timer: 1500
           });</script>";
             $cuantos=count($_POST["eliminar"]);
             if($_SESSION['cuantas']==$cuantos){
-                header("location:?c=crudDepartamentos&page=".($_GET["pag"]-1)."");
+                header("location:?c=crudDias&page=".($_GET["pag"]-1)."");
             }
             else{
-            header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+            header("location:?c=crudDias&page=".$_GET["pag"]."");
             }
         }else{
             $_SESSION["error2"]="
@@ -1545,33 +1537,33 @@ function borrarDepartamentos(){
             <script>     Swal.fire({
                 icon: 'warning',
                 title: 'Oops...',
-                text: 'No se ha seleccionado ningún departamento para eliminar.',
+                text: 'No se ha seleccionado ningún día para eliminar.',
                 footer: ''
               })</script>";
-            header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+            header("location:?c=crudDias&page=".$_GET["pag"]."");
         }
     
     }
     elseif(isset($_POST["modificar"])){
         $_SESSION["modificar"]=$_POST["modificar"];
-        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+        header("location:?c=crudDias&page=".$_GET["pag"]."");
 
     }else{
-        $result=$this->crud->borrarUnoaUnoDepartamentos($_GET["id"]);
+        $result=$this->crud->borrarUnoaUnoDias($_GET["id"]);
         $_SESSION["exito"]="
         
 
         <script>    Swal.fire({
             icon: 'success',
-            title: 'Departamento eliminado con éxito',
+            title: 'Días no disponibles eliminado con éxito',
             showConfirmButton: false,
             timer: 1500
           });</script>";
         if($_SESSION['cuantas']==1){
-            header("location:?c=crudDepartamentos&page=".$_GET["pag"] - 1 ."");
+            header("location:?c=crudDias&page=".$_GET["pag"] - 1 ."");
         }
         else{
-        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+        header("location:?c=crudDias&page=".$_GET["pag"]."");
         }
         
 
@@ -1579,37 +1571,37 @@ function borrarDepartamentos(){
   
 }
 
-function modificarDepartamentos(){
+function modificarDias(){
     //echo "<div class='alert  '>Ya existe una reserva con este día, hora y Usuarioe</div>";
     if(isset($_POST['cancelar'])){
         unset($_SESSION["modificar"]);
 
-        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+        header("location:?c=crudDias&page=".$_GET["pag"]."");
     }
     else{
     
-    $resultado=$this->crud->actualizarDepartamentos($_POST["dato"]); 
+    $resultado=$this->crud->actualizarDias($_POST["dato"]); 
     $_SESSION["exito"]="
         
 
     <script>    Swal.fire({
         icon: 'success',
-        title: 'Departamento modificado con éxito',
+        title: 'Días modificados con éxito',
         showConfirmButton: false,
         timer: 1500
       });</script>";  
 
     if($resultado){
-        $result=$this->crud->borrarUnoaUnoDepartamentos($_GET["id"]);
+        $result=$this->crud->borrarUnoaUnoDias($_GET["id"]);
 
         unset($_SESSION["modificar"]);
-        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+        header("location:?c=crudDias&page=".$_GET["pag"]."");
     }
     else{
         
         $_SESSION["vacio"]="<div class='alert  ' id='alerta'> No se ha cambiado ningún campo</div>";
         
-        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+        header("location:?c=crudDias&page=".$_GET["pag"]."");
     }
     
 
@@ -1617,14 +1609,14 @@ function modificarDepartamentos(){
 }
 
 
-function crearDepartamentos(){
+function crearDias(){
     //echo "<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
     if(isset($_POST['cancelar'])){
         unset($_SESSION["modificar"]);
 
-        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+        header("location:?c=crudDias&page=".$_GET["pag"]."");
     }
-    else if($_POST['dato'][0]==null || $_POST['dato'][1]==null){
+    else if($_POST['dato'][1]==null || $_POST['dato'][2]==null){
         $_SESSION["vacio"]="  <script>    Swal.fire({
             icon: 'warning',
             title: 'Debe rellenar todos los campos',
@@ -1632,11 +1624,11 @@ function crearDepartamentos(){
             timer: 1500
           });</script>
     ";
-        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."&crear=1");
+        header("location:?c=crudDias&page=".$_GET["pag"]."&crear=1");
     }
     else{
     
-    $resultado=$this->crud->crearDepartamentos($_POST["dato"]);
+    $resultado=$this->crud->crearDias($_POST["dato"]);
 
 
     if($resultado){
@@ -1645,33 +1637,22 @@ function crearDepartamentos(){
 
         <script>    Swal.fire({
             icon: 'success',
-            title: 'Departamento creado con éxito',
+            title: 'Días no disponibles creados con éxito',
             showConfirmButton: false,
             timer: 1500
           });</script>";  
         unset($_SESSION["modificar"]);
-        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+        header("location:?c=crudDias&page=".$_GET["pag"]."");
     }
-    else{
-        
-        $_SESSION["vacio"]=" <script>     swal({
-            title: 'Ya existe un departamento con ese nombre. ',
-              text: '',
-              type: 'warning',
-              showCancelButton: false,
-              confirmButtonColor: '#3085d6',
-              confirmButtonText: 'Entendido'
-    
-            });</script>";    
-        
-        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."&crear=1");
-    }
+
     
 
 }
 }
 
-/******************************   FINAL CONTROLADOR DEPARTAMENTOS         ********************************/
+/******************************   FINAL CONTROLADOR DIAS NO DISPONIBLES         ********************************/
+
+
 
 
 

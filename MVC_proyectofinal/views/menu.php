@@ -320,12 +320,13 @@ body {
     <a class="btn-menu" href="?c=crudFestivos&page=1"><i class="bi bi-briefcase"></i>  Festivos</a>  
 
 
+
     ';
   }else{echo"";}
 
-  if($_SESSION['crudDepartamentos']==1){
+  if($_SESSION['crudDias']==1){
     echo '  
-    <a class="btn-menu" href="?c=crudDepartamentos&page=1"><i class="bi bi-briefcase"></i>  Departamentos</a>  
+    <a class="btn-menu" href="?c=crudDias&page=1"><i class="bi bi-calendar-day"></i>  Días no disponibles</a>  
 
 
     ';

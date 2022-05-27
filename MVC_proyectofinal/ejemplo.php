@@ -28,15 +28,13 @@ class Precio{
      /*************************************  FIN MODELO DE AULAS  ********************************/
    
     function ver(){
-        $qry = "SELECT departamentos.nombre from departamentos 
-        INNER JOIN puestos ON departamentos.id = puestos.idDepartamento
-        where puestos.nombre='Intervención Sociocomunitaria'";
+        
+        $comprobar="SELECT nombre, fechaInicio, fechaFinal FROM festivos GROUP BY nombre;";
+        $consulta_comprobar=$this->conexion()->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
 
-    $consulta= $this->conexion()->prepare($qry);
-    $consulta->execute();
-    $resultado_departamentos=$consulta->fetchAll();
-
-        return $resultado_departamentos;
+        return $resultado_comprobar;
     }
 
     
@@ -47,6 +45,9 @@ class Precio{
 
 $precio=new Precio();
 $resultado=$precio->ver();
-print_r($resultado[0]['nombre']);
+foreach ($resultado as $dato){
+    print_r($dato);
+}
+
 
 ?>

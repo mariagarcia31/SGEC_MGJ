@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2022 a las 14:52:56
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.5
+-- Servidor: 10.200.10.225
+-- Tiempo de generación: 27-05-2022 a las 23:05:22
+-- Versión del servidor: 10.5.16-MariaDB-1:10.5.16+maria~stretch-log
+-- Versión de PHP: 7.4.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -14,245 +14,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sgec`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `aulas`
---
-
-CREATE TABLE `aulas` (
-  `id` varchar(220) NOT NULL,
-  `ubicacion` varchar(220) NOT NULL,
-  `informacion` varchar(220) NOT NULL,
-  `aforo` int(100) NOT NULL,
-  `habilitado` tinyint(1) NOT NULL,
-  `imagen` varchar(80) NOT NULL DEFAULT '''libs/img/upload/aulaDefecto.jpeg'''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `aulas`
---
-
-INSERT INTO `aulas` (`id`, `ubicacion`, `informacion`, `aforo`, `habilitado`, `imagen`) VALUES
-('Aula polivalente', 'Al lado de cafetería', 'Pizarra pequeña, ordenador, proyector, altavoces y sillas', 99, 1, 'libs/img/upload/IMG-6104.jpg'),
-('El bosque', 'Pabellón 1, planta 2ª', 'Mesa, sillas y sofá', 15, 0, 'libs/img/upload/IMG-6108.jpg'),
-('Espacio Erasmus', 'Pabellón 1, planta 2ª', 'Mesas y sillas', 10, 1, 'libs/img/upload/IMG-6093.jpg'),
-('Sala de reuniones (112)', 'Pabellón 1, planta 1ª', 'Pizarra digital , mesas y sillas', 16, 1, 'libs/img/upload/IMG-6095.jpg'),
-('Sala de reuniones (301)', 'Pabellón 3, planta 2ª', 'Mesas y sillas', 5, 1, 'libs/img/upload/IMG-6102.jpg'),
-('Sala de reuniones (311)', 'Pabellón 3, planta 1ª', 'Mesas y sillas', 5, 1, 'libs/img/upload/IMG-6100.jpg');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `configuracion`
---
-
-CREATE TABLE `configuracion` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `valor` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `configuracion`
---
-
-INSERT INTO `configuracion` (`id`, `nombre`, `valor`) VALUES
-(1, 'Máximo de días siguientes para reservar', '14');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `departamentos`
---
-
-CREATE TABLE `departamentos` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `departamentos`
---
-
-INSERT INTO `departamentos` (`id`, `nombre`) VALUES
-(9, 'Dpto. Actividades Extraescolares'),
-(6, 'Dpto. Actividades Físicas'),
-(1, 'Dpto. Administración y Gestión'),
-(2, 'Dpto. Agrario'),
-(8, 'Dpto. Comercio y Marketing'),
-(5, 'Dpto. Fol'),
-(3, 'Dpto. Informatica'),
-(4, 'Dpto. Inglés'),
-(7, 'Dpto. Servicios Culturales y a la Comunidad');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `festivos`
---
-
-CREATE TABLE `festivos` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `Nombre` varchar(100) DEFAULT NULL,
-  `fechaInicio` date NOT NULL,
-  `fechaFinal` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `festivos`
---
-
-INSERT INTO `festivos` (`id`, `Nombre`, `fechaInicio`, `fechaFinal`) VALUES
-(1, 'Semana Santa', '2022-04-04', '2022-04-18');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `grupos`
---
-
-CREATE TABLE `grupos` (
-  `id` int(6) UNSIGNED NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `departamento` varchar(80) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `grupos`
---
-
-INSERT INTO `grupos` (`id`, `nombre`, `departamento`) VALUES
-(1, 'DAW 3', 'Dpto. Agrario'),
-(2, 'DAM 2', 'Informática'),
-(3, 'DAW 1', 'Informática'),
-(4, 'DAM 1', 'Informática'),
-(5, 'DAW 5', 'Infornática'),
-(6, 'DAW 6', 'Informática'),
-(7, 'DAM 7', 'Informatica');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `historial`
---
-
-CREATE TABLE `historial` (
-  `id` int(11) NOT NULL,
-  `idAula` varchar(220) NOT NULL,
-  `idUsuario` int(11) UNSIGNED NOT NULL,
-  `fecha` date NOT NULL,
-  `grupo` varchar(255) NOT NULL,
-  `motivo` varchar(255) NOT NULL,
-  `hora` varchar(255) NOT NULL,
-  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `historial`
---
-
-INSERT INTO `historial` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(149, 'Aula Polivalente', 1, '2022-05-03', 'DAM 1', 'Charla', '10:30AM - 11:30AM', '2022-04-29 21:26:44'),
-(300, 'aula 7', 75, '2022-05-02', 'DAW', 'charla', '11:30 - 12:30 am', '2022-05-05 14:20:20');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ip`
---
-
-CREATE TABLE `ip` (
-  `address` char(16) COLLATE utf8_bin NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `puestos`
---
-
-CREATE TABLE `puestos` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `idDepartamento` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `puestos`
---
-
-INSERT INTO `puestos` (`id`, `idDepartamento`, `nombre`) VALUES
-(1, 5, 'Intervención Sociocomunitaria'),
-(2, 1, 'Organización y Gestión Comercial'),
-(3, 2, 'Procesos de Producción Agraria'),
-(4, 3, 'Informática'),
-(5, 4, 'Inglés'),
-(6, 6, 'Educación Física'),
-(7, 1, 'Procesos de Gestión Administrativa'),
-(8, 7, 'Procedimientos Sanitarios y Asistenciales'),
-(9, 3, 'Sistemas y Aplicaciones Informáticas'),
-(10, 5, 'Formación y Orientación Laboral'),
-(11, 7, 'Servicios a la Comunidad'),
-(12, 8, 'Procesos comerciales'),
-(13, 9, 'Música');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `reservas`
---
-
-CREATE TABLE `reservas` (
-  `id` int(11) NOT NULL,
-  `idAula` varchar(220) NOT NULL,
-  `idUsuario` int(11) UNSIGNED NOT NULL,
-  `fecha` date NOT NULL,
-  `grupo` varchar(255) NOT NULL,
-  `motivo` varchar(255) NOT NULL,
-  `hora` varchar(255) NOT NULL,
-  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `reservas`
---
-
-INSERT INTO `reservas` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`, `motivo`, `hora`, `fecha_creacion`) VALUES
-(316, 'Aula polivalente', 1, '2022-05-24', 'DAM 1', 'examem', '10:30AM - 11:30AM', '2022-05-18 11:33:55'),
-(317, 'Espacio Erasmus', 1, '2022-05-24', 'DAM 1', 'charla', '10:30AM - 11:30AM', '2022-05-24 14:37:41'),
-(318, 'Aula polivalente', 1, '2022-06-01', 'DAM 1', 'examem', '09:30AM - 10:30AM', '2022-05-25 13:03:48');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `roles`
---
-
-CREATE TABLE `roles` (
-  `id` int(6) UNSIGNED NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `crud_roles` tinyint(1) NOT NULL,
-  `crud_usuarios` tinyint(1) NOT NULL,
-  `crud_aulas` tinyint(1) NOT NULL,
-  `crud_reservas` tinyint(1) NOT NULL,
-  `crud_grupos` tinyint(1) NOT NULL,
-  `crud_festivos` tinyint(1) NOT NULL,
-  `estadisticas` tinyint(1) NOT NULL,
-  `crud_configuracion` tinyint(1) NOT NULL,
-  `crud_departamentos` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `roles`
---
-
-INSERT INTO `roles` (`id`, `nombre`, `crud_roles`, `crud_usuarios`, `crud_aulas`, `crud_reservas`, `crud_grupos`, `crud_festivos`, `estadisticas`, `crud_configuracion`, `crud_departamentos`) VALUES
-(1, 'super-admin', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(2, 'Profesor', 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(86, 'Gestor', 0, 1, 1, 1, 1, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -278,72 +39,81 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `primerApellido`, `segundoApellido`, `usuario`, `departamento`, `contra`, `confirmacion`, `rol`) VALUES
-(1, 'Maria', 'mariagarcia.daw@ciudadescolarfp.es', 'García', 'Valero', 'Maria', 'Dpto. Informatica', '1234', 1, 1);
+(1, 'Maria', 'mariagarcia.daw@ciudadescolarfp.es', 'García', 'Valero', 'Maria', 'Dpto. Informatica', '1234', 1, 1),
+(501, 'Ana', NULL, 'Amate', 'Aguado', 'aamaagu372', 'Dpto. Fol', 'aamaagu372', 0, 2),
+(502, 'Isabel', NULL, 'Arévalo', 'Moyano', 'iarvmoy077', 'Dpto. Actividades Extraescolares', 'iarvmoy077', 0, 2),
+(503, 'Patricia', NULL, 'Arroyo', 'Cortázar', 'parrcor997', 'Dpto. Agrario', 'parrcor997', 0, 2),
+(504, 'Nuria', NULL, 'Ballesteros', 'Rincón', 'nbalrin331', 'Sin departamento asignado', 'nbalrin331', 0, 2),
+(505, 'Milena', NULL, 'Barrera', 'Ramírez', 'mbarram438', 'Dpto. Administración y Gestión', 'mbarram438', 0, 2),
+(506, 'M.Esther de la', NULL, 'Beldad', 'Diez', 'mbeldez760', 'Dpto. Fol', 'mbeldez760', 0, 2),
+(507, 'Almudena', NULL, 'Caballero', 'Delgado', 'acabdel884', 'Dpto. Inglés', 'acabdel884', 0, 2),
+(508, 'Susana', NULL, 'Cabellos', 'Caldera', 'scabcal501', 'Dpto. Fol', 'scabcal501', 0, 2),
+(509, 'Nuria de la', NULL, 'Cámara', 'Andrés', 'ncmaand151', 'Dpto. Fol', 'ncmaand151', 0, 2),
+(510, 'Luis Miguel', NULL, 'Canorea', 'López', 'lcanlpe856', 'Sin departamento asignado', 'lcanlpe856', 0, 2),
+(511, 'Pedro', NULL, 'Carcajona', 'Piris', 'pcarpir328', 'Dpto. Fol', 'pcarpir328', 0, 2),
+(512, 'Francisco Javi', NULL, 'Casco', 'Romero', 'fcasrom118', 'Dpto. Comercio y Marketing', 'fcasrom118', 0, 2),
+(513, 'Cristina', NULL, 'Chamizo', 'Cáceres', 'cchacac104', 'Dpto. Informatica', 'cchacac104', 0, 2),
+(514, 'Mikel', NULL, 'Conde', 'Reyes', 'mconrey936', 'Dpto. Servicios Culturales y a la Comunidad', 'mconrey936', 0, 2),
+(515, 'Alicia', NULL, 'Cotarelo', 'Seijas', 'acotsei466', 'Dpto. Inglés', 'acotsei466', 0, 2),
+(516, 'M.Mar', NULL, 'Crespo', 'Jiménez', 'mcrejim994', 'Dpto. Servicios Culturales y a la Comunidad', 'mcrejim994', 0, 2),
+(517, 'Francisco', NULL, 'Crespo', 'Molero', 'fcremol415', 'Dpto. Servicios Culturales y a la Comunidad', 'fcremol415', 0, 2),
+(518, 'Concepción', NULL, 'Delgado', 'Martín', 'cdelmar231', 'Dpto. Servicios Culturales y a la Comunidad', 'cdelmar231', 0, 2),
+(519, 'Héctor C.', NULL, 'Fernández', 'Bardal', 'hferbar894', 'Dpto. Informatica', 'hferbar894', 0, 2),
+(520, 'Ana Irene', NULL, 'Fuentes del', 'Castillo', 'afuecas252', 'Dpto. Actividades Físicas', 'afuecas252', 0, 2),
+(521, 'Fatima', NULL, 'Gamero', 'Tapias', 'fgamtap556', 'Dpto. Fol', 'fgamtap556', 0, 2),
+(522, 'Soraya', NULL, 'García', 'Nogales', 'sgarnog360', 'Dpto. Actividades Físicas', 'sgarnog360', 0, 2),
+(523, 'Alfonso Jose', NULL, 'García', 'Rodríguez', 'agarrod353', 'Dpto. Actividades Físicas', 'agarrod353', 0, 2),
+(524, 'Santiago', NULL, 'García', 'Tejero', 'sgartej868', 'Dpto. Actividades Físicas', 'sgartej868', 0, 2),
+(525, 'Alejandro', NULL, 'Gimenez', 'Elorriaga', 'agimelo202', 'Sin departamento asignado', 'agimelo202', 0, 2),
+(526, 'Raquel', NULL, 'Gómez', 'López', 'rgmelpe128', 'Dpto. Servicios Culturales y a la Comunidad', 'rgmelpe128', 0, 2),
+(527, 'M.Luisa', NULL, 'González', 'Herranz', 'mgonher314', 'Dpto. Administración y Gestión', 'mgonher314', 0, 2),
+(528, 'Maria Victoria', NULL, 'González', 'López', 'mgonlop497f', 'Dpto. Informatica', 'mgonlop497f', 0, 2),
+(529, 'Ignacio', NULL, 'González', 'Sánchez', 'igonsnc799', 'Dpto. Actividades Físicas', 'igonsnc799', 0, 2),
+(530, 'Oscar Javier', NULL, 'Guerrero', 'Roldán', 'oguerol016', 'Dpto. Informatica', 'oguerol016', 0, 2),
+(531, 'Maria Cristina', NULL, 'Hernández', 'Martínez', 'mhermar808', 'Dpto. Comercio y Marketing', 'mhermar808', 0, 2),
+(532, 'Víctor', NULL, 'Hernando', 'Jerez', 'vherjer601', 'Dpto. Actividades Físicas', 'vherjer601', 0, 2),
+(533, 'Javier', NULL, 'Herrero', 'Ruiz', 'jherrui543', 'Dpto. Inglés', 'jherrui543', 0, 2),
+(534, 'M. Belén', NULL, 'Ibáñez', 'Marcos', 'mibemar978', 'Sin departamento asignado', 'mibemar978', 0, 2),
+(535, 'Elena', NULL, 'Jara', 'Cañas', 'ejarcaa077', 'Sin departamento asignado', 'ejarcaa077', 0, 2),
+(536, 'María Carmen', NULL, 'Jiménez', 'Blázquez', 'mjimblz561', 'Dpto. Informatica', 'mjimblz561', 0, 2),
+(537, 'Iván', NULL, 'Jiménez', 'Fombona', 'ijimfom417', 'Dpto. Informatica', 'ijimfom417', 0, 2),
+(538, 'Prado', NULL, 'Lens', 'Carretero', 'plencar881', 'Dpto. Fol', 'plencar881', 0, 2),
+(539, 'Cecilia', NULL, 'López', 'García', 'clopgar691', 'Dpto. Administración y Gestión', 'clopgar691', 0, 2),
+(540, 'Julio Javier', NULL, 'López', 'Gimenez', 'jlopgim830', 'Dpto. Informatica', 'jlopgim830', 0, 2),
+(541, 'Miguel A.', NULL, 'Lorenzo', 'Tomillo', 'mlortom761', 'Dpto. Actividades Físicas', 'mlortom761', 0, 2),
+(542, 'Vanesa', NULL, 'Luna', 'Serrano', 'vlunser952', 'Dpto. Fol', 'vlunser952', 0, 2),
+(543, 'Susana', NULL, 'Madrigal', 'Barchino', 'smadbar721', 'Dpto. Administración y Gestión', 'smadbar721', 0, 2),
+(544, 'Carmen', NULL, 'Mañas', 'Ariza', 'cmaaari645', 'Dpto. Comercio y Marketing', 'cmaaari645', 0, 2),
+(545, 'Cristina', NULL, 'Mariscal del', 'Saz-Orozc', 'cmarsaz757', 'Dpto. Servicios Culturales y a la Comunidad', 'cmarsaz757', 0, 2),
+(546, 'Sonsoles', NULL, 'Martín', 'Encinar', 'smarenc699', 'Dpto. Actividades Físicas', 'smarenc699', 0, 2),
+(547, 'Soledad', NULL, 'Martín', 'Velasco', 'smarvel054', 'Dpto. Fol', 'smarvel054', 0, 2),
+(548, 'Elvira', NULL, 'Méndez', 'Santamarina', 'emndsan108', 'Dpto. Administración y Gestión', 'emndsan108', 0, 2),
+(549, 'Natalia', NULL, 'Merino', 'Jiménez', 'nmerjim484', 'Dpto. Administración y Gestión', 'nmerjim484', 0, 2),
+(550, 'Eva', NULL, 'Montero', 'Cañibano', 'emoncan411', 'Dpto. Actividades Físicas', 'emoncan411', 0, 2),
+(551, 'M.Esperanza', NULL, 'Mora', 'Ruiz', 'mmorrui852', 'Dpto. Administración y Gestión', 'mmorrui852', 0, 2),
+(552, 'María Carmen', NULL, 'Nieto', 'Bonal', 'mniebon124', 'Dpto. Fol', 'mniebon124', 0, 2),
+(553, 'Susana', NULL, 'Ortiz', 'García', 'sortgar378', 'Dpto. Servicios Culturales y a la Comunidad', 'sortgar378', 0, 2),
+(554, 'Jose Antonio', NULL, 'Pérez', 'Fuentes', 'jperfue784', 'Dpto. Informatica', 'jperfue784', 0, 2),
+(555, 'Raul', NULL, 'Pulido', 'Piñero', 'rpulpin135', 'Dpto. Fol', 'rpulpin135', 0, 2),
+(556, 'Marta', NULL, 'Remiro', 'Va', 'mremva127', 'Dpto. Servicios Culturales y a la Comunidad', 'mremva127', 0, 2),
+(557, 'M.Teresa', NULL, 'Revilla', 'Rivas', 'mrevriv003', 'Dpto. Comercio y Marketing', 'mrevriv003', 0, 2),
+(558, 'Mercedes', NULL, 'Rodríguez', 'Araque', 'mrodara771', 'Dpto. Actividades Físicas', 'mrodara771', 0, 2),
+(559, 'M.Mar', NULL, 'Rodríguez', 'Sánchez', 'mrodsnc495', 'Dpto. Fol', 'mrodsnc495', 0, 2),
+(560, 'Elvira', NULL, 'Rodríguez', 'Villar', 'erodvil911', 'Dpto. Actividades Físicas', 'erodvil911', 0, 2),
+(561, 'Laura', NULL, 'Sanabria', 'Serrano', 'lsanser155', 'Dpto. Inglés', 'lsanser155', 0, 2),
+(562, 'Salvador', NULL, 'Sanchez', 'Fernández', 'ssanfer194', 'Dpto. Informatica', 'ssanfer194', 0, 2),
+(563, 'Miguel Ángel', NULL, 'Sánchez', 'López', 'msnclpe421', 'Dpto. Fol', 'msnclpe421', 0, 2),
+(564, 'Maria del Mar', NULL, 'Santos', 'Yugueros', 'msanyug896', 'Dpto. Administración y Gestión', 'msanyug896', 0, 2),
+(565, 'Marta', NULL, 'Sanz', 'Polo', 'msanpol764', 'Dpto. Administración y Gestión', 'msanpol764', 0, 2),
+(566, 'Ana', NULL, 'Sayalero', 'Morón', 'asaymor156', 'Dpto. Comercio y Marketing', 'asaymor156', 0, 2),
+(567, 'Maria', NULL, 'Terrón', 'Torrado', 'mtertor596', 'Dpto. Administración y Gestión', 'mtertor596', 0, 2),
+(568, 'Rebeca del', NULL, 'Val', 'Sánchez', 'rvalsnc351', 'Dpto. Fol', 'rvalsnc351', 0, 2),
+(569, 'Ana Belén', NULL, 'Vázquez', 'Hernando', 'avazher138', 'Dpto. Servicios Culturales y a la Comunidad', 'avazher138', 0, 2),
+(570, 'Maria Nieves', NULL, 'Zamora', 'Gómez', 'nzamgom087', 'Dpto. Comercio y Marketing', 'nzamgom087', 0, 2);
 
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `aulas`
---
-ALTER TABLE `aulas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `configuracion`
---
-ALTER TABLE `configuracion`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
-
---
--- Indices de la tabla `departamentos`
---
-ALTER TABLE `departamentos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
-
---
--- Indices de la tabla `festivos`
---
-ALTER TABLE `festivos`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `grupos`
---
-ALTER TABLE `grupos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
-
---
--- Indices de la tabla `historial`
---
-ALTER TABLE `historial`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `puestos`
---
-ALTER TABLE `puestos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre` (`nombre`),
-  ADD KEY `fk_id_departamento` (`idDepartamento`);
-
---
--- Indices de la tabla `reservas`
---
-ALTER TABLE `reservas`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_reserva_aula` (`idAula`),
-  ADD KEY `id_reserva_usuario` (`idUsuario`);
-
---
--- Indices de la tabla `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -358,75 +128,14 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `configuracion`
---
-ALTER TABLE `configuracion`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `departamentos`
---
-ALTER TABLE `departamentos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de la tabla `festivos`
---
-ALTER TABLE `festivos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `grupos`
---
-ALTER TABLE `grupos`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT de la tabla `historial`
---
-ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
-
---
--- AUTO_INCREMENT de la tabla `puestos`
---
-ALTER TABLE `puestos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT de la tabla `reservas`
---
-ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=319;
-
---
--- AUTO_INCREMENT de la tabla `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
-
---
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=571;
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `puestos`
---
-ALTER TABLE `puestos`
-  ADD CONSTRAINT `fk_id_departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `reservas`
---
-ALTER TABLE `reservas`
-  ADD CONSTRAINT `id_reserva_aula` FOREIGN KEY (`idAula`) REFERENCES `aulas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `id_reserva_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`

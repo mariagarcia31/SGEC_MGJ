@@ -143,7 +143,7 @@ class Crud extends Conexion{
                     $_SESSION['actualizarBBDD']=$verif4['actualizar_bbdd'];
                     $_SESSION['estadisticas']=$verif4['estadisticas'];
                     $_SESSION['crudFestivos']=$verif4['crud_festivos'];
-                    $_SESSION['crudDepartamentos']=$verif4['crud_departamentos'];
+                    $_SESSION['crudDias']=$verif4['crud_dias'];
                     $_SESSION['crudConfiguracion']=$verif4['crud_configuracion'];
 
                     $_SESSION['contra']=$contrasena;
@@ -178,7 +178,7 @@ class Crud extends Conexion{
                     $_SESSION['actualizarBBDD']=$verif4['actualizar_bbdd'];
                     $_SESSION['estadisticas']=$verif4['estadisticas'];
                     $_SESSION['crudFestivos']=$verif4['crud_festivos'];
-                    $_SESSION['crudDepartamentos']=$verif4['crud_departamentos'];
+                    $_SESSION['crudDias']=$verif4['crud_dias'];
                     $_SESSION['crudConfiguracion']=$verif4['crud_configuracion'];
 
                     $_SESSION['contra']=$contrasena;
@@ -442,6 +442,7 @@ return false;}
              $date2 = date('Y-m-d', strtotime("+$maximoDiasSiguientes day"));
              $finde= $this->esFinde($date);
              $festivo= $this->esFestivo($date);
+             $noDisponible= $this->esDiaNoDisponible($date,$idAula);
              
              //$reservados= $this->estaReservado($date,$idAula);
              
@@ -458,6 +459,11 @@ return false;}
 
             else if($festivo){
                 $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>$festivo</h4></td> ";
+
+            } 
+
+            else if($noDisponible){
+                $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>No disponible<br>$noDisponible</h4></td> ";
 
             } 
 
@@ -558,10 +564,14 @@ return false;}
                 $fecha = $dt->format('Y-m-d');
                 $finde= $this->esFinde($fecha);
                 $festivo= $this->esFestivo($fecha);
+                $noDisponible= $this->esDiaNoDisponible($fecha,$idAula);
                 $booking=$this->seteaDate2($_GET['id'],$fecha);
 
                 if($festivo){
                     $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>$festivo</h5></td> ";
+                }
+                else if($noDisponible){
+                    $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>No disponible<br>$noDisponible</h5></td> ";
                 }
                 else if($finde==1){
                     $calendar.="";
@@ -683,10 +693,14 @@ return false;}
                 
                 $finde= $this->esFinde($date);
                 $festivo= $this->esFestivo($date);
+                $noDisponible= $this->esDiaNoDisponible($date,$nombre);
                 $booking=$this->seteaDate2($nombre, $date);
 
                 if($festivo){
                     $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>Festivo<br>$festivo</h5></td> ";
+                }
+                else if($noDisponible){
+                    $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>No disponible<br>$noDisponible</h5></td> ";
                 }
 
                 else if($date<$hoy||$date>$maximoDiasSiguientes||$finde==1){
@@ -806,6 +820,36 @@ return false;}
             else if($fechaComparar>$inicioFestivo and $fechaComparar<$finalFesitvo){
 
                 return $festivo['nombre'];
+            }
+
+           
+
+        }
+        
+    }
+
+    function esDiaNoDisponible($date, $aula){
+
+        $comprobar="SELECT motivo, fechaInicio, fechaFinal FROM diasnodisponiblesporaula WHERE idAula = '$aula'";
+        $consulta_comprobar=$this->conexion->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+        $fechaComparar = strtotime($date);
+
+        foreach($resultado_comprobar as $festivo){
+
+            
+            $inicioFestivo = strtotime($festivo['fechaInicio']);
+            $finalFesitvo = strtotime($festivo['fechaFinal']);
+
+            if($fechaComparar==$inicioFestivo||$fechaComparar==$finalFesitvo){
+            return $festivo['motivo'];
+            
+            }
+
+            else if($fechaComparar>$inicioFestivo and $fechaComparar<$finalFesitvo){
+
+                return $festivo['motivo'];
             }
 
            
@@ -976,6 +1020,33 @@ return false;}
     }
 
 
+
+    function crudDias($opc,$iteams_pagina=null,$offset=null){
+        if($opc==1){
+
+            $sql="SELECT count(*) FROM diasnodisponiblesporaula";
+
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $count=$consulta->fetch(PDO::FETCH_NUM);
+            
+            return $count;
+        }
+        elseif($opc==2){
+
+                   
+            $sql="SELECT * FROM diasnodisponiblesporaula ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $consult=$consulta->fetchAll(PDO::FETCH_ASSOC);
+            $keys=array_keys($consult[0]);
+            return array($consult,$keys);
+        }
+       
+        
+
+    }
 
     function crudFestivos($opc,$iteams_pagina=null,$offset=null){
         if($opc==1){
@@ -2340,6 +2411,118 @@ function crearConfiguracion($indic){
 
 
 
+
+
+/*************************************  MODELO DE DIAS NO DISPONIBLES   ********************************/
+function borrarUnoaUnoDias($selec){
+            
+    $sql="DELETE FROM diasnodisponiblesporaula WHERE  id='$selec'";
+    $consulta=$this->conexion->prepare($sql);
+    $consulta->execute();
+    return true;
+        
+}
+
+function borrarDias($selec){
+  
+    if(empty($selec)){
+       
+        return false;
+    }
+    else{
+      
+        foreach($selec as $valores){
+            $sql="DELETE FROM diasnodisponiblesporaula WHERE  id='$valores'";
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            
+        }
+        return true;
+    }
+    
+    }  
+
+
+
+
+
+
+    function modifDias($id){
+
+     
+        $nombres="SELECT * FROM diasnodisponiblesporaula WHERE id=:cod;";
+        $consulta_nombres=$this->conexion->prepare($nombres);
+        $consulta_nombres->bindParam(':cod',$id);
+        $consulta_nombres->execute();
+        $resultado_nombres=$consulta_nombres->fetchAll();
+
+        return $resultado_nombres;
+    }
+
+
+function actualizarDias($indic){
+    $comprobar="SELECT * FROM diasnodisponiblesporaula WHERE id='".$indic[0]."';";
+    $consulta_comprobar=$this->conexion->prepare($comprobar);
+    $consulta_comprobar->execute();
+    $resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
+
+    $resultado = array_diff($resultado_comprobar, $indic);
+
+   /*SI DEJO ESTO LA ACTUALIZACIÓN NO VA
+    if(empty($resultado)){
+        return false;
+    }
+    */
+       
+            $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='diasnodisponiblesporaula';";
+            $consulta_nombres=$this->conexion->prepare($nombres);
+            $consulta_nombres->execute();
+            $resultado_nombres=$consulta_nombres->fetchAll();
+                foreach($resultado_nombres as $nombre_columna){	
+                    for($i=0;$i<count($nombre_columna)/2;$i++){
+                        $nombress[]=$nombre_columna;
+                    }
+                }
+    
+                for($i=0;$i<count($nombress);$i++){
+                    
+                    $sql="UPDATE diasnodisponiblesporaula SET  ".$nombress[$i][0]."=:data  WHERE id='".$indic[0]."';";
+                    $stmt=$this->conexion->prepare($sql);
+                    $stmt->bindParam(":data",$indic[$i]);
+                    $stmt->execute();
+                    
+                    
+                }
+            return true;
+        
+        }      
+    
+
+function crearDias($indic){
+
+
+            $aula = $indic[0];
+            $motivo = $indic[1];
+            $fechainicio =$indic[2];
+            $fechafin =$indic[3];
+            
+                $comprobar="INSERT INTO  diasnodisponiblesporaula (idAula, motivo, fechaInicio, fechaFinal) VALUES ('$aula', '$motivo','$fechainicio','$fechafin');";
+                $consulta_comprobar=$this->conexion->prepare($comprobar);
+                $consulta_comprobar->execute();
+                
+                return true;
+
+            
+        
+    }
+
+
+        
+
+
+
+
+ /*************************************  FIN MODELO DE DIAS NO DISPONIBLES    ********************************/
 
 
 
