@@ -761,25 +761,13 @@ return false;}
 
                     $bookings[]= $x["hora"];
                     $idReservaUsuario=$x["idUsuario"];
-                    $comprobar="SELECT nombre, primerApellido, puesto FROM `usuarios` WHERE id = '$idReservaUsuario'";
+                    $comprobar="SELECT nombre, primerApellido, departamento FROM `usuarios` WHERE id = '$idReservaUsuario'";
                     $consulta_comprobar=$this->conexion->prepare($comprobar);
                     $consulta_comprobar->execute();
                     $resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
                     $nombres[]= $resultado_comprobar['nombre'];
                     $apellidos[]= $resultado_comprobar['primerApellido'];
-                    $puesto= $resultado_comprobar['puesto'];
-
-                    $comprobar1="SELECT departamento FROM `departamentos` WHERE puesto = '$puesto'";
-                    $consulta_comprobar1=$this->conexion->prepare($comprobar1);
-                    $consulta_comprobar1->execute();
-                    $resultado_comprobar1=$consulta_comprobar1->fetch(PDO::FETCH_ASSOC);
-                    if($resultado_comprobar1==null){
-                        $puestos[]= "Agregar departamento";
-
-                    }else{
-                        $puestos[]= $resultado_comprobar1['departamento'];
-
-                    }
+                    $puestos[]= $resultado_comprobar['departamento'];
 
                    
                }      
@@ -1929,8 +1917,9 @@ return false;}
                 $puesto1=utf8_encode(trim($puesto,'"'));
                 $puestoDef=explode("-", $puesto1);
                 $correo=$usuario1."@ciudadescolarfp.es";
-                echo "hola";
-                echo $getTextLine[0];
+
+               
+
                 // Eliminamos la cabecera
                 if($nombre=="Nombre" || $nombre=="" || $nombre=='"Nombre"'){
                     continue;
@@ -1940,9 +1929,39 @@ return false;}
                     $consulta->execute();
                     $resultado_nombres=$consulta->fetchAll();
                     if($resultado_nombres==null){
-                        $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, puesto,contra, confirmacion, rol) values('$nombre1','$correo','$primerApellido1','$segundoApellido1','$usuario1','".$puestoDef[0]."','$usuario1','0','2'); ";
+
+                        $qry = "SELECT * from puestos where nombre='".$puestoDef."' ; ";
+                        $consulta= $this->conexion->prepare($qry);
+                        $consulta->execute();
+                        $resultado_puestos=$consulta->fetchAll();
+        
+                        if($resultado_puestos==null){
+                        
+                            $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, departamento,contra, confirmacion, rol) values('$nombre1','$correo','$primerApellido1','$segundoApellido1','$usuario1','Sin departamento asignado','$usuario1','0','2'); ";
                         $consulta=$this->conexion->prepare($qry);
                         $consulta->execute();
+                            
+                        }
+
+                        else{
+
+                            $qry = "SELECT departamentos.nombre from departamentos 
+                            INNER JOIN puestos ON departamentos.id = puestos.idDepartamento
+                            where puestos.nombre='".$puestoDef."'";
+
+                        $consulta= $this->conexion->prepare($qry);
+                        $consulta->execute();
+                        $resultado_departamentos=$consulta->fetchAll();
+                        $resultado_departamentos[0];
+
+                        $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, departamento,contra, confirmacion, rol) values('$nombre1','$correo','$primerApellido1','$segundoApellido1','$usuario1','".$resultado_departamentos[0]."','$usuario1','0','2'); ";
+                        $consulta=$this->conexion->prepare($qry);
+                        $consulta->execute();
+
+                        }
+
+
+                       
                     }
     
                 }
@@ -2212,137 +2231,6 @@ function crearFestivos($indic){
 
 
  /*************************************  FIN MODELO DE FESTIVOS   ********************************/
-
-
-
-
-
- 
-
-/*************************************  MODELO DE DEPARTAMENTOS   ********************************/
-function borrarUnoaUnoDepartamentos($selec){
-            
-    $sql="DELETE FROM departamentos WHERE  id='$selec'";
-    $consulta=$this->conexion->prepare($sql);
-    $consulta->execute();
-    return true;
-        
-}
-
-function borrarDepartamentos($selec){
-  
-    if(empty($selec)){
-       
-        return false;
-    }
-    else{
-      
-        foreach($selec as $valores){
-            $sql="DELETE FROM departamentos WHERE  id='$valores'";
-            $consulta=$this->conexion->prepare($sql);
-            $consulta->execute();
-            
-        }
-        return true;
-    }
-    
-    }  
-
-
-
-
-
-
-    function modifDepartamentos($id){
-
-     
-        $nombres="SELECT * FROM departamentos WHERE id=:cod;";
-        $consulta_nombres=$this->conexion->prepare($nombres);
-        $consulta_nombres->bindParam(':cod',$id);
-        $consulta_nombres->execute();
-        $resultado_nombres=$consulta_nombres->fetchAll();
-
-        return $resultado_nombres;
-    }
-
-
-function actualizarDepartamentos($indic){
-    $comprobar="SELECT * FROM departamentos WHERE id='".$indic[0]."';";
-    $consulta_comprobar=$this->conexion->prepare($comprobar);
-    $consulta_comprobar->execute();
-    $resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
-
-    $resultado = array_diff($resultado_comprobar, $indic);
-
-   /*SI DEJO ESTO LA ACTUALIZACIÓN NO VA
-    if(empty($resultado)){
-        return false;
-    }
-    */
-       
-            $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='departamentos';";
-            $consulta_nombres=$this->conexion->prepare($nombres);
-            $consulta_nombres->execute();
-            $resultado_nombres=$consulta_nombres->fetchAll();
-                foreach($resultado_nombres as $nombre_columna){	
-                    for($i=0;$i<count($nombre_columna)/2;$i++){
-                        $nombress[]=$nombre_columna;
-                    }
-                }
-    
-                for($i=0;$i<count($nombress);$i++){
-                    
-                    $sql="UPDATE departamentos SET  ".$nombress[$i][0]."=:data  WHERE id='".$indic[0]."';";
-                    $stmt=$this->conexion->prepare($sql);
-                    $stmt->bindParam(":data",$indic[$i]);
-                    $stmt->execute();
-                    
-                    
-                }
-            return true;
-        
-        }      
-    
-
-function crearDepartamentos($indic){
-
-        $comprobar="SELECT * FROM departamentos WHERE puesto='".$indic[0]."';";
-        $consulta_comprobar=$this->conexion->prepare($comprobar);
-        $consulta_comprobar->execute();
-        $resultado_comprobar=$consulta_comprobar->fetchAll();
-        if(count($resultado_comprobar)>0){
-            return false;
-        }
-        
-        else{
-            
-            $puesto = $indic[0];
-            $departamento =$indic[1];
-            
-
-            
-                $comprobar="INSERT INTO  departamentos (puesto, departamento) VALUES ('$puesto','$departamento');";
-                $consulta_comprobar=$this->conexion->prepare($comprobar);
-                $consulta_comprobar->execute();
-                
-                return true;
-            
-
-            
-
-
-            
-        
-    }
-
-
-        
-}
-
-
-
- /*************************************  FIN MODELO DE DEPARTAMENTOS   ********************************/
-
 
 
 

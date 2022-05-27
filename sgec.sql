@@ -109,31 +109,50 @@ INSERT INTO `configuracion` (`id`, `nombre`, `valor`) VALUES
 --
 
 CREATE TABLE `departamentos` (
-  `puesto` varchar(250) NOT NULL,
-  `departamento` varchar(250) NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `nombre` varchar(250) UNIQUE NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `departamentos`
 --
 
-INSERT INTO `departamentos` (`puesto`, `departamento`) VALUES
-('Intervención Sociocomunitaria', 'Dpto. Administración y finanzas'),
-('Organización y Gestión Comercial', 'Dpto. Administración y Gestión'),
-('Procesos de Producción Agraria', 'Dpto. Agrario'),
-('Informático', 'Dpto. Informatica'),
-('Inglés', 'Dpto. Inglés'),
-('Intervención Sociocomunitaria', 'Dpto. Fol'),
-('Educación Física', 'Dpto. Actividades Físicas'),
-('Procesos de Gestión Administrativa', 'Dpto. Administración y Gestión'),
-('Procedimientos Sanitarios y Asistenciales', 'Dpto. Servicios Culturales y a la Comunidad'),
-('Sistemas y Aplicaciones Informáticas', 'Dpto. Informática'),
-('Formación y Orientación Laboral', 'Dpto. Fol'),
-('Servicios a la Comunidad', 'Dpto. Servicios Culturales y a la Comunidad'),
-('Procesos comerciales', 'Dpto. Administración y Gestión'),
-('Música', 'Dpto. Actividades Extraescolares');
+INSERT INTO `departamentos` (`id`, `nombre`) VALUES
+(1, 'Dpto. Administración y Gestión'),
+(2, 'Dpto. Agrario'),
+(3, 'Dpto. Informatica'),
+(4, 'Dpto. Inglés'),
+(5, 'Dpto. Fol'),
+(6, 'Dpto. Actividades Físicas'),
+(7, 'Dpto. Servicios Culturales y a la Comunidad'),
+(8, 'Dpto. Comercio y Marketing'),
+(9, 'Dpto. Actividades Extraescolares');
+
 
 -- --------------------------------------------------------
+
+
+CREATE TABLE `puestos` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `idDepartamento` int(10) UNSIGNED NOT NULL,
+  `nombre` varchar(250) UNIQUE NOT NULL 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+INSERT INTO `puestos` (`id`, `nombre`, `idDepartamento`) VALUES
+(1,'Intervención Sociocomunitaria', 5),
+(2, 'Organización y Gestión Comercial', 1),
+(3, 'Procesos de Producción Agraria', 2),
+(4, 'Informática', 3),
+(5, 'Inglés', 4),
+(6, 'Educación Física', 6),
+(7, 'Procesos de Gestión Administrativa', 1),
+(8, 'Procedimientos Sanitarios y Asistenciales', 7),
+(9, 'Sistemas y Aplicaciones Informáticas', 3),
+(10, 'Formación y Orientación Laboral', 5),
+(11, 'Servicios a la Comunidad', 7),
+(12, 'Procesos comerciales', 8),
+(13, 'Música', 9);
 
 --
 -- Estructura de tabla para la tabla `festivos`
@@ -292,80 +311,8 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `primerApellido`, `segundoApellido`, `usuario`, `puesto`, `contra`, `confirmacion`, `rol`) VALUES
-(1, 'Maria', 'mariagarcia.daw@ciudadescolarfp.es', 'García', 'Valero', 'Maria', 'Procesos de Producción Agrariaaa', '$2y$10$8RheuFJBBw8cVZuN6p.CK.wOXXa1ME.StjIa3TND/nLZlRykM/WR2', 1, 1),
-(2, 'Jossue', 'anthonyjossuebuenano.daw@ciudadescolarfp.es', 'buenaño', 'peña', 'josu', 'Informático', '$2y$10$SpZrXU.wXTNfQaGypHPCU.rEkDN5bYDEMisAAyJUQ2cG4DBUlFXtG', 1, 1),
-(3, 'Gerardo', 'gerardopimentel.daw@ciudadescolarfp.es', 'Pimentel', 'Serrano', 'gerardo', 'Informático', '$2y$10$dbURiABwmulO1adHZnaF2uXlN45wtg1KqMGfnRQ0HFAZ3qW4HsWJK', 1, 1),
-(81, 'Ana', 'aamaagu372@ciudadescolarfp.es', 'Amate', 'Aguado', 'aamaagu372', 'Intervención Sociocomunitaria', 'aamaagu372', 0, 2),
-(82, 'Isabel', 'iarvmoy077@ciudadescolarfp.es', 'Arévalo', 'Moyano', 'iarvmoy077', 'Música', 'iarvmoy077', 0, 2),
-(83, 'Patricia', 'parrcor997@ciudadescolarfp.es', 'Arroyo', 'Cortázar', 'parrcor997', 'Procesos de Producción Agraria', 'parrcor997', 0, 2),
-(84, 'Nuria', 'nbalrin331@ciudadescolarfp.es', 'Ballesteros', 'Rincón', 'nbalrin331', 'Orientación Educativa', 'nbalrin331', 0, 2),
-(85, 'Milena', 'mbarram438@ciudadescolarfp.es', 'Barrera', 'Ramírez', 'mbarram438', 'Organización y Gestión Comercial', 'mbarram438', 0, 2),
-(86, 'M.Esther de la', 'mbeldez760@ciudadescolarfp.es', 'Beldad', 'Diez', 'mbeldez760', 'Formación y Orientación Laboral', 'mbeldez760', 0, 2),
-(87, 'Almudena', 'acabdel884@ciudadescolarfp.es', 'Caballero', 'Delgado', 'acabdel884', 'Inglés', 'acabdel884', 0, 2),
-(88, 'Susana', 'scabcal501@ciudadescolarfp.es', 'Cabellos', 'Caldera', 'scabcal501', 'Intervención Sociocomunitaria', 'scabcal501', 0, 2),
-(89, 'Nuria de la', 'ncmaand151@ciudadescolarfp.es', 'Cámara', 'Andrés', 'ncmaand151', 'Intervención Sociocomunitaria', 'ncmaand151', 0, 2),
-(90, 'Luis Miguel', 'lcanlpe856@ciudadescolarfp.es', 'Canorea', 'López', 'lcanlpe856', 'Administración de Empresas', 'lcanlpe856', 0, 2),
-(91, 'Pedro', 'pcarpir328@ciudadescolarfp.es', 'Carcajona', 'Piris', 'pcarpir328', 'Intervención Sociocomunitaria', 'pcarpir328', 0, 2),
-(92, 'Francisco Javi', 'fcasrom118@ciudadescolarfp.es', 'Casco', 'Romero', 'fcasrom118', 'Procesos Comerciales', 'fcasrom118', 0, 2),
-(93, 'Cristina', 'cchacac104@ciudadescolarfp.es', 'Chamizo', 'Cáceres', 'cchacac104', 'Sistemas y Aplicaciones Informáticas', 'cchacac104', 0, 2),
-(94, 'Mikel', 'mconrey936@ciudadescolarfp.es', 'Conde', 'Reyes', 'mconrey936', 'Procedimientos Sanitarios y Asistenciales', 'mconrey936', 0, 2),
-(95, 'Alicia', 'acotsei466@ciudadescolarfp.es', 'Cotarelo', 'Seijas', 'acotsei466', 'Inglés', 'acotsei466', 0, 2),
-(96, 'M.Mar', 'mcrejim994@ciudadescolarfp.es', 'Crespo', 'Jiménez', 'mcrejim994', 'Servicios a la Comunidad', 'mcrejim994', 0, 2),
-(97, 'Francisco', 'fcremol415@ciudadescolarfp.es', 'Crespo', 'Molero', 'fcremol415', 'Servicios a la Comunidad', 'fcremol415', 0, 2),
-(98, 'Concepción', 'cdelmar231@ciudadescolarfp.es', 'Delgado', 'Martín', 'cdelmar231', 'Servicios a la Comunidad', 'cdelmar231', 0, 2),
-(99, 'Héctor C.', 'hferbar894@ciudadescolarfp.es', 'Fernández', 'Bardal', 'hferbar894', 'Informática', 'hferbar894', 0, 2),
-(100, 'Ana Irene', 'afuecas252@ciudadescolarfp.es', 'Fuentes del', 'Castillo', 'afuecas252', 'Educación Física', 'afuecas252', 0, 2),
-(101, 'Fatima', 'fgamtap556@ciudadescolarfp.es', 'Gamero', 'Tapias', 'fgamtap556', 'Intervención Sociocomunitaria', 'fgamtap556', 0, 2),
-(102, 'Soraya', 'sgarnog360@ciudadescolarfp.es', 'García', 'Nogales', 'sgarnog360', 'Educación Física', 'sgarnog360', 0, 2),
-(103, 'Alfonso Jose', 'agarrod353@ciudadescolarfp.es', 'García', 'Rodríguez', 'agarrod353', 'Educación Física', 'agarrod353', 0, 2),
-(104, 'Santiago', 'sgartej868@ciudadescolarfp.es', 'García', 'Tejero', 'sgartej868', 'Educación Física', 'sgartej868', 0, 2),
-(105, 'Alejandro', 'agimelo202@ciudadescolarfp.es', 'Gimenez', 'Elorriaga', 'agimelo202', 'Administración de Empresas', 'agimelo202', 0, 2),
-(106, 'Raquel', 'rgmelpe128@ciudadescolarfp.es', 'Gómez', 'López', 'rgmelpe128', 'Servicios a la Comunidad', 'rgmelpe128', 0, 2),
-(107, 'M.Luisa', 'mgonher314@ciudadescolarfp.es', 'González', 'Herranz', 'mgonher314', 'Organización y Gestión Comercial', 'mgonher314', 0, 2),
-(108, 'Maria Victoria', 'mgonlop497f@ciudadescolarfp.es', 'González', 'López', 'mgonlop497f', 'Informática', 'mgonlop497f', 0, 2),
-(109, 'Ignacio', 'igonsnc799@ciudadescolarfp.es', 'González', 'Sánchez', 'igonsnc799', 'Educación Física', 'igonsnc799', 0, 2),
-(110, 'Oscar Javier', 'oguerol016@ciudadescolarfp.es', 'Guerrero', 'Roldán', 'oguerol016', 'Sistemas y Aplicaciones Informáticas', 'oguerol016', 0, 2),
-(111, 'Maria Cristina', 'mhermar808@ciudadescolarfp.es', 'Hernández', 'Martínez', 'mhermar808', 'Procesos Comerciales', 'mhermar808', 0, 2),
-(112, 'Víctor', 'vherjer601@ciudadescolarfp.es', 'Hernando', 'Jerez', 'vherjer601', 'Educación Física', 'vherjer601', 0, 2),
-(113, 'Javier', 'jherrui543@ciudadescolarfp.es', 'Herrero', 'Ruiz', 'jherrui543', 'Inglés', 'jherrui543', 0, 2),
-(114, 'M. Belén', 'mibemar978@ciudadescolarfp.es', 'Ibáñez', 'Marcos', 'mibemar978', 'Administración de Empresas', 'mibemar978', 0, 2),
-(115, 'Elena', 'ejarcaa077@ciudadescolarfp.es', 'Jara', 'Cañas', 'ejarcaa077', 'Operaciones y Equipos de Producción Agraria', 'ejarcaa077', 0, 2),
-(116, 'María Carmen', 'mjimblz561@ciudadescolarfp.es', 'Jiménez', 'Blázquez', 'mjimblz561', 'Sistemas y Aplicaciones Informáticas', 'mjimblz561', 0, 2),
-(117, 'Iván', 'ijimfom417@ciudadescolarfp.es', 'Jiménez', 'Fombona', 'ijimfom417', 'Informática', 'ijimfom417', 0, 2),
-(118, 'Prado', 'plencar881@ciudadescolarfp.es', 'Lens', 'Carretero', 'plencar881', 'Formación y Orientación Laboral', 'plencar881', 0, 2),
-(119, 'Cecilia', 'clopgar691@ciudadescolarfp.es', 'López', 'García', 'clopgar691', 'Organización y Gestión Comercial', 'clopgar691', 0, 2),
-(120, 'Julio Javier', 'jlopgim830@ciudadescolarfp.es', 'López', 'Gimenez', 'jlopgim830', 'Informática', 'jlopgim830', 0, 2),
-(121, 'Miguel A.', 'mlortom761@ciudadescolarfp.es', 'Lorenzo', 'Tomillo', 'mlortom761', 'Educación Física', 'mlortom761', 0, 2),
-(122, 'Vanesa', 'vlunser952@ciudadescolarfp.es', 'Luna', 'Serrano', 'vlunser952', 'Intervención Sociocomunitaria', 'vlunser952', 0, 2),
-(123, 'Susana', 'smadbar721@ciudadescolarfp.es', 'Madrigal', 'Barchino', 'smadbar721', 'Organización y Gestión Comercial', 'smadbar721', 0, 2),
-(124, 'Carmen', 'cmaaari645@ciudadescolarfp.es', 'Mañas', 'Ariza', 'cmaaari645', 'Procesos Comerciales', 'cmaaari645', 0, 2),
-(125, 'Cristina', 'cmarsaz757@ciudadescolarfp.es', 'Mariscal del', 'Saz-Orozc', 'cmarsaz757', 'Procedimientos Sanitarios y Asistenciales', 'cmarsaz757', 0, 2),
-(126, 'Sonsoles', 'smarenc699@ciudadescolarfp.es', 'Martín', 'Encinar', 'smarenc699', 'Educación Física', 'smarenc699', 0, 2),
-(127, 'Soledad', 'smarvel054@ciudadescolarfp.es', 'Martín', 'Velasco', 'smarvel054', 'Intervención Sociocomunitaria', 'smarvel054', 0, 2),
-(128, 'Elvira', 'emndsan108@ciudadescolarfp.es', 'Méndez', 'Santamarina', 'emndsan108', 'Procesos de Gestión Administrativa', 'emndsan108', 0, 2),
-(129, 'Natalia', 'nmerjim484@ciudadescolarfp.es', 'Merino', 'Jiménez', 'nmerjim484', 'Organización y Gestión Comercial', 'nmerjim484', 0, 2),
-(130, 'Eva', 'emoncan411@ciudadescolarfp.es', 'Montero', 'Cañibano', 'emoncan411', 'Educación Física', 'emoncan411', 0, 2),
-(131, 'M.Esperanza', 'mmorrui852@ciudadescolarfp.es', 'Mora', 'Ruiz', 'mmorrui852', 'Organización y Gestión Comercial', 'mmorrui852', 0, 2),
-(132, 'María Carmen', 'mniebon124@ciudadescolarfp.es', 'Nieto', 'Bonal', 'mniebon124', 'Formación y Orientación Laboral', 'mniebon124', 0, 2),
-(133, 'Susana', 'sortgar378@ciudadescolarfp.es', 'Ortiz', 'García', 'sortgar378', 'Procedimientos Sanitarios y Asistenciales', 'sortgar378', 0, 2),
-(134, 'Jose Antonio', 'jperfue784@ciudadescolarfp.es', 'Pérez', 'Fuentes', 'jperfue784', 'Informática', 'jperfue784', 0, 2),
-(135, 'Raul', 'rpulpin135@ciudadescolarfp.es', 'Pulido', 'Piñero', 'rpulpin135', 'Formación y Orientación Laboral', 'rpulpin135', 0, 2),
-(136, 'Marta', 'mremva127@ciudadescolarfp.es', 'Remiro', 'Va', 'mremva127', 'Servicios a la Comunidad', 'mremva127', 0, 2),
-(137, 'M.Teresa', 'mrevriv003@ciudadescolarfp.es', 'Revilla', 'Rivas', 'mrevriv003', 'Procesos Comerciales', 'mrevriv003', 0, 2),
-(138, 'Mercedes', 'mrodara771@ciudadescolarfp.es', 'Rodríguez', 'Araque', 'mrodara771', 'Educación Física', 'mrodara771', 0, 2),
-(139, 'M.Mar', 'mrodsnc495@ciudadescolarfp.es', 'Rodríguez', 'Sánchez', 'mrodsnc495', 'Intervención Sociocomunitaria', 'mrodsnc495', 0, 2),
-(140, 'Elvira', 'erodvil911@ciudadescolarfp.es', 'Rodríguez', 'Villar', 'erodvil911', 'Educación Física', 'erodvil911', 0, 2),
-(141, 'Laura', 'lsanser155@ciudadescolarfp.es', 'Sanabria', 'Serrano', 'lsanser155', 'Inglés', 'lsanser155', 0, 2),
-(142, 'Salvador', 'ssanfer194@ciudadescolarfp.es', 'Sanchez', 'Fernández', 'ssanfer194', 'Informática', 'ssanfer194', 0, 2),
-(143, 'Miguel Ángel', 'msnclpe421@ciudadescolarfp.es', 'Sánchez', 'López', 'msnclpe421', 'Formación y Orientación Laboral', 'msnclpe421', 0, 2),
-(144, 'Maria del Mar', 'msanyug896@ciudadescolarfp.es', 'Santos', 'Yugueros', 'msanyug896', 'Procesos de Gestión Administrativa', 'msanyug896', 0, 2),
-(145, 'Marta', 'msanpol764@ciudadescolarfp.es', 'Sanz', 'Polo', 'msanpol764', 'Organización y Gestión Comercial', 'msanpol764', 0, 2),
-(146, 'Ana', 'asaymor156@ciudadescolarfp.es', 'Sayalero', 'Morón', 'asaymor156', 'Procesos Comerciales', 'asaymor156', 0, 2),
-(147, 'Maria', 'mtertor596@ciudadescolarfp.es', 'Terrón', 'Torrado', 'mtertor596', 'Procesos de Gestión Administrativa', 'mtertor596', 0, 2),
-(148, 'Rebeca del', 'rvalsnc351@ciudadescolarfp.es', 'Val', 'Sánchez', 'rvalsnc351', 'Intervención Sociocomunitaria', 'rvalsnc351', 0, 2),
-(149, 'Ana Belén', 'avazher138@ciudadescolarfp.es', 'Vázquez', 'Hernando', 'avazher138', 'Servicios a la Comunidad', 'avazher138', 0, 2),
-(150, 'Maria Nieves', 'nzamgom087@ciudadescolarfp.es', 'Zamora', 'Gómez', 'nzamgom087', 'Procesos Comerciales', 'nzamgom087', 0, 2);
+INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `primerApellido`, `segundoApellido`, `usuario`, `departamento`, `contra`, `confirmacion`, `rol`) VALUES
+(1, 'Maria', 'mariagarcia.daw@ciudadescolarfp.es', 'García', 'Valero', 'Maria', 'Dpto. Informatica', '1234', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -385,13 +332,7 @@ ALTER TABLE `configuracion`
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
--- Indices de la tabla `departamentos`
---
-ALTER TABLE `departamentos`
-  ADD KEY `puesto` (`puesto`),
-  ADD KEY `departamento` (`departamento`) USING BTREE;
 
---
 -- Indices de la tabla `festivos`
 --
 ALTER TABLE `festivos`
@@ -435,6 +376,15 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+ALTER TABLE `departamentos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
+
+  --
+ALTER TABLE `puestos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
+
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -479,6 +429,13 @@ ALTER TABLE `usuarios`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
+ALTER TABLE `departamentos`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+
+ALTER TABLE `puestos`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 -- Restricciones para tablas volcadas
 --
 
@@ -495,19 +452,22 @@ ALTER TABLE `reservas`
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `fk_id_rol` FOREIGN KEY (`rol`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-DELIMITER $$
+ALTER TABLE `puestos`
+  ADD CONSTRAINT `fk_id_departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--DELIMITER $$
 --
 -- Eventos
 --
-CREATE DEFINER=`root`@`localhost` EVENT `almacenamiento` ON SCHEDULE EVERY 1 DAY STARTS '2022-05-05 16:24:53' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
-INSERT INTO `historial` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`,`motivo`, `hora`, `fecha_creacion`)
-  SELECT `id`, `idAula`, `idUsuario`, `fecha`, `grupo`,`motivo`, `hora`, `fecha_creacion`
-  FROM `reservas` 
-  WHERE `fecha` <  CURDATE();
+-- CREATE DEFINER=`root`@`localhost` EVENT `almacenamiento` ON SCHEDULE EVERY 1 DAY STARTS '2022-05-05 16:24:53' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+-- INSERT INTO `historial` (`id`, `idAula`, `idUsuario`, `fecha`, `grupo`,`motivo`, `hora`, `fecha_creacion`)
+--  SELECT `id`, `idAula`, `idUsuario`, `fecha`, `grupo`,`motivo`, `hora`, `fecha_creacion`
+--  FROM `reservas` 
+--  WHERE `fecha` <  CURDATE();
   
-  DELETE FROM `reservas` WHERE `fecha` < CURDATE();
+--  DELETE FROM `reservas` WHERE `fecha` < CURDATE();
   
-  END$$
+--  END$$
 
-DELIMITER ;
+--DELIMITER ;
 COMMIT;
