@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2022 a las 13:15:00
+-- Tiempo de generación: 27-05-2022 a las 13:28:18
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -118,9 +118,20 @@ CREATE TABLE `departamentos` (
 --
 
 INSERT INTO `departamentos` (`puesto`, `departamento`) VALUES
-('Informático', 'Dpto. Informatica'),
 ('Intervención Sociocomunitaria', 'Dpto. Administración y finanzas'),
-('Procesos de Producción Agraria', 'Dpto. Agrario');
+('Organización y Gestión Comercial', 'Dpto. Administración y Gestión'),
+('Procesos de Producción Agraria', 'Dpto. Agrario'),
+('Informático', 'Dpto. Informatica'),
+('Inglés', 'Dpto. Inglés'),
+('Intervención Sociocomunitaria', 'Dpto. Fol'),
+('Educación Física', 'Dpto. Actividades Físicas'),
+('Procesos de Gestión Administrativa', 'Dpto. Administración y Gestión'),
+('Procedimientos Sanitarios y Asistenciales', 'Dpto. Servicios Culturales y a la Comunidad'),
+('Sistemas y Aplicaciones Informáticas', 'Dpto. Informática'),
+('Formación y Orientación Laboral', 'Dpto. Fol'),
+('Servicios a la Comunidad', 'Dpto. Servicios Culturales y a la Comunidad'),
+('Procesos comerciales', 'Dpto. Administración y Gestión'),
+('Música', 'Dpto. Actividades Extraescolares');
 
 -- --------------------------------------------------------
 
@@ -377,8 +388,8 @@ ALTER TABLE `configuracion`
 -- Indices de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  ADD PRIMARY KEY (`departamento`),
-  ADD KEY `puesto` (`puesto`);
+  ADD KEY `puesto` (`puesto`),
+  ADD KEY `departamento` (`departamento`) USING BTREE;
 
 --
 -- Indices de la tabla `festivos`
