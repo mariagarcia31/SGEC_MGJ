@@ -1236,10 +1236,21 @@ return false;}
 		$consulta_comprobar->execute();
 		$resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
 
+        $festivo = $this->esFestivo($indic[3]);
+        $diaNoDisponible = $this->esDiaNoDisponible($indic[3], $indic[1]);
+
         $resultado = array_diff($resultado_comprobar, $indic);
 
         if(empty($resultado)){
             return 3;
+		}
+
+        if($festivo){
+            return 4;
+		}
+
+        if($diaNoDisponible){
+            return 5;
 		}
 
       
@@ -1272,7 +1283,7 @@ return false;}
                     
 
 
-                    return true;
+                    return 1;
                 }
 
                 else{
@@ -1299,7 +1310,7 @@ return false;}
                         
                         
                     }
-                return true;
+                return 1;
             }      
         
     }
@@ -1408,11 +1419,24 @@ return false;}
 		$consulta_comprobar->execute();
 		$resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
 
+        $festivo = $this->esFestivo($indic[3]);
+        $diaNoDisponible = $this->esDiaNoDisponible($indic[3], $indic[1]);
+
         $resultado = array_diff($resultado_comprobar, $indic);
 
         if(empty($resultado)){
             return 3;
 		}
+
+        if($festivo){
+            return 4;
+		}
+
+        if($diaNoDisponible){
+            return 5;
+		}
+
+       
 
       
             $comprobar="SELECT * FROM reservas WHERE fecha='".$indic[3]."' AND  idAula='".$indic[1]."' AND  hora='".$indic[6]."';";
@@ -1444,7 +1468,7 @@ return false;}
                     
 
 
-                    return true;
+                    return 1;
                 }
 
                 else{
@@ -1471,7 +1495,7 @@ return false;}
                         
                         
                     }
-                return true;
+                return 1;
             }      
         
     }

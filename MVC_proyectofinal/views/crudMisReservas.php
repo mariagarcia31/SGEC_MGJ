@@ -457,7 +457,7 @@ picker.addEventListener('input', function(e){
         });
   }
 
-  else if(date2.getDate() < date1.getDate()){
+  else if(date2 < date1){
     e.preventDefault();
     this.value = '';
     swal({

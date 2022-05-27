@@ -548,10 +548,43 @@ class Control{
             
             header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
         }
-        else if($resultado){
+        else if($resultado===4){
+        
+            $_SESSION["error2"]="
+            
+    
+            <script>     swal({
+                title: 'No se puede reservar este día, ya que es festivo. ',
+                  text: '',
+                  type: 'warning',
+                  showCancelButton: false,
+                  confirmButtonColor: '#3085d6',
+                  confirmButtonText: 'Entendido'
+        
+                });</script>";       
+            header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
+        }
+    
+        else if($resultado===5){
+            
+            $_SESSION["error2"]="
+            
+    
+            <script>     swal({
+                title: 'No se puede reservar esta aula en este día, ya que se encontrará deshabilitada. ',
+                  text: '',
+                  type: 'warning',
+                  showCancelButton: false,
+                  confirmButtonColor: '#3085d6',
+                  confirmButtonText: 'Entendido'
+        
+                });</script>";       
+            header("location:?c=crudMisReservas&page=".$_GET["pag"]."");
+        }
+        else if($resultado ===1){
             $_SESSION["exito"]="
         
-
+    
             <script>    Swal.fire({
                 icon: 'success',
                 title: 'Reserva modificada con éxito',
@@ -674,7 +707,41 @@ function modificarReservas(){
             });</script>";       
         header("location:?c=crudReservas&page=".$_GET["pag"]."");
     }
-    else if($resultado){
+
+    else if($resultado===4){
+        
+        $_SESSION["error2"]="
+        
+
+        <script>     swal({
+            title: 'No se puede reservar este día, ya que es festivo. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";       
+        header("location:?c=crudReservas&page=".$_GET["pag"]."");
+    }
+
+    else if($resultado===5){
+        
+        $_SESSION["error2"]="
+        
+
+        <script>     swal({
+            title: 'No se puede reservar esta aula en este día, ya que se encontrará deshabilitada. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";       
+        header("location:?c=crudReservas&page=".$_GET["pag"]."");
+    }
+    else if($resultado ===1){
         $_SESSION["exito"]="
     
 
