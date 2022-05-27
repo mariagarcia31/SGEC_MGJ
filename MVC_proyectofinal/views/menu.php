@@ -322,6 +322,14 @@ body {
 
     ';
   }else{echo"";}
+
+  if($_SESSION['crudDepartamentos']==1){
+    echo '  
+    <a class="btn-menu" href="?c=crudDepartamentos&page=1"><i class="bi bi-briefcase"></i>  Departamentos</a>  
+
+
+    ';
+  }else{echo"";}
   echo " </div>  <hr class='sidebar-divider'>";
 
   /*if($_SESSION['actualizarBBDD']==1){

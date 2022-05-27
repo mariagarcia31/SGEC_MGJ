@@ -143,6 +143,7 @@ class Crud extends Conexion{
                     $_SESSION['actualizarBBDD']=$verif4['actualizar_bbdd'];
                     $_SESSION['estadisticas']=$verif4['estadisticas'];
                     $_SESSION['crudFestivos']=$verif4['crud_festivos'];
+                    $_SESSION['crudDepartamentos']=$verif4['crud_departamentos'];
                     $_SESSION['crudConfiguracion']=$verif4['crud_configuracion'];
 
                     $_SESSION['contra']=$contrasena;
@@ -177,6 +178,7 @@ class Crud extends Conexion{
                     $_SESSION['actualizarBBDD']=$verif4['actualizar_bbdd'];
                     $_SESSION['estadisticas']=$verif4['estadisticas'];
                     $_SESSION['crudFestivos']=$verif4['crud_festivos'];
+                    $_SESSION['crudDepartamentos']=$verif4['crud_departamentos'];
                     $_SESSION['crudConfiguracion']=$verif4['crud_configuracion'];
 
                     $_SESSION['contra']=$contrasena;
@@ -299,7 +301,16 @@ class Crud extends Conexion{
     }
 
     function esFinde($date) {
+
         return (date('N', strtotime($date)) >= 6);
+    }
+
+function esFinde2($date) {
+      if(date('N', strtotime($date)) >= 5 && (date('N', strtotime($date)) <= 6)){
+        return true;}
+
+else{
+return false;}
     }
 
     function maximoDiasSiguientes(){
@@ -315,6 +326,7 @@ class Crud extends Conexion{
 
     function build_calendar($month, $year){
         
+               
         $maximoDiasSiguientes=$this->maximoDiasSiguientes();
         $bookings = array();
 
@@ -349,7 +361,6 @@ class Crud extends Conexion{
     
         // cuantos dias tiene el mes
         $numberDays = date('t',$firstDayOfMonth);
-
         $dateComponents = getdate($firstDayOfMonth);
     
     
@@ -369,10 +380,15 @@ class Crud extends Conexion{
         }
         //numero de la semana del primer día del mes
         $dayOfWeek = $dateComponents['wday'];
-        
+        if($dayOfWeek==0){
+            $dayOfWeek = $dateComponents['wday']+6;
+        }else{
+            $dayOfWeek = $dateComponents['wday']-1;
+        }
+     
         //cremaos el calendario
         $calendar = "<div class='table-responsive' style='border:none;'>";
-        
+    
         $calendar .= "<table class=' table table-bordered border' style='width:100%;border:1px solid white !important'>";
         
         
@@ -380,25 +396,34 @@ class Crud extends Conexion{
         $calendar .= "<h3 class='nombreMes'>$monthName $year</h3>";
         $calendar.= "<a href='?c=calendario&month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."&id=".$idAula."' ><i class='bi bi-chevron-right flechaCambiarMes'></i></a><br>";
         
-        $calendar.= "<a href='?c=calendarioSemanal&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week botonCambiarVista'> Vista semanal</i></button></a><br><br>";
+        $calendar.= "<div style='    display: flex;
+        justify-content: center;'><a style='margin-right:10px; ma6gin-bottom:10px' href='?c=calendarioSemanal&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week botonCambiarVista'> Vista semanal</i></button></a><br><br>";
+        $calendar.= "<a href='?c=calendarioDiario&id=".$idAula."' ><button class='btn btn-secondary'><i class='bi bi-calendar-week botonCambiarVista'> Vista diaria</i></button></a><br><br></div>";
+
 
 
         $calendar .= "<tr>";
     
         // Creamos las cabeceras
         foreach($daysOfWeek as $day) {
-            $calendar .= "<th class='diaSemana'><b>$day</b></th>";
+            
+                $calendar .= "<th class='diaSemana'><b>$day</b></th>";
+
+           
         } 
         
         // creamos el resto del calendario
-        $currentDay = 2;
+
+        $currentDay = 1;
         $calendar .= "</tr><tr>";
     
          
     
         if($dayOfWeek > 0) { 
             for($k=0;$k<$dayOfWeek;$k++){
-                $calendar .= "<td  class='empty'></td>"; 
+               
+                $calendar .= "<td  class='empty'></td>";
+               
             }
         }
         
@@ -407,7 +432,7 @@ class Crud extends Conexion{
         
         while ($currentDay <= $numberDays) {
              //cuando es domingo hacemos una nueva fila
-             if ($dayOfWeek == 7) {
+             if ($dayOfWeek ==7) {
                  $dayOfWeek = 0;
                  $calendar .= "</tr><tr>";
              }
@@ -417,12 +442,25 @@ class Crud extends Conexion{
              $date2 = date('Y-m-d', strtotime("+$maximoDiasSiguientes day"));
              $finde= $this->esFinde($date);
              $festivo= $this->esFestivo($date);
-             if($festivo){
-                $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>Festivo<br>$festivo</h4></td> ";
-            }
-             else if($date<date('Y-m-d')||$date>$date2||$finde==1){
+             
+             //$reservados= $this->estaReservado($date,$idAula);
+             
+             /*if($reservados){
+
+                $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>$reservados</h4></td> ";
+
+            }*/
+
+            if($date<date('Y-m-d')||$date>$date2||$finde==1){
                  $calendar.="<td><h4 class='dia' style='color:#D8D8D8;'>$currentDay</h4> ";
              }
+
+
+            else if($festivo){
+                $calendar.="<td><h4 class='dia' style='color:#B8B8B8'>$festivo</h4></td> ";
+
+            } 
+
 
              else{
                  
@@ -430,6 +468,7 @@ class Crud extends Conexion{
              }
              $calendar .="</td>";
              $currentDay++;
+
              $dayOfWeek++;
          }
          
@@ -448,6 +487,7 @@ class Crud extends Conexion{
         return $calendar;
     }
 
+
     function build_calendar_semanal(){
         $maximoDiasSiguientes=$this->maximoDiasSiguientes();
         $dt = new DateTime;
@@ -459,7 +499,7 @@ class Crud extends Conexion{
         $year = $dt->format('o');
         $week = $dt->format('W');
         $horarios=array('08:30AM - 09:30AM', '09:30AM - 10:30AM', '10:30AM - 11:30AM', '11:30AM - 12:30AM', '12:30AM - 13:30PM', '13:30PM - 14:30PM');              
-        $daysOfWeek = array('Lunes','Martes','Miércoles','Jueves','Viernes');
+        $daysOfWeek = array('Lunes','Martes','Miércoles','Jueves','Viernes','Sábado', 'Domingo');
         $dateTime=$dt;
         $dateTime->setISODate($year,$week);
         $primerDiaSemana=$dateTime->format('Y-m-d');
@@ -536,7 +576,7 @@ class Crud extends Conexion{
 
                     $clave = array_search($hora, $booking[0]);
     
-                    $calendar.="<td><a class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>".$booking[1][$clave]." ".$booking[2][$clave]."<br>"."(".$booking[3][$clave].")"."</p></a></td> ";
+                    $calendar.="<td><a style='width:100px; overflow-x:scroll' class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>".$booking[1][$clave]." ".$booking[2][$clave]."<br>"."(".$booking[3][$clave].")"."</p></a></td> ";
                     
                  }
 
@@ -664,7 +704,7 @@ class Crud extends Conexion{
                     max-width: auto;
                     /* background-color: orange; */
                     padding: 5px;
-                    overflow-y: unset;' class='btn btn-danger botonReservado' disabled><p class='textoBotonReservar'>Reservado<br>".$booking[1][$clave]." ".$booking[2][$clave]."<br>"."(".$booking[3][$clave].")"."</p></a></td> ";
+                    overflow-y: unset;' class='btn btn-danger botonReservado'  style='width:100px; overflow-x:scroll' disabled><p class='textoBotonReservar'>Reservado<br>".$booking[1][$clave]." ".$booking[2][$clave]."<br>"."(".$booking[3][$clave].")"."</p></a></td> ";
                     
                  }
 
@@ -900,10 +940,12 @@ class Crud extends Conexion{
         elseif($opc==2){
 
                    
-            $sql="SELECT usuarios.id, usuarios.nombre as 'Nombre', usuarios.primerApellido as'1º apellido', usuarios.segundoApellido as '2º apellido', usuarios.usuario, usuarios.correo, usuarios.puesto, usuarios.confirmacion, usuarios.rol, roles.nombre as 'Rol'
+            $sql="SELECT usuarios.id, usuarios.nombre as 'Nombre', usuarios.primerApellido as'1º apellido', usuarios.segundoApellido as '2º apellido', usuarios.usuario, usuarios.correo, departamentos.departamento, usuarios.confirmacion, usuarios.rol, roles.nombre as 'Rol'
             FROM usuarios 
             INNER JOIN roles
             on usuarios.rol=roles.id
+            INNER JOIN departamentos
+            on usuarios.puesto=departamentos.puesto
             ORDER BY id ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
 
             $consulta=$this->conexion->prepare($sql);
@@ -975,6 +1017,34 @@ class Crud extends Conexion{
 
     }
 
+
+
+    function crudDepartamentos($opc,$iteams_pagina=null,$offset=null){
+        if($opc==1){
+
+            $sql="SELECT count(*) FROM departamentos";
+
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $count=$consulta->fetch(PDO::FETCH_NUM);
+            
+            return $count;
+        }
+        elseif($opc==2){
+
+                   
+            $sql="SELECT * FROM departamentos ORDER BY departamento ASC LIMIT ".$iteams_pagina." OFFSET ".$offset."";
+
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            $consult=$consulta->fetchAll(PDO::FETCH_ASSOC);
+            $keys=array_keys($consult[0]);
+            return array($consult,$keys);
+        }
+       
+        
+
+    }
 
     function crudGrupos($opc,$iteams_pagina=null,$offset=null){
         if($opc==1){
@@ -2142,6 +2212,137 @@ function crearFestivos($indic){
 
 
  /*************************************  FIN MODELO DE FESTIVOS   ********************************/
+
+
+
+
+
+ 
+
+/*************************************  MODELO DE DEPARTAMENTOS   ********************************/
+function borrarUnoaUnoDepartamentos($selec){
+            
+    $sql="DELETE FROM departamentos WHERE  id='$selec'";
+    $consulta=$this->conexion->prepare($sql);
+    $consulta->execute();
+    return true;
+        
+}
+
+function borrarDepartamentos($selec){
+  
+    if(empty($selec)){
+       
+        return false;
+    }
+    else{
+      
+        foreach($selec as $valores){
+            $sql="DELETE FROM departamentos WHERE  id='$valores'";
+            $consulta=$this->conexion->prepare($sql);
+            $consulta->execute();
+            
+        }
+        return true;
+    }
+    
+    }  
+
+
+
+
+
+
+    function modifDepartamentos($id){
+
+     
+        $nombres="SELECT * FROM departamentos WHERE id=:cod;";
+        $consulta_nombres=$this->conexion->prepare($nombres);
+        $consulta_nombres->bindParam(':cod',$id);
+        $consulta_nombres->execute();
+        $resultado_nombres=$consulta_nombres->fetchAll();
+
+        return $resultado_nombres;
+    }
+
+
+function actualizarDepartamentos($indic){
+    $comprobar="SELECT * FROM departamentos WHERE id='".$indic[0]."';";
+    $consulta_comprobar=$this->conexion->prepare($comprobar);
+    $consulta_comprobar->execute();
+    $resultado_comprobar=$consulta_comprobar->fetch(PDO::FETCH_ASSOC);
+
+    $resultado = array_diff($resultado_comprobar, $indic);
+
+   /*SI DEJO ESTO LA ACTUALIZACIÓN NO VA
+    if(empty($resultado)){
+        return false;
+    }
+    */
+       
+            $nombres="SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='sgec' AND `TABLE_NAME`='departamentos';";
+            $consulta_nombres=$this->conexion->prepare($nombres);
+            $consulta_nombres->execute();
+            $resultado_nombres=$consulta_nombres->fetchAll();
+                foreach($resultado_nombres as $nombre_columna){	
+                    for($i=0;$i<count($nombre_columna)/2;$i++){
+                        $nombress[]=$nombre_columna;
+                    }
+                }
+    
+                for($i=0;$i<count($nombress);$i++){
+                    
+                    $sql="UPDATE departamentos SET  ".$nombress[$i][0]."=:data  WHERE id='".$indic[0]."';";
+                    $stmt=$this->conexion->prepare($sql);
+                    $stmt->bindParam(":data",$indic[$i]);
+                    $stmt->execute();
+                    
+                    
+                }
+            return true;
+        
+        }      
+    
+
+function crearDepartamentos($indic){
+
+        $comprobar="SELECT * FROM departamentos WHERE puesto='".$indic[0]."';";
+        $consulta_comprobar=$this->conexion->prepare($comprobar);
+        $consulta_comprobar->execute();
+        $resultado_comprobar=$consulta_comprobar->fetchAll();
+        if(count($resultado_comprobar)>0){
+            return false;
+        }
+        
+        else{
+            
+            $puesto = $indic[0];
+            $departamento =$indic[1];
+            
+
+            
+                $comprobar="INSERT INTO  departamentos (puesto, departamento) VALUES ('$puesto','$departamento');";
+                $consulta_comprobar=$this->conexion->prepare($comprobar);
+                $consulta_comprobar->execute();
+                
+                return true;
+            
+
+            
+
+
+            
+        
+    }
+
+
+        
+}
+
+
+
+ /*************************************  FIN MODELO DE DEPARTAMENTOS   ********************************/
+
 
 
 

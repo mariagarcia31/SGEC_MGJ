@@ -396,7 +396,7 @@ $("#myModal").modal();
 
                     </div>';            
 
-            echo '<div class="modal-footer">  <input type="submit" class="btn btn-success" value="Cargar" name="enviar">
+            echo '<div class="modal-footer">  <input type="submit" style="font-size:14px;margin-top:5px" class="btn btn-success" value="Cargar" name="enviar">
             <input type="submit" class="btn btn-danger" value="Cancelar" style="font-size:14px" name="cancelar"></div></form></div></div></div></div>';
      
                                         
@@ -407,7 +407,7 @@ $("#myModal").modal();
 
         ?>
 <form style='font-size:14px' action="?c=borrarUsuarios&pag=<?php echo $_GET["page"]?>" method="post"> 
-<input type='submit' name='borrar' value='Borrar en lote' class='btn btn-danger' style="    float: right;
+<input type='submit' name='borrar' value='Borrar en lote' onclick='return confirm("¿Desea eliminar este registro?\nEsta acción es irreversible");' class='btn btn-danger' style="    float: right;
     font-size: 14px;
     position: absolute;
     right: 16px;
@@ -506,7 +506,7 @@ echo "<br>";
 <div style="margin-bottom: 100px;
     display: flex;
     justify-content: center">
-    <nav aria-label="...">
+   <nav aria-label="...">
 		<ul class="pagination">
 		<li style="<?php echo $_GET['page']==1 ? 'display:none' : '' ?>" class="page-item">
 				<a class="page-link" href="?c=crudUsuarios&page=<?php echo $_GET['page']-1?>"><</a>

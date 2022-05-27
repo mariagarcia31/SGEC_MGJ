@@ -76,7 +76,7 @@
 
 <!-- Search box. -->
 <div class="col-12" style="margin-left:15px;height:fit-content; padding-bottom:2% !important">
-
+<div class="container">
 <div class="barra" style='border: 1px solid  #212529;border-radius:3.2rem; display:inline !important;padding:1.2rem !important'>
 
 <i class="bi bi-search" style="font-size: 20px;padding-right: 10px;margin-left:3%;"></i>
@@ -88,7 +88,7 @@
    <!-- Suggestions will be displayed in below div. -->
 
    <div id="displaySearch" class="resultadosBusqueda "style="position:fixed;z-index:90;margin-left:30px"></div>
-
+</div>
 </div>
 
 

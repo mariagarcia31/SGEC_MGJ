@@ -103,6 +103,9 @@ class Control{
     function crudFestivos(){
         include_once ("views/crudFestivos.php");
     }
+    function crudDepartamentos(){
+        include_once ("views/crudDepartamentos.php");
+    }
     function estadisticas(){
         include_once ("views/estadisticas.php");
     }
@@ -115,37 +118,38 @@ class Control{
     function cargarUsuarios(){
            if(isset($_POST["enviar"])){
             $result=$this->crud->cargarUsuarios();
+            if($result){
+                $_SESSION["exito"]=" 
+            
+    
+                <script>    Swal.fire({
+                    icon: 'success',
+                    title: 'Usuarios cargados con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });</script>";
+                  
+                header("location:?c=crudUsuarios&page=".$_GET['pag'].""); 
+                
+               }else{
+                $_SESSION["exito"]=" 
+            
+    
+                <script>    Swal.fire({
+                    icon: 'error',
+                    title: 'La extensión del archivo debe ser .csv/.txt',
+                    showConfirmButton: false,
+                    timer: 2500
+                  });</script>";
+                  
+                header("location:?c=crudUsuarios&page=".$_GET['pag'].""); 
+               }
            }
            if(isset($_POST["cancelar"])){
             header("location:?c=crudUsuarios&page=".$_GET['page']."");     
            }
 
-           if($result){
-            $_SESSION["exito"]=" 
-        
-
-            <script>    Swal.fire({
-                icon: 'success',
-                title: 'Usuarios cargados con éxito',
-                showConfirmButton: false,
-                timer: 1500
-              });</script>";
-              
-            header("location:?c=crudUsuarios&page=".$_GET['pag'].""); 
-            
-           }else{
-            $_SESSION["exito"]=" 
-        
-
-            <script>    Swal.fire({
-                icon: 'error',
-                title: 'La extensión del archivo debe ser .csv/.txt',
-                showConfirmButton: false,
-                timer: 2500
-              });</script>";
-              
-            header("location:?c=crudUsuarios&page=".$_GET['pag'].""); 
-           }
+           
         
     }
 
@@ -1499,6 +1503,175 @@ function crearFestivos(){
 }
 
 /******************************   FINAL CONTROLADOR FESTIVOS         ********************************/
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************   CONTROLADOR DEPARTAMENTOS            ********************************/
+function borrarDepartamentos(){
+
+        
+    if(isset($_POST["borrar"])){
+        $result=$this->crud->borrarDepartamentos($_POST["eliminar"]);
+        if($result){
+            $_SESSION["exito"]="
+        
+
+        <script>    Swal.fire({
+            icon: 'success',
+            title: 'Departamento eliminado con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>";
+            $cuantos=count($_POST["eliminar"]);
+            if($_SESSION['cuantas']==$cuantos){
+                header("location:?c=crudDepartamentos&page=".($_GET["pag"]-1)."");
+            }
+            else{
+            header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+            }
+        }else{
+            $_SESSION["error2"]="
+        
+
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'No se ha seleccionado ningún departamento para eliminar.',
+                footer: ''
+              })</script>";
+            header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+        }
+    
+    }
+    elseif(isset($_POST["modificar"])){
+        $_SESSION["modificar"]=$_POST["modificar"];
+        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+
+    }else{
+        $result=$this->crud->borrarUnoaUnoDepartamentos($_GET["id"]);
+        $_SESSION["exito"]="
+        
+
+        <script>    Swal.fire({
+            icon: 'success',
+            title: 'Departamento eliminado con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>";
+        if($_SESSION['cuantas']==1){
+            header("location:?c=crudDepartamentos&page=".$_GET["pag"] - 1 ."");
+        }
+        else{
+        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+        }
+        
+
+    }
+  
+}
+
+function modificarDepartamentos(){
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y Usuarioe</div>";
+    if(isset($_POST['cancelar'])){
+        unset($_SESSION["modificar"]);
+
+        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+    }
+    else{
+    
+    $resultado=$this->crud->actualizarDepartamentos($_POST["dato"]); 
+    $_SESSION["exito"]="
+        
+
+    <script>    Swal.fire({
+        icon: 'success',
+        title: 'Departamento modificado con éxito',
+        showConfirmButton: false,
+        timer: 1500
+      });</script>";  
+
+    if($resultado){
+        $result=$this->crud->borrarUnoaUnoDepartamentos($_GET["id"]);
+
+        unset($_SESSION["modificar"]);
+        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+    }
+    else{
+        
+        $_SESSION["vacio"]="<div class='alert  ' id='alerta'> No se ha cambiado ningún campo</div>";
+        
+        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+    }
+    
+
+}
+}
+
+
+function crearDepartamentos(){
+    //echo "<div class='alert  '>Ya existe una reserva con este día, hora y aula</div>";
+    if(isset($_POST['cancelar'])){
+        unset($_SESSION["modificar"]);
+
+        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+    }
+    else if($_POST['dato'][0]==null || $_POST['dato'][1]==null){
+        $_SESSION["vacio"]="  <script>    Swal.fire({
+            icon: 'warning',
+            title: 'Debe rellenar todos los campos',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>
+    ";
+        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."&crear=1");
+    }
+    else{
+    
+    $resultado=$this->crud->crearDepartamentos($_POST["dato"]);
+
+
+    if($resultado){
+        $_SESSION["exito"]="
+        
+
+        <script>    Swal.fire({
+            icon: 'success',
+            title: 'Departamento creado con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          });</script>";  
+        unset($_SESSION["modificar"]);
+        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."");
+    }
+    else{
+        
+        $_SESSION["vacio"]=" <script>     swal({
+            title: 'Ya existe un departamento con ese nombre. ',
+              text: '',
+              type: 'warning',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido'
+    
+            });</script>";    
+        
+        header("location:?c=crudDepartamentos&page=".$_GET["pag"]."&crear=1");
+    }
+    
+
+}
+}
+
+/******************************   FINAL CONTROLADOR DEPARTAMENTOS         ********************************/
 
 
 

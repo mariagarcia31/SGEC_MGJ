@@ -1,4 +1,3 @@
-
 <?php
 
 if ((isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESSION["cambiado"]) && isset($_SESSION["crudReservas"])) ){
@@ -11,7 +10,7 @@ if ((isset($_COOKIE['contrasena']) || isset($_SESSION['contra']) && isset($_SESS
 
 
 ?>
-<html lang="en" style="    overflow-x: hidden;">
+<html lang="es" style="    overflow-x: hidden;">
 <head>
   
     <title>Gestionar reservas</title>
@@ -39,13 +38,25 @@ $(document).ready(function(){
 $count=$this->crud->crudReservas(1);
 
 if($count[0]==0){
-    echo '<div class="container" style="margin-top:60px;margin-right:80px">
-    <div class="row">
-    <div class="col-md-12 ">
-    <h1 class="display-1" style="color:#1A3C40"> No se han realizado reservas aún</h1>
+    echo '<div class="container" >
+    <div class="row mx-auto" >
+    <div class="col-md-12 " style="text-align:center; margin-top:5%;">
+    <i class="bi bi-emoji-frown" style="font-size:50px; margin-bottom:30px" ></i>
+    <h1 class="display-3"> ¡Oops! Parece que no hay ninguna reserva pendiente</h1>
+    <a href="?c=principal&page=1"><button name="reservar" style="font-size:20px; margin-bottom:5%;margin-top:3%"  class="btn btn-success"> Reservar</button></a>
+
     </div>
     </div>
-    </div>';}
+    </div>';
+ if(isset($_SESSION['error2'])){
+                        echo $_SESSION['error2'];
+                        unset($_SESSION['error2']);
+                    }
+                    else if(isset($_SESSION['exito'])){
+                        echo $_SESSION['exito'];
+                        unset($_SESSION['exito']);
+                    }
+}
 else{
 
 $iteams_pagina=6;
@@ -278,7 +289,7 @@ $("#myModal").modal();
         echo "</tr>";
         ?>
 <form style='font-size:14px' action="?c=borrarReservas&pag=<?php echo $_GET["page"]?>" method="post"> 
-<input type="submit" name="borrar" value="Borrar en lote" class="btn btn-danger" style="    float: right;
+<input type="submit" name="borrar" value="Borrar en lote" onclick='return confirm("¿Desea eliminar este registro?\nEsta acción es irreversible");' class="btn btn-danger" style="    float: right;
     font-size: 14px;
     position: absolute;
     right: 16px;
@@ -359,9 +370,15 @@ echo "<br>";
     display: flex;
     justify-content: center">
     <nav aria-label="...">
-		<ul class="pagination">
+				<ul class="pagination">
 		<li style="<?php echo $_GET['page']==1 ? 'display:none' : '' ?>" class="page-item">
-				<a class="page-link" href="inicio.php?c=crudReservas&page=<?php echo $_GET['page']-1?>"><</a>
+				<a class="page-link" href="?c=crudReservas&page=<?php echo $_GET['page']-1?>"><</a>
+			</li>
+            <li style="<?php echo $_GET['page']==1 ? 'display:none' : '' ?>" class="page-item">
+				<a class="page-link" href="?c=crudReservas&page=1">1</a>
+			</li>
+            <li style="<?php echo $_GET['page']==1||$_GET['page']==2 ? 'display:none' : '' ?>" class="page-item">
+				<a class="page-link" href="">...</a>
 			</li>
             <li class="page-item active" >
 
@@ -372,12 +389,17 @@ echo "<br>";
                     
                     ?>
                     <a class="page-link" style="color: white!important;
-                    background-color: #212529!important;" href="inicio.php?c=crudReservas&page=<?php echo $_GET['page']?>"><?php echo $i ?></a>
+                    background-color: #212529!important;" href="?c=crudReservas&page=<?php echo $_GET['page']?>"><?php echo $i ?></a>
                     </li>
                     
                     <li class="page-item" style="<?php echo $i==$total_pages ? 'display:none' : '' ?>">
-                    <a class="page-link" href="inicio.php?c=crudReservas&page=<?php echo $_GET['page']+1?>"><?php echo $i+1 ?></a>
-
+                    <a class="page-link" href="?c=crudReservas&page=<?php echo $_GET['page']+1?>"><?php echo $i+1 ?></a>
+                    <li class="page-item" style="<?php echo $i==$total_pages ? 'display:none' : '' ?>">
+                    <a class="page-link" href="?c=crudReservas&page=<?php echo $_GET['page']+2?>"><?php echo $i+2 ?></a>
+                    
+                    <li class="page-item" style="<?php echo $i==$total_pages||$i==($total_pages-1) ? 'display:none' : '' ?>"><a class="page-link">...</a></li>
+                    <li class="page-item" style="<?php echo $i==$total_pages||$i==($total_pages-1) ? 'display:none' : '' ?>">
+                    <a class="page-link" href="?c=crudReservas&page=<?php echo $total_pages?>"><?php echo $total_pages ?></a>
 
 				<?php }
               
@@ -387,7 +409,7 @@ echo "<br>";
 				<!--Para ir a la página siguiente en el enlace ponemos que le lleve a la página actual +1-->
                 
                 <li style="<?php echo $_GET['page']==$total_pages ? 'display:none' : '' ?>">
-				<a class="page-link" href="inicio.php?c=crudReservas&page=<?php echo $_GET['page']+1?>">></a>
+				<a class="page-link" href="?c=crudReservas&page=<?php echo $_GET['page']+1?>">></a>
 			</li>				
 		</ul>
     </nav>
