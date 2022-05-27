@@ -70,6 +70,10 @@ class Control{
         include_once ("views/cambiar_contra.php");
     }
 
+    function inicio(){
+        include_once ("views/inicio.php");
+    }
+
     function calendario(){
         include_once ("views/calendario.php");
     }
@@ -179,12 +183,12 @@ class Control{
         
         $result=$this->crud->verificarUsuario($correo,$contrasena);
         $result2=$this->crud->verificarContra($correo);
-
+        
        
 
         if($result){
 
-            if($result2){
+            if($result2===1){
 
                 mysqli_set_charset($connection, "utf8");
                 $ip = $_SERVER["REMOTE_ADDR"];
@@ -209,7 +213,16 @@ class Control{
 
                 
  
-            }else{
+            }
+            
+            else if($result2===5){
+
+                $_SESSION['usuario']=$correo;
+                header("location:?c=inicio");
+
+            }
+            
+            else{
                 $_SESSION['correo']=$correo;
                 header("location:?c=c_contra"); 
             }             
@@ -290,7 +303,35 @@ class Control{
                 text: 'Las contraseñas deben ser iguales y deben contener una mayúscula, un caracter especial (+, -, / o \ ), un número y una longitud mínima de 8 caracteres.',
                 footer: ''
             })</script>";
-            header("location:?c=c_contra&correo=".$_GET["correo"]."");     
+            header("location:?c=c_contra");     
+        }
+           
+        
+
+
+    }
+
+    function primer_inicio(){
+
+        $result=$this->crud->primerInicio($_POST["correo1"],$_POST["correo2"],$_POST["contrasena1"],$_POST["contrasena2"]);
+
+        if($result){
+
+            
+                $_SESSION["cambiado"]="ok";
+                header("location:?c=principal");  
+            }
+               
+            
+        else{
+            $_SESSION["error2"]="
+            <script>     Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Las contraseñas y los correos deben ser iguales, la contraseña debe contener una mayúscula, un caracter especial (+, -, / o \ ), un número y una longitud mínima de 8 caracteres.',
+                footer: ''
+            })</script>";
+            header("location:?c=inicio");     
         }
            
         

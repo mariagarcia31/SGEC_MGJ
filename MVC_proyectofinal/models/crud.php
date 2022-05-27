@@ -205,23 +205,34 @@ class Crud extends Conexion{
     function verificarContra($correo){
         try{
      
-         $sql="SELECT confirmacion from usuarios where (correo = :email or usuario = :email);";
+         $sql="SELECT confirmacion, correo from usuarios where (correo = :email or usuario = :email);";
 
             $consulta=$this->conexion->prepare($sql);
             $consulta->bindParam(":email",$correo);
             $consulta->execute();
-            $verif1=$consulta->fetch();
+            $verif1=$consulta->fetchAll();
 
-            if($verif1[0]==1){
-                return true;
+            if($verif1[0]['confirmacion']==0 && $verif1[0]["correo"]==null){
+                return 5;
             
-            }else{
+            }
+
+            
+
+            else if($verif1[0]['confirmacion']==1){
+                return 1;
+            
+            }
+            
+            else{
                 return false;
             }
         }catch(PDOException $e){
             return $e;
         }
     }
+
+
 
 
     function contraNueva($correo,$contraN,$contraN2){
@@ -238,8 +249,50 @@ class Crud extends Conexion{
                     if(preg_match($expresion, $contraN)){
                         $contra=password_hash("$contraN", PASSWORD_DEFAULT);
                         $sql="UPDATE usuarios
-                        set contra='$contra', correo='$correo' ,confirmacion=1
+                        set contra='$contra',confirmacion=1
                         where id=".$consult[0]["id"].";";
+
+
+                        $con=$this->conexion->prepare($sql);
+                        $con->execute();
+                        
+                        return true;
+                        
+                    }else{
+                        return false;
+                    }
+                  
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+            
+            
+
+        }catch(PDOException $e){
+            return $e;
+        }
+    }
+
+    function primerInicio($correo, $correo2, $contraN,$contraN2){
+
+        try{
+            $usuario = $_SESSION['usuario'];
+            $sql="SELECT * FROM usuarios WHERE correo='$correo' ";
+            $con=$this->conexion->prepare($sql);
+            $con->execute();
+            $consult=$con->fetchAll(PDO::FETCH_ASSOC);
+            if($consult[0]==NULL){
+                if($contraN == $contraN2 && $correo == $correo2 ){
+                    $expresion='/^\\S*(?=\\S{8,})(?=\\S*[\\+|\\|\\-|\\/])(?=\\S[a-z])(?=\\S*[A-Z])(?=\\S*[\\d])\\S*$/';
+
+                    if(preg_match($expresion, $contraN)){
+                        $contra=password_hash("$contraN", PASSWORD_DEFAULT);
+                        $sql="UPDATE usuarios
+                        set contra='$contra', correo='$correo' ,confirmacion=1
+                        where usuario='$usuario'";
 
 
                         $con=$this->conexion->prepare($sql);

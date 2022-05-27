@@ -27,14 +27,16 @@ class Precio{
       
      /*************************************  FIN MODELO DE AULAS  ********************************/
    
-    function ver(){
+    function ver($correo){
         
-        $comprobar="SELECT nombre, fechaInicio, fechaFinal FROM festivos GROUP BY nombre;";
-        $consulta_comprobar=$this->conexion()->prepare($comprobar);
-        $consulta_comprobar->execute();
-        $resultado_comprobar=$consulta_comprobar->fetchAll(PDO::FETCH_ASSOC);
+        $sql="SELECT confirmacion, correo from usuarios where (correo = :email or usuario = :email);";
 
-        return $resultado_comprobar;
+        $consulta=$this->conexion()->prepare($sql);
+        $consulta->bindParam(":email",$correo);
+        $consulta->execute();
+        $verif1=$consulta->fetchAll();
+
+        return $verif1;
     }
 
     
@@ -44,10 +46,10 @@ class Precio{
 
 
 $precio=new Precio();
-$resultado=$precio->ver();
-foreach ($resultado as $dato){
-    print_r($dato);
-}
+$resultado=$precio->ver('ama2');
+
+    print_r($resultado[0]['confirmacion']);
+
 
 
 ?>
