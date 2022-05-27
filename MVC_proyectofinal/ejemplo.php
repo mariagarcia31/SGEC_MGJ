@@ -27,19 +27,26 @@ class Precio{
       
      /*************************************  FIN MODELO DE AULAS  ********************************/
    
-    function ver($correo){
-        $sql="SELECT * FROM usuarios WHERE (correo='$correo' OR usuario='$correo');";
-        $con=$this->conexion()->prepare($sql);
-        $con->execute();
-        $consult=$con->fetchAll(PDO::FETCH_ASSOC);
-        return $consult[0]["id"];
+    function ver(){
+        $qry = "SELECT departamentos.nombre from departamentos 
+        INNER JOIN puestos ON departamentos.id = puestos.idDepartamento
+        where puestos.nombre='Intervención Sociocomunitaria'";
+
+    $consulta= $this->conexion()->prepare($qry);
+    $consulta->execute();
+    $resultado_departamentos=$consulta->fetchAll();
+
+        return $resultado_departamentos;
     }
+
+    
 
 }
 
 
 
 $precio=new Precio();
+$resultado=$precio->ver();
+print_r($resultado[0]['nombre']);
 
-print_r($precio->ver("josu"));
 ?>

@@ -1917,19 +1917,21 @@ return false;}
                 $puestoDef=explode("-", $puesto1);
                 $correo=$usuario1."@ciudadescolarfp.es";
 
-               
+                
 
                 // Eliminamos la cabecera
                 if($nombre=="Nombre" || $nombre=="" || $nombre=='"Nombre"'){
                     continue;
+                   
                 }else{
+
                     $qry = "SELECT * from usuarios where correo='".$correo."' ; ";
                     $consulta= $this->conexion->prepare($qry);
                     $consulta->execute();
                     $resultado_nombres=$consulta->fetchAll();
                     if($resultado_nombres==null){
-
-                        $qry = "SELECT * from puestos where nombre='".$puestoDef."' ; ";
+                       
+                        $qry = "SELECT * from puestos where nombre='".$puestoDef[0]."'";
                         $consulta= $this->conexion->prepare($qry);
                         $consulta->execute();
                         $resultado_puestos=$consulta->fetchAll();
@@ -1946,14 +1948,14 @@ return false;}
 
                             $qry = "SELECT departamentos.nombre from departamentos 
                             INNER JOIN puestos ON departamentos.id = puestos.idDepartamento
-                            where puestos.nombre='".$puestoDef."'";
+                            where puestos.nombre='".$puestoDef[0]."'";
 
                         $consulta= $this->conexion->prepare($qry);
                         $consulta->execute();
                         $resultado_departamentos=$consulta->fetchAll();
-                        $resultado_departamentos[0];
+                        $nombreDpto = $resultado_departamentos[0]['nombre'];
 
-                        $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, departamento,contra, confirmacion, rol) values('$nombre1','$correo','$primerApellido1','$segundoApellido1','$usuario1','".$resultado_departamentos[0]."','$usuario1','0','2'); ";
+                        $qry = "INSERT INTO usuarios (nombre,correo, primerApellido, segundoApellido, usuario, departamento,contra, confirmacion, rol) values('$nombre1','$correo','$primerApellido1','$segundoApellido1','$usuario1','$nombreDpto','$usuario1','0','2'); ";
                         $consulta=$this->conexion->prepare($qry);
                         $consulta->execute();
 
